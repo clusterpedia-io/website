@@ -1,0 +1,71 @@
++++
+title = "Clusterpedia"
+linkTitle = "Clusterpedia"
+
++++
+
+{{< blocks/cover title="欢迎来到 Clusterpedia" image_anchor="top" height="full">}}
+<div class="mx-auto">
+	<a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">
+		Lean More <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+	</a>
+	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://github.com/clusterpedia-io/clusterpedia">
+		Source Code <i class="fab fa-github ml-2 "></i>
+	</a>
+    <p class="lead mt-5"><strong>The Encyclopedia of Kubernetes clusters</strong> </p>
+
+	{{< blocks/link-down color="info" >}}
+</div>
+{{< /blocks/cover >}}
+
+{{% blocks/lead color="primary" %}}
+
+<h1> 混合检索多集群的资源 </h1>
+<br />
+<p> 通过 Clusterpedia 可以一次获取多个集群内的资源，并且支持强大的检索条件 </p>
+{{% /blocks/lead %}}
+
+{{% blocks/lead color="blue" %}}
+
+<h1>丰富的资源支持</h1>
+<br />
+<p> Clusterpedia 不仅仅支持以 Pods, Deployments 等资源类型来检索多个集群中资源，</p>
+<p>还支持将多个资源组合成集合资源（Collection Resource）来聚合检索多个类型的资源，例如 Workloads。</p>
+<br />
+<p>支持检索自定义资源</p>
+
+{{% /blocks/lead %}}
+
+{{% blocks/lead color="yellow" %}}
+
+<h1> 兼容 Kubernetes OpenAPI </h1>
+<br />
+<p>可以利用已有的工具，例如 kubectl 或者 client-go 来检索多集群资源，无需额外框架或者工具</p>
+
+{{% /blocks/lead %}}
+
+{{% blocks/lead color="gray-dark" %}}
+
+<h1> 强大的检索条件支持 </h1>
+<br />
+<p>在兼容 Kubernetes OpenAPI 的基础上，除了支持 Label Selector 外，还支持更加复杂和使用的检索条件，例如</p>
+<p> 支持检索多个集群以及命名空间下的资源，</p>
+<p> 更加强大的 Field Selector, 支持筛选资源的任意字段，</p>
+<p> 可以通过父辈甚至祖辈 Owner 来查询后代资源， </p>
+<p> 基于多个资源字段的排序，</p>
+<p> 分页以及 remaining items count 支持</p>
+
+{{% /blocks/lead %}}
+
+{{< blocks/section color="dark" >}}
+
+{{% blocks/feature icon="fab fa-slack" title="Join us on Slack" url="https://join.slack.com/t/clusterpedia/shared_invite/zt-11smmdntu-Im1YjOahqvHhJFqNzLELOA" url_text="Join us" %}}
+Join the community on Slack
+{{% /blocks/feature %}}
+
+{{% blocks/feature icon="fab fa-github" title="欢迎加入 Clusterpedia!" url="https://github.com/clusterpedia-io" url_text="Contribute to Clusterpedia" %}}
+We do a [Pull Request]("https://github.com/clusterpedia-io/clusterpedia/pulls") contributions workflow on
+**GitHub**. New users are always welcome!
+{{% /blocks/feature %}}
+
+{{< /blocks/section >}}

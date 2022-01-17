@@ -1,0 +1,23 @@
+{
+    "name": "clusterpedia-io-hugo",
+    "version": "0.0.1",
+    "description": "The website for clusterpedia.io",
+    "main": "none.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/clusterpedia-io/website.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/clusterpedia-io/website/issues"
+    },
+    "homepage": "https:/github.com/clusterpedia-io/website#readme",
+    "devDependencies": {
+        "autoprefixer": "^9.8.6",
+        "postcss-cli": "^7.1.2"
+    }
+}

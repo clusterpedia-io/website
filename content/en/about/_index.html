@@ -1,0 +1,35 @@
+---
+title: About Clusterpedia
+linkTitle: About
+menu:
+  main:
+    weight: -1
+---
+{{< blocks/cover title="About Clusterpedia" image_anchor="bottom" height="min" >}}
+
+<p class="lead mt-5"><strong>The Encyclopedia of Kubernetes clusters</strong> </p>
+
+{{< /blocks/cover >}}
+
+{{% blocks/lead %}}
+This name Clusterpedia is inspired by Wikipedia. It is an encyclopedia of multi-cluster to synchronize, search for, and simply control multi-cluster resources.
+
+Clusterpedia can synchronize resources with multiple clusters and provide more powerful search features on the basis of compatibility with Kubernetes OpenAPI to help you effectively get any multi-cluster resource that you are looking for in a quick and easy way.
+{{% /blocks/lead %}}
+
+
+{{< blocks/section >}}
+<div class="col-12">
+    <h1 class="text-center">Features</h1>
+    <li>Support for complex search, filters, sorting, paging, and more</li>
+    <li>Support for requesting relevant resources when you query resources</li>
+    <li>Unify the search entry for master clusters and multi-cluster resources</li>
+    <li>Compatible with kubernetes OpenAPI, where you can directly use kubectl for multi-cluster search without any third-party plug-ins or tools</li>
+    <li>Compatible with synchronizing different versions of cluster resources, not restricted by the version of master cluster</li>
+    <li>High performance and low memory consumption for resource synchronization</li>
+    <li>Automatically start/stop resource synchronization according to the current health status of the cluster</li>
+    <li>Support for plug-in storage layer. You can use other storage components to customize the storage layer according to your needs.</li>
+    <li>High availability</li>
+</div>
+
+{{< /blocks/section >}}
