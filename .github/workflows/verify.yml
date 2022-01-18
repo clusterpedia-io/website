@@ -3,7 +3,7 @@ name: Verify
 on:
   pull_request:
     branches: [main]
-  workflow_dispath:
+  workflow_dispatch:
 
 jobs:
   deploy:
