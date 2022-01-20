@@ -3,7 +3,7 @@ title: 聚合资源(Collection Resource)
 weight: 10
 ---
 
-Clusterpedia 为了能够一次性获取多个类型的资源，在单个资源类型的基础上提供了一种新的资源 - `聚合资源（Collection Resource）`。
+Clusterpedia 为了能够一次性获取多个类型的资源，在单个资源类型的基础上提供了一种新的资源 —— `聚合资源（Collection Resource）`。
 
 `聚合资源`是由不同的资源类型组合而成，可以对这些资源类型进行统一的检索和分页。
 

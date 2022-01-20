@@ -1,5 +1,5 @@
 ---
-title: "多集群资源检索"
+title: "多集群检索"
 weight: 10
 ---
 多集群资源检索可以满足我们，根据查询条件一次过滤多个集群内的资源，并提供对这些资源的分页排序的能力
@@ -9,7 +9,6 @@ weight: 10
 ## 基本功能
 ### 指定集群
 多集群检索时，会默认检索所有的集群，我们也可以指定单个或者一组集群
-
 
 {{< tabs >}}
 
@@ -183,39 +182,10 @@ kubectl get po --field-selector="spec.containers[1].name in (container1,containe
 并且 Clusterpedia 在 Owner 的基础上还支持对 Owner 进行辈分提升来进行祖辈甚至更好辈分的检索。
 
 通过 Owner 检索，可以一次查询到 Deployment 下的所有 Pods，无需中间再查询 ReplicaSet。
-> Owner 查询必须指定单个集群，可以使用 Serach Label 或者 URL Query 来指定，也可以在 URL Path 中指定集群名称
->
-> 当前暂时只支持 Owner UID 查询
 
-先使用 kubectl 获取 Deployment 的 UID
-```bash
-kubectl --cluster cluster-1 get deploy fake-deploy -o jsonpath="{.metadata.uid}"
-151ae265-28fe-4734-850e-b641266cd5da
-```
-> 在 kubectl 下获取 uid 可能比较麻烦，但是在 UI 场景中通常已经获得了 `metadata.uid` 更加容易
+Owner 查询必须指定单个集群，可以使用 Serach Label 或者 URL Query 来指定，也可以在 URL Path 中指定集群名称
 
-{{< tabs >}}
-
-{{% tab name="kubectl" %}}
-使用 owner-uid  来指定 Owner 的 UID, owner-seniority 对 Owner 进行辈分提升。
-```
-kubectl --cluster cluster-1 get pods -l \
-    "internalstorage.clusterpedia.io/owner-uid=151ae265-28fe-4734-850e-b641266cd5da,\
-     internalstorage.clusterpedia.io/owner-seniority=1"
-```
-
-> Owner 检索作为试验性功能，暂时以 internalstorage.clusterpedia.io 作为 Search Label 前缀
->
-> 确定相关功能的可用性和实用性后，移到 search.clusterpedia.io 下。
-{{% /tab %}}
-
-{{% tab name="URL" %}}
-Owner 检索作为试验性功能，暂时还没有提供 URL Query
-{{< /tab >}}
-
-{{< /tabs >}}
-
-使用以 `Owner Namespace` 和 `Owenr Name` 结合成 `Owner Key` 来查询的功能尚在讨论中，可以在 [issue: Support for searching resources by owner](https://github.com/clusterpedia-io/clusterpedia/issues/49) 参与讨论。
+关于根据 Owner 检索的具体使用方法，可以参考[指定集群内根据父辈或者祖辈 Owenr 进行检索](../searching-specified-cluster#根据父辈或者祖辈-owner-进行检索)
 
 ## 分页与排序
 分页和排序是资源检索必不可少的功能
