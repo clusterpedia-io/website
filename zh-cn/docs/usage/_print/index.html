@@ -1,0 +1,907 @@
+<!doctype html><html lang=zh-cn class=no-js>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=generator content="Hugo 0.87.0">
+<link rel=canonical type=text/html href=/zh-cn/docs/usage/>
+<meta name=robots content="noindex, nofollow">
+<link rel="shortcut icon" href=/favicons/favicon.ico>
+<link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16>
+<link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32>
+<link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36>
+<link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48>
+<link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72>
+<link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
+<link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
+<link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
+<title>使用 | Clusterpedia.io</title>
+<meta name=description content>
+<meta property="og:title" content="使用">
+<meta property="og:description" content="Clusterpedia 的官网">
+<meta property="og:type" content="website">
+<meta property="og:url" content="/zh-cn/docs/usage/"><meta property="og:site_name" content="Clusterpedia.io">
+<meta itemprop=name content="使用">
+<meta itemprop=description content="Clusterpedia 的官网"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="使用">
+<meta name=twitter:description content="Clusterpedia 的官网">
+<link rel=preload href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css as=style>
+<link href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css rel=stylesheet integrity>
+<script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
+<script src=https://unpkg.com/lunr@2.3.9/lunr.min.js integrity=sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli crossorigin=anonymous></script>
+</head>
+<body class=td-section>
+<header>
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+<a class=navbar-brand href=/zh-cn/>
+<span class=navbar-logo><svg id="Graph" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g id="Cpedia_-_Graph_-_Color_Dark" data-name="Cpedia - Graph - Color Dark"><rect id="Frame" width="512" height="512" fill="none"/><path id="Secondary" d="M476 221.051A274.908 274.908.0 00428.269 256 282.438 282.438.0 01395.7 220.752a322.971 322.971.0 0156.3-41.27zM362.4 256a334.139 334.139.0 00-53.2 92.145A329.953 329.953.0 00295.32 394.6a322.932 322.932.0 00-7.587 69.4h48a274.957 274.957.0 016.4-58.813 282.32 282.32.0 0114.238-45.835 285.94 285.94.0 0139.323-68.1A330.2 330.2.0 01362.4 256zM169.865 405.189a274.9 274.9.0 016.4 58.811h48a322.893 322.893.0 00-7.589-69.4 282.46 282.46.0 00-46.811 10.589zM179.94 300.03A333.961 333.961.0 00149.6 256a330 330 0 00-33.291-35.248A322.915 322.915.0 0060 179.482L36 221.051A274.964 274.964.0 0183.733 256a282.3 282.3.0 0132.576 35.248 286.331 286.331.0 0122.054 32.768 286.3 286.3.0 0117.264 35.339A330.144 330.144.0 01202.8 348.148 334.156 334.156.0 00179.94 300.03zM169.865 106.811a274.966 274.966.0 01-54.132-23.862l-24 41.569a322.934 322.934.0 0063.894 28.127 282.241 282.241.0 0014.238-45.834zm186.507 45.836a322.994 322.994.0 0063.895-28.129l-24-41.569a275.02 275.02.0 01-54.133 23.864A282.293 282.293.0 01295.32 117.4a286.278 286.278.0 01-39.307 2.716h-.1a286.366 286.366.0 01-39.237-2.718 330.245 330.245.0 01-13.88 46.455 334.129 334.129.0 0053.1 4.263h.115a333.931 333.931.0 0053.187-4.261 329.92 329.92.0 0047.174-11.208z" fill="#1b1c1d"/><path id="Primary" d="M211.993 256l22-38.1h44l22 38.1-22 38.105h-44zM342.134 106.813A274.957 274.957.0 01335.733 48h-48a322.932 322.932.0 007.587 69.4 282.293 282.293.0 0046.814-10.587zM428.269 256A282.438 282.438.0 01395.7 220.752a285.92 285.92.0 01-39.323-68.105A329.92 329.92.0 01309.2 163.854 334.125 334.125.0 00362.4 256a330.2 330.2.0 0033.3 35.248 322.971 322.971.0 0056.3 41.27l24-41.569A274.908 274.908.0 01428.269 256zM149.6 256a333.961 333.961.0 0030.34-44.03 334.156 334.156.0 0022.86-48.118 330.245 330.245.0 0013.88-46.455A322.893 322.893.0 00224.267 48h-48a274.9 274.9.0 01-6.4 58.811 282.241 282.241.0 01-14.238 45.834 286.3 286.3.0 01-17.264 35.339 286.331 286.331.0 01-22.054 32.768A330 330 0 01149.6 256zm-65.867.0A274.964 274.964.0 0136 290.949l24 41.569a322.915 322.915.0 0056.309-41.27A282.3 282.3.0 0083.733 256zM255.9 343.885a334.129 334.129.0 00-53.1 4.263 330.144 330.144.0 00-47.171 11.207 322.934 322.934.0 00-63.894 28.127l24 41.569a274.966 274.966.0 0154.132-23.862A282.46 282.46.0 01216.678 394.6a286.366 286.366.0 0139.237-2.718h.1A286.278 286.278.0 01295.32 394.6a329.953 329.953.0 0113.88-46.456 334.028 334.028.0 00-53.187-4.26zm86.236 61.3a275.027 275.027.0 0154.133 23.864l24-41.569a322.991 322.991.0 00-63.895-28.13 282.32 282.32.0 00-14.24 45.837z" fill="#33de72"/></g></svg></span><span class=font-weight-bold>Clusterpedia.io</span>
+</a>
+<div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar>
+<ul class="navbar-nav mt-2 mt-lg-0">
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/zh-cn/about/><span>关于</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class="nav-link active" href=/zh-cn/docs/><i class="fas fa-book"></i><span class=active>文档</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=https://github.com/clusterpedia-io/clusterpedia target=_blank><i class="fab fa-github"></i><span>GitHub</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=https://join.slack.com/t/clusterpedia/shared_invite/zt-11smmdntu-Im1YjOahqvHhJFqNzLELOA target=_blank><i class="fab fa-slack"></i><span>Slack</span></a>
+</li>
+<li class="nav-item dropdown mr-4 d-none d-lg-block">
+<a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
+中文 Chinese
+</a>
+<div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
+<a class=dropdown-item href=/>English</a>
+</div>
+</li>
+</ul>
+</div>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a993abfa4a44853305cb01f13105d558.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+</div>
+</nav>
+</header>
+<div class="container-fluid td-outer">
+<div class=td-main>
+<div class="row flex-xl-nowrap">
+<main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
+<div class=td-content>
+<div class="pageinfo pageinfo-primary d-print-none">
+<p>
+这是本节的多页打印视图。
+<a href=# onclick="return print(),!1">点击此处打印</a>.
+</p><p>
+<a href=/zh-cn/docs/usage/>返回本页常规视图</a>.
+</p>
+</div>
+<h1 class=title>使用</h1>
+<ul>
+<li>1: <a href=#pg-926b93f86224309ec4277c2c1b97fe8c>集群接入</a></li>
+<li>2: <a href=#pg-64bebf7ca20899cc843d095cee1d0313>同步集群资源</a></li>
+<li>3: <a href=#pg-bbba5e1deb968130546edf7495679ad0>访问 Clusterpedia</a></li>
+<li>4: <a href=#pg-48ab5663f4f8c240e7bf89c5454f249f>资源检索</a></li>
+<ul>
+<li>4.1: <a href=#pg-be1ada3dbf5dd82aaaef9f4f79a2a91e>多集群资源检索</a></li>
+<li>4.2: <a href=#pg-5b389c38373677f485ceebb14192ff51>指定集群资源检索</a></li>
+<li>4.3: <a href=#pg-b57579fd349e8eecde6373481fa27481>聚合资源(Collection Resource)检索</a></li>
+</ul>
+</ul>
+<div class=content>
+</div>
+</div>
+<div class=td-content>
+<h1 id=pg-926b93f86224309ec4277c2c1b97fe8c>1 - 集群接入</h1>
+<p>Clusterpedia 通过 <code>PediaCluster</code> 资源来接入集群，通过配置集群的 APIServer 地址以及验证信息来连接到指定集群中</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusters.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-example</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserverURL</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;https://10.30.43.43:6443&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>caData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>tokenData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>certData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>keyData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p><code>apiserverURL</code> 作为被接入集群的地址时必不可少的，而验证字段的配置有多种选择：</p>
+<ul>
+<li><code>caData</code> + <code>tokenData</code></li>
+<li><code>caData</code> + <code>certData</code> + <code>keyData</code></li>
+</ul>
+<blockquote>
+<p><code>caData</code> 在集群 APIServer 允许 Insecure 连接的情况下，也可以不填</p>
+</blockquote>
+<p>这些验证字段都需要 base64 编码，如果这些字段的值是直接从 ConfigMap 或者 Secret 中获取的话，那么就已经 base64 过</p>
+<h2 id=使用-serviceaccount-来接入集群>使用 ServiceAccount 来接入集群</h2>
+<p>用户可以选择在<strong>被接入集群</strong>中创建 ServiceAccount 并配置相应的 RBAC 来接入集群。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 注意：当前 kubectl 连接到被接入集群</span>
+kubectl apply -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/examples/clusterpedia_synchro_rbac.yaml
+
+<span style=color:#8f5902;font-style:italic># 获取 Service Account 对应 CA 和 Token</span>
+<span style=color:#000>SYNCHRO_CA</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87;font-weight:700>$(</span>kubectl get secret <span style=color:#204a87;font-weight:700>$(</span>kubectl get serviceaccount clusterpedia-synchro -o <span style=color:#000>jsonpath</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#39;{.secrets[0].name}&#39;</span><span style=color:#204a87;font-weight:700>)</span> -o <span style=color:#000>jsonpath</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#39;{.data.ca\.crt}&#39;</span><span style=color:#204a87;font-weight:700>)</span>
+<span style=color:#000>SYNCHRO_TOKEN</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87;font-weight:700>$(</span>kubectl get secret <span style=color:#204a87;font-weight:700>$(</span>kubectl get serviceaccount clusterpedia-synchro -o <span style=color:#000>jsonpath</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#39;{.secrets[0].name}&#39;</span><span style=color:#204a87;font-weight:700>)</span> -o <span style=color:#000>jsonpath</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#39;{.data.token}&#39;</span><span style=color:#204a87;font-weight:700>)</span>
+</code></pre></div><p>将 <code>$SYNCHRO_CA</code> 和 <code>SYNCHRO_TOKEN</code> 分别填写到 PediaCluster 资源的 <code>spec.caData</code> 和 <code>tokenData</code> 字段中</p>
+<h2 id=创建-pediacluster>创建 PediaCluster</h2>
+<p>完善集群的验证信息后，就可以获得一个完整的 <code>PediaCluster</code> 资源了。直接使用 <code>kubectl apply -f</code> 直接创建即可</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusters.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-example</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserverURL</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://10.6.100.10:6443</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>caData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>tokenData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklrMHRSalJtZGpSdVgxcFljMGxsU1ZneFlXMHpPSFZOY0Zwbk1UTkhiVFpsVFZwQ2JIWk9SbU5XYW5NaWZRLmV5SnBjM01pT2lKcmRXSmxjbTVsZEdWekwzTmxjblpwWTJWaFkyTnZkVzUwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXVZVzFsYzNCaFkyVWlPaUprWldaaGRXeDBJaXdpYTNWaVpYSnVaWFJsY3k1cGJ5OXpaWEoyYVdObFlXTmpiM1Z1ZEM5elpXTnlaWFF1Ym1GdFpTSTZJbU5zZFhOMFpYSndaV1JwWVMxemVXNWphSEp2TFhSdmEyVnVMVGsxYTJSNElpd2lhM1ZpWlhKdVpYUmxjeTVwYnk5elpYSjJhV05sWVdOamIzVnVkQzl6WlhKMmFXTmxMV0ZqWTI5MWJuUXVibUZ0WlNJNkltTnNkWE4wWlhKd1pXUnBZUzF6ZVc1amFISnZJaXdpYTNWaVpYSnVaWFJsY3k1cGJ5OXpaWEoyYVdObFlXTmpiM1Z1ZEM5elpYSjJhV05sTFdGalkyOTFiblF1ZFdsa0lqb2lNREl5WXpNMk5USXRPR1k0WkMwME5qSmtMV0l6TnpFdFpUVXhPREF3TnpFeE9HUTBJaXdpYzNWaUlqb2ljM2x6ZEdWdE9uTmxjblpwWTJWaFkyTnZkVzUwT21SbFptRjFiSFE2WTJ4MWMzUmxjbkJsWkdsaExYTjVibU5vY204aWZRLkF4ZjhmbG5oR0lDYjJaMDdkT0FKUW11aHVIX0ZzRzZRSVY5Sm5sSmtPUnF5aGpWSDMyMkVqWDk1bVhoZ2RVQ2RfZXphRFJ1RFFpLTBOWDFseGc5OXpYRks1MC10ZzNfYlh5NFA1QnRFOUpRNnNraUt4dDFBZVJHVUF4bG5fVFU3SHozLTU5Vnl5Q3NwckFZczlsQWQwRFB6bTRqb1dyS1lKUXpPaGl5VjkzOWpaX2ZkS1BVUmNaMVVKVGpXUTlvNEFFY0hMdDlyTEJNMTk2eDRkbzA4ZHFaUnVtTzJZRXFkQTB3ZnRxZ2NGQzdtTGlSVVhkWElkYW9CY1BuWXBwM01MU3B5QjJQMV9vSlRFNS1nd3k4N2Jwb3U1RXo2TElSSExIeW5NWXAtWVRLR2hBbDJwMXdJb0tDZUNnQng4RlRfdzM4Rnh1TnE0UDRoQW5RUUh6bU9Ndw==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><h2 id=集群查看>集群查看</h2>
+<p>集群接入成功后，可以通过 <code>kubectl get pediacluster</code> 命令来查看所有接入的集群，以及集群状态</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
+NAME           APISERVER URL               VERSION    STATUS
+cluster-1      https://10.6.100.10:6443    v1.22.2    Healthy
+cluster-2      https://10.50.10.11:16443   v1.10.11   Healthy
+</code></pre></div><h2 id=接下来>接下来</h2>
+<p>继续查看 <a href=../sync-resources>通过集群资源</a> 来同步集群内资源</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-64bebf7ca20899cc843d095cee1d0313>2 - 同步集群资源</h1>
+<p>Clusterpedia 的主要功能，便是提供对多集群内的资源进行复杂检索。</p>
+<p>通过 <code>PediaCluster</code> 资源来指定该集群中哪些资源需要支持复杂检索，Clusterpedia 会将这些资源实时的同步到存储层中</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusters.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-example</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserverURL</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;https://10.30.43.43:6443&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>pods</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>configmsp</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cert-manager.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>versions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#000>certificates</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><h2 id=内置资源同步>内置资源同步</h2>
+<p><code>PediaCluster</code> 为了方便管理和查看这些同步的资源，用户需要以 Group 为单位来配置资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline> </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>   </span><span style=color:#204a87;font-weight:700>versions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>   </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>daemonsets</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>对于内置资源，不需要填写 <code>versions</code> 字段。</p>
+<p>Clusterpedia 会根据该集群内所支持的资源版本自动选择合适的版本来收集，
+并且用户无需担心版本转换的问题， Clusterpedia 会开放出该内置资源的所有版本接口</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<span style=color:#ce5c00;font-weight:700>{</span>
+  <span style=color:#4e9a06>&#34;kind&#34;</span>: <span style=color:#4e9a06>&#34;APIGroup&#34;</span>,
+  <span style=color:#4e9a06>&#34;apiVersion&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>,
+  <span style=color:#4e9a06>&#34;name&#34;</span>: <span style=color:#4e9a06>&#34;apps&#34;</span>,
+  <span style=color:#4e9a06>&#34;versions&#34;</span>: <span style=color:#ce5c00;font-weight:700>[</span>
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1&#34;</span>,
+      <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>,
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1beta2&#34;</span>,
+      <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1beta2&#34;</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>,
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1beta1&#34;</span>,
+      <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1beta1&#34;</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>
+  <span style=color:#ce5c00;font-weight:700>]</span>,
+  <span style=color:#4e9a06>&#34;preferredVersion&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+    <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1&#34;</span>,
+    <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>
+  <span style=color:#ce5c00;font-weight:700>}</span>
+<span style=color:#ce5c00;font-weight:700>}</span>
+</code></pre></div><h2 id=自定义资源同步>自定义资源同步</h2>
+<p>相比内置资源，自定义资源在资源版本的配置上会稍有不同。</p>
+<pre><code class=language-yaml: data-lang=yaml:>resources:
+ - group: cert-manager.io
+   versions: []
+   resources:
+    - certificates
+</code></pre><p>用户同样可以忽略 versions 字段，这时 Clusterpedia 就会同步该 Group 在该集群的前三个版本。</p>
+<p>以 cert-manager.io 为例，获取集群中 cert-manager.io 支持的 Group</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/cert-manager.io&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<span style=color:#ce5c00;font-weight:700>{</span>
+  <span style=color:#4e9a06>&#34;kind&#34;</span>: <span style=color:#4e9a06>&#34;APIGroup&#34;</span>,
+  <span style=color:#4e9a06>&#34;apiVersion&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>,
+  <span style=color:#4e9a06>&#34;name&#34;</span>: <span style=color:#4e9a06>&#34;cert-manager.io&#34;</span>,
+  <span style=color:#4e9a06>&#34;versions&#34;</span>: <span style=color:#ce5c00;font-weight:700>[</span>
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;cert-manager.io/v1&#34;</span>,
+      <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>,
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;cert-manager.io/v1beta1&#34;</span>,
+      <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1beta1&#34;</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>,
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;cert-manager.io/v1alpha3&#34;</span>,
+      <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1alpha3&#34;</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>,
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;cert-manager.io/v1alpha2&#34;</span>,
+      <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1alpha2&#34;</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>
+  <span style=color:#ce5c00;font-weight:700>]</span>,
+  <span style=color:#4e9a06>&#34;preferredVersion&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+    <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;cert-manager.io/v1&#34;</span>,
+    <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>
+  <span style=color:#ce5c00;font-weight:700>}</span>
+<span style=color:#ce5c00;font-weight:700>}</span>
+</code></pre></div><p>可以看到，当前集群支持 <em>cert-manager.io</em> 的 <code>v1</code>，<code>v1beta1</code>，<code>v1alpha3</code>，<code>v1alpha2</code> 四个版本。</p>
+<p>当 <code>resources.[group].versions</code> 为空时，Clusterpedia 就会以 <code>APIGroup.versions</code> 列表的顺序，收集 <code>v1</code>， <code>v1beta1</code>，<code>v1alpah3</code> 三个版本，而 <code>v1alpha2</code> 不会被收集</p>
+<p>如果用户指定了 versions，那么就会按照 <code>versions</code> 的配置来收集指定的版本资源。</p>
+<pre><code class=language-yaml: data-lang=yaml:>resources:
+ - group: cert-manager.io
+   versions:
+    - v1beta1
+   resources:
+    - certificates
+</code></pre><p>这时，只会收集 v1beta1 版本。</p>
+<h3 id=使用注意>使用注意</h3>
+<p>自定义资源收集暂时不支持版本转换，收集了哪些版本，那么就只支持哪些资源版本的收集。</p>
+<p>这时在检索多集群资源时，如果 cluster-1 只收集了 v1beta1 版本的资源，而检索请求 v1 版本的资源便会忽略 cluster-1 所收集的 v1beta1 版本</p>
+<p>需要用户去协调处理多个集群内的版本情况</p>
+<h2 id=查看资源同步状态>查看资源同步状态</h2>
+<p>我们可以通过 <code>PediaCluster</code> 资源的 <code>Status</code> 来查看资源的信息，同步的资源版本和状态以及存储版本</p>
+<p>在 <code>Status</code> 中，资源会有<strong>同步版本</strong>和<strong>存储版本</strong>：</p>
+<ul>
+<li><strong>同步版本</strong>是 Clusterpedia 从被同步集群中获取到的资源的版本</li>
+<li><strong>存储版本</strong>是 Clusterpedia 存储到存储层中的版本</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>namespaced</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>syncConditions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>lastTransitionTime</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;2022-01-13T04:34:08Z&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Syncing</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>storageVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>version</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>通常集群资源的<strong>同步版本</strong>和<strong>存储版本</strong>是相同的。</p>
+<p>但是当接入一个比较老的集群时，集群只提供了 <code>v1beta1</code> 版本的 <code>Deployment</code> 资源，而这时资源的<strong>同步版本</strong>为 <code>v1beta1</code>，<strong>存储版本</strong>为 <code>v1</code></p>
+<p>例如，同步 1.10 版本 Kubernetes 的 Deployment 时，同步状态为：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>namespaced</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>syncConditions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>lastTransitionTime</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;2022-01-13T04:34:04Z&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Syncing</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>storageVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>version</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1beta1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>对于自定义资源来说，<strong>同步版本</strong>和<strong>存储版本</strong>是一致的</p>
+<h2 id=接下来>接下来</h2>
+<p>资源同步完成后，便可以检索这些同步的资源，支持<a href=../searching-for-resources>单类型资源检索</a>和<a href=../searching-for-collectionresource>聚合资源(Collection Resource)检索</a></p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-bbba5e1deb968130546edf7495679ad0>3 - 访问 Clusterpedia</h1>
+<p>Clusterpedia 主要有两个组件：</p>
+<ul>
+<li><code>ClusterSynchroManager</code> 管理 <em>主集群</em> 内的 <code>PediaCluster</code> 资源，通过 <code>PediaCluster</code> 配置认证信息连接到指定集群，并且实时同步相应的资源。</li>
+<li><code>APIServer</code> 同样会监听 <em>主集群</em> 内的 <code>PediaCluster</code> 资源，并根据集群同步的资源以**兼容 Kubernetes OpenAPI **的方式来提供对资源的复杂检索</li>
+</ul>
+<p>并且 <code>Clusterpedia APIServer</code> 以<a href=https://kubernetes.io/zh/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation>聚合式 API</a> 的方式注册到 <em>主集群</em> 的 APIServer 中，这样我们通过和主集群相同的入口便可访问 Clusterpedia</p>
+<h2 id=resources-和聚合资源>Resources 和聚合资源</h2>
+<p>Clusterpedia APIServer 会在 Group <code>pedia.clusterpedia.io</code> 下提供两种检索资源：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl api-resources <span style=color:#000;font-weight:700>|</span> grep pedia.clusterpedia.io
+NAME                 SHORTNAMES    APIVERSION                        NAMESPACED   KIND
+collectionresources                pedia.clusterpedia.io/v1alpha1    <span style=color:#204a87>false</span>        CollectionResource
+resources                          pedia.clusterpedia.io/v1alpha1    <span style=color:#204a87>false</span>        Resources
+</code></pre></div><ul>
+<li><code>Resources</code> 用于指定资源类型的方式来检索，在使用上兼容 Kubernetes OpenAPI</li>
+<li><code>CollectionResource</code> 用于检索由多个资源类型聚合而成的新的资源类型，以达到同时检索多种资源的目的</li>
+</ul>
+<blockquote>
+<p>对于 Collection Resource 的概念和使用可以查看 <a href>什么是聚合资源（Collection Resource）</a>, <a href>聚合资源（Collection Resource）检索</a></p>
+</blockquote>
+<h2 id=访问-clusterpedia-资源>访问 Clusterpedia 资源</h2>
+<p>在检索指定类型的资源时，可以按照 Kubernetes OpenAPI 的 Get/List 规范来请求，
+这样我们不仅仅可以使用 URL 来访问 Clusterpedia Resources，还可以直接使用 kubectl 或者 client-go 来检索资源。</p>
+<p>Clusterpedia 在 URL Path 上区分请求是多集群资源还是指定集群集群：</p>
+<p><strong>多集群资源路径</strong> 直接以 Resources 资源路径为前缀
+<em>/apis/pedia.clusterpedia.io/v1alpha1/resources</em></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alhpa1/versions&#34;</span>
+</code></pre></div><p><strong>指定集群资源路径</strong> 在 Resources 资源路径的基础上设置资源名称来指定集群
+<em>/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/<cluster name></em></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alhpa1/clusters/cluster-1/versions
+</span></code></pre></div><h3 id=为-kubectl-生成集群访问的快捷配置>为 kubectl 生成集群访问的快捷配置</h3>
+<p>尽管我们可以使用 URL 来访问 Clusterpedia 资源，但是如果想要更方便的使用 kubectl 来查询的话，就需要配置集群的 kubeconfig cluster 配置。</p>
+<p>Clusterpedia 提供了一个简单的脚本来帮助生成 kube config</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
+
+Current Context: kubernetes-admin@kubernetes
+Current Cluster: kubernetes
+        Server: https://10.6.100.10:6443
+        TLS Server Name:
+        Insecure Skip TLS Verify:
+        Certificate Authority:
+        Certificate Authority Data: ***
+
+Cluster <span style=color:#4e9a06>&#34;clusterpedia&#34;</span> set.
+Cluster <span style=color:#4e9a06>&#34;cluster-1&#34;</span> set.
+Cluster <span style=color:#4e9a06>&#34;cluster-2&#34;</span> set.
+</code></pre></div><blockquote>
+<p>可以在 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/hack/gen-clusterconfigs.sh>hack/gen-clusterconfigs.sh</a> 找到该脚本</p>
+</blockquote>
+<p>脚本会打印当前的集群信息，并将集群中 PediaCluster 配置到 kubeconfig 中。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># .kube/config</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>cluster</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>certificate-authority-data</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>server</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://10.6.100.10:6443/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>cluster</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>certificate-authority-data</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>server</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://10.6.100.10:6443/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>cluster</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>certificate-authority-data</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>server</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://10.6.100.10:6443/apis/pedia.clusterpedia.io/v1alpha1/resources</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>cluster</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>certificate-authority-data</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>server</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://10.6.100.10:6443</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>kubernetes</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>脚本生成了用于多集群访问的 <em>clusterpedia</em> cluster 以及其他 <code>PediaCluster</code> cluster，
+而且在访问 Clusterpedia 时会复用主集群的入口以及认证信息，相比主集群入口只是增加了 Resources 的 path。</p>
+<p>多集群的 kubeconfig 信息生成完成后，就可以使用 <code>kubectl --cluster</code> 来指定集群访问了</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia version
+
+<span style=color:#8f5902;font-style:italic># 多集群检索时支持的资源</span>
+kubectl --cluster clusterpedia api-resources
+<span style=color:#8f5902;font-style:italic># cluster-1 支持检索的资源</span>
+kubectl --cluster cluster-1 api-resources
+</code></pre></div><h2 id=查看支持检索的资源类型>查看支持检索的资源类型</h2>
+<p>我们可以根据 URL 路径来分别获取全局资源信息和指定集群的资源信息。
+全局资源信息是所有集群同步的资源类型的并集。</p>
+<p>Clusterpedia 开放的 Discovery API 同样兼容 Kubernetes OpenAPI，可以使用 <code>kubectl</code>，<a href=https://pkg.go.dev/k8s.io/client-go/discovery#DiscoveryClient>client-go/discovery</a>，<a href=https://pkg.go.dev/k8s.io/client-go/restmapper>client-go/restmapper</a> 或者 <a href=https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/client/apiutil#NewDynamicRESTMapper>controller-runtime/dynamic-restmapper</a> 来访问。</p>
+<p><strong>使用 URL 来获取 APIGroupList 以及 APIGroup 信息</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<span style=color:#ce5c00;font-weight:700>{</span>
+  <span style=color:#4e9a06>&#34;kind&#34;</span>: <span style=color:#4e9a06>&#34;APIGroupList&#34;</span>,
+  <span style=color:#4e9a06>&#34;apiVersion&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>,
+  <span style=color:#4e9a06>&#34;groups&#34;</span>: <span style=color:#ce5c00;font-weight:700>[</span>
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;name&#34;</span>: <span style=color:#4e9a06>&#34;apps&#34;</span>,
+      <span style=color:#4e9a06>&#34;versions&#34;</span>: <span style=color:#ce5c00;font-weight:700>[</span>
+        <span style=color:#ce5c00;font-weight:700>{</span>
+          <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1&#34;</span>,
+          <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>
+        <span style=color:#ce5c00;font-weight:700>}</span>,
+        <span style=color:#ce5c00;font-weight:700>{</span>
+          <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1beta2&#34;</span>,
+          <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1beta2&#34;</span>
+        <span style=color:#ce5c00;font-weight:700>}</span>,
+        <span style=color:#ce5c00;font-weight:700>{</span>
+          <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1beta1&#34;</span>,
+          <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1beta1&#34;</span>
+        <span style=color:#ce5c00;font-weight:700>}</span>
+      <span style=color:#ce5c00;font-weight:700>]</span>,
+      <span style=color:#4e9a06>&#34;preferredVersion&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+        <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1&#34;</span>,
+        <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>
+      <span style=color:#ce5c00;font-weight:700>}</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>,
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;name&#34;</span>: <span style=color:#4e9a06>&#34;cert-manager.io&#34;</span>,
+      <span style=color:#4e9a06>&#34;versions&#34;</span>: <span style=color:#ce5c00;font-weight:700>[</span>
+        <span style=color:#ce5c00;font-weight:700>{</span>
+          <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;cert-manager.io/v1&#34;</span>,
+          <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>
+        <span style=color:#ce5c00;font-weight:700>}</span>
+      <span style=color:#ce5c00;font-weight:700>]</span>,
+      <span style=color:#4e9a06>&#34;preferredVersion&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+        <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;cert-manager.io/v1&#34;</span>,
+        <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>
+      <span style=color:#ce5c00;font-weight:700>}</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>
+  <span style=color:#ce5c00;font-weight:700>]</span>
+<span style=color:#ce5c00;font-weight:700>}</span>
+
+kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<span style=color:#ce5c00;font-weight:700>{</span>
+  <span style=color:#4e9a06>&#34;kind&#34;</span>: <span style=color:#4e9a06>&#34;APIGroup&#34;</span>,
+  <span style=color:#4e9a06>&#34;apiVersion&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>,
+  <span style=color:#4e9a06>&#34;name&#34;</span>: <span style=color:#4e9a06>&#34;apps&#34;</span>,
+  <span style=color:#4e9a06>&#34;versions&#34;</span>: <span style=color:#ce5c00;font-weight:700>[</span>
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1&#34;</span>,
+      <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>,
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1beta2&#34;</span>,
+      <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1beta2&#34;</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>,
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1beta1&#34;</span>,
+      <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1beta1&#34;</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>
+  <span style=color:#ce5c00;font-weight:700>]</span>,
+  <span style=color:#4e9a06>&#34;preferredVersion&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+    <span style=color:#4e9a06>&#34;groupVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1&#34;</span>,
+    <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>
+  <span style=color:#ce5c00;font-weight:700>}</span>
+<span style=color:#ce5c00;font-weight:700>}</span>
+</code></pre></div><p><strong>使用 kubectl 来获取 api-resources</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia api-resources
+NAME          SHORTNAMES   APIVERSION           NAMESPACED   KIND
+configmaps    cm           v1                   <span style=color:#204a87>true</span>         ConfigMap
+namespaces    ns           v1                   <span style=color:#204a87>false</span>        Namespace
+nodes         no           v1                   <span style=color:#204a87>false</span>        Node
+pods          po           v1                   <span style=color:#204a87>true</span>         Pod
+secrets                    v1                   <span style=color:#204a87>true</span>         Secret
+daemonsets    ds           apps/v1              <span style=color:#204a87>true</span>         DaemonSet
+deployments   deploy       apps/v1              <span style=color:#204a87>true</span>         Deployment
+replicasets   rs           apps/v1              <span style=color:#204a87>true</span>         ReplicaSet
+issuers                    cert-manager.io/v1   <span style=color:#204a87>true</span>         Issuer
+</code></pre></div>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-48ab5663f4f8c240e7bf89c5454f249f>4 - 资源检索</h1>
+<p>Clusterpedia 支持对 <a href=searching-multi-cluster>多个集群内资源</a>，<a href=searching-specified-cluster>指定集群的资源</a> 以及<a href=searching-collection-resource>聚合资源</a> 的复杂检索，</p>
+<p>并且这些复杂检索的条件可以通过两种方式传递给 Clusterpedia APIServer：</p>
+<ul>
+<li><code>URL Query</code>：直接将查询条件作为 Query 来传递</li>
+<li><code>Search Labels</code>：为了兼容 Kubernetes OpenAPI，可以将查询条件设置在 Label Selector。</li>
+</ul>
+<p>除了条件检索，Clusterpedia 还增强了 <a href=#%E5%AD%97%E6%AE%B5%E8%BF%87%E6%BB%A4>Field Selector</a>
+，满足我们通过 <code>metadata.annotation</code> 或者 <code>status.*</code> 内字段的过滤需求。</p>
+<h1 id=条件检索>条件检索</h1>
+<h2 id=元信息检索>元信息检索</h2>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指定集群名称</td>
+<td>search.clusterpedia.io/clusters</td>
+<td>clusters</td>
+</tr>
+<tr>
+<td>指定命名空间</td>
+<td>search.clusterpedia.io/namespaces</td>
+<td>namespaces</td>
+</tr>
+<tr>
+<td>指定资源名称</td>
+<td>search.clusterpedia.io/names</td>
+<td>names</td>
+</tr>
+</tbody>
+</table>
+<h2 id=owner-检索>Owner 检索</h2>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指定 Owner UID</td>
+<td>internalstorage.clusterpedia.io/owner-uid</td>
+<td>ownerID</td>
+</tr>
+<tr>
+<td>指定 Owner Key</td>
+<td>internalstorage.clusterpedia.io/owner-key</td>
+<td>ownerKey</td>
+</tr>
+<tr>
+<td>指定 Owner 辈分</td>
+<td>internalstorage.clusterpedia.io/owner-seniority</td>
+<td>ownerSeniority</td>
+</tr>
+</tbody>
+</table>
+<h2 id=排序>排序</h2>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>多字段排序</td>
+<td>search.clusterpedia.io/orderby</td>
+<td>orderby</td>
+</tr>
+</tbody>
+</table>
+<h2 id=分页>分页</h2>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>size</td>
+<td>search.clusterpedia.io/size</td>
+<td>limit</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>search.clusterpedia.io/offset</td>
+<td>continue</td>
+</tr>
+<tr>
+<td>要求响应携带 Continue</td>
+<td>search.clusterpedia.io/with-continue</td>
+<td>withContinue</td>
+</tr>
+<tr>
+<td>要求响应携带资源剩余数量</td>
+<td>search.clusterpedia.io/with-remaining-count</td>
+<td>withRemainingCount</td>
+</tr>
+</tbody>
+</table>
+<p>search label 支持和 Label Selector 相同的操作符：<code>exist</code>，<code>not exist</code>，<code>==</code>，<code>=</code>，<code>!=</code>，<code>in</code>，<code>not in</code>。</p>
+<blockquote>
+<p>在使用 kubectl 操作时，分页 size 只能通过 <code>kubectl --chunk-size</code> 来设置，因为 kubectl 会将 limit 默认设置为 500。</p>
+</blockquote>
+<h1 id=字段过滤>字段过滤</h1>
+<p>Clusterpedia Field Selector 的在操作符上与 Label Selector 保持一致，同样支持 <code>exist</code>，<code>not exist</code>，<code>==</code>，<code>=</code>，<code>!=</code>，<code>in</code>，<code>not in</code>。</p>
+<p>无论是 URL 还是 kubectl 上的命令参数都原生 Field Selector 一致</p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>kubectl</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字段过滤</td>
+<td>kubectl &ndash;field-selector</td>
+<td>fieldSelector</td>
+</tr>
+</tbody>
+</table>
+<p>详细可以查看：</p>
+<ul>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia/pull/36>support field selector</a></li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/48>issue: support list field filtering</a></li>
+</ul>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-be1ada3dbf5dd82aaaef9f4f79a2a91e>4.1 - 多集群资源检索</h1>
+<p>多集群资源检索可以满足我们，根据查询条件一次过滤多个集群内的资源，并提供对这些资源的分页排序的能力</p>
+<p>在使用 kubectl 操作时，可以使用 <code>kubectl --cluster clusterpedia api-resources</code> 来查看当前集群支持的资源种类。</p>
+<h2 id=基本功能>基本功能</h2>
+<h3 id=指定集群>指定集群</h3>
+<p>多集群检索时，会默认检索所有的集群，我们也可以指定单个或者一组集群</p>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-1-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-1-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-1-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-1-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-1><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-1-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-1-0>
+<p><p>使用 Search Label <code>search.clusterpedia.io/clusters</code> 来指定一组命名空间</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/clusters in (cluster-1,cluster-2)&#34;</span>
+NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   cluster-1   coredns                   2/2     <span style=color:#0000cf;font-weight:700>2</span>            <span style=color:#0000cf;font-weight:700>2</span>           68d
+kube-system   cluster-2   coredns                   2/2     <span style=color:#0000cf;font-weight:700>2</span>            <span style=color:#0000cf;font-weight:700>2</span>           64d
+
+<span style=color:#8f5902;font-style:italic># 指定单个集群</span>
+kubectl --cluster clusterpedia get deployments -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/clusters=cluster-1&#34;</span>
+<span style=color:#8f5902;font-style:italic># 或者使用 --cluster &lt;cluster name&gt; 来指定</span>
+kubectl --cluster cluster-1 get deployments<span style=color:#4e9a06>&#34;
+</span></code></pre></div><p>对于指定单个集群的检索，也可以查看 <a href=../searching-specified-cluster>指定集群检索</a></p>
+</div>
+<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-1-1>
+<p><p>使用 URL 时，使用 <code>clusters</code> 作为 URL Query 来传递</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
+</code></pre></div><p>如果指定单个集群，也可以将 cluster name 放到 URL 路径中</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
+</code></pre></div><p>了解更多<a href=../searching-specified-cluster>指定集群检索</a></p>
+</div></div>
+<h3 id=指定命名空间>指定命名空间</h3>
+<p>可以像查看原生 Kube 一样来<strong>指定单个命名空间或者所有命名空间</strong></p>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-2 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-2-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-2-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-2-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-2-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-2><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-2-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-2-0>
+<p><p>使用 <code>-n &lt;namespace></code> 来指定命名空间，默认在 default 命名空间</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -n kube-system
+CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+cluster-1   coredns                   2/2     <span style=color:#0000cf;font-weight:700>2</span>            <span style=color:#0000cf;font-weight:700>2</span>           68d
+cluster-2   calico-kube-controllers   1/1     <span style=color:#0000cf;font-weight:700>1</span>            <span style=color:#0000cf;font-weight:700>1</span>           64d
+cluster-2   coredns                   2/2     <span style=color:#0000cf;font-weight:700>2</span>            <span style=color:#0000cf;font-weight:700>2</span>           64d
+</code></pre></div><p>使用 <code>-A</code> 或者 <code>--all-namespaces</code> 来查看所有集群的所有命名空间下的资源</p>
+<pre><code>kubectl --cluster clusterpedia get deployments -A
+NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   cluster-1   coredns                   2/2     2            2           68d
+kube-system   cluster-2   calico-kube-controllers   1/1     1            1           64d
+kube-system   cluster-2   coredns                   2/2     2            2           64d
+default       cluster-2   dd-airflow-scheduler      0/1     1            0           54d
+default       cluster-2   dd-airflow-web            0/1     1            0           54d
+</code></pre></div>
+<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-2-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-2-1>
+<p><p>获取资源的 URL 和原生 Kubernetes 一样 <em>/apis/apps/v1/deployments</em>，</p>
+<p>只是需要加上 Clusterpedia Resources 的路径前缀 <em>/apis/pedia.clusterpedia.io/v1alpha1/resources</em></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments&#34;</span>
+
+<span style=color:#8f5902;font-style:italic># 指定命名空间</span>
+kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/namespaces/kube-system/deployments&#34;</span>
+</code></pre></div></div></div>
+<hr>
+<p>除了指定单个命名空间，还可以<strong>指定查看一组命名空间下的资源</strong>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-3 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-3-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-3-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-3-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-3-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-3><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-3-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-3-0>
+<p><p>使用 Search Label <code>search.clusterpedia.io/namespaces</code> 来指定一组命名空间</p>
+<blockquote>
+<p>一定要指定 -A 参数，避免 kubectl 在路径中设置 default namespace</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -A -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/namespaces in (kube-system, default)&#34;</span>
+NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   cluster-1   coredns                   2/2     <span style=color:#0000cf;font-weight:700>2</span>            <span style=color:#0000cf;font-weight:700>2</span>           68d
+kube-system   cluster-2   calico-kube-controllers   1/1     <span style=color:#0000cf;font-weight:700>1</span>            <span style=color:#0000cf;font-weight:700>1</span>           64d
+kube-system   cluster-2   coredns                   2/2     <span style=color:#0000cf;font-weight:700>2</span>            <span style=color:#0000cf;font-weight:700>2</span>           64d
+default       cluster-2   dd-airflow-scheduler      0/1     <span style=color:#0000cf;font-weight:700>1</span>            <span style=color:#0000cf;font-weight:700>0</span>           54d
+default       cluster-2   dd-airflow-web            0/1     <span style=color:#0000cf;font-weight:700>1</span>            <span style=color:#0000cf;font-weight:700>0</span>           54d
+</code></pre></div></div>
+<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-3-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-3-1>
+<p><p>使用 URL 时，就需要使用 Label Selector 来传递参数了，直接使用 URL Query <code>namespaces</code> 即可</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?namespace=kube-system,default&#34;</span>
+</code></pre></div></div></div>
+</p>
+<h3 id=指定资源名称>指定资源名称</h3>
+<p>用户可以通过一组资源名称来过滤资源</p>
+<blockquote>
+<p>当前暂时不支持模糊搜索
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-4 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-4-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-4-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-4-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-4-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-4><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-4-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-4-0>
+<p><p>使用 Search Label <code>search.clusterpedia.io/namespaces</code> 来指定一组命名空间</p>
+<blockquote>
+<p>一定要指定 -A 参数，避免 kubectl 在路径中设置 default namespace</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -A -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/names=coredns&#34;</span>
+NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   cluster-1   coredns                   2/2     <span style=color:#0000cf;font-weight:700>2</span>            <span style=color:#0000cf;font-weight:700>2</span>           68d
+kube-system   cluster-2   coredns                   2/2     <span style=color:#0000cf;font-weight:700>2</span>            <span style=color:#0000cf;font-weight:700>2</span>           64d
+</code></pre></div></div>
+<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-4-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-4-1>
+<p><p>使用 URL 时，使用 <code>names</code> 作为 URL Query 来传递，可以选择设置 namespaces 也可以不设置</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?names=kube-coredns,dd-airflow-web&#34;</span>
+</code></pre></div><p>在多集群检索时，返回的数据实际是以类似 DeploymentList 的结构封装的数据。</p>
+<p>如果我们想要获取到单个的 Deployment 那么就需要在 URL 路径中指定 cluster name，参考获取<a href>获取单个资源</a></p>
+</div></div>
+</p>
+</blockquote>
+<h2 id=字段过滤>字段过滤</h2>
+<p>原生 Kubernetes 当前只支持对 <code>metadata.name</code> 和 <code>metadata.namespace</code> 的字段过滤，而且操作符只支持 <code>=</code>，<code>!=</code>，<code>==</code>，能力非常有限。</p>
+<p>Clusterpedia 在兼容已有的 Field Selector 功能的基础上，提供了更加墙大的功能，支持和 <code>Label Selector</code> 相同的操作符。</p>
+<p>Field Selector 的 key 当前支持三种格式：</p>
+<ul>
+<li><strong>使用 <code>.</code> 分隔字段</strong></li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;status.phase=Running&#34;</span>
+
+<span style=color:#8f5902;font-style:italic># 也可以在首字符添加 `.`</span>
+kubectl --cluster clusterpedia --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;.status.phase=Running&#34;</span>
+</code></pre></div><ul>
+<li><strong>字段名称使用 <code>''</code> 或者 <code>""</code> 来包裹</strong>，可以用于带 <code>.</code> 之类的非法字符的字段</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deploy <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;metadata.annotations[&#39;test.io&#39;] in (value1,value2),spec.replica=3&#34;</span>
+</code></pre></div><ul>
+<li><strong>使用 <code>[]</code> 来分隔字段</strong>，<code>[]</code> 内字符串必须使用 <code>''</code> 或者 <code>""</code> 来包裹</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;status[&#39;phase&#39;]=Running&#34;</span>
+</code></pre></div><h3 id=列表字段支持>列表字段支持</h3>
+<p>实际在字段过滤的设计时考虑到了对<code>列表元素</code>内字段过滤，不过由于使用场景是否真正有意义还需要更多的讨论 <a href=https://github.com/clusterpedia-io/clusterpedia/issues/48>issue: support list field filtering</a></p>
+<p>示例：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;spec.containers[].name!=container1&#34;</span>
+
+kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;spec.containers[].name == container1&#34;</span>
+
+kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;spec.containers[1].name in (container1,container2)&#34;</span>
+</code></pre></div><h2 id=根据父辈以及祖辈-owner-查询>根据父辈以及祖辈 Owner 查询</h2>
+<p>通过 Owner 检索是一个非常有用的检索功能，
+并且 Clusterpedia 在 Owner 的基础上还支持对 Owner 进行辈分提升来进行祖辈甚至更好辈分的检索。</p>
+<p>通过 Owner 检索，可以一次查询到 Deployment 下的所有 Pods，无需中间再查询 ReplicaSet。</p>
+<blockquote>
+<p>Owner 查询必须指定单个集群，可以使用 Serach Label 或者 URL Query 来指定，也可以在 URL Path 中指定集群名称</p>
+<p>当前暂时只支持 Owner UID 查询</p>
+</blockquote>
+<p>先使用 kubectl 获取 Deployment 的 UID</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get deploy fake-deploy -o <span style=color:#000>jsonpath</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;{.metadata.uid}&#34;</span>
+151ae265-28fe-4734-850e-b641266cd5da
+</code></pre></div><blockquote>
+<p>在 kubectl 下获取 uid 可能比较麻烦，但是在 UI 场景中通常已经获得了 <code>metadata.uid</code> 更加容易</p>
+</blockquote>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-5 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-5-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-5-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-5><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-0>
+<p><p>使用 owner-uid 来指定 Owner 的 UID, owner-seniority 对 Owner 进行辈分提升。</p>
+<pre><code>kubectl --cluster cluster-1 get pods -l \
+    &quot;internalstorage.clusterpedia.io/owner-uid=151ae265-28fe-4734-850e-b641266cd5da,\
+     internalstorage.clusterpedia.io/owner-seniority=1&quot;
+</code></pre><blockquote>
+<p>Owner 检索作为试验性功能，暂时以 internalstorage.clusterpedia.io 作为 Search Label 前缀</p>
+<p>确定相关功能的可用性和实用性后，移到 search.clusterpedia.io 下。</p>
+</blockquote>
+</div>
+<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-1>
+<p><p>Owner 检索作为试验性功能，暂时还没有提供 URL Query</p>
+</div></div>
+<p>使用以 <code>Owner Namespace</code> 和 <code>Owenr Name</code> 结合成 <code>Owner Key</code> 来查询的功能尚在讨论中，可以在 <a href=https://github.com/clusterpedia-io/clusterpedia/issues/49>issue: Support for searching resources by owner</a> 参与讨论。</p>
+<h2 id=分页与排序>分页与排序</h2>
+<p>分页和排序是资源检索必不可少的功能</p>
+<h3 id=根据多个字段进行排序>根据多个字段进行排序</h3>
+<p>可以指定多个字段进行排序，而对排序字段的支持是由存储层来决定。</p>
+<p>当前默认存储层支持对 <code>cluster</code>，<code>namespace</code>，<code>name</code>，<code>created_at</code>，<code>resource_version</code> 进行正序和倒序的排序，字段也支持随意的组合
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-6 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-6-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-6-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-6-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-6-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-6><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-6-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-6-0>
+<p><p>使用多个字段进行正序排序</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods -l <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/orderby in (cluster, name)
+</span></code></pre></div><p>由于 Label Selector 对 value 的限制，倒序时需要在字段结尾加上 <code>_desc</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods -l <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/orderby in (namespace_desc, cluster, name)
+</span></code></pre></div></div>
+<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-6-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-6-1>
+<p><p>Owner 检索作为试验性功能，暂时还没有提供 URL Query</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace,cluster
+</span></code></pre></div><p>指定字段倒序排序时，在字段后添加 desc，以空格分隔</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace desc,cluster&#34;</span>
+</code></pre></div></div></div>
+</p>
+<h3 id=分页>分页</h3>
+<p>原生 Kubernetes 实际是支持分页的，<a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListOptions>ListOptions</a> 中便已经存在用于分页查询的字段。</p>
+<p>Clusterpedia 复用 ListOptions.Limit 和 ListOptions.Continue 字段作为分页的 <code>size</code> 和 <code>offset</code>。</p>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-7 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-7-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-7-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-7-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-7-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-7><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-7-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-7-0>
+<p><p>kubectl 的 <code>--chunk-size</code> 实际通过设置 <code>limit</code> 来用于分片拉取，
+原生的 Kubernetes APIServer 会在返回的响应中携带用于下一次拉取的 <code>continue</code>，
+并根据 <code>--chunk-size</code> 和 <code>conintue</code> 进行下一次拉取，直到相应的数据中 Conintue 为空。</p>
+<p>Clusterpedia 为了保证在 kubectl 中实现分页检索，默认并不会在响应中返回 <code>continue</code> 字段，这样避免了 kubectl 使用分片拉取全部数据</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get pods --chunk-size <span style=color:#0000cf;font-weight:700>10</span>
+</code></pre></div><p>需要注意 kubectl 在不设置 <code>--chunk-size</code> 的情况下，<code>limit</code> 会被设置成默认值 <code>500</code>，
+也就是说 <code>search.clusterpedia.io/size</code> 实际是无法生效的，只是用于和 <code>search.clusterpedia.io/offset</code> 形成对应关系</p>
+<blockquote>
+<p>URL Query 的优先级大于 Search Label</p>
+</blockquote>
+<p>在 kubectl 中 continue 是没有 flag 可以设置的。所以还是要使用 Search Label 来传递。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods --chunk-size <span style=color:#0000cf;font-weight:700>10</span> -l <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/offset=10&#34;</span>
+</code></pre></div></div>
+<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-7-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-7-1>
+<p><p>分页在 URL 中设置 <code>limit</code> 和 <code>continue</code>，即可</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?limit=10&amp;continue=5&#34;</span>
+</code></pre></div></div></div>
+<h3 id=响应携带-continue-信息>响应携带 Continue 信息</h3>
+<p>响应数据的 ListMeta.Continue 可以用于 ListOptions.Continue 中作为下一次拉取的 offset</p>
+<p>分页功能中我们提到，为了避免 kubectl 进行对全量数据的分片拉取，Clusterepdia 不会在响应中携带 Continue 信息。</p>
+<p>不过如果用户有需求那么可以要求响应中携带 Continue 信息
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-8 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-8-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-8-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-8-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-8-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-8><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-8-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-8-0>
+<p><p>在 kubectl 设置 <code>search.clusterpedia.io/with-continue</code> 会导致以分片拉取的形式拉取全量资源。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deploy -l <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/with-continue=true&#34;</span>
+</code></pre></div></div>
+<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-8-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-8-1>
+<p><p>在使用 URL 访问 Clusterepdia 时，响应的 Continue 可以作为下一次请求的 offset</p>
+<blockquote>
+<p>搭配分页功能使用</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?withContinue=true&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<span style=color:#ce5c00;font-weight:700>{</span>
+  <span style=color:#4e9a06>&#34;kind&#34;</span>: <span style=color:#4e9a06>&#34;DeploymentList&#34;</span>,
+  <span style=color:#4e9a06>&#34;apiVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1&#34;</span>,
+  <span style=color:#4e9a06>&#34;metadata&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+    <span style=color:#4e9a06>&#34;continue&#34;</span>: <span style=color:#4e9a06>&#34;1&#34;</span>
+  <span style=color:#ce5c00;font-weight:700>}</span>,
+  <span style=color:#4e9a06>&#34;items&#34;</span>: <span style=color:#ce5c00;font-weight:700>[</span>
+    ...
+  <span style=color:#ce5c00;font-weight:700>]</span>
+<span style=color:#ce5c00;font-weight:700>}</span>
+</code></pre></div></div></div>
+</p>
+<h3 id=响应携带剩余资源数量信息>响应携带剩余资源数量信息</h3>
+<p>在一些 UI 场景下，往往会需要获取到当前检索条件下的资源总量。</p>
+<p>Kubernetes List 响应的 <a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta>ListMeta</a> 中存在 <code>RemainingItemCount</code> 字段，</p>
+<p>通过复用该字段，便可在兼容 Kubernetes OpenAPI 的基础下返回资源总量：</p>
+<p><strong><code>offset + len(list.items) + list.metadata.remainingItemCount</code></strong>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-9 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-9-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-9-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-9-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-9-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-9><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-9-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-9-0>
+<p><p>需要以 URL 的方式使用该功能</p>
+</div>
+<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-9-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-9-1>
+<p><p>在 URL Query 设置 <code>withRemainingCount</code> 即可要求响应总携带剩余资源数量</p>
+<blockquote>
+<p>搭配分页功能使用</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?withRemainingCount&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<span style=color:#ce5c00;font-weight:700>{</span>
+  <span style=color:#4e9a06>&#34;kind&#34;</span>: <span style=color:#4e9a06>&#34;DeploymentList&#34;</span>,
+  <span style=color:#4e9a06>&#34;apiVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1&#34;</span>,
+  <span style=color:#4e9a06>&#34;metadata&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+    <span style=color:#4e9a06>&#34;remainingItemCount&#34;</span>: <span style=color:#0000cf;font-weight:700>23</span>
+  <span style=color:#ce5c00;font-weight:700>}</span>,
+  <span style=color:#4e9a06>&#34;items&#34;</span>: <span style=color:#ce5c00;font-weight:700>[</span>
+    ...
+  <span style=color:#ce5c00;font-weight:700>]</span>
+<span style=color:#ce5c00;font-weight:700>}</span>
+</code></pre></div></div></div>
+</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-5b389c38373677f485ceebb14192ff51>4.2 - 指定集群资源检索</h1>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-b57579fd349e8eecde6373481fa27481>4.3 - 聚合资源(Collection Resource)检索</h1>
+</div>
+</main>
+</div>
+</div>
+<footer class="bg-dark py-5 row d-print-none">
+<div class="container-fluid mx-sm-5">
+<div class=row>
+<div class="col-6 col-sm-4 text-xs-center order-sm-2">
+</div>
+<div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+<ul class="list-inline mb-0">
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub>
+<a class=text-white target=_blank rel=noopener href=https://github.com/clusterpedia-io aria-label=GitHub>
+<i class="fab fa-github"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=Slack aria-label=Slack>
+<a class=text-white target=_blank rel=noopener href=https://clusterpedia.slack.com aria-label=Slack>
+<i class="fab fa-slack"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="Developer mailing list" aria-label="Developer mailing list">
+<a class=text-white target=_blank rel=noopener href=mailto:clusterpedia@googlegroups.com aria-label="Developer mailing list">
+<i class="fa fa-envelope"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+<small class=text-white>&copy; 2022 The Clusterpedia Authors 保留所有权利</small>
+<p class=mt-2><a href=/zh-cn/about/>关于 Clusterpedia</a></p>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
+<script src=/js/tabpane-persist.js></script>
+<script src=/js/main.min.8ab8f81ff7e1454d30024cd6f956d4d341c3a97e2a673f988065f2ee4e147922.js integrity="sha256-irj4H/fhRU0wAkzW+VbU00HDqX4qZz+YgGXy7k4UeSI=" crossorigin=anonymous></script>
+</body>
+</html>
