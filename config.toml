@@ -4,11 +4,11 @@ title = "Clusterpedia"
 enableRobotsTXT = true
 
 # Hugo allows theme composition (and inheritance). The precedence is from left to right.
-theme = ["docsy"]
-#[module]
-#replacements = "github.com/FortAwesome/Font-Awesome -> ., github.com/twbs/bootstrap -> ."
-#[[module.imports]]
-#path = "docsy"
+# theme = ["docsy"]
+[module]
+replacements = "github.com/FortAwesome/Font-Awesome -> ., github.com/twbs/bootstrap -> ."
+[[module.imports]]
+path = "docsy"
 
 # Will give values to .Lastmod etc.
 enableGitInfo = true
@@ -60,10 +60,11 @@ anchor = "smart"
 title = "Clusterpedia.io"
 description = "Clusterpedia.io website"
 languageName ="English"
+contentDir = "content/en"
 # Weight used for sorting.
 weight = 1
 
-[languages.zh]
+[languages.zh-cn]
 title = "Clusterpedia.io"
 description = "Clusterpedia 的官网"
 languageName ="中文 Chinese"
