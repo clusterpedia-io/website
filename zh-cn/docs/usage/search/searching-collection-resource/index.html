@@ -13,19 +13,31 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>聚合资源(Collection Resource)检索 | Clusterpedia.io</title>
-<meta name=description content>
-<meta property="og:title" content="聚合资源(Collection Resource)检索">
-<meta property="og:description" content>
+<title>聚合资源检索 | Clusterpedia.io</title>
+<meta name=description content="关于聚合资源的概念可以查看 什么是聚合资源 （Collection Resource）
+由于 kubectl 的限制，我们无法通过 Label Selector 或者其他方式来传递检索参数，
+所以建议以 URL 的方式来检索聚合资源。
+URL …">
+<meta property="og:title" content="聚合资源检索">
+<meta property="og:description" content="关于聚合资源的概念可以查看 什么是聚合资源 （Collection Resource）
+由于 kubectl 的限制，我们无法通过 Label Selector 或者其他方式来传递检索参数， 所以建议以 URL 的方式来检索聚合资源。
+URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一定要搭配分页功能使用。
+ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/collectionresources/workloads?limit=1&#34; | jq # 输出 { &#34;kind&#34;: &#34;CollectionResource&#34;, &#34;apiVersion&#34;: &#34;pedia.clusterpedia.io/v1alpha1&#34;, &#34;metadata&#34;: { &#34;name&#34;: &#34;workloads&#34;, &#34;creationTimestamp&#34;: null }, &#34;reosurceTypes&#34;: [ { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;kind&#34;: &#34;Deployment&#34;, &#34;resource&#34;: &#34;deployments&#34; }, { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;resource&#34;: &#34;daemonsets&#34; }, { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;resource&#34;: &#34;statefulsets&#34; } ], &#34;items&#34;: [ { &#34;apiVersion&#34;: &#34;apps/v1&#34;, &#34;kind&#34;: &#34;Deployment&#34;, .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/zh-cn/docs/usage/search/searching-collection-resource/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
-<meta itemprop=name content="聚合资源(Collection Resource)检索">
-<meta itemprop=description content>
-<meta itemprop=wordCount content="0">
+<meta itemprop=name content="聚合资源检索">
+<meta itemprop=description content="关于聚合资源的概念可以查看 什么是聚合资源 （Collection Resource）
+由于 kubectl 的限制，我们无法通过 Label Selector 或者其他方式来传递检索参数， 所以建议以 URL 的方式来检索聚合资源。
+URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一定要搭配分页功能使用。
+ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/collectionresources/workloads?limit=1&#34; | jq # 输出 { &#34;kind&#34;: &#34;CollectionResource&#34;, &#34;apiVersion&#34;: &#34;pedia.clusterpedia.io/v1alpha1&#34;, &#34;metadata&#34;: { &#34;name&#34;: &#34;workloads&#34;, &#34;creationTimestamp&#34;: null }, &#34;reosurceTypes&#34;: [ { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;kind&#34;: &#34;Deployment&#34;, &#34;resource&#34;: &#34;deployments&#34; }, { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;resource&#34;: &#34;daemonsets&#34; }, { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;resource&#34;: &#34;statefulsets&#34; } ], &#34;items&#34;: [ { &#34;apiVersion&#34;: &#34;apps/v1&#34;, &#34;kind&#34;: &#34;Deployment&#34;, .">
+<meta itemprop=wordCount content="137">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="聚合资源(Collection Resource)检索">
-<meta name=twitter:description content>
+<meta name=twitter:title content="聚合资源检索">
+<meta name=twitter:description content="关于聚合资源的概念可以查看 什么是聚合资源 （Collection Resource）
+由于 kubectl 的限制，我们无法通过 Label Selector 或者其他方式来传递检索参数， 所以建议以 URL 的方式来检索聚合资源。
+URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一定要搭配分页功能使用。
+ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/collectionresources/workloads?limit=1&#34; | jq # 输出 { &#34;kind&#34;: &#34;CollectionResource&#34;, &#34;apiVersion&#34;: &#34;pedia.clusterpedia.io/v1alpha1&#34;, &#34;metadata&#34;: { &#34;name&#34;: &#34;workloads&#34;, &#34;creationTimestamp&#34;: null }, &#34;reosurceTypes&#34;: [ { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;kind&#34;: &#34;Deployment&#34;, &#34;resource&#34;: &#34;deployments&#34; }, { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;resource&#34;: &#34;daemonsets&#34; }, { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;resource&#34;: &#34;statefulsets&#34; } ], &#34;items&#34;: [ { &#34;apiVersion&#34;: &#34;apps/v1&#34;, &#34;kind&#34;: &#34;Deployment&#34;, .">
 <link rel=preload href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css as=style>
 <link href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -63,7 +75,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a993abfa4a44853305cb01f13105d558.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.c96151a85dc7a7dc3ad83a4e12b99160.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -73,7 +85,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a993abfa4a44853305cb01f13105d558.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.c96151a85dc7a7dc3ad83a4e12b99160.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -132,7 +144,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchsearching-specified-cluster-li>
 <a href=/zh-cn/docs/usage/search/searching-specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-specified-cluster><span>指定集群资源检索</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zh-cndocsusagesearchsearching-collection-resource-li>
-<a href=/zh-cn/docs/usage/search/searching-collection-resource/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-collection-resource><span class=td-sidebar-nav-active-item>聚合资源(Collection Resource)检索</span></a>
+<a href=/zh-cn/docs/usage/search/searching-collection-resource/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-collection-resource><span class=td-sidebar-nav-active-item>聚合资源检索</span></a>
 </li>
 </ul>
 </li>
@@ -151,7 +163,7 @@
 <a href=https://github.com/clusterpedia-io/website/tree/main/content/zh-cn/docs/usage/search/searching-collection-resource.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> 查看页面源码</a>
 <a href=https://github.com/clusterpedia-io/website/edit/main/content/zh-cn/docs/usage/search/searching-collection-resource.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
 <a href="https://github.com/clusterpedia-io/website/new/main/content/zh-cn/docs/usage/search/searching-collection-resource.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-<a href="https://github.com/clusterpedia-io/website/issues/new?title=%e8%81%9a%e5%90%88%e8%b5%84%e6%ba%90%28Collection%20Resource%29%e6%a3%80%e7%b4%a2" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+<a href="https://github.com/clusterpedia-io/website/issues/new?title=%e8%81%9a%e5%90%88%e8%b5%84%e6%ba%90%e6%a3%80%e7%b4%a2" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
 <a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
 <a id=print href=/zh-cn/docs/usage/search/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
 </div>
@@ -169,15 +181,79 @@
 <a href=/zh-cn/docs/usage/search/>资源检索</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=/zh-cn/docs/usage/search/searching-collection-resource/>聚合资源(Collection Resource)检索</a>
+<a href=/zh-cn/docs/usage/search/searching-collection-resource/>聚合资源检索</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>聚合资源(Collection Resource)检索</h1>
+<h1>聚合资源检索</h1>
 <header class=article-meta>
 <p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 少于1分钟 &nbsp;</p>
 </header>
+<p>关于聚合资源的概念可以查看 <a href=../../../concepts/collection-resource>什么是聚合资源 （Collection Resource）</a></p>
+<p>由于 kubectl 的限制，我们无法通过 <code>Label Selector</code> 或者其他方式来传递检索参数，
+所以<strong>建议以 URL 的方式来检索<code>聚合资源</code></strong>。</p>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-collection-resource-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-collection-resource-1-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-collection-resource-1-0 aria-selected=true>URL</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-collection-resource-1-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-collection-resource-1-1>kubectl</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-collection-resource-1><div id=tabset-zh-cndocsusagesearchsearching-collection-resource-1-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-collection-resource-1-0>
+<p><blockquote>
+<p><strong>请求<code>聚合资源</code>时，由于资源数量可能会非常大，一定要搭配<a href=../#%E5%88%86%E9%A1%B5>分页功能</a>使用。</strong></p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/collectionresources/workloads?limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#a40000>#</span> <span style=color:#a40000>输出</span>
+<span style=color:#000;font-weight:700>{</span>
+  <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;CollectionResource&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pedia.clusterpedia.io/v1alpha1&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;metadata&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;workloads&#34;</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;creationTimestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>null</span>
+  <span style=color:#000;font-weight:700>},</span>
+  <span style=color:#204a87;font-weight:700>&#34;reosurceTypes&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;group&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Deployment&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;resource&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;deployments&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;group&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;resource&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;daemonsets&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;group&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;resource&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;statefulsets&#34;</span>
+    <span style=color:#000;font-weight:700>}</span>
+  <span style=color:#000;font-weight:700>],</span>
+  <span style=color:#204a87;font-weight:700>&#34;items&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Deployment&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#a40000>...</span>
+    <span style=color:#000;font-weight:700>}</span>
+  <span style=color:#000;font-weight:700>]</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><p><code>聚合资源</code>的复杂检索和<a href=../searching-multi-cluster>多集群资源检索</a> 功能基本相同，只有部分操作不支持：</p>
+<ul>
+<li>不支持根据 Owner 检索，如果需要进行根据 Owner 检索需要指定具体的资源类型，可以参考 <a href=../searching-multi-cluster#%E6%A0%B9%E6%8D%AE%E7%88%B6%E8%BE%88%E4%BB%A5%E5%8F%8A%E7%A5%96%E8%BE%88-owner-%E6%9F%A5%E8%AF%A2>多集群检索</a> 和 <a href=../searching-specified-cluster##%E6%A0%B9%E6%8D%AE%E7%88%B6%E8%BE%88%E4%BB%A5%E5%8F%8A%E7%A5%96%E8%BE%88-owner-%E6%9F%A5%E8%AF%A2>指定集群检索</a></li>
+<li>不支持在 Collection Resource 中获取具体的单个资源，因为具体资源需要指定集群和资源类型，可以使用 <a href>获取单个资源</a></li>
+</ul>
+</div>
+<div id=tabset-zh-cndocsusagesearchsearching-collection-resource-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-collection-resource-1-1>
+<p><p>尽管 kubectl 无法很好的检索<code>聚合资源</code>，但是可以简单的体验一下。</p>
+<blockquote>
+<p>由于无法传递分页以及其他检索条件，kubectl 会一次获取到所有的<code>聚合资源</code>，在接入了大量集群或者存在大量 <code>deployments</code>，<code>daemonsets</code>，<code>statefulsets</code> 资源时，不要使用 kubectl 来查看<code>聚合资源</code></p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources workloads
+</code></pre></div><pre tabindex=0><code># 输出
+CLUSTER     GROUP   VERSION   KIND         NAMESPACE                     NAME                                          AGE
+cluster-1   apps    v1        DaemonSet    kube-system                   vsphere-cloud-controller-manager              63d
+cluster-2   apps    v1        Deployment   kube-system                   calico-kube-controllers                       109d
+cluster-2   apps    v1        Deployment   kube-system                   coredns-coredns                               109d
+...
+</code></pre><p><strong>请使用 URL 来检索<code>聚合资源</code></strong></p>
+</div></div>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
 <h2 class=feedback--title>Feedback</h2>
