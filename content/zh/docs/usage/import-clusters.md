@@ -1,5 +1,5 @@
 ---
-title: "集群接入"
+title: 集群接入
 weight: 1
 ---
 
@@ -22,7 +22,7 @@ spec:
 * `caData` + `certData` + `keyData`
 > `caData` 在集群 APIServer 允许 Insecure 连接的情况下，也可以不填
 
-这些验证字段都需要 base64 编码，如果这些字段的值是直接从 ConfigMap 或者 Secret 中获取的话，那么就已经 base64 过
+这些验证字段都需要 base64 编码，如果这些字段的值是直接从 ConfigMap 或者 Secret 中获取的话，那么就已经 base64 过。
 
 ## 使用 ServiceAccount 来接入集群
 用户可以选择在**被接入集群**中创建 ServiceAccount 并配置相应的 RBAC 来接入集群。
@@ -35,8 +35,7 @@ kubectl apply -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/
 SYNCHRO_CA=$(kubectl get secret $(kubectl get serviceaccount clusterpedia-synchro -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.ca\.crt}')
 SYNCHRO_TOKEN=$(kubectl get secret $(kubectl get serviceaccount clusterpedia-synchro -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}')
 ```
-将 `$SYNCHRO_CA` 和 `SYNCHRO_TOKEN` 分别填写到 PediaCluster 资源的 `spec.caData` 和 `tokenData` 字段中
-
+将 `$SYNCHRO_CA` 和 `SYNCHRO_TOKEN` 分别填写到 PediaCluster 资源的 `spec.caData` 和 `spec.tokenData` 字段中
 
 ## 创建 PediaCluster
 完善集群的验证信息后，就可以获得一个完整的 `PediaCluster` 资源了。直接使用 `kubectl apply -f` 直接创建即可
@@ -54,10 +53,13 @@ spec:
 集群接入成功后，可以通过 `kubectl get pediacluster` 命令来查看所有接入的集群，以及集群状态
 ```bash
 kubectl get pediacluster
+```
+```
+# 输出：
 NAME           APISERVER URL               VERSION    STATUS
 cluster-1      https://10.6.100.10:6443    v1.22.2    Healthy
 cluster-2      https://10.50.10.11:16443   v1.10.11   Healthy
 ```
 
 ## 接下来
-继续查看 [通过集群资源](../sync-resources) 来同步集群内资源
+继续查看 [同步集群资源](../sync-resources)
