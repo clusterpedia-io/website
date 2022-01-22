@@ -2,9 +2,10 @@
 title: "配置存储层"
 weight: 1
 ---
-Clusterpedia 的`默认存储层`支持 MySQL 和 PostgreSQL 两种存储组件。
+Clusterpedia 的`默认存储层`支持 **MySQL** 和 **PostgreSQL** 两种存储组件。
 
-用户在安装 Clusterpedia 时，可以使用已有存储组件，不过需要创建相应的`默认存储层`配置（ConfigMap） 和存储组件密码（Secret）
+用户在安装 Clusterpedia 时，可以使用已存在的存储组件，
+不过需要创建相应的[`默认存储层`配置（ConfigMap）](#默认存储层配置)和[存储组件密码 Secret](#配置存储组件密码-secret)。
 
 ## 默认存储层配置
 用户需要在 `clusterpedia-system` 命名空间下创建 `clusterpedia-internalstorage` ConfigMap。
@@ -36,6 +37,8 @@ internalstorage config 支持以下基本字段:
 |`password`|存储组件密码|
 |`database`|Clusterpedia 所使用的 database|
 
+**存储组件的访问密码，最好存放在 Secret，参考 [配置存储组件密码 Secret](#配置存储组件密码-secret)**
+
 ### 日志配置
 支持配置存储层日志，通过 `log` 字段来开启日志打印慢 SQL 和错误
 |field|description|
@@ -60,10 +63,11 @@ database: "clusterpedia"
 ### 更多配置
 默认存储层还提供了更多的配置，可以参考 [internalstorage/config.go](https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go)
 
-## 配置存储组件 Secret
+## 配置存储组件密码 Secret
 Clusterpedia 的安装 yaml 会从 `internalstroage-password` 的 Secret 中获取密码。
 
-将存储组件密码配置到 Secret 中
+将存储组件的密码配置到 Secret 中
 ```bash
-kubectl -n clusterpedia-system create secret generic internalstorage-password --from-literal=password=dangerous0
+kubectl -n clusterpedia-system create secret generic \
+    internalstorage-password --from-literal=password=<存储组件访问密码>
 ```
