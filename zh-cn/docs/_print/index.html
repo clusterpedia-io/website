@@ -61,7 +61,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.37214c43aecf1af1ac88b645f7963924.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2fbfce2f207b48b6bdd01cf800d30081.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -130,13 +130,24 @@
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
 <span style=color:#204a87>cd</span> clusterpedia
 </code></pre></div><h2 id=安装存储组件>安装存储组件</h2>
-<p>Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择</p>
+<p>Clusterpedia 安装时提供了 <strong>MySQL 8.0</strong> 和 <strong>PostgreSQL 12</strong> 两种存储组件以供选择</p>
 <blockquote>
-<p>用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过存储组件安装</p>
+<p>用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接<a href=#%E5%AE%89%E8%A3%85-clusterpedia>跳过</a>存储组件安装</p>
 </blockquote>
-<p><strong>进入所选存储组件的安装目录</strong>，这里选择使用 PostgreSQL</p>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsinstallationkubectl-apply-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsinstallationkubectl-apply-1-0 role=tab aria-controls=tabset-zh-cndocsinstallationkubectl-apply-1-0 aria-selected=true>PostgreSQL</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsinstallationkubectl-apply-1-1 role=tab aria-controls=tabset-zh-cndocsinstallationkubectl-apply-1-1>MySQL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsinstallationkubectl-apply-1><div id=tabset-zh-cndocsinstallationkubectl-apply-1-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsinstallationkubectl-apply-1-0>
+<p><p><strong>进入所选存储组件的安装目录</strong></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#204a87>cd</span> ./deploy/internalstorage/postgres
-</code></pre></div><p><strong>存储组件使用 local pv 的方式存储数据，部署时，需要指定 local pv 所在节点</strong></p>
+</code></pre></div></div>
+<div id=tabset-zh-cndocsinstallationkubectl-apply-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsinstallationkubectl-apply-1-1>
+<p><p><strong>进入所选存储组件的安装目录</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#204a87>cd</span> ./deploy/internalstorage/mysql
+</code></pre></div></div></div>
+<p><strong>存储组件使用 Local PV 的方式存储数据，部署时需要指定 Local PV 所在节点</strong></p>
+<blockquote>
+<p>用户可以选择自己提供 PV</p>
+</blockquote>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#204a87>export</span> <span style=color:#000>STORAGE_NODE_NAME</span><span style=color:#ce5c00;font-weight:700>=</span>&lt;节点名称&gt;
 sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000>$STORAGE_NODE_NAME</span><span style=color:#4e9a06>|g&#34;</span> <span style=color:#4e9a06>`</span>grep __NODE_NAME__ -rl ./templates<span style=color:#4e9a06>`</span> &gt; clusterpedia_internalstorage_pv.yaml
 </code></pre></div><p><strong>部署存储组件</strong></p>
@@ -146,12 +157,12 @@ sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000
 <span style=color:#204a87>cd</span> ../../
 </code></pre></div><h2 id=安装-clusterpedia>安装 Clusterpedia</h2>
 <p>存储组件部署完成后，便可安装 Clusterpedia。</p>
-<p><strong>如果选择使用已存在的存储组件，则需要参考 <a href=../configurate/configurate-internalstorage>配置存储层</a> 来将存储组件对接到默认存储层中</strong></p>
+<p><strong>如果选择使用已存在的存储组件，则需要参考 <a href=../configurate/configurate-internalstorage>配置存储层</a> 来将存储组件对接到<code>默认存储层</code>中</strong></p>
 <blockquote>
 <p>在 clusterpedia 项目根目录下进行操作</p>
 </blockquote>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 部署 crds</span>
-kubectl apply -f ./deploy/crds ./deploy
+kubectl apply -f ./deploy/crds
 
 <span style=color:#8f5902;font-style:italic># 部署 Clusterpedia 组件</span>
 kubectl apply -f ./deploy
@@ -169,8 +180,9 @@ kubectl apply -f ./deploy
 </div>
 <div class=td-content>
 <h1 id=pg-bc917736d18b8a8273b54276076451f5>1.3.1 - 配置存储层</h1>
-<p>Clusterpedia 的<code>默认存储层</code>支持 MySQL 和 PostgreSQL 两种存储组件。</p>
-<p>用户在安装 Clusterpedia 时，可以使用已有存储组件，不过需要创建相应的<code>默认存储层</code>配置（ConfigMap） 和存储组件密码（Secret）</p>
+<p>Clusterpedia 的<code>默认存储层</code>支持 <strong>MySQL</strong> 和 <strong>PostgreSQL</strong> 两种存储组件。</p>
+<p>用户在安装 Clusterpedia 时，可以使用已存在的存储组件，
+不过需要创建相应的<a href=#%E9%BB%98%E8%AE%A4%E5%AD%98%E5%82%A8%E5%B1%82%E9%85%8D%E7%BD%AE><code>默认存储层</code>配置（ConfigMap）</a>和<a href=#%E9%85%8D%E7%BD%AE%E5%AD%98%E5%82%A8%E7%BB%84%E4%BB%B6%E5%AF%86%E7%A0%81-secret>存储组件密码 Secret</a>。</p>
 <h2 id=默认存储层配置>默认存储层配置</h2>
 <p>用户需要在 <code>clusterpedia-system</code> 命名空间下创建 <code>clusterpedia-internalstorage</code> ConfigMap。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># internalstorage configmap example</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -223,6 +235,7 @@ kubectl apply -f ./deploy
 </tr>
 </tbody>
 </table>
+<p><strong>存储组件的访问密码，最好存放在 Secret，参考 <a href=#%E9%85%8D%E7%BD%AE%E5%AD%98%E5%82%A8%E7%BB%84%E4%BB%B6%E5%AF%86%E7%A0%81-secret>配置存储组件密码 Secret</a></strong></p>
 <h3 id=日志配置>日志配置</h3>
 <p>支持配置存储层日志，通过 <code>log</code> 字段来开启日志打印慢 SQL 和错误</p>
 <table>
@@ -261,10 +274,11 @@ kubectl apply -f ./deploy
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>database</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;clusterpedia&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><h3 id=更多配置>更多配置</h3>
 <p>默认存储层还提供了更多的配置，可以参考 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go>internalstorage/config.go</a></p>
-<h2 id=配置存储组件-secret>配置存储组件 Secret</h2>
+<h2 id=配置存储组件密码-secret>配置存储组件密码 Secret</h2>
 <p>Clusterpedia 的安装 yaml 会从 <code>internalstroage-password</code> 的 Secret 中获取密码。</p>
-<p>将存储组件密码配置到 Secret 中</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n clusterpedia-system create secret generic internalstorage-password --from-literal<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#000>password</span><span style=color:#ce5c00;font-weight:700>=</span>dangerous0
+<p>将存储组件的密码配置到 Secret 中</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n clusterpedia-system create secret generic <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    internalstorage-password --from-literal<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#000>password</span><span style=color:#ce5c00;font-weight:700>=</span>&lt;存储组件访问密码&gt;
 </code></pre></div>
 </div>
 <div class=td-content style=page-break-before:always>
