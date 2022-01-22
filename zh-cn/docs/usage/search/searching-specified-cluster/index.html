@@ -13,19 +13,42 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>指定集群资源检索 | Clusterpedia.io</title>
-<meta name=description content>
-<meta property="og:title" content="指定集群资源检索">
-<meta property="og:description" content>
+<title>指定集群检索 | Clusterpedia.io</title>
+<meta name=description content="Clusterpedia 除了支持多个集群的混合检索，还可以指定集群来检索资源。
+
+在性能上使用 Search Label 或者 URL Query 来指定单个集群和在 URL Path 中指定集群并无区别
+本文主要讲述在 URL Path 中指定集群
+
+在以指定集群的方式使用 kubectl 前， …">
+<meta property="og:title" content="指定集群检索">
+<meta property="og:description" content="Clusterpedia 除了支持多个集群的混合检索，还可以指定集群来检索资源。
+ 在性能上使用 Search Label 或者 URL Query 来指定单个集群和在 URL Path 中指定集群并无区别
+本文主要讲述在 URL Path 中指定集群
+ 在以指定集群的方式使用 kubectl 前，需要先配置 kubectl 的集群快捷方式
+kubectl URL kubectl --cluster cluster-1 get deployments -n kube-system # 输出： NAMESPACE CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE kube-system cluster-1 coredns 2/2 2 2 68d  将 cluster name 放到 URL 路径中来指定集群
+kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34; 也可以通过 URL Query 来指定单个集群
+kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;  指定集群支持的功能和多集群检索的作用基本相同，而且在 Owner 检索上更加方便， 另外在获取单个资源时也只能使用在 URL Path 中指定集群的方式。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/zh-cn/docs/usage/search/searching-specified-cluster/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
-<meta itemprop=name content="指定集群资源检索">
-<meta itemprop=description content>
-<meta itemprop=wordCount content="0">
+<meta itemprop=name content="指定集群检索">
+<meta itemprop=description content="Clusterpedia 除了支持多个集群的混合检索，还可以指定集群来检索资源。
+ 在性能上使用 Search Label 或者 URL Query 来指定单个集群和在 URL Path 中指定集群并无区别
+本文主要讲述在 URL Path 中指定集群
+ 在以指定集群的方式使用 kubectl 前，需要先配置 kubectl 的集群快捷方式
+kubectl URL kubectl --cluster cluster-1 get deployments -n kube-system # 输出： NAMESPACE CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE kube-system cluster-1 coredns 2/2 2 2 68d  将 cluster name 放到 URL 路径中来指定集群
+kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34; 也可以通过 URL Query 来指定单个集群
+kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;  指定集群支持的功能和多集群检索的作用基本相同，而且在 Owner 检索上更加方便， 另外在获取单个资源时也只能使用在 URL Path 中指定集群的方式。">
+<meta itemprop=wordCount content="295">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="指定集群资源检索">
-<meta name=twitter:description content>
+<meta name=twitter:title content="指定集群检索">
+<meta name=twitter:description content="Clusterpedia 除了支持多个集群的混合检索，还可以指定集群来检索资源。
+ 在性能上使用 Search Label 或者 URL Query 来指定单个集群和在 URL Path 中指定集群并无区别
+本文主要讲述在 URL Path 中指定集群
+ 在以指定集群的方式使用 kubectl 前，需要先配置 kubectl 的集群快捷方式
+kubectl URL kubectl --cluster cluster-1 get deployments -n kube-system # 输出： NAMESPACE CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE kube-system cluster-1 coredns 2/2 2 2 68d  将 cluster name 放到 URL 路径中来指定集群
+kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34; 也可以通过 URL Query 来指定单个集群
+kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;  指定集群支持的功能和多集群检索的作用基本相同，而且在 Owner 检索上更加方便， 另外在获取单个资源时也只能使用在 URL Path 中指定集群的方式。">
 <link rel=preload href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css as=style>
 <link href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -63,7 +86,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.c96151a85dc7a7dc3ad83a4e12b99160.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.37214c43aecf1af1ac88b645f7963924.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -73,7 +96,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.c96151a85dc7a7dc3ad83a4e12b99160.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.37214c43aecf1af1ac88b645f7963924.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -128,9 +151,9 @@
 <a href=/zh-cn/docs/usage/search/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsusagesearch><span>资源检索</span></a>
 <ul class="ul-3 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchsearching-multi-cluster-li>
-<a href=/zh-cn/docs/usage/search/searching-multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-multi-cluster><span>多集群资源检索</span></a>
+<a href=/zh-cn/docs/usage/search/searching-multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-multi-cluster><span>多集群检索</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zh-cndocsusagesearchsearching-specified-cluster-li>
-<a href=/zh-cn/docs/usage/search/searching-specified-cluster/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-specified-cluster><span class=td-sidebar-nav-active-item>指定集群资源检索</span></a>
+<a href=/zh-cn/docs/usage/search/searching-specified-cluster/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-specified-cluster><span class=td-sidebar-nav-active-item>指定集群检索</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchsearching-collection-resource-li>
 <a href=/zh-cn/docs/usage/search/searching-collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-collection-resource><span>聚合资源检索</span></a>
 </li>
@@ -151,10 +174,16 @@
 <a href=https://github.com/clusterpedia-io/website/tree/main/content/zh-cn/docs/usage/search/searching-specified-cluster.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> 查看页面源码</a>
 <a href=https://github.com/clusterpedia-io/website/edit/main/content/zh-cn/docs/usage/search/searching-specified-cluster.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
 <a href="https://github.com/clusterpedia-io/website/new/main/content/zh-cn/docs/usage/search/searching-specified-cluster.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-<a href="https://github.com/clusterpedia-io/website/issues/new?title=%e6%8c%87%e5%ae%9a%e9%9b%86%e7%be%a4%e8%b5%84%e6%ba%90%e6%a3%80%e7%b4%a2" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+<a href="https://github.com/clusterpedia-io/website/issues/new?title=%e6%8c%87%e5%ae%9a%e9%9b%86%e7%be%a4%e6%a3%80%e7%b4%a2" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
 <a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
 <a id=print href=/zh-cn/docs/usage/search/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#根据父辈或者祖辈-owner-进行检索>根据父辈或者祖辈 Owner 进行检索</a></li>
+<li><a href=#获取单个资源>获取单个资源</a></li>
+</ul>
+</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class=td-breadcrumbs>
@@ -169,15 +198,124 @@
 <a href=/zh-cn/docs/usage/search/>资源检索</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=/zh-cn/docs/usage/search/searching-specified-cluster/>指定集群资源检索</a>
+<a href=/zh-cn/docs/usage/search/searching-specified-cluster/>指定集群检索</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>指定集群资源检索</h1>
+<h1>指定集群检索</h1>
 <header class=article-meta>
-<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 少于1分钟 &nbsp;</p>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 2 分钟阅读 &nbsp;</p>
 </header>
+<p>Clusterpedia 除了支持多个集群的混合检索，还可以指定集群来检索资源。</p>
+<blockquote>
+<p>在性能上使用 <a href=../#%E5%85%83%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2>Search Label</a> 或者 <a href=../#%E5%85%83%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2>URL Query</a> 来指定单个集群和在 URL Path 中指定集群并无区别</p>
+<p>本文主要讲述在 URL Path 中指定集群</p>
+</blockquote>
+<p>在以指定集群的方式使用 kubectl 前，需要先<a href=../../access-clusterpedia#%E4%B8%BA-kubectl-%E7%94%9F%E6%88%90%E9%9B%86%E7%BE%A4%E8%AE%BF%E9%97%AE%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%85%8D%E7%BD%AE>配置 kubectl 的集群快捷方式</a></p>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-specified-cluster-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-specified-cluster-1-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-specified-cluster-1-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-specified-cluster-1-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-specified-cluster-1-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-specified-cluster-1><div id=tabset-zh-cndocsusagesearchsearching-specified-cluster-1-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-specified-cluster-1-0>
+<p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get deployments -n kube-system
+</code></pre></div><pre tabindex=0><code># 输出：
+NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   cluster-1   coredns                   2/2     2            2           68d
+</code></pre></div>
+<div id=tabset-zh-cndocsusagesearchsearching-specified-cluster-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-specified-cluster-1-1>
+<p><p>将 cluster name 放到 URL 路径中来指定集群</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
+</code></pre></div><p>也可以通过 <code>URL Query</code> 来指定单个集群</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
+</code></pre></div></div></div>
+<p>指定集群支持的功能和<a href=../searching-multi-cluster>多集群检索</a>的作用基本相同，而且在 Owner 检索上更加方便，
+另外在<strong>获取单个资源时也只能使用在 URL Path 中指定集群的方式</strong>。</p>
+<h2 id=根据父辈或者祖辈-owner-进行检索>根据父辈或者祖辈 Owner 进行检索</h2>
+<p>Owner 查询必须指定单个集群，可以使用 <a href=../#%E5%85%83%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2>Search Label</a> 或者 <a href=../#%E5%85%83%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2>URL Query</a> 来指定，也可以在 URL Path 中指定集群名称</p>
+<p><strong>通过 <code>Owenr UID</code> 以及用于 Owner 辈分提升的 <code>Owenr Senirority</code> 可以完成基于祖辈 Owner 的资源检索。</strong></p>
+<blockquote>
+<p>当前暂时只支持根据 <code>Owner UID</code> 查询</p>
+</blockquote>
+<p>例如通过 <code>Deployment UID</code> 直接查询相应的 <code>Pods</code>，无需查询有哪些 <code>ReplicaSet</code> 属于该 <code>Deployment</code></p>
+<p>首先使用 kubectl 获取 <code>Deployment</code> 的 UID</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get deploy fake-deploy -o <span style=color:#000>jsonpath</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;{.metadata.uid}&#34;</span>
+</code></pre></div><pre tabindex=0><code>#输出：
+151ae265-28fe-4734-850e-b641266cd5da
+</code></pre><blockquote>
+<p>在 kubectl 下获取 uid 可能比较麻烦，但是在 UI 场景中通常已经更容易查看 <code>metadata.uid</code></p>
+</blockquote>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-specified-cluster-2 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-specified-cluster-2-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-specified-cluster-2-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-specified-cluster-2-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-specified-cluster-2-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-specified-cluster-2><div id=tabset-zh-cndocsusagesearchsearching-specified-cluster-2-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-specified-cluster-2-0>
+<p><p>使用 <code>owner-uid</code> 来指定 Owner 的 UID, <code>owner-seniority</code> 对 Owner 进行辈分提升。</p>
+<blockquote>
+<p><em><code>owner-seniority</code> 默认为 0，表示 Owner 为父辈。设置为 1，提升 Owenr 辈分成为祖父 Owenr</em></p>
+</blockquote>
+<pre tabindex=0><code>kubectl --cluster cluster-1 get pods -l \
+    &quot;internalstorage.clusterpedia.io/owner-uid=151ae265-28fe-4734-850e-b641266cd5da,\
+     internalstorage.clusterpedia.io/owner-seniority=1&quot;
+</code></pre></div>
+<div id=tabset-zh-cndocsusagesearchsearching-specified-cluster-2-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-specified-cluster-2-1>
+<p><p>Owner 检索作为试验性功能，暂时还没有提供 URL Query</p>
+</div></div>
+<blockquote>
+<p>Owner 检索作为试验性功能，暂时以 <em>internalstorage.clusterpedia.io</em> 作为 <a href=../#owner-%E6%A3%80%E7%B4%A2>Search Label</a> 前缀</p>
+<p>确定相关功能的可用性和实用性后，移到 <em>search.clusterpedia.io</em> 下。</p>
+</blockquote>
+<p>使用以 <code>Owner Namespace</code> 和 <code>Owenr Name</code> 结合成 <code>Owner Key</code> 来查询的功能尚在讨论中，</p>
+<p>可以在 <a href=https://github.com/clusterpedia-io/clusterpedia/issues/49>issue: Support for searching resources by owner</a> 参与讨论。</p>
+<h2 id=获取单个资源>获取单个资源</h2>
+<p>当我们想要使用资源名称获取（Get）一个资源时，就必须要以 URL Path 的方式将集群名称传递进去，就像 namespace 一样。</p>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-specified-cluster-3 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-specified-cluster-3-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-specified-cluster-3-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-specified-cluster-3-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-specified-cluster-3-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-specified-cluster-3><div id=tabset-zh-cndocsusagesearchsearching-specified-cluster-3-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-specified-cluster-3-0>
+<p><p>如果使用多集群方式传递一个资源名称会报错</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get deploy fake-deploy 
+</code></pre></div><pre tabindex=0><code># 输出：
+CLUSTER     NAME        READY   UP-TO-DATE   AVAILABLE   AGE
+cluster-1   fake-deploy 1/1     1            1           35d
+</code></pre><p>当然在 kubectl 中也可以通过 <a href=../#%E5%85%83%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2>Search Label</a> 来指定一个资源名称。</p>
+<p>不过在 <code>-o yaml</code> 或者其他方式查看返回的源数据时，和使用 <code>kubectl --cluster &lt;cluster name></code> 是不一样的。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 实际服务端返回 DeploymentList 的资源，由 kubectl 替换成 List 资源</span>
+kubectl --cluster clusterpedia get deploy -l 
+    <span style=color:#4e9a06>&#34;search.clusterpedia.io/clusters=cluster-1,\
+</span><span style=color:#4e9a06>     search.clusterpedia.io/names=fake-deploy&#34;</span> -o yaml
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># 输出：</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>items</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>List</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resourceVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>selfLink</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>实际返回的资源依然是一个 <code>KindList</code>，而 <code>kubectl --cluster &lt;clsuter name></code> 返回的便是具体的 <code>Kind</code>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get deploy fake-deploy -o yaml
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># 输出：</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps/v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>annotations</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>deployment.kubernetes.io/revision</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;1&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>shadow.clusterpedia.io/cluster-name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>creationTimestamp</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;2021-12-16T02:26:29Z&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>generation</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>fake-deploy</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>namespace</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>default</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resourceVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;38085769&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>uid</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>151ae265-28fe-4734-850e-b641266cd5da</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div></div>
+<div id=tabset-zh-cndocsusagesearchsearching-specified-cluster-3-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-specified-cluster-3-1>
+<p><p>获取指定资源的 URL 可以分为三部分</p>
+<ul>
+<li>资源检索前缀： <em>/apis/pedia.clusterpedia.io/v1alpha1/resources</em></li>
+<li>指定集群名称 <em>/clusters/&lt; cluster name ></em></li>
+<li>原生 Kubernetes API 的资源 Path <em>/apis/apps/v1/deployments/namespaces/<namespace>/<resource name></em></li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alhpa1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy&#34;</span>
+</code></pre></div></div></div>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
 <h2 class=feedback--title>Feedback</h2>
