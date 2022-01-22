@@ -15,15 +15,29 @@ cd clusterpedia
 ```
 
 ## 安装存储组件
-Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择
-> 用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过存储组件安装
+Clusterpedia 安装时提供了 **MySQL 8.0** 和 **PostgreSQL 12** 两种存储组件以供选择
+> 用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接[跳过](#安装-clusterpedia)存储组件安装
 
-**进入所选存储组件的安装目录**，这里选择使用 PostgreSQL
+{{< tabs >}}
+
+{{% tab name="PostgreSQL" %}}
+**进入所选存储组件的安装目录**
 ```bash
 cd ./deploy/internalstorage/postgres
 ```
+{{% /tab %}}
 
-**存储组件使用 local pv 的方式存储数据，部署时，需要指定 local pv 所在节点**
+{{% tab name="MySQL" %}}
+**进入所选存储组件的安装目录**
+```bash
+cd ./deploy/internalstorage/mysql
+```
+{{< /tab >}}
+
+{{< /tabs >}}
+
+**存储组件使用 Local PV 的方式存储数据，部署时需要指定 Local PV 所在节点**
+> 用户可以选择自己提供 PV
 ```bash
 export STORAGE_NODE_NAME=<节点名称>
 sed "s|__NODE_NAME__|$STORAGE_NODE_NAME|g" `grep __NODE_NAME__ -rl ./templates` > clusterpedia_internalstorage_pv.yaml
@@ -40,12 +54,12 @@ cd ../../
 ## 安装 Clusterpedia
 存储组件部署完成后，便可安装 Clusterpedia。
 
-**如果选择使用已存在的存储组件，则需要参考 [配置存储层](../configurate/configurate-internalstorage) 来将存储组件对接到默认存储层中**
+**如果选择使用已存在的存储组件，则需要参考 [配置存储层](../configurate/configurate-internalstorage) 来将存储组件对接到`默认存储层`中**
 
 > 在 clusterpedia 项目根目录下进行操作
 ```bash
 # 部署 crds
-kubectl apply -f ./deploy/crds ./deploy
+kubectl apply -f ./deploy/crds
 
 # 部署 Clusterpedia 组件
 kubectl apply -f ./deploy
