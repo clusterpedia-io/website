@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=generator content="Hugo 0.87.0">
+<meta name=generator content="Hugo 0.91.2">
 <link rel=canonical type=text/html href=/zh-cn/docs/usage/>
 <meta name=robots content="noindex, nofollow">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
@@ -28,6 +28,8 @@
 <link href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script src=https://unpkg.com/lunr@2.3.9/lunr.min.js integrity=sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli crossorigin=anonymous></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZQPMJ4HH3"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NZQPMJ4HH3',{anonymize_ip:!1})}</script>
 </head>
 <body class=td-section>
 <header>
@@ -201,7 +203,7 @@ cluster-2      https://10.50.10.11:16443   v1.10.11   Healthy
 <span style=color:#ce5c00;font-weight:700>}</span>
 </code></pre></div><h2 id=自定义资源同步>自定义资源同步</h2>
 <p>相比内置资源，自定义资源在资源版本的配置上会稍有不同。</p>
-<pre><code class=language-yaml: data-lang=yaml:>resources:
+<pre tabindex=0><code class=language-yaml: data-lang=yaml:>resources:
  - group: cert-manager.io
    versions: []
    resources:
@@ -239,7 +241,7 @@ cluster-2      https://10.50.10.11:16443   v1.10.11   Healthy
 </code></pre></div><p>可以看到，当前集群支持 <em>cert-manager.io</em> 的 <code>v1</code>，<code>v1beta1</code>，<code>v1alpha3</code>，<code>v1alpha2</code> 四个版本。</p>
 <p>当 <code>resources.[group].versions</code> 为空时，Clusterpedia 就会以 <code>APIGroup.versions</code> 列表的顺序，收集 <code>v1</code>， <code>v1beta1</code>，<code>v1alpah3</code> 三个版本，而 <code>v1alpha2</code> 不会被收集</p>
 <p>如果用户指定了 versions，那么就会按照 <code>versions</code> 的配置来收集指定的版本资源。</p>
-<pre><code class=language-yaml: data-lang=yaml:>resources:
+<pre tabindex=0><code class=language-yaml: data-lang=yaml:>resources:
  - group: cert-manager.io
    versions:
     - v1beta1
@@ -634,7 +636,7 @@ cluster-1   coredns                   2/2     <span style=color:#0000cf;font-wei
 cluster-2   calico-kube-controllers   1/1     <span style=color:#0000cf;font-weight:700>1</span>            <span style=color:#0000cf;font-weight:700>1</span>           64d
 cluster-2   coredns                   2/2     <span style=color:#0000cf;font-weight:700>2</span>            <span style=color:#0000cf;font-weight:700>2</span>           64d
 </code></pre></div><p>使用 <code>-A</code> 或者 <code>--all-namespaces</code> 来查看所有集群的所有命名空间下的资源</p>
-<pre><code>kubectl --cluster clusterpedia get deployments -A
+<pre tabindex=0><code>kubectl --cluster clusterpedia get deployments -A
 NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
 kube-system   cluster-1   coredns                   2/2     2            2           68d
 kube-system   cluster-2   calico-kube-controllers   1/1     1            1           64d
@@ -742,7 +744,7 @@ kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span
 <li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-5-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-1>URL</a></li></ul>
 <div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-5><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-0>
 <p><p>使用 owner-uid 来指定 Owner 的 UID, owner-seniority 对 Owner 进行辈分提升。</p>
-<pre><code>kubectl --cluster cluster-1 get pods -l \
+<pre tabindex=0><code>kubectl --cluster cluster-1 get pods -l \
     &quot;internalstorage.clusterpedia.io/owner-uid=151ae265-28fe-4734-850e-b641266cd5da,\
      internalstorage.clusterpedia.io/owner-seniority=1&quot;
 </code></pre><blockquote>
