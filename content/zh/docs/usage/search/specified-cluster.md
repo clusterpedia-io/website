@@ -38,7 +38,7 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/d
 
 {{< /tabs >}}
 
-指定集群支持的功能和[多集群检索](../searching-multi-cluster)的作用基本相同，而且在 Owner 检索上更加方便，
+指定集群支持的功能和[多集群检索](../multi-cluster)的作用基本相同，而且在 Owner 检索上更加方便，
 另外在**获取单个资源时也只能使用在 URL Path 中指定集群的方式**。
 
 

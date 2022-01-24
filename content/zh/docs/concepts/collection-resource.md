@@ -47,7 +47,7 @@ metadata:
 ```
 可以看到 `workloads` 包含了 `deployments`，`daemonsets`， `statefulsets` 三种资源。
 
-更多关于`聚合资源`的操作可以查看 [聚合资源检索](../../usage/search/searching-collection-resource)
+更多关于`聚合资源`的操作可以查看 [聚合资源检索](../../usage/search/collection-resource)
 
 ## 自定义聚合资源
 `内置存储层`未来会支持`自定义聚合资源`，允许用户随意组合任意的资源类型。
