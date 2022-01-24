@@ -41,7 +41,7 @@ kube-system   cluster-1   coredns                   2/2     2            2      
 kube-system   cluster-2   coredns                   2/2     2            2           64d
 ```
 
-对于指定单个集群的检索，同样可以使用 Search Label 来设置，也可以查看 [指定集群检索](../searching-specified-cluster) 来使用 URL Path 的方式指定集群
+对于指定单个集群的检索，同样可以使用 Search Label 来设置，也可以查看 [指定集群检索](../specified-cluster) 来使用 URL Path 的方式指定集群
 ```bash
 # 指定单个集群
 kubectl --cluster clusterpedia get deployments -l "search.clusterpedia.io/clusters=cluster-1"
@@ -61,7 +61,7 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/d
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments"
 ```
-了解更多[指定集群检索](../searching-specified-cluster)
+了解更多[指定集群检索](../specified-cluster)
 {{< /tab >}}
 
 {{< /tabs >}}
@@ -175,7 +175,7 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/n
 
 在多集群检索时，返回的数据实际是以类似 `DeploymentList` 的结构封装的数据。
 
-如果我们想要获取到单个的 `Deployment` 那么就需要在 URL 路径中指定 cluster name，参考[获取单个资源](../searching-specified-cluster#获取单个资源)
+如果我们想要获取到单个的 `Deployment` 那么就需要在 URL 路径中指定 cluster name，参考[获取单个资源](../specified-cluster#获取单个资源)
 {{< /tab >}}
 
 {{< /tabs >}}
@@ -225,7 +225,7 @@ kubectl get po --field-selector="spec.containers[1].name in (container1,containe
 
 **Owner 查询必须指定单个集群，可以使用 [Serach Label](../#owner-检索) 或者 [URL Query](../#owner-检索) 来指定，也可以在 URL Path 中指定集群名称**
 
-关于**根据 Owner 检索**的具体使用方法，可以参考[指定集群内根据父辈或者祖辈 Owenr 进行检索](../searching-specified-cluster#根据父辈或者祖辈-owner-进行检索)
+关于**根据 Owner 检索**的具体使用方法，可以参考[指定集群内根据父辈或者祖辈 Owenr 进行检索](../specified-cluster#根据父辈或者祖辈-owner-进行检索)
 
 ## 分页与排序
 分页和排序是资源检索必不可少的功能

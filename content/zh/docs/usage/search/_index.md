@@ -2,7 +2,7 @@
 title: 资源检索
 ---
 
-Clusterpedia 支持对 [多个集群内资源](searching-multi-cluster)，[指定集群的资源](searching-specified-cluster) 以及[聚合资源](searching-collection-resource) 的复杂检索，
+Clusterpedia 支持对 [多个集群内资源](multi-cluster)，[指定集群的资源](specified-cluster) 以及[聚合资源](collection-resource) 的复杂检索，
 
 并且这些复杂检索的条件可以通过两种方式传递给 `Clusterpedia APIServer`：
 * `URL Query`：直接将查询条件作为 Query 来传递
@@ -71,6 +71,6 @@ Clusterpedia 支持对 [多个集群内资源](searching-multi-cluster)，[指�
 |字段过滤|`kubectl --field-selector`|fieldSelector|
 
 详细可以查看：
-* [使用字段过滤来检索资源](./searching-multi-cluster#字段过滤)
+* [使用字段过滤来检索资源](./multi-cluster#字段过滤)
 * [support field selector](https://github.com/clusterpedia-io/clusterpedia/pull/36) 
 * [issue: support list field filtering](https://github.com/clusterpedia-io/clusterpedia/issues/48)

@@ -52,8 +52,8 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/collectionresources/work
 }
 ```
 
-`聚合资源`的复杂检索和[多集群资源检索](../searching-multi-cluster) 功能基本相同，只有部分操作不支持：
-* 不支持根据 Owner 检索，如果需要进行根据 Owner 检索需要指定具体的资源类型，可以参考 [多集群检索](../searching-multi-cluster#根据父辈以及祖辈-owner-查询) 和 [指定集群检索](../searching-specified-cluster#根据父辈或者祖辈-owner-进行检索)
+`聚合资源`的复杂检索和[多集群资源检索](../multi-cluster) 功能基本相同，只有部分操作不支持：
+* 不支持根据 Owner 检索，如果需要进行根据 Owner 检索需要指定具体的资源类型，可以参考 [多集群检索](../multi-cluster#根据父辈以及祖辈-owner-查询) 和 [指定集群检索](../specified-cluster#根据父辈或者祖辈-owner-进行检索)
 * 不支持在 Collection Resource 中获取具体的单个资源，因为具体资源需要指定集群和资源类型，可以使用 [获取单个资源]()
 {{% /tab %}}
 
