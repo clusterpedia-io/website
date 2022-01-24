@@ -83,7 +83,7 @@ kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersi
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3945a914c5c73ad4eaf155018f6b2f24.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e5ddbee01f51f7a063d5b3ccad4b38c0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -93,7 +93,7 @@ kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersi
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3945a914c5c73ad4eaf155018f6b2f24.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e5ddbee01f51f7a063d5b3ccad4b38c0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -147,12 +147,12 @@ kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersi
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsusagesearch-li>
 <a href=/zh-cn/docs/usage/search/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsusagesearch><span>资源检索</span></a>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchsearching-multi-cluster-li>
-<a href=/zh-cn/docs/usage/search/searching-multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-multi-cluster><span>多集群检索</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchsearching-specified-cluster-li>
-<a href=/zh-cn/docs/usage/search/searching-specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-specified-cluster><span>指定集群检索</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchsearching-collection-resource-li>
-<a href=/zh-cn/docs/usage/search/searching-collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-collection-resource><span>聚合资源检索</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchmulti-cluster-li>
+<a href=/zh-cn/docs/usage/search/multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchmulti-cluster><span>多集群检索</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchspecified-cluster-li>
+<a href=/zh-cn/docs/usage/search/specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchspecified-cluster><span>指定集群检索</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchcollection-resource-li>
+<a href=/zh-cn/docs/usage/search/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchcollection-resource><span>聚合资源检索</span></a>
 </li>
 </ul>
 </li>
@@ -227,7 +227,7 @@ workloads   deployments.apps,daemonsets.apps,statefulsets.apps
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resourceVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>selfLink</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><p>可以看到 <code>workloads</code> 包含了 <code>deployments</code>，<code>daemonsets</code>， <code>statefulsets</code> 三种资源。</p>
-<p>更多关于<code>聚合资源</code>的操作可以查看 <a href=../../usage/search/searching-collection-resource>聚合资源检索</a></p>
+<p>更多关于<code>聚合资源</code>的操作可以查看 <a href=../../usage/search/collection-resource>聚合资源检索</a></p>
 <h2 id=自定义聚合资源>自定义聚合资源</h2>
 <p><code>内置存储层</code>未来会支持<code>自定义聚合资源</code>，允许用户随意组合任意的资源类型。</p>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>

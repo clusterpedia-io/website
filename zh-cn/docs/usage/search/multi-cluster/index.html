@@ -26,7 +26,7 @@ kubectl --cluster clusterpedia api-resources # 输出： NAME SHORTNAMES APIVERS
 基本功能 指定集群 多集群检索时，会默认检索所有的集群，我们也可以指定单个或者一组集群
 kubectl URL 使用 Search Label search.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="/zh-cn/docs/usage/search/searching-multi-cluster/"><meta property="article:section" content="docs">
+<meta property="og:url" content="/zh-cn/docs/usage/search/multi-cluster/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
 <meta itemprop=name content="多集群检索">
 <meta itemprop=description content="多集群资源检索可以满足我们根据查询条件一次过滤多个集群内的资源，并提供对这些资源的分页排序的能力
@@ -79,7 +79,7 @@ kubectl URL 使用 Search Label search.">
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3945a914c5c73ad4eaf155018f6b2f24.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e5ddbee01f51f7a063d5b3ccad4b38c0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -89,7 +89,7 @@ kubectl URL 使用 Search Label search.">
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3945a914c5c73ad4eaf155018f6b2f24.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e5ddbee01f51f7a063d5b3ccad4b38c0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -143,12 +143,12 @@ kubectl URL 使用 Search Label search.">
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zh-cndocsusagesearch-li>
 <a href=/zh-cn/docs/usage/search/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsusagesearch><span>资源检索</span></a>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zh-cndocsusagesearchsearching-multi-cluster-li>
-<a href=/zh-cn/docs/usage/search/searching-multi-cluster/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-multi-cluster><span class=td-sidebar-nav-active-item>多集群检索</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchsearching-specified-cluster-li>
-<a href=/zh-cn/docs/usage/search/searching-specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-specified-cluster><span>指定集群检索</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchsearching-collection-resource-li>
-<a href=/zh-cn/docs/usage/search/searching-collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchsearching-collection-resource><span>聚合资源检索</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zh-cndocsusagesearchmulti-cluster-li>
+<a href=/zh-cn/docs/usage/search/multi-cluster/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchmulti-cluster><span class=td-sidebar-nav-active-item>多集群检索</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchspecified-cluster-li>
+<a href=/zh-cn/docs/usage/search/specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchspecified-cluster><span>指定集群检索</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchcollection-resource-li>
+<a href=/zh-cn/docs/usage/search/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchcollection-resource><span>聚合资源检索</span></a>
 </li>
 </ul>
 </li>
@@ -164,9 +164,9 @@ kubectl URL 使用 Search Label search.">
 </aside>
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href=https://github.com/clusterpedia-io/website/tree/main/content/zh-cn/docs/usage/search/searching-multi-cluster.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> 查看页面源码</a>
-<a href=https://github.com/clusterpedia-io/website/edit/main/content/zh-cn/docs/usage/search/searching-multi-cluster.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-<a href="https://github.com/clusterpedia-io/website/new/main/content/zh-cn/docs/usage/search/searching-multi-cluster.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+<a href=https://github.com/clusterpedia-io/website/tree/main/content/zh-cn/docs/usage/search/multi-cluster.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> 查看页面源码</a>
+<a href=https://github.com/clusterpedia-io/website/edit/main/content/zh-cn/docs/usage/search/multi-cluster.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+<a href="https://github.com/clusterpedia-io/website/new/main/content/zh-cn/docs/usage/search/multi-cluster.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
 <a href="https://github.com/clusterpedia-io/website/issues/new?title=%e5%a4%9a%e9%9b%86%e7%be%a4%e6%a3%80%e7%b4%a2" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
 <a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
 <a id=print href=/zh-cn/docs/usage/search/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
@@ -210,7 +210,7 @@ kubectl URL 使用 Search Label search.">
 <a href=/zh-cn/docs/usage/search/>资源检索</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=/zh-cn/docs/usage/search/searching-multi-cluster/>多集群检索</a>
+<a href=/zh-cn/docs/usage/search/multi-cluster/>多集群检索</a>
 </li>
 </ol>
 </nav>
@@ -237,34 +237,34 @@ issuers                    cert-manager.io/v1   true         Issuer
 <h2 id=基本功能>基本功能</h2>
 <h3 id=指定集群>指定集群</h3>
 <p>多集群检索时，会默认检索所有的集群，我们也可以指定单个或者一组集群</p>
-<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-1-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-1-0 aria-selected=true>kubectl</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-1-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-1-1>URL</a></li></ul>
-<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-1><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-1-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-1-0>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchmulti-cluster-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchmulti-cluster-1-0 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-1-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchmulti-cluster-1-1 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-1-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchmulti-cluster-1><div id=tabset-zh-cndocsusagesearchmulti-cluster-1-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-1-0>
 <p><p>使用 <a href=../#%E5%85%83%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2>Search Label</a> <code>search.clusterpedia.io/clusters</code> 来指定一组集群</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/clusters in (cluster-1,cluster-2)&#34;</span>
 </code></pre></div><pre tabindex=0><code># 输出：
 NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
 kube-system   cluster-1   coredns                   2/2     2            2           68d
 kube-system   cluster-2   coredns                   2/2     2            2           64d
-</code></pre><p>对于指定单个集群的检索，同样可以使用 Search Label 来设置，也可以查看 <a href=../searching-specified-cluster>指定集群检索</a> 来使用 URL Path 的方式指定集群</p>
+</code></pre><p>对于指定单个集群的检索，同样可以使用 Search Label 来设置，也可以查看 <a href=../specified-cluster>指定集群检索</a> 来使用 URL Path 的方式指定集群</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 指定单个集群</span>
 kubectl --cluster clusterpedia get deployments -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/clusters=cluster-1&#34;</span>
 
 <span style=color:#8f5902;font-style:italic># 指定集群也可以使用 --cluster &lt;cluster name&gt; 来指定</span>
 kubectl --cluster cluster-1 get deployments<span style=color:#4e9a06>&#34;
 </span></code></pre></div></div>
-<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-1-1>
+<div id=tabset-zh-cndocsusagesearchmulti-cluster-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-1-1>
 <p><p>使用 URL 时，使用 <code>clusters</code> 作为 <a href=../#%E5%85%83%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2>URL Query</a> 来传递</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
 </code></pre></div><p>如果指定单个集群，也可以将 cluster name 放到 URL 路径中</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
-</code></pre></div><p>了解更多<a href=../searching-specified-cluster>指定集群检索</a></p>
+</code></pre></div><p>了解更多<a href=../specified-cluster>指定集群检索</a></p>
 </div></div>
 <h3 id=指定命名空间>指定命名空间</h3>
 <p>可以像查看原生 Kube 一样来<strong>指定单个命名空间或者所有命名空间</strong></p>
-<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-2 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-2-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-2-0 aria-selected=true>kubectl</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-2-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-2-1>URL</a></li></ul>
-<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-2><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-2-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-2-0>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchmulti-cluster-2 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchmulti-cluster-2-0 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-2-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchmulti-cluster-2-1 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-2-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchmulti-cluster-2><div id=tabset-zh-cndocsusagesearchmulti-cluster-2-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-2-0>
 <p><p>使用 <code>-n &lt;namespace></code> 来指定命名空间，默认在 <em>default</em> 命名空间</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -n kube-system
 </code></pre></div><pre tabindex=0><code># 输出：
@@ -282,7 +282,7 @@ kube-system   cluster-2   coredns                   2/2     2            2      
 default       cluster-2   dd-airflow-scheduler      0/1     1            0           54d
 default       cluster-2   dd-airflow-web            0/1     1            0           54d
 </code></pre></div>
-<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-2-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-2-1>
+<div id=tabset-zh-cndocsusagesearchmulti-cluster-2-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-2-1>
 <p><p>获取资源的 <strong>URL Path</strong> 和原生 Kubernetes 一样 <em>/apis/apps/v1/deployments</em>，</p>
 <p>只是需要加上 Clusterpedia Resources 的路径前缀 <em>/apis/pedia.clusterpedia.io/v1alpha1/resources</em> 来表示当前是 Clusterpedia 请求。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments&#34;</span>
@@ -292,9 +292,9 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 </code></pre></div></div></div>
 <hr>
 <p>除了指定单个命名空间，还可以<strong>指定查看一组命名空间下的资源</strong>
-<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-3 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-3-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-3-0 aria-selected=true>kubectl</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-3-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-3-1>URL</a></li></ul>
-<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-3><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-3-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-3-0>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchmulti-cluster-3 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchmulti-cluster-3-0 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-3-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchmulti-cluster-3-1 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-3-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchmulti-cluster-3><div id=tabset-zh-cndocsusagesearchmulti-cluster-3-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-3-0>
 <p><p>使用 <a href=../#%E5%85%83%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2>Search Label</a> <code>search.clusterpedia.io/namespaces</code> 来指定一组命名空间</p>
 <blockquote>
 <p>一定要指定 -A 参数，避免 kubectl 在路径中设置 default namespace</p>
@@ -308,7 +308,7 @@ kube-system   cluster-2   coredns                   2/2     2            2      
 default       cluster-2   dd-airflow-scheduler      0/1     1            0           54d
 default       cluster-2   dd-airflow-web            0/1     1            0           54d
 </code></pre></div>
-<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-3-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-3-1>
+<div id=tabset-zh-cndocsusagesearchmulti-cluster-3-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-3-1>
 <p><p>使用 URL 时，就不需要使用 Label Selector 来传递参数了，直接使用 URL Query <code>namespaces</code> 即可</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?namespaces=kube-system,default&#34;</span>
 </code></pre></div></div></div>
@@ -318,9 +318,9 @@ default       cluster-2   dd-airflow-web            0/1     1            0      
 <blockquote>
 <p>当前暂时不支持模糊搜索</p>
 </blockquote>
-<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-4 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-4-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-4-0 aria-selected=true>kubectl</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-4-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-4-1>URL</a></li></ul>
-<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-4><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-4-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-4-0>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchmulti-cluster-4 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchmulti-cluster-4-0 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-4-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchmulti-cluster-4-1 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-4-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchmulti-cluster-4><div id=tabset-zh-cndocsusagesearchmulti-cluster-4-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-4-0>
 <p><p>使用 Search Label <code>search.clusterpedia.io/names</code> 来指定一组资源名称
 <strong>注意：如果在所有命名空间下检索资源，需要指定 -A 参数，或者使用 -n 来指定命名空间</strong></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -A -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/names=coredns&#34;</span>
@@ -329,14 +329,14 @@ NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILAB
 kube-system   cluster-1   coredns                   2/2     2            2           68d
 kube-system   cluster-2   coredns                   2/2     2            2           64d
 </code></pre></div>
-<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-4-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-4-1>
+<div id=tabset-zh-cndocsusagesearchmulti-cluster-4-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-4-1>
 <p><p>使用 URL 时，使用 <code>names</code> 作为 URL Query 来传递，如果需要指定命名空间，那么就在路径中加上 namespace。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?names=kube-coredns,dd-airflow-web&#34;</span>
 
 <span style=color:#8f5902;font-style:italic># 在 default 命名空间下检索指定名字的资源</span>
 kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/namespaces/default/deployments?names=kube-coredns,dd-airflow-web&#34;</span>
 </code></pre></div><p>在多集群检索时，返回的数据实际是以类似 <code>DeploymentList</code> 的结构封装的数据。</p>
-<p>如果我们想要获取到单个的 <code>Deployment</code> 那么就需要在 URL 路径中指定 cluster name，参考<a href=../searching-specified-cluster#%E8%8E%B7%E5%8F%96%E5%8D%95%E4%B8%AA%E8%B5%84%E6%BA%90>获取单个资源</a></p>
+<p>如果我们想要获取到单个的 <code>Deployment</code> 那么就需要在 URL 路径中指定 cluster name，参考<a href=../specified-cluster#%E8%8E%B7%E5%8F%96%E5%8D%95%E4%B8%AA%E8%B5%84%E6%BA%90>获取单个资源</a></p>
 </div></div>
 <h2 id=字段过滤>字段过滤</h2>
 <p>原生 Kubernetes 当前只支持对 <code>metadata.name</code> 和 <code>metadata.namespace</code> 的字段过滤，而且操作符只支持 <code>=</code>，<code>!=</code>，<code>==</code>，能力非常有限。</p>
@@ -371,15 +371,15 @@ kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span
 并且 Clusterpedia 在 Owner 的基础上还支持<strong>对 Owner 进行辈分提升来进行祖辈甚至更高辈分的检索</strong>。</p>
 <p>通过 Owner 检索，可以一次查询到 <code>Deployment</code> 下的所有 <code>Pods</code>，无需中间再查询 <code>ReplicaSet</code>。</p>
 <p><strong>Owner 查询必须指定单个集群，可以使用 <a href=../#owner-%E6%A3%80%E7%B4%A2>Serach Label</a> 或者 <a href=../#owner-%E6%A3%80%E7%B4%A2>URL Query</a> 来指定，也可以在 URL Path 中指定集群名称</strong></p>
-<p>关于<strong>根据 Owner 检索</strong>的具体使用方法，可以参考<a href=../searching-specified-cluster#%E6%A0%B9%E6%8D%AE%E7%88%B6%E8%BE%88%E6%88%96%E8%80%85%E7%A5%96%E8%BE%88-owner-%E8%BF%9B%E8%A1%8C%E6%A3%80%E7%B4%A2>指定集群内根据父辈或者祖辈 Owenr 进行检索</a></p>
+<p>关于<strong>根据 Owner 检索</strong>的具体使用方法，可以参考<a href=../specified-cluster#%E6%A0%B9%E6%8D%AE%E7%88%B6%E8%BE%88%E6%88%96%E8%80%85%E7%A5%96%E8%BE%88-owner-%E8%BF%9B%E8%A1%8C%E6%A3%80%E7%B4%A2>指定集群内根据父辈或者祖辈 Owenr 进行检索</a></p>
 <h2 id=分页与排序>分页与排序</h2>
 <p>分页和排序是资源检索必不可少的功能</p>
 <h3 id=根据多个字段进行排序>根据多个字段进行排序</h3>
 <p>可以指定多个字段进行排序，而对排序字段的支持是由存储层来决定。</p>
 <p>当前默认存储层支持对 <code>cluster</code>，<code>namespace</code>，<code>name</code>，<code>created_at</code>，<code>resource_version</code> 进行正序和倒序的排序，字段也支持随意的组合
-<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-5 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-5-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-0 aria-selected=true>kubectl</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-5-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-1>URL</a></li></ul>
-<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-5><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-0>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchmulti-cluster-5 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchmulti-cluster-5-0 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-5-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchmulti-cluster-5-1 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-5-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchmulti-cluster-5><div id=tabset-zh-cndocsusagesearchmulti-cluster-5-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-5-0>
 <p><p>使用多个字段进行正序排序</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods -l <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/orderby in (cluster, name)&#34;</span>
@@ -387,7 +387,7 @@ kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods -l <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/orderby in (namespace_desc, cluster, name)&#34;</span>
 </code></pre></div></div>
-<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-5-1>
+<div id=tabset-zh-cndocsusagesearchmulti-cluster-5-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-5-1>
 <p><p>使用 <a href=../#%E6%8E%92%E5%BA%8F>URL Query</a> 来指定排序字段</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace,cluster&#34;</span>
 </code></pre></div><p>指定倒序字段时，在字段后添加 desc，以空格分隔</p>
@@ -397,9 +397,9 @@ kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span
 <h3 id=分页>分页</h3>
 <p>原生 Kubernetes 实际是支持分页的，<a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListOptions>ListOptions</a> 中便已经存在用于分页查询的字段。</p>
 <p>Clusterpedia 复用 <code>ListOptions.Limit</code> 和 <code>ListOptions.Continue</code> 字段作为分页的 <code>size</code> 和 <code>offset</code>。</p>
-<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-6 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-6-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-6-0 aria-selected=true>kubectl</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-6-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-6-1>URL</a></li></ul>
-<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-6><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-6-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-6-0>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchmulti-cluster-6 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchmulti-cluster-6-0 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-6-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchmulti-cluster-6-1 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-6-1>URL</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchmulti-cluster-6><div id=tabset-zh-cndocsusagesearchmulti-cluster-6-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-6-0>
 <p><p>kubectl 的 <code>--chunk-size</code> 实际通过设置 <code>limit</code> 来用于分片拉取。</p>
 <p>原生的 Kubernetes APIServer 会在返回的响应中携带用于下一次拉取的 <code>continue</code>，
 并根据 <code>--chunk-size</code> 和 <code>conintue</code> 进行下一次拉取，直到相应的数据中 Conintue 为空。</p>
@@ -414,7 +414,7 @@ kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods --chunk-size <span style=color:#0000cf;font-weight:700>10</span> -l <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/offset=10&#34;</span>
 </code></pre></div></div>
-<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-6-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-6-1>
+<div id=tabset-zh-cndocsusagesearchmulti-cluster-6-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-6-1>
 <p><p>对资源进行分页检索，只需要在 URL 中设置 <code>limit</code> 和 <code>continue</code> 即可</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?limit=10&amp;continue=5&#34;</span>
 </code></pre></div></div></div>
@@ -422,9 +422,9 @@ kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span
 <p>响应数据的 <a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta>ListMeta.Continue</a> 可以用于 <a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListOptions>ListOptions.Continue</a> 中作为下一次拉取的 offset</p>
 <p>分页功能中我们提到，为了避免 kubectl 进行对全量数据的分片拉取，Clusterepdia 不会在响应中携带 Continue 信息。</p>
 <p>不过如果用户有需求那么可以要求响应中携带 Continue 信息
-<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-7 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-7-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-7-0 aria-selected=true>URL</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-7-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-7-1>kubectl</a></li></ul>
-<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-7><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-7-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-7-0>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchmulti-cluster-7 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchmulti-cluster-7-0 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-7-0 aria-selected=true>URL</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchmulti-cluster-7-1 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-7-1>kubectl</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchmulti-cluster-7><div id=tabset-zh-cndocsusagesearchmulti-cluster-7-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-7-0>
 <p><p>在使用 URL 访问 Clusterepdia 时，响应的 Continue 可以作为下一次请求的 offset</p>
 <blockquote>
 <p>搭配分页功能使用</p>
@@ -441,7 +441,7 @@ kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span
   <span style=color:#000;font-weight:700>]</span>
 <span style=color:#000;font-weight:700>}</span>
 </code></pre></div></div>
-<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-7-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-7-1>
+<div id=tabset-zh-cndocsusagesearchmulti-cluster-7-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-7-1>
 <p><p><strong>在 kubectl 设置 <code>search.clusterpedia.io/with-continue</code> 会导致以分片拉取的形式拉取全量资源。</strong></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deploy -l <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/with-continue=true&#34;</span>
@@ -452,9 +452,9 @@ kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span
 <p>Kubernetes List 响应的 <a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta>ListMeta</a> 中存在 <code>RemainingItemCount</code> 字段，</p>
 <p>通过复用该字段，便可在兼容 Kubernetes OpenAPI 的基础下返回资源总量：</p>
 <p><strong><code>offset + len(list.items) + list.metadata.remainingItemCount</code></strong>
-<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchsearching-multi-cluster-8 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-8-0 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-8-0 aria-selected=true>URL</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchsearching-multi-cluster-8-1 role=tab aria-controls=tabset-zh-cndocsusagesearchsearching-multi-cluster-8-1>kubectl</a></li></ul>
-<div class=tab-content id=tabset-zh-cndocsusagesearchsearching-multi-cluster-8><div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-8-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-8-0>
+<ul class="nav nav-tabs" id=tabset-zh-cndocsusagesearchmulti-cluster-8 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-zh-cndocsusagesearchmulti-cluster-8-0 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-8-0 aria-selected=true>URL</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-zh-cndocsusagesearchmulti-cluster-8-1 role=tab aria-controls=tabset-zh-cndocsusagesearchmulti-cluster-8-1>kubectl</a></li></ul>
+<div class=tab-content id=tabset-zh-cndocsusagesearchmulti-cluster-8><div id=tabset-zh-cndocsusagesearchmulti-cluster-8-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-8-0>
 <p><p>在 <a href=../#%E5%88%86%E9%A1%B5>URL Query</a> 设置 <code>withRemainingCount</code> 即可要求响应携带剩余资源数量</p>
 <blockquote>
 <p>搭配<a href=#%E5%88%86%E9%A1%B5>分页</a>功能使用</p>
@@ -471,7 +471,7 @@ kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span
   <span style=color:#000;font-weight:700>]</span>
 <span style=color:#000;font-weight:700>}</span>
 </code></pre></div></div>
-<div id=tabset-zh-cndocsusagesearchsearching-multi-cluster-8-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchsearching-multi-cluster-8-1>
+<div id=tabset-zh-cndocsusagesearchmulti-cluster-8-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-8-1>
 <p><p>需要以 URL 的方式使用该功能</p>
 </div></div>
 </p>
