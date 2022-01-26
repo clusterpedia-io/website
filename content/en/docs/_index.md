@@ -1,5 +1,5 @@
 ---
-title: Document
+title: Documents
 menu:
   main:
     weight: 10
