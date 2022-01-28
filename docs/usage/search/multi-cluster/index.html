@@ -69,7 +69,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.175072f30e1eb64febef960b9b08b722.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.87ed13ed3074c25c333cf9c6e61524c2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -79,7 +79,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.175072f30e1eb64febef960b9b08b722.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.87ed13ed3074c25c333cf9c6e61524c2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -165,9 +165,9 @@ English
 <ul>
 <li><a href=#basic-features>Basic Features</a>
 <ul>
-<li><a href=#specify-cluster>Specify Cluster</a></li>
-<li><a href=#specify-namespace>Specify Namespace</a></li>
-<li><a href=#specify-resource-name>Specify Resource Name</a></li>
+<li><a href=#specify-clusters>Specify Clusters</a></li>
+<li><a href=#specify-namespaces>Specify Namespaces</a></li>
+<li><a href=#specify-resource-names>Specify Resource Names</a></li>
 </ul>
 </li>
 <li><a href=#field-selector>Field Selector</a>
@@ -226,7 +226,7 @@ issuers                    cert-manager.io/v1   true         Issuer
 </code></pre><p>Clusterpedia provides multi-cluster resource search based on all cluster-synchronized resources,
 and we can view <a href=../../sync-resources>Sync Cluster Resources</a> to update the resources that need to be synchronized.</p>
 <h2 id=basic-features>Basic Features</h2>
-<h3 id=specify-cluster>Specify Cluster</h3>
+<h3 id=specify-clusters>Specify Clusters</h3>
 <p>When searching multiple clusters, all clusters will be retrieved by default, we can also specify a single cluster or a group of clusters</p>
 <ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-1-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-1-0 aria-selected=true>kubectl</a></li>
 <li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-1-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-1-1>URL</a></li></ul>
@@ -251,7 +251,7 @@ kubectl --cluster cluster-1 get deployments<span style=color:#4e9a06>&#34;
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
 </code></pre></div><p>Lean More <a href=../specified-cluster>Specify Cluster Search</a></p>
 </div></div>
-<h3 id=specify-namespace>Specify Namespace</h3>
+<h3 id=specify-namespaces>Specify Namespaces</h3>
 <p>We can <strong>specify a single namespace or all namespaces</strong> as if we were viewing a native Kubernetes resource.</p>
 <ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-2 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-2-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-2-0 aria-selected=true>kubectl</a></li>
 <li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-2-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-2-1>URL</a></li></ul>
@@ -304,7 +304,7 @@ default       cluster-2   dd-airflow-web            0/1     1            0      
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?namespaces=kube-system,default&#34;</span>
 </code></pre></div></div></div>
 </p>
-<h3 id=specify-resource-name>Specify Resource Name</h3>
+<h3 id=specify-resource-names>Specify Resource Names</h3>
 <p>Users can filter resources by a group of resource names</p>
 <blockquote>
 <p>Fuzzy search is not supported at the moment.</p>

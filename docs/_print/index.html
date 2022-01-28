@@ -61,7 +61,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.175072f30e1eb64febef960b9b08b722.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.87ed13ed3074c25c333cf9c6e61524c2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -160,7 +160,7 @@ sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000
 <p>Once the storage component are successfully deployed, you can install the Clusterpedia.</p>
 <p><strong>If you uses existing storage component, refer to <a href=../configuration/configure-internalstorage>Configure Storage Layer</a> to set the storage component into <code>Default Storage Layer</code></strong></p>
 <blockquote>
-<p>Run the following code in the clusterpedia root directory</p>
+<p>Run the following cmd in the clusterpedia root directory</p>
 </blockquote>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Deploy crds</span>
 kubectl apply -f ./deploy/crds
@@ -200,7 +200,7 @@ kubectl apply -f ./deploy
 </span><span style=color:#8f5902;font-style:italic>    database: &#34;clusterpedia&#34;
 </span><span style=color:#8f5902;font-style:italic>    log:
 </span><span style=color:#8f5902;font-style:italic>      slowThreshold: &#34;100ms&#34;</span><span style=color:#f8f8f8;text-decoration:underline>    
-</span></code></pre></div><p>internalstorage config supports the following fields:</p>
+</span></code></pre></div><p><code>Default Storage Layer</code> config supports the following fields:</p>
 <table>
 <thead>
 <tr>
@@ -287,7 +287,7 @@ kubectl apply -f ./deploy
 <div class=td-content>
 <h1 id=pg-40243a331b263af5e1b61fd771638878>2.1 - Collection Resource</h1>
 <p>In order to query multiple types of resources at once, Clusterpedia provides a new resource: <code>Collection Resource</code>.</p>
-<p><code>Collection Resource</code> is composed of different resource types that can be retrieved and paginated uniformly.</p>
+<p><code>Collection Resource</code> is composed of different types of resources, and these resources can be retrieved and paged in a uniform way through the <code>Collection Resource</code>.</p>
 <p><strong>What Collection Resources are supported by the Clusterpedia depends on the <code>Storage Layer</code>.</strong> For example, the <code>Default Storage Layer</code> temporarily only supports the <code>workloads</code>, which is used to represent workloads.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources
 </code></pre></div><pre tabindex=0><code># Output:
@@ -319,7 +319,7 @@ workloads   deployments.apps,daemonsets.apps,statefulsets.apps
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>selfLink</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><p>It is found that <code>workloads</code> includes three resources: <code>deployments</code>, <code>daemonsets</code>, and <code>statefulsets</code>.</p>
 <p>For details about <code>Collection Resource</code>, see <a href=../../usage/search/collection-resource>Search for Collection Resource</a></p>
-<h2 id=custom-collection-resource>Custom collection resource</h2>
+<h2 id=custom-collection-resource>Custom Collection Resource</h2>
 <p><code>Default Storage Layer</code> will support <code>Custom Collection Resource</code> in future to enable users to combine any resource types freely.</p>
 </div>
 <div class=td-content style=page-break-before:always>
@@ -565,7 +565,7 @@ resources                          pedia.clusterpedia.io/v1alpha1    false      
 </code></pre></div><p><strong>Regardless of a resource path of multiple clusters or a specific cluster, the path can be spliced and followed by Kubernetes <code>Get</code>/<code>List</code> Path</strong></p>
 <h3 id=configure-the-cluster-shortcut-for-kubectl>Configure the cluster shortcut for kubectl</h3>
 <p>Although we can use URLs to access Clusterpedia resources, if we want to use kubectl to query more conveniently, we need to configure the kubeconfig cluster.</p>
-<p>Clusterpedia provides a simple script to generate <code>cluster kubeconfig</code></p>
+<p>Clusterpedia provides a simple script to generate <code>cluster config</code> in the kubeconfig.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
 </code></pre></div><pre tabindex=0><code># Output:
 Current Context: kubernetes-admin@kubernetes
@@ -729,12 +729,12 @@ issuers                    cert-manager.io/v1   true         Issuer
 <tbody>
 <tr>
 <td>Filter cluster names</td>
-<td>`search.clusterpedia.io/clusters</td>
+<td><code>search.clusterpedia.io/clusters</code></td>
 <td><code>clusters</code></td>
 </tr>
 <tr>
 <td>Filter namespaces</td>
-<td>`search.clusterpedia.io/namespaces</td>
+<td><code>search.clusterpedia.io/namespaces</code></td>
 <td><code>namespaces</code></td>
 </tr>
 <tr>
@@ -898,7 +898,7 @@ issuers                    cert-manager.io/v1   true         Issuer
 </code></pre><p>Clusterpedia provides multi-cluster resource search based on all cluster-synchronized resources,
 and we can view <a href=../../sync-resources>Sync Cluster Resources</a> to update the resources that need to be synchronized.</p>
 <h2 id=basic-features>Basic Features</h2>
-<h3 id=specify-cluster>Specify Cluster</h3>
+<h3 id=specify-clusters>Specify Clusters</h3>
 <p>When searching multiple clusters, all clusters will be retrieved by default, we can also specify a single cluster or a group of clusters</p>
 <ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-1-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-1-0 aria-selected=true>kubectl</a></li>
 <li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-1-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-1-1>URL</a></li></ul>
@@ -923,7 +923,7 @@ kubectl --cluster cluster-1 get deployments<span style=color:#4e9a06>&#34;
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
 </code></pre></div><p>Lean More <a href=../specified-cluster>Specify Cluster Search</a></p>
 </div></div>
-<h3 id=specify-namespace>Specify Namespace</h3>
+<h3 id=specify-namespaces>Specify Namespaces</h3>
 <p>We can <strong>specify a single namespace or all namespaces</strong> as if we were viewing a native Kubernetes resource.</p>
 <ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-2 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-2-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-2-0 aria-selected=true>kubectl</a></li>
 <li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-2-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-2-1>URL</a></li></ul>
@@ -976,7 +976,7 @@ default       cluster-2   dd-airflow-web            0/1     1            0      
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?namespaces=kube-system,default&#34;</span>
 </code></pre></div></div></div>
 </p>
-<h3 id=specify-resource-name>Specify Resource Name</h3>
+<h3 id=specify-resource-names>Specify Resource Names</h3>
 <p>Users can filter resources by a group of resource names</p>
 <blockquote>
 <p>Fuzzy search is not supported at the moment.</p>

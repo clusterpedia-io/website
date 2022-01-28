@@ -26,7 +26,7 @@ ClusterSynchroManager manages the PediaCluster resource in the master cluster, c
 <meta itemprop=name content="Access the Clusterpedia">
 <meta itemprop=description content="Clusterpedia has two main components:
  ClusterSynchroManager manages the PediaCluster resource in the master cluster, connects to the specified cluster through the PediaCluster authentication information, and synchronizes the corresponding resources in real time. APIServer also listens to the PediaCluster resource in the master cluster and provides complex search for resources in a compatible Kubernetes OpenAPI manner based on the resources synchronized by the cluster.  Also, the Clusterpedia APIServer will be registered to the master cluster APIServer in the way of Aggregation API, so that we can access Clusterpedia through the same entry as the master cluster.">
-<meta itemprop=wordCount content="722">
+<meta itemprop=wordCount content="725">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Access the Clusterpedia">
 <meta name=twitter:description content="Clusterpedia has two main components:
@@ -68,7 +68,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.175072f30e1eb64febef960b9b08b722.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.87ed13ed3074c25c333cf9c6e61524c2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -78,7 +78,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.175072f30e1eb64febef960b9b08b722.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.87ed13ed3074c25c333cf9c6e61524c2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -223,7 +223,7 @@ resources                          pedia.clusterpedia.io/v1alpha1    false      
 </code></pre></div><p><strong>Regardless of a resource path of multiple clusters or a specific cluster, the path can be spliced and followed by Kubernetes <code>Get</code>/<code>List</code> Path</strong></p>
 <h3 id=configure-the-cluster-shortcut-for-kubectl>Configure the cluster shortcut for kubectl</h3>
 <p>Although we can use URLs to access Clusterpedia resources, if we want to use kubectl to query more conveniently, we need to configure the kubeconfig cluster.</p>
-<p>Clusterpedia provides a simple script to generate <code>cluster kubeconfig</code></p>
+<p>Clusterpedia provides a simple script to generate <code>cluster config</code> in the kubeconfig.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
 </code></pre></div><pre tabindex=0><code># Output:
 Current Context: kubernetes-admin@kubernetes

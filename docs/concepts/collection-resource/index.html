@@ -18,24 +18,21 @@
 Collection Resource is composed of …">
 <meta property="og:title" content="Collection Resource">
 <meta property="og:description" content="In order to query multiple types of resources at once, Clusterpedia provides a new resource: Collection Resource.
-Collection Resource is composed of different resource types that can be retrieved and paginated uniformly.
-What Collection Resources are supported by the Clusterpedia depends on the Storage Layer. For example, the Default Storage Layer temporarily only supports the workloads, which is used to represent workloads.
-kubectl get collectionresources # Output: NAME RESOURCES workloads deployments.">
+Collection Resource is composed of different types of resources, and these resources can be retrieved and paged in a uniform way through the Collection Resource.
+What Collection Resources are supported by the Clusterpedia depends on the Storage Layer. For example, the Default Storage Layer temporarily only supports the workloads, which is used to represent workloads.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/concepts/collection-resource/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
 <meta itemprop=name content="Collection Resource">
 <meta itemprop=description content="In order to query multiple types of resources at once, Clusterpedia provides a new resource: Collection Resource.
-Collection Resource is composed of different resource types that can be retrieved and paginated uniformly.
-What Collection Resources are supported by the Clusterpedia depends on the Storage Layer. For example, the Default Storage Layer temporarily only supports the workloads, which is used to represent workloads.
-kubectl get collectionresources # Output: NAME RESOURCES workloads deployments.">
-<meta itemprop=wordCount content="134">
+Collection Resource is composed of different types of resources, and these resources can be retrieved and paged in a uniform way through the Collection Resource.
+What Collection Resources are supported by the Clusterpedia depends on the Storage Layer. For example, the Default Storage Layer temporarily only supports the workloads, which is used to represent workloads.">
+<meta itemprop=wordCount content="144">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Collection Resource">
 <meta name=twitter:description content="In order to query multiple types of resources at once, Clusterpedia provides a new resource: Collection Resource.
-Collection Resource is composed of different resource types that can be retrieved and paginated uniformly.
-What Collection Resources are supported by the Clusterpedia depends on the Storage Layer. For example, the Default Storage Layer temporarily only supports the workloads, which is used to represent workloads.
-kubectl get collectionresources # Output: NAME RESOURCES workloads deployments.">
+Collection Resource is composed of different types of resources, and these resources can be retrieved and paged in a uniform way through the Collection Resource.
+What Collection Resources are supported by the Clusterpedia depends on the Storage Layer. For example, the Default Storage Layer temporarily only supports the workloads, which is used to represent workloads.">
 <link rel=preload href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css as=style>
 <link href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -73,7 +70,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.175072f30e1eb64febef960b9b08b722.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.87ed13ed3074c25c333cf9c6e61524c2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -83,7 +80,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.175072f30e1eb64febef960b9b08b722.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.87ed13ed3074c25c333cf9c6e61524c2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -186,7 +183,7 @@ English
 <p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; less than a minute &nbsp;</p>
 </header>
 <p>In order to query multiple types of resources at once, Clusterpedia provides a new resource: <code>Collection Resource</code>.</p>
-<p><code>Collection Resource</code> is composed of different resource types that can be retrieved and paginated uniformly.</p>
+<p><code>Collection Resource</code> is composed of different types of resources, and these resources can be retrieved and paged in a uniform way through the <code>Collection Resource</code>.</p>
 <p><strong>What Collection Resources are supported by the Clusterpedia depends on the <code>Storage Layer</code>.</strong> For example, the <code>Default Storage Layer</code> temporarily only supports the <code>workloads</code>, which is used to represent workloads.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources
 </code></pre></div><pre tabindex=0><code># Output:
@@ -218,7 +215,7 @@ workloads   deployments.apps,daemonsets.apps,statefulsets.apps
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>selfLink</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><p>It is found that <code>workloads</code> includes three resources: <code>deployments</code>, <code>daemonsets</code>, and <code>statefulsets</code>.</p>
 <p>For details about <code>Collection Resource</code>, see <a href=../../usage/search/collection-resource>Search for Collection Resource</a></p>
-<h2 id=custom-collection-resource>Custom collection resource</h2>
+<h2 id=custom-collection-resource>Custom Collection Resource</h2>
 <p><code>Default Storage Layer</code> will support <code>Custom Collection Resource</code> in future to enable users to combine any resource types freely.</p>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>

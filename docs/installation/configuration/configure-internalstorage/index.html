@@ -20,7 +20,7 @@ When installing Clusterpedia, you can use existing …">
 <meta property="og:description" content="Default Storage Layer of Clusterpedia supports two storage components: MySQL and PostgreSQL.
 When installing Clusterpedia, you can use existing storage component and create Default Storage Layer(ConfigMap) and Secret of storage component.
 Configure the Default Storage Layer You shall create clusterpedia-internalstorage ConfigMap in the clusterpedia-system namespace.
-# internalstorage configmap exampleapiVersion:v1kind:ConfigMapmetadata:name:clusterpedia-internalstoragenamespace:clusterpedia-systemdata:internalstorage-config.yaml:|type: &#34;mysql&#34; host: &#34;clusterpedia-internalstorage-mysql&#34; port: 3306 user: root database: &#34;clusterpedia&#34; log: slowThreshold: &#34;100ms&#34;internalstorage config supports the following fields:
+# internalstorage configmap exampleapiVersion:v1kind:ConfigMapmetadata:name:clusterpedia-internalstoragenamespace:clusterpedia-systemdata:internalstorage-config.yaml:|type: &#34;mysql&#34; host: &#34;clusterpedia-internalstorage-mysql&#34; port: 3306 user: root database: &#34;clusterpedia&#34; log: slowThreshold: &#34;100ms&#34;Default Storage Layer config supports the following fields:
    field description     type type of storage component such as &ldquo;postgres&rdquo; and &ldquo;mysql&rdquo;   host host for storage component such as IP address or Service Name   port port for storage component   user user for storage component   password password for storage component   database the database used by Clusterpedia    It is a good choice to store the access password to Secret.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/installation/configuration/configure-internalstorage/"><meta property="article:section" content="docs">
@@ -29,15 +29,15 @@ Configure the Default Storage Layer You shall create clusterpedia-internalstorag
 <meta itemprop=description content="Default Storage Layer of Clusterpedia supports two storage components: MySQL and PostgreSQL.
 When installing Clusterpedia, you can use existing storage component and create Default Storage Layer(ConfigMap) and Secret of storage component.
 Configure the Default Storage Layer You shall create clusterpedia-internalstorage ConfigMap in the clusterpedia-system namespace.
-# internalstorage configmap exampleapiVersion:v1kind:ConfigMapmetadata:name:clusterpedia-internalstoragenamespace:clusterpedia-systemdata:internalstorage-config.yaml:|type: &#34;mysql&#34; host: &#34;clusterpedia-internalstorage-mysql&#34; port: 3306 user: root database: &#34;clusterpedia&#34; log: slowThreshold: &#34;100ms&#34;internalstorage config supports the following fields:
+# internalstorage configmap exampleapiVersion:v1kind:ConfigMapmetadata:name:clusterpedia-internalstoragenamespace:clusterpedia-systemdata:internalstorage-config.yaml:|type: &#34;mysql&#34; host: &#34;clusterpedia-internalstorage-mysql&#34; port: 3306 user: root database: &#34;clusterpedia&#34; log: slowThreshold: &#34;100ms&#34;Default Storage Layer config supports the following fields:
    field description     type type of storage component such as &ldquo;postgres&rdquo; and &ldquo;mysql&rdquo;   host host for storage component such as IP address or Service Name   port port for storage component   user user for storage component   password password for storage component   database the database used by Clusterpedia    It is a good choice to store the access password to Secret.">
-<meta itemprop=wordCount content="277">
+<meta itemprop=wordCount content="279">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Configure Storage Layer">
 <meta name=twitter:description content="Default Storage Layer of Clusterpedia supports two storage components: MySQL and PostgreSQL.
 When installing Clusterpedia, you can use existing storage component and create Default Storage Layer(ConfigMap) and Secret of storage component.
 Configure the Default Storage Layer You shall create clusterpedia-internalstorage ConfigMap in the clusterpedia-system namespace.
-# internalstorage configmap exampleapiVersion:v1kind:ConfigMapmetadata:name:clusterpedia-internalstoragenamespace:clusterpedia-systemdata:internalstorage-config.yaml:|type: &#34;mysql&#34; host: &#34;clusterpedia-internalstorage-mysql&#34; port: 3306 user: root database: &#34;clusterpedia&#34; log: slowThreshold: &#34;100ms&#34;internalstorage config supports the following fields:
+# internalstorage configmap exampleapiVersion:v1kind:ConfigMapmetadata:name:clusterpedia-internalstoragenamespace:clusterpedia-systemdata:internalstorage-config.yaml:|type: &#34;mysql&#34; host: &#34;clusterpedia-internalstorage-mysql&#34; port: 3306 user: root database: &#34;clusterpedia&#34; log: slowThreshold: &#34;100ms&#34;Default Storage Layer config supports the following fields:
    field description     type type of storage component such as &ldquo;postgres&rdquo; and &ldquo;mysql&rdquo;   host host for storage component such as IP address or Service Name   port port for storage component   user user for storage component   password password for storage component   database the database used by Clusterpedia    It is a good choice to store the access password to Secret.">
 <link rel=preload href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css as=style>
 <link href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css rel=stylesheet integrity>
@@ -76,7 +76,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.175072f30e1eb64febef960b9b08b722.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.87ed13ed3074c25c333cf9c6e61524c2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -86,7 +86,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.175072f30e1eb64febef960b9b08b722.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.87ed13ed3074c25c333cf9c6e61524c2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -221,7 +221,7 @@ English
 </span><span style=color:#8f5902;font-style:italic>    database: &#34;clusterpedia&#34;
 </span><span style=color:#8f5902;font-style:italic>    log:
 </span><span style=color:#8f5902;font-style:italic>      slowThreshold: &#34;100ms&#34;</span><span style=color:#f8f8f8;text-decoration:underline>    
-</span></code></pre></div><p>internalstorage config supports the following fields:</p>
+</span></code></pre></div><p><code>Default Storage Layer</code> config supports the following fields:</p>
 <table>
 <thead>
 <tr>

@@ -61,7 +61,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.175072f30e1eb64febef960b9b08b722.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.87ed13ed3074c25c333cf9c6e61524c2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -89,7 +89,7 @@ This is the multi-page printable view of this section.
 <div class=td-content>
 <h1 id=pg-40243a331b263af5e1b61fd771638878>1 - Collection Resource</h1>
 <p>In order to query multiple types of resources at once, Clusterpedia provides a new resource: <code>Collection Resource</code>.</p>
-<p><code>Collection Resource</code> is composed of different resource types that can be retrieved and paginated uniformly.</p>
+<p><code>Collection Resource</code> is composed of different types of resources, and these resources can be retrieved and paged in a uniform way through the <code>Collection Resource</code>.</p>
 <p><strong>What Collection Resources are supported by the Clusterpedia depends on the <code>Storage Layer</code>.</strong> For example, the <code>Default Storage Layer</code> temporarily only supports the <code>workloads</code>, which is used to represent workloads.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources
 </code></pre></div><pre tabindex=0><code># Output:
@@ -121,7 +121,7 @@ workloads   deployments.apps,daemonsets.apps,statefulsets.apps
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>selfLink</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><p>It is found that <code>workloads</code> includes three resources: <code>deployments</code>, <code>daemonsets</code>, and <code>statefulsets</code>.</p>
 <p>For details about <code>Collection Resource</code>, see <a href=../../usage/search/collection-resource>Search for Collection Resource</a></p>
-<h2 id=custom-collection-resource>Custom collection resource</h2>
+<h2 id=custom-collection-resource>Custom Collection Resource</h2>
 <p><code>Default Storage Layer</code> will support <code>Custom Collection Resource</code> in future to enable users to combine any resource types freely.</p>
 </div>
 <div class=td-content style=page-break-before:always>
