@@ -26,7 +26,7 @@ data:
       slowThreshold: "100ms"
 ```
 
-internalstorage config supports the following fields:
+`Default Storage Layer` config supports the following fields:
 |field|description|
 |-----|-----------|
 |`type`|type of storage component such as "postgres" and "mysql" |

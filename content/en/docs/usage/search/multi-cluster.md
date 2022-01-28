@@ -25,7 +25,7 @@ Clusterpedia provides multi-cluster resource search based on all cluster-synchro
 and we can view [Sync Cluster Resources](../../sync-resources) to update the resources that need to be synchronized.
 
 ## Basic Features
-### Specify Cluster
+### Specify Clusters
 When searching multiple clusters, all clusters will be retrieved by default, we can also specify a single cluster or a group of clusters
 
 {{< tabs >}}
@@ -67,7 +67,7 @@ Lean More [Specify Cluster Search](../specified-cluster)
 
 {{< /tabs >}}
 
-### Specify Namespace
+### Specify Namespaces
 We can **specify a single namespace or all namespaces** as if we were viewing a native Kubernetes resource.
 
 {{< tabs >}}
@@ -145,7 +145,7 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/d
 
 {{< /tabs >}}
 
-### Specify Resource Name 
+### Specify Resource Names
 Users can filter resources by a group of resource names
 > Fuzzy search is not supported at the moment.
 
