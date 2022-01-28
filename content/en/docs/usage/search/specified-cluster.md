@@ -1,15 +1,15 @@
 ---
-title: "Search in a specified cluster"
+title: "Search in a Specified Cluster"
 weight: 11
 ---
 
 In addition to searching in multiple clusters, Clusterpedia can also search for resources in a specified cluster.  
 
-> Using [`Search Label`](../#search by metadata) or [`URL Query`](../#search by metadata) to specify a single cluster is not different from specifying a cluster in URL Path in terms of performance
+> Using [`Search Label`](../#search-by-metadata) or [`URL Query`](../#search-by-metadata) to specify a single cluster is not different from specifying a cluster in URL Path in terms of performance
 >
 > This topic focuses on specifying clusters in URL Path
 
-Before using kubectl in the way of specifying a cluster, you need to [configure the cluster shortcut for kubectl](../../access-clusterpedia#generate a shortcut configuration for cluster access by kubectl)
+Before using kubectl in the way of specifying a cluster, you need to [configure the cluster shortcut for kubectl](../../access-clusterpedia#configure-the-cluster-shortcut-for-kubectl)
 
 {{< tabs >}}
 
@@ -38,11 +38,12 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/d
 
 {{< /tabs >}}
 
-The function supported by searching in a specified cluster is basically the same as that of [multi-cluster search](../multi-cluster). It is more convenient for searching by Owner in a specified cluster. In addition, when **getting a single resource, you can only use the specified cluster in the URL Path**.
+The function supported by searching in a specified cluster is basically the same as that of [multi-cluster search](../multi-cluster). 
 
+It is more convenient for searching by Owner in a specified cluster. In addition, when **getting a single resource, you can only use the specified cluster in the URL Path**.
 
-## Search by parent or grandparent Owner
-To query by Owner, you shall specify a single cluster. You can use [Search Label](../#search by metadata) or [URL Query](../#search by metadata) to specify, or specify the cluster name in the URL Path.
+## Search by Parent or Ancestor Owner
+To query by Owner, you shall specify a single cluster. You can use [Search Label](../#search-by-metadata) or [URL Query](../#search-by-metadata) to specify, or specify the cluster name in the URL Path.
 
 **Resource search based on ancestors Owner can be completed through `Owenr UID` and `Owenr Senirority`.**
 > Currently only supports query by `Owner UID`
@@ -80,7 +81,7 @@ Search by Owner is an experimental feature and URL Query has not been provided y
 
 {{< /tabs >}}
 
-> Search by Owner is an experimental feature, temporarily prefixed with *internalstorage.clusterpedia.io* as [Search Label](../#owner-search)
+> Search by Owner is an experimental feature, temporarily prefixed with *internalstorage.clusterpedia.io* as [Search Label](../#search-by-owner)
 >
 > After you confirm the availability and usefulness of relevant features, move it under *search.clusterpedia.io*.
 

@@ -7,7 +7,7 @@ Clusterpedia has two main components:
 * `ClusterSynchroManager` manages the `PediaCluster` resource in the *master cluster*, connects to the specified cluster through the `PediaCluster` authentication information, and synchronizes the corresponding resources in real time.
 * `APIServer` also listens to the `PediaCluster` resource in the *master cluster* and provides complex search for resources in a **compatible Kubernetes OpenAPI** manner based on the resources synchronized by the cluster.  
 
-Also, the `Clusterpedia APIServer` will be registered to the *master cluster* APIServer in the way of [aggregation API](https://kubernetes.io/zh/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation), so that we can access Clusterpedia through the same entry as the master cluster.
+Also, the `Clusterpedia APIServer` will be registered to the *master cluster* APIServer in the way of [Aggregation API](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation), so that we can access Clusterpedia through the same entry as the master cluster.
 
 ## Resources and [Collection Resource](../../concepts/collection-resource)
 Clusterpedia APIServer will provide two different resources to search under Group - *pedia.clusterpedia.io*:
@@ -21,34 +21,35 @@ collectionresources                pedia.clusterpedia.io/v1alpha1    false      
 resources                          pedia.clusterpedia.io/v1alpha1    false        Resources
 ```
 * `Resources` is used to specify a resource type to search for, compatible with Kubernetes OpenAPI
-* `CollectionResource` is used to search for new resource aggregated by different types to find multiple resources at one time
+* `CollectionResource` is used to search for new resource aggregated by different types to find multiple resource types at one time
 
-> For concepts and usage about Collection Resource, refer to [What is Collection Resource]() and [Search for Collection Resource]().
+> For concepts and usage about Collection Resource, refer to [What is Collection Resource](../../concepts/collection-resource) and [Search for Collection Resource](../search/collection-resource).
 
 ## Access the Clusterpedia resources
 
-When searching for a resource of a specific type, you can request it according to the Get/List specification of **Kubernetes OpenAPI**. **In this way we can not only use the URL to access Clusterpedia resources, but also directly use kubectl or client-go to search for the resources.**
+When searching for a resource of a specific type, you can request it according to the `Get`/`List` specification of **Kubernetes OpenAPI**. **In this way we can not only use the URL to access Clusterpedia resources, but also directly use `kubectl` or `client-go` to search for the resources.**
 
 Clusterpedia uses URL Path to distinguish whether the request is a multi-cluster resource or a specific cluster:
 
-**Multi-cluster resource path** Directly prefix the Resources path
+**Multi-cluster resource path**, directly prefix the Resources path:
+
 */apis/pedia.clusterpedia.io/v1alpha1/resources*
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alhpa1/version"
 ```
 
-**Specific cluster resource path** Specify a cluster by setting the resource name based on the Resources path
+**Specific cluster resource path**, specify a cluster by setting the resource name based on the Resources path
 */apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/<cluster name>*
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/version"
 ```
 
-**Regardless of a resource path of multiple clusters or a specific cluster, the path can be spliced and followed by Kubernetes Get/List Path**
+**Regardless of a resource path of multiple clusters or a specific cluster, the path can be spliced and followed by Kubernetes `Get`/`List` Path**
 
-### Generate a shortcut configuration for accessing clusters by kubectl
+### Configure the cluster shortcut for kubectl
 Although we can use URLs to access Clusterpedia resources, if we want to use kubectl to query more conveniently, we need to configure the kubeconfig cluster.
 
-Clusterpedia provides a simple script to generate `cluster kube config`
+Clusterpedia provides a simple script to generate `cluster kubeconfig`
 ```bash
 curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/hack/gen-clusterconfigs.sh | sh -
 ```
@@ -68,7 +69,7 @@ Cluster "cluster-2" set.
 ```
 > Check the script from [hack/gen-clusterconfigs.sh](https://github.com/clusterpedia-io/clusterpedia/blob/main/hack/gen-clusterconfigs.sh)
 
-The script prints the current cluster information and configures the PediaCluster into kubeconfig.
+The script prints the current cluster information and configures the `PediaCluster` into kubeconfig.
 ```bash
 cat ~/.kube/config
 ```
@@ -91,7 +92,9 @@ cat ~/.kube/config
     server: https://10.6.100.10:6443
   name: kubernetes
 ```
-The script generates *clusterpedia* clusters for multi-cluster access and other cluster configs in the name of `PediaCluster`, and reuses the master cluster's entry and authentication information when accessing Clusterpedia. Compared with the master cluster entry, it only adds Clusterpedia Resources path.
+The script generates *clusterpedia* clusters for multi-cluster access and other cluster configs in the name of `PediaCluster`, and reuses the master cluster's entry and authentication information when accessing Clusterpedia.
+
+Compared with the master cluster entry, it only adds Clusterpedia Resources path.
 
 After multi-cluster kubeconfig is generated, you can use `kubectl --cluster` to specify the cluster access
 ```bash

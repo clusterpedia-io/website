@@ -1,15 +1,15 @@
 ---
-title: Search in multiple clusters
+title: Search in Multiple Clusters
 weight: 10
 ---
-多集群资源检索可以满足我们**根据查询条件一次过滤多个集群内的资源，并提供对这些资源的分页排序的能力**
+Multi-cluster resource search allows us to **filter resources in multiple clusters at once based on query criteria, and provides the ability to paginate and sort these resources**.
 
-在使用 kubectl 操作时，可以查看一下当前可以检索哪些资源
+When using `kubectl`, we can see what resources are currently available for search
 ```bash
 kubectl --cluster clusterpedia api-resources
 ```
 ```
-# 输出：
+# Output：
 NAME          SHORTNAMES   APIVERSION           NAMESPACED   KIND
 configmaps    cm           v1                   true         ConfigMap
 namespaces    ns           v1                   false        Namespace
@@ -21,75 +21,76 @@ deployments   deploy       apps/v1              true         Deployment
 replicasets   rs           apps/v1              true         ReplicaSet
 issuers                    cert-manager.io/v1   true         Issuer
 ```
-Clusterpedia 根据所有集群同步的资源来提供多集群的资源检索，可以查看 [同步集群资源](../../sync-resources) 来更新需要同步的资源
+Clusterpedia provides multi-cluster resource search based on all cluster-synchronized resources,
+and we can view [Sync Cluster Resources](../../sync-resources) to update the resources that need to be synchronized.
 
-## 基本功能
-### 指定集群
-多集群检索时，会默认检索所有的集群，我们也可以指定单个或者一组集群
+## Basic Features
+### Specify Cluster
+When searching multiple clusters, all clusters will be retrieved by default, we can also specify a single cluster or a group of clusters
 
 {{< tabs >}}
 
 {{% tab name="kubectl" %}}
-使用 [Search Label](../#元信息检索) `search.clusterpedia.io/clusters` 来指定一组集群
+Use [Search Label](../#search-by-metadata) `search.clusterpedia.io/clusters` to specify a group of clusters.
 ```bash
 kubectl --cluster clusterpedia get deployments -l "search.clusterpedia.io/clusters in (cluster-1,cluster-2)"
 ```
 ```
-# 输出：
+# Output：
 NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
 kube-system   cluster-1   coredns                   2/2     2            2           68d
 kube-system   cluster-2   coredns                   2/2     2            2           64d
 ```
 
-对于指定单个集群的检索，同样可以使用 Search Label 来设置，也可以查看 [指定集群检索](../specified-cluster) 来使用 URL Path 的方式指定集群
+For specifying a single cluster search, we can also use Search Label to set it up, or see [Search in Specified Cluster](../specified-cluster) to specify a cluster using **URL Path**.
 ```bash
-# 指定单个集群
+# specifying a single cluster
 kubectl --cluster clusterpedia get deployments -l "search.clusterpedia.io/clusters=cluster-1"
 
-# 指定集群也可以使用 --cluster <cluster name> 来指定
+# specifying a cluster can also be done with --cluster <cluster name>
 kubectl --cluster cluster-1 get deployments"
 ```
 {{% /tab %}}
 
 {{% tab name="URL" %}}
-使用 URL 时，使用 `clusters` 作为 [URL Query](../#元信息检索) 来传递
+When using URL, use `clusters` as URL Query to pass.
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1"
 ```
 
-如果指定单个集群，也可以将 cluster name 放到 URL 路径中
+If we specify a single cluster, we can also put the cluster name in the URL Path.
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments"
 ```
-了解更多[指定集群检索](../specified-cluster)
+Lean More [Specify Cluster Search](../specified-cluster)
 {{< /tab >}}
 
 {{< /tabs >}}
 
-### 指定命名空间
-可以像查看原生 Kube 一样来**指定单个命名空间或者所有命名空间**
+### Specify Namespace
+We can **specify a single namespace or all namespaces** as if we were viewing a native Kubernetes resource.
 
 {{< tabs >}}
 
 {{% tab name="kubectl" %}}
-使用 `-n <namespace>` 来指定命名空间，默认在 *default* 命名空间
+Use `-n <namespace>` to specify the namespace, the default is in the *default* namespace
 ```bash
 kubectl --cluster clusterpedia get deployments -n kube-system
 ```
 ```
-# 输出：
+# Output：
 CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
 cluster-1   coredns                   2/2     2            2           68d
 cluster-2   calico-kube-controllers   1/1     1            1           64d
 cluster-2   coredns                   2/2     2            2           64d
 ```
 
-使用 `-A` 或者 `--all-namespaces` 来查看所有集群的所有命名空间下的资源
+Use `-A` or `--all-namespaces` to see the resources under all namespaces for all clusters
 ```bash
 kubectl --cluster clusterpedia get deployments -A
 ```
 ```
-# 输出：
+# Output：
 NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
 kube-system   cluster-1   coredns                   2/2     2            2           68d
 kube-system   cluster-2   calico-kube-controllers   1/1     1            1           64d
@@ -100,13 +101,13 @@ default       cluster-2   dd-airflow-web            0/1     1            0      
 {{% /tab %}}
 
 {{% tab name="URL" %}}
-获取资源的 **URL Path** 和原生 Kubernetes 一样 */apis/apps/v1/deployments*，
+The **URL Path** to get the resources is the same as the native Kubernetes */apis/apps/v1/deployments*.
 
-只是需要加上 Clusterpedia Resources 的路径前缀 */apis/pedia.clusterpedia.io/v1alpha1/resources* 来表示当前是 Clusterpedia 请求。
+We just need to prefix the path to Clusterpedia Resources with **/apis/pedia.clusterpedia.io/v1alpha1/resources** to indicate that it is currently a Clusterpedia request.
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments"
 
-# 指定命名空间
+# Specify namespace
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/namespaces/kube-system/deployments"
 ```
 {{< /tab >}}
@@ -115,17 +116,17 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/n
 
 ---
 
-除了指定单个命名空间，还可以**指定查看一组命名空间下的资源**
+In addition to specifying a single namespace, we can also **specify to search the resources under a group of namespaces**.
 {{< tabs >}}
 
 {{% tab name="kubectl" %}}
-使用 [Search Label](../#元信息检索) `search.clusterpedia.io/namespaces` 来指定一组命名空间
-> 一定要指定 -A 参数，避免 kubectl 在路径中设置 default namespace
+Use [Search Label](../#search-by-metadata) `search.clusterpedia.io/namespaces` to specify a group of namespaces.
+> Be sure to specify the `-A` flag to avoid kubectl setting default namespace in the path.
 ```bash
 kubectl --cluster clusterpedia get deployments -A -l "search.clusterpedia.io/namespaces in (kube-system, default)"
 ```
 ```
-# 输出：
+# Output：
 NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
 kube-system   cluster-1   coredns                   2/2     2            2           68d
 kube-system   cluster-2   calico-kube-controllers   1/1     1            1           64d
@@ -136,7 +137,7 @@ default       cluster-2   dd-airflow-web            0/1     1            0      
 {{% /tab %}}
 
 {{% tab name="URL" %}}
-使用 URL 时，就不需要使用 Label Selector 来传递参数了，直接使用 URL Query `namespaces` 即可
+When using URL, we don't need to use Label Selector to pass parameters, just use URL Query - `namespaces`
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?namespaces=kube-system,default"
 ```
@@ -144,20 +145,20 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/d
 
 {{< /tabs >}}
 
-### 指定资源名称
-用户可以通过一组资源名称来过滤资源
-> 当前暂时不支持模糊搜索
+### Specify Resource Name 
+Users can filter resources by a group of resource names
+> Fuzzy search is not supported at the moment.
 
 {{< tabs >}}
 
 {{% tab name="kubectl" %}}
-使用 Search Label `search.clusterpedia.io/names` 来指定一组资源名称
-**注意：如果在所有命名空间下检索资源，需要指定 -A 参数，或者使用 -n 来指定命名空间**
+Use Search Label `search.clusterpedia.io/names` to specify a group of resource names.
+> **Note: To search for resources under all namespaces, specify the `-A` flag, or use `-n` to specify the namespace.**
 ```bash
 kubectl --cluster clusterpedia get deployments -A -l "search.clusterpedia.io/names=coredns"
 ```
 ```
-# 输出：
+# Output:
 NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
 kube-system   cluster-1   coredns                   2/2     2            2           68d
 kube-system   cluster-2   coredns                   2/2     2            2           64d
@@ -165,50 +166,51 @@ kube-system   cluster-2   coredns                   2/2     2            2      
 {{% /tab %}}
 
 {{% tab name="URL" %}}
-使用 URL 时，使用 `names` 作为 URL Query 来传递，如果需要指定命名空间，那么就在路径中加上 namespace。
+When using URL, use `names` to pass as **URL Query**, and if you need to specify namespaces, then add namespace to the path.
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?names=kube-coredns,dd-airflow-web"
 
-# 在 default 命名空间下检索指定名字的资源
+# search resources with specified names under default namespace
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/namespaces/default/deployments?names=kube-coredns,dd-airflow-web"
 ```
 
-在多集群检索时，返回的数据实际是以类似 `DeploymentList` 的结构封装的数据。
+When searching from multiple clusters, the data returned is actually encapsulated in a structure similar to `DeploymentList`.
 
-如果我们想要获取到单个的 `Deployment` 那么就需要在 URL 路径中指定 cluster name，参考[获取单个资源](../specified-cluster#获取单个资源)
+If we want to get a single `Deployment` then we need to specify the cluster name in the URL path, refer to [Get Single Resource]()
 {{< /tab >}}
 
 {{< /tabs >}}
 
-## 字段过滤
-原生 Kubernetes 当前只支持对 `metadata.name` 和 `metadata.namespace` 的字段过滤，而且操作符只支持 `=`，`!=`，`==`，能力非常有限。
+## Field Selector
+Native Kubernetes currently only supports field filtering on `metadata.name` and `metadata.namespace`, and the operators only support `=, `!=`, `==`, which is very limited.
 
-**Clusterpedia 在兼容已有的 Field Selector 功能的基础上，提供了更加墙大的功能，支持和 `Label Selector` 相同的操作符。**
+**Clusterpedia provides more powerful features based on the compatibility with existing Field Selector features, and supports the same operators as `Label Selector`.**
 
-Field Selector 的 key 当前支持三种格式：
-* **使用 `.` 分隔字段**
+Field Selector's key currently supports three formats.
+* **Use `.` to sperate fields**
 ```bash
 kubectl --cluster clusterpedia get pods --field-selector="status.phase=Running"
 
-# 也可以在首字符添加 `.`
+# we can also add the first character `.`
 kubectl --cluster clusterpedia get pods --field-selector=".status.phase not in (Running,Succeeded)"
 ```
 
-* **字段名称使用 `''` 或者 `""` 来包裹**，可以用于带 `.` 之类的非法字符的字段
+* **Field names wrapped in `''` or `""`** can be used for fields with illegal characters like `.`
 ```bash
 kubectl --cluster clusterpedia get deploy \
     --field-selector="metadata.annotations['test.io'] in (value1,value2),spec.replica=3"
 ```
 
-* **使用 `[]` 来分隔字段**，`[]` 内字符串必须使用 `''` 或者 `""` 来包裹
+* **Use `[]` to separate fields**, the string inside `[]` must be wrapped with `''` or `""`
 ```bash
 kubectl --cluster clusterpedia get pods --field-selector="status['phase']!=Running"
 ```
 
-### 列表字段支持
-实际在字段过滤的设计时考虑到了对`列表元素`内字段过滤，不过由于使用场景是否真正有意义还需要更多的讨论 [issue: support list field filtering](https://github.com/clusterpedia-io/clusterpedia/issues/48)
+### Support List Fields
+The actual design of field filtering takes into account the filtering of fields within `list elements`, but more discussion is needed as to whether the usage scenario actually makes sense:
+[issue: support list field filtering](https://github.com/clusterpedia-io/clusterpedia/issues/48)
 
-示例：
+Examples：
 ```bash
 kubectl get po --field-selector="spec.containers[].name!=container1"
 
@@ -217,33 +219,34 @@ kubectl get po --field-selector="spec.containers[].name == container1"
 kubectl get po --field-selector="spec.containers[1].name in (container1,container2)"
 ```
 
-## 根据父辈以及祖辈 Owner 查询
-通过 Owner 检索是一个非常有用的检索功能，
-并且 Clusterpedia 在 Owner 的基础上还支持**对 Owner 进行辈分提升来进行祖辈甚至更高辈分的检索**。
+## Search by Parent or Ancestor Owner
+Searching by Owner is a very useful search function,
+and Clusterpedia also supports **the seniority advancement of Owner to search for grandparents and even higher seniority**.
 
-通过 Owner 检索，可以一次查询到 `Deployment` 下的所有 `Pods`，无需中间再查询 `ReplicaSet`。
+By searching by Owner, we can query all `Pods` under `Deployment` at once, without having to query `ReplicaSet` in between.
 
-**Owner 查询必须指定单个集群，可以使用 [Serach Label](../#owner-检索) 或者 [URL Query](../#owner-检索) 来指定，也可以在 URL Path 中指定集群名称**
+**When using the Owner query, we must specify a single cluster, either as a [Serach Label](../#search-by-owner) or [URL Query](../#search-by-owner), or you can specify the cluster name in the URL Path.**
 
-关于**根据 Owner 检索**的具体使用方法，可以参考[指定集群内根据父辈或者祖辈 Owenr 进行检索](../specified-cluster#根据父辈或者祖辈-owner-进行检索)
+For details on how to **search by Owner**, you can refer to [Search by Parent or Ancestor Owenr within a specified cluster](../specified-cluster#search-by-parent-or-ancestor-owner)
 
-## 分页与排序
-分页和排序是资源检索必不可少的功能
+## Paging and Sorting
+Paging and sorting are essential features for resource retrieval.
 
-### 根据多个字段进行排序
-可以指定多个字段进行排序，而对排序字段的支持是由存储层来决定。
+### Sorting by multiple fields
+Multiple fields can be specified for sorting, and the support for sorting fields is determined by the Storage Layer.
 
-当前默认存储层支持对 `cluster`，`namespace`，`name`，`created_at`，`resource_version` 进行正序和倒序的排序，字段也支持随意的组合
+The current `Default Storage Layer` supports sorting `cluster`，`namespace`，`name`，`created_at`，`resource_version` in both asc and desc,
+and the fields are also supported in any combination
 {{< tabs >}}
 
 {{% tab name="kubectl" %}}
-使用多个字段进行正序排序
+Sorting using  multiple fields
 ```bash
 kubectl --cluster clusterpedia get pods -l \
     "search.clusterpedia.io/orderby in (cluster, name)"
 ```
 
-由于 Label Selector 对 value 的限制，倒序时需要在字段结尾加上 `_desc`
+Because of Label Selector's validation of value, order by desc requires **_desc** at the end of the field.
 ```bash
 kubectl --cluster clusterpedia get pods -l \
     "search.clusterpedia.io/orderby in (namespace_desc, cluster, name)"
@@ -251,12 +254,12 @@ kubectl --cluster clusterpedia get pods -l \
 {{% /tab %}}
 
 {{% tab name="URL" %}}
-使用 [URL Query](../#排序) 来指定排序字段
+Use [URL Query](../#orderby) to specify sorting fields
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace,cluster"
 ```
 
-指定倒序字段时，在字段后添加 desc，以空格分隔
+When specifying a field in order by desc, add **desc** to the end of the field, separated by spaces
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace desc,cluster"
 ```
@@ -264,28 +267,30 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/d
 
 {{< /tabs >}}
 
-### 分页
-原生 Kubernetes 实际是支持分页的，[ListOptions](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListOptions) 中便已经存在用于分页查询的字段。
+### Paging
+Native Kubernetes actually supports paging, and fields for paging queries already exist in [ListOptions](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListOptions).
 
-Clusterpedia 复用 `ListOptions.Limit` 和 `ListOptions.Continue` 字段作为分页的 `size` 和 `offset`。
+Clusterpedia reuses the `ListOptions.Limit` and `ListOptions.Continue` fields as the `size` and `offset` for paging.
 
 {{< tabs >}}
 
 {{% tab name="kubectl" %}}
-kubectl 的 `--chunk-size` 实际通过设置 `limit` 来用于分片拉取。
+`kubectl --chunk-size` is actually used for paging pulls by setting `ListOptions.Limit`.
 
-原生的 Kubernetes APIServer 会在返回的响应中携带用于下一次拉取的 `continue`，
-并根据 `--chunk-size` 和 `conintue` 进行下一次拉取，直到相应的数据中 Conintue 为空。
+The native Kubernetes APIServer carries the `continue` for the next list in the returned response,
+and performs the next list based on `--chunk-size` and `conintue` until the `conintue` is empty in the response data.
 
-Clusterpedia 为了保证在 kubectl 中实现分页检索，默认并不会在响应中返回 `continue` 字段，这样避免了 kubectl 使用分片拉取全部数据
+Clusterpedia does not return the `continue` field in the response by default in order to ensure paged search in `kubectl`,
+which prevents `kubectl` from pulling all data using chunks.
 ```bash
 kubectl --cluster cluster-1 get pods --chunk-size 10
 ```
-需要注意 kubectl 在不设置 `--chunk-size` 的情况下，`limit` 会被设置成默认值 `500`，
-也就是说 `search.clusterpedia.io/size` 实际是无法生效的，只是用于和 `search.clusterpedia.io/offset` 形成对应关系
-> URL Query 的优先级大于 Search Label
 
-在 kubectl 中 continue 是没有 flag 可以设置的。所以还是要使用 [Search Label](../#分页) 来传递。
+Note that kubectl sets the `limit` to the default value of 500 without setting `--chunk-size`,
+which means that `search.clusterpedia.io/size` does not actually take effect and is only used to correspond to `search.clusterpedia.io/offset`.
+> `URL Query` has a higher priority than `Search Label`
+
+There is no flag to set for `continue` in kubectl. So you have to use [Search Label](../#paging) to pass it.
 ```bash
 kubectl --cluster clusterpedia get pods --chunk-size 10 -l \
     "search.clusterpedia.io/offset=10"
@@ -293,7 +298,7 @@ kubectl --cluster clusterpedia get pods --chunk-size 10 -l \
 {{% /tab %}}
 
 {{% tab name="URL" %}}
-对资源进行分页检索，只需要在 URL 中设置 `limit` 和 `continue` 即可
+To paginate resources, just set the `limit` and `continue` in the URL.
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?limit=10&continue=5"
 ```
@@ -301,18 +306,17 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/d
 
 {{< /tabs >}}
 
-### 响应携带 Continue 信息
-响应数据的 [ListMeta.Continue](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta) 可以用于 [ListOptions.Continue](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListOptions) 中作为下一次拉取的 offset
+### Response With Continue
+[ListMeta.Continue](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta) can be used in [ListOptions.Continue](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListOptions) as the offset for the next request.
 
-分页功能中我们提到，为了避免 kubectl 进行对全量数据的分片拉取，Clusterepdia 不会在响应中携带 Continue 信息。
+As mentioned in the paging feature, Clusterepdia does not have `continue` in the response to prevent kubectl from pulling the full amount of data in pieces.
 
-不过如果用户有需求那么可以要求响应中携带 Continue 信息
+However, if the user requires it, he can request that the response include `continue`.
 {{< tabs >}}
 
 {{% tab name="URL" %}}
-在使用 URL 访问 Clusterepdia 时，响应的 Continue 可以作为下一次请求的 offset
-> 搭配分页功能使用
-
+When accessing Clusterepdia using a URL, the response' `continue` can be used as the offset for the next request.
+> Use with paging
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?withContinue=true&limit=1" | jq
 ```
@@ -331,7 +335,7 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/d
 {{% /tab %}}
 
 {{% tab name="kubectl" %}}
-**在 kubectl 设置 `search.clusterpedia.io/with-continue` 会导致以分片拉取的形式拉取全量资源。**
+**Setting `search.clusterpedia.io/with-continue` in kubectl will result in pulling the full amount of resources as a paged pull.**
 ```bash
 kubectl --cluster clusterpedia get deploy -l \
     "search.clusterpedia.io/with-continue=true"
@@ -340,19 +344,19 @@ kubectl --cluster clusterpedia get deploy -l \
 
 {{< /tabs >}}
 
-### 响应携带剩余资源数量信息
-**在一些 UI 场景下，往往会需要获取到当前检索条件下的资源总量。**
+### Response With Remaining Count
+**In some UI cases, it is often necessary to get the total number of resources in the current search condition.**
 
-Kubernetes List 响应的 [ListMeta](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta) 中存在 `RemainingItemCount` 字段，
+The `RemainingItemCount` field exists in the [ListMeta](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta) of the Kubernetes List response.
 
-通过复用该字段，便可在兼容 Kubernetes OpenAPI 的基础下返回资源总量：
+By reusing this field, the total number of resources can be returned in a Kubernetes OpenAPI-compatible manner:
 
 **`offset + len(list.items) + list.metadata.remainingItemCount`**
 {{< tabs >}}
 
 {{% tab name="URL" %}}
-在 [URL Query](../#分页) 设置 `withRemainingCount` 即可要求响应携带剩余资源数量
-> 搭配[分页](#分页)功能使用
+Set `withRemainingCount` in the [URL Query](../#paging) to request that the response include the number of remaining resources.
+> Use with paging
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?withRemainingCount&limit=1" | jq
 ```
@@ -371,8 +375,7 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/d
 {{% /tab %}}
 
 {{% tab name="kubectl" %}}
-需要以 URL 的方式使用该功能
+Need to use this feature as a URL
 {{< /tab >}}
 
 {{< /tabs >}}
-

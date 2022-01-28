@@ -1,12 +1,12 @@
 ---
-title: "Configure storage layers"
+title: "Configure Storage Layer"
 weight: 1
 ---
-`Default storage layer` of Clusterpedia supports two storage components: **MySQL** and **PostgreSQL**.
+`Default Storage Layer` of Clusterpedia supports two storage components: **MySQL** and **PostgreSQL**.
 
-When installing Clusterpedia, you can use existing storage components and create [`default storage layer` (ConfigMap)](#configuration of default storage layer) and [`Secret of storage component`](#Configure the secret for storage component).
+When installing Clusterpedia, you can use existing storage component and create [`Default Storage Layer`(ConfigMap)](#configure-the-default-storage-layer) and [`Secret of storage component`](#configure-secret).
 
-## Configure the default storage layer
+## Configure the Default Storage Layer
 You shall create `clusterpedia-internalstorage` ConfigMap in the `clusterpedia-system` namespace.
 ```yaml
 # internalstorage configmap example
@@ -29,17 +29,17 @@ data:
 internalstorage config supports the following fields:
 |field|description|
 |-----|-----------|
-|`type`|type of storage components such as "postgres" and "mysql" |
-|`host`|host for storage components such as IP address or Service Name|
-|`port`|port for storage components|
-|`user`|user for storage components|
-|`password`|password for storage components|
+|`type`|type of storage component such as "postgres" and "mysql" |
+|`host`|host for storage component such as IP address or Service Name|
+|`port`|port for storage component|
+|`user`|user for storage component|
+|`password`|password for storage component|
 |`database`|the database used by Clusterpedia|
 
-**It is a good choice to store the access password to Secret. For details see [Configure Secret of storage components](#Configure password-secret)**
+**It is a good choice to store the access password to Secret. For details see [Configure Secret of storage component](#configure-secret)**
 
 ### Configure log
-Clusterpedia supports to configure logs for storage layers, enabling the log to record slow SQL queries and errors via the `log` field.
+Clusterpedia supports to configure logs for storage layer, enabling the log to record `slow SQL queries` and `errors` via the `log` field.
 |field|description|
 |-----|-----------|
 |`log.stdout`|Output log to standard device|
@@ -65,7 +65,7 @@ The default storage layer also provides more configurations. Refer to [internals
 ## Configure Secret
 The yaml file that is used to install Clusterpedia may get the password from `internalstroage-password` Secret.
 
-Configure the storage components password to Secret
+Configure the storage component password to Secret
 ```bash
 kubectl -n clusterpedia-system create secret generic \
     internalstorage-password --from-literal=password=<password to access storage components>

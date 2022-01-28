@@ -1,17 +1,17 @@
 ---
-title: "Search for collection resources"
+title: "Search for Collection Resource"
 weight: 12
 ---
 
-For collection resource, refer to [what is Collection Resource](../../../concepts/collection-resource)  
+For collection resource, refer to [What is Collection Resource](../../../concepts/collection-resource)  
 
-Due to the limitation of kubectl, we cannot pass search conditions through `Label Selector` or other methods, so **it is recommended to search for `collection resource`** by using a URL.
+Due to the limitation of kubectl, we cannot pass search conditions through `Label Selector` or other methods, so **it is recommended to search for `Collection Resource`** by using a URL.
 
 
 {{< tabs >}}
 
 {{% tab name="URL" %}}
-> **When requesting `collection resources`, you shall use [paging function](../#paging) because the number of resources may be very large.**
+> **When requesting `Collection Resource`, you shall use [paging](../#paging) because the number of resources may be very large.**
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/collectionresources/workloads?limit=1" | jq
 ```
@@ -52,14 +52,14 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/collectionresources/work
 }
 ```
 
-The complex search of `collection resources` is basically the same as the function of [multi-cluster resource search](../multi-cluster), only some operations are not supported:
-* Search by Owner is not supported. If you need to specify a specific resource type to search by Owner, you can refer to [`Multi-cluster search`](../multi-cluster#query by parent/grandparent owner) and [`Specified cluster search`](. ./specified-cluster#Search by parent or ancestor owner)
-* Getting a specific single resource in Collection Resource is not supported, because you shall specify cluster and type for a specific resource. In this case, you can use [Get a single resource]().
+The complex search of `Collection Resource` is basically the same as the function of [multi-cluster resource search](../multi-cluster), only some operations are not supported:
+* Search by Owner is not supported. If you need to specify a specific resource type to search by Owner, you can refer to [`multi-cluster resource search`](../multi-cluster#query-by-parent-or-ancestor-owner) and [`specified cluster search`](../specified-cluster#search-by-parent-or-ancestor-owner)
+* Getting a specific single resource in `Collection Resource` is not supported, because you shall specify cluster and type for a specific resource. In this case, you can use [Get a single resource](../specified-cluster#get-a-single-resource).
 {{% /tab %}}
 
 {{% tab name="kubectl" %}}
-It is not easy to search for `collection resources` by using kubectl. However, you can have a try.
-> kubectl cannot pass pages and other search conditions and may get all `collection resources` at one time. It is not recommended to use kubectl to view `collection resources` if a large number of clusters are imported or a cluster has many `deployments`, `daemonsets` and `statefulsets` resources.
+It is not easy to search for `Collection Resource` by using kubectl. However, you can have a try.
+> kubectl cannot pass pages and other search conditions and may get all `Collection Resources` at one time. It is not recommended to use kubectl to view `Collection Resource` if a large number of clusters are imported or a cluster has many `deployments`, `daemonsets` and `statefulsets` resources.
 
 ```bash
 kubectl get collectionresources workloads
@@ -73,7 +73,7 @@ cluster-2   apps    v1        Deployment   kube-system                   coredns
 ...
 ```
 
-**Search for `collection resources` by using URL**
+**Search for `Collection Resource` by using URL**
 {{< /tab >}}
 
 {{< /tabs >}}

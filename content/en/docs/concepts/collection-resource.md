@@ -3,11 +3,11 @@ title: Collection Resource
 weight: 10
 ---
 
-In order to find different resource types at one time, Clusterpedia provides a new resource: `Collection Resource`.
+In order to query multiple types of resources at once, Clusterpedia provides a new resource: `Collection Resource`.
 
-`Collection Resource` is composed of different resources that can be retrieved by types and paginated uniformly.
+`Collection Resource` is composed of different resource types that can be retrieved and paginated uniformly.
 
-**What collection resources are supported by the Clusterpedia depends on the `storage layer`.** For example, the `built-in storage layer` temporarily only supports the `workloads` collection resource, which is used to represent workloads.
+**What Collection Resources are supported by the Clusterpedia depends on the `Storage Layer`.** For example, the `Default Storage Layer` temporarily only supports the `workloads`, which is used to represent workloads.
 ```bash
 kubectl get collectionresources
 ```
@@ -17,7 +17,7 @@ NAME        RESOURCES
 workloads   deployments.apps,daemonsets.apps,statefulsets.apps
 ```
 
-View the supported `collection resource` in a yaml file
+View the supported `Collection Resource` in a yaml file
 ```bash
 kubectl get collectionresources -o yaml
 ```
@@ -47,7 +47,7 @@ metadata:
 ```
 It is found that `workloads` includes three resources: `deployments`, `daemonsets`, and `statefulsets`.
 
-For details about `collection resource`, see [Search for collection resource](../../usage/search/collection-resource)
+For details about `Collection Resource`, see [Search for Collection Resource](../../usage/search/collection-resource)
 
 ## Custom collection resource
-`Built-in storage layer` will support `custom collection resource` in future to enable users to combine any resource types freely.
+`Default Storage Layer` will support `Custom Collection Resource` in future to enable users to combine any resource types freely.

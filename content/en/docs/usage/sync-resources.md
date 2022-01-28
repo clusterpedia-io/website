@@ -1,11 +1,12 @@
 ---
-title: "Synchronize cluster resources"
+title: "Synchronize Cluster Resources"
 weight: 2
 ---
 
 The main function of Clusterpedia is to provide complex search for resources in multiple clusters.  
 
-Clusterpedia uses the `PediaCluster` resource to specify which resources in the cluster need to support complex search, and synchronizes these resources onto the `storage component` via `storage layer` in real time.
+Clusterpedia uses the `PediaCluster` resource to specify which resources in the cluster need to support complex search,
+and synchronizes these resources onto the `Storage Component` via `Storage Layer` in real time.
 ```yaml
 # example
 apiVersion: clusters.clusterpedia.io/v1alpha1
@@ -41,7 +42,9 @@ resources:
 ```
 **For built-in resources, `versions` is not required.**
 
-Clusterpedia will automatically select the appropriate version to synchronize based on the resource version supported in the cluster. Also, you do not need to worry about version conversion because Clusterpedia will open all version interfaces for built-in resources.
+Clusterpedia will automatically select the appropriate version to synchronize based on the resource version supported in the cluster.
+
+Also, you do not need to worry about version conversion because Clusterpedia will open all version interfaces for built-in resources.
 ```bash
 kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps" | jq
 ```
@@ -141,11 +144,11 @@ If cluster-1 only synchronizes `v1beta1` resources when you are searching for mu
 You are required to learn and handle the different versions in multiple clusters for custom resources.
 
 ## View synchronized resources
-You can view resources, synchronized versions, and storage versions by using `Status` of the `PediaCluster` resource.  
+You can view resources, sync versions, and storage versions by using `Status` of the `PediaCluster` resource.  
 
-For `Status`, a resource may have **synchronized version** and **storage version**:
-* **Synchronized version** refers to the resource version from a synchronized cluster by Clusterpedia
-* **Storage version** refers to the version stored at the storage layer by Clusterpedia
+For `Status`, a resource may have **Sync Version** and **Storage Version**:
+* **Sync Version** refers to the resource version from a synchronized cluster by Clusterpedia
+* **Storage Version** refers to the version stored at the storage layer by Clusterpedia
 
 ```yaml
 status:
@@ -161,9 +164,9 @@ status:
         storageVersion: v1
         version: v1
 ```
-In general, **synchronized version** is same as **storage version** for a cluster resource.  
+In general, **Sync Version** is same as **Storage Version** for a cluster resource.  
 
-However, if an imported cluster only provides the `Deployment` resource of the `v1beta1` version, the **synchronized version** is `v1beta1` and the **storage version** is `v1`.  
+However, if an imported cluster only provides the `Deployment` resource of the `v1beta1` version, the **Sync Version** is `v1beta1` and the **Storage Version** is `v1`.  
 
 For example, when synchronizing a Deployment of Kubernetes 1.10, the synchronization status is as follows:
 ```yaml
@@ -181,7 +184,7 @@ status:
         version: v1beta1
 ```
 
-For a custom resource, **synchronized version** is same as **storage version**
+For a custom resource, **Synchronized Version** is same as **Storage Version**
 
 ## Next
-After resource synchronization, you can [access the Clusterpedia](../access-clusterpedia) to [search for resources](../search)
+After resource synchronization, you can [Access the Clusterpedia](../access-clusterpedia) to [Search for Resources](../search)
