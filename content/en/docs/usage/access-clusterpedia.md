@@ -49,7 +49,7 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/clust
 ### Configure the cluster shortcut for kubectl
 Although we can use URLs to access Clusterpedia resources, if we want to use kubectl to query more conveniently, we need to configure the kubeconfig cluster.
 
-Clusterpedia provides a simple script to generate `cluster kubeconfig`
+Clusterpedia provides a simple script to generate `cluster config` in the kubeconfig.
 ```bash
 curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/hack/gen-clusterconfigs.sh | sh -
 ```

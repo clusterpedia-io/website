@@ -19,8 +19,8 @@ In addition to conditional retrieval, Clusterpedia also enhances [`Field Selecto
 
 |Role| search label key|url query|
 | -- | --------------- | ------- |
-|Filter cluster names|`search.clusterpedia.io/clusters|`clusters`|
-|Filter namespaces|`search.clusterpedia.io/namespaces|`namespaces`|
+|Filter cluster names|`search.clusterpedia.io/clusters`|`clusters`|
+|Filter namespaces|`search.clusterpedia.io/namespaces`|`namespaces`|
 |Filter resource names|`search.clusterpedia.io/names`|`names`|
 
 ## Search by Owner

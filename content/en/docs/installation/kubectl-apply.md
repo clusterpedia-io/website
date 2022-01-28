@@ -57,7 +57,7 @@ Once the storage component are successfully deployed, you can install the Cluste
 
 **If you uses existing storage component, refer to [Configure Storage Layer](../configuration/configure-internalstorage) to set the storage component into `Default Storage Layer`**
 
-> Run the following code in the clusterpedia root directory
+> Run the following cmd in the clusterpedia root directory
 ```bash
 # Deploy crds
 kubectl apply -f ./deploy/crds

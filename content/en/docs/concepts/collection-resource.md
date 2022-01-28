@@ -5,7 +5,7 @@ weight: 10
 
 In order to query multiple types of resources at once, Clusterpedia provides a new resource: `Collection Resource`.
 
-`Collection Resource` is composed of different resource types that can be retrieved and paginated uniformly.
+`Collection Resource` is composed of different types of resources, and these resources can be retrieved and paged in a uniform way through the `Collection Resource`.
 
 **What Collection Resources are supported by the Clusterpedia depends on the `Storage Layer`.** For example, the `Default Storage Layer` temporarily only supports the `workloads`, which is used to represent workloads.
 ```bash
@@ -49,5 +49,5 @@ It is found that `workloads` includes three resources: `deployments`, `daemonset
 
 For details about `Collection Resource`, see [Search for Collection Resource](../../usage/search/collection-resource)
 
-## Custom collection resource
+## Custom Collection Resource
 `Default Storage Layer` will support `Custom Collection Resource` in future to enable users to combine any resource types freely.
