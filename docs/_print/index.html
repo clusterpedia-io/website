@@ -14,15 +14,15 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>Document | Clusterpedia.io</title>
+<title>Documentation | Clusterpedia.io</title>
 <meta name=description content>
-<meta property="og:title" content="Document">
+<meta property="og:title" content="Documentation">
 <meta property="og:description" content="Clusterpedia.io website">
 <meta property="og:type" content="website">
 <meta property="og:url" content="/docs/"><meta property="og:site_name" content="Clusterpedia.io">
-<meta itemprop=name content="Document">
+<meta itemprop=name content="Documentation">
 <meta itemprop=description content="Clusterpedia.io website"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Document">
+<meta name=twitter:title content="Documentation">
 <meta name=twitter:description content="Clusterpedia.io website">
 <link rel=preload href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css as=style>
 <link href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css rel=stylesheet integrity>
@@ -43,7 +43,7 @@
 <a class=nav-link href=/about/><span>About</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class="nav-link active" href=/docs/><i class="fas fa-book"></i><span class=active>Document</span></a>
+<a class="nav-link active" href=/docs/><i class="fas fa-book"></i><span class=active>Documentation</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=https://github.com/clusterpedia-io/clusterpedia target=_blank><i class="fab fa-github"></i><span>GitHub</span></a>
@@ -61,7 +61,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.e5ddbee01f51f7a063d5b3ccad4b38c0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.175072f30e1eb64febef960b9b08b722.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -78,11 +78,1251 @@ This is the multi-page printable view of this section.
 <a href=/docs/>Return to the regular view of this page</a>.
 </p>
 </div>
-<h1 class=title>Document</h1>
+<h1 class=title>Documentation</h1>
 <ul>
+<li>1: <a href=#pg-273a1d3f87830cbffaaf95a64d1ab7e6>Installation</a></li>
+<ul>
+<li>1.1: <a href=#pg-9c8311e1b4822b2005012bd9c3815fa7>kubectl apply</a></li>
+<li>1.2: <a href=#pg-8aa1a9a3bda410f713c9c386ab4e389b>Helm</a></li>
+<li>1.3: <a href=#pg-be1d3247596952e01a50b42f0b830dac>Configuration</a></li>
+<ul>
+<li>1.3.1: <a href=#pg-231303eecf780ab7b7e152cd9a8008c0>Configure Storage Layer</a></li>
+</ul>
+</ul>
+<li>2: <a href=#pg-dd948255948d6b59b32c471abcb62997>Concepts</a></li>
+<ul>
+<li>2.1: <a href=#pg-40243a331b263af5e1b61fd771638878>Collection Resource</a></li>
+<li>2.2: <a href=#pg-911128911953cea7ceaaad409a1badf1>PediaCluster</a></li>
+</ul>
+<li>3: <a href=#pg-ec5a5e9379174e59d723f74f5206953c>Usage</a></li>
+<ul>
+<li>3.1: <a href=#pg-926b93f86224309ec4277c2c1b97fe8c>Import Clusters</a></li>
+<li>3.2: <a href=#pg-64bebf7ca20899cc843d095cee1d0313>Synchronize Cluster Resources</a></li>
+<li>3.3: <a href=#pg-bbba5e1deb968130546edf7495679ad0>Access the Clusterpedia</a></li>
+<li>3.4: <a href=#pg-48ab5663f4f8c240e7bf89c5454f249f>Search</a></li>
+<ul>
+<li>3.4.1: <a href=#pg-ec8e2360424d04fb82dc27fbc4824983>Search in Multiple Clusters</a></li>
+<li>3.4.2: <a href=#pg-d30ab8cb55be590100ae14cd7d8c1d47>Search in a Specified Cluster</a></li>
+<li>3.4.3: <a href=#pg-83e3a820b19f3a40c674f197775a60c8>Search for Collection Resource</a></li>
+</ul>
+</ul>
+<li>4: <a href=#pg-c9da5865a77748e4db7d4db31200b34f>Release notes</a></li>
+<ul>
+</ul>
 </ul>
 <div class=content>
 </div>
+</div>
+<div class=td-content>
+<h1 id=pg-273a1d3f87830cbffaaf95a64d1ab7e6>1 - Installation</h1>
+</div>
+<div class=td-content>
+<h1 id=pg-9c8311e1b4822b2005012bd9c3815fa7>1.1 - kubectl apply</h1>
+<p>The installation of Clusterpedia is divided into several parts:</p>
+<ul>
+<li><a href=#install-storage-component>Install storage component</a></li>
+<li><a href=#install-clusterpedia>Install Clusterpedia</a></li>
+<li><a href=#final-check>Final check</a></li>
+</ul>
+<blockquote>
+<p>If you use existing storage component (MySQL or PostgreSQL), directly skip the step of installing the storage component.</p>
+</blockquote>
+<p>Pull clusterpedia project:</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
+<span style=color:#204a87>cd</span> clusterpedia
+</code></pre></div><h2 id=install-storage-component>Install storage component</h2>
+<p>Clusterpedia installation provides two storage components (<strong>MySQL 8.0</strong> and <strong>PostgreSQL 12</strong>) to choose.</p>
+<blockquote>
+<p>If you use existing storage components (MySQL or PostgreSQL), directly <a href=#install-clusterpedia>skip</a> this step</p>
+</blockquote>
+<ul class="nav nav-tabs" id=tabset-docsinstallationkubectl-apply-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsinstallationkubectl-apply-1-0 role=tab aria-controls=tabset-docsinstallationkubectl-apply-1-0 aria-selected=true>PostgreSQL</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsinstallationkubectl-apply-1-1 role=tab aria-controls=tabset-docsinstallationkubectl-apply-1-1>MySQL</a></li></ul>
+<div class=tab-content id=tabset-docsinstallationkubectl-apply-1><div id=tabset-docsinstallationkubectl-apply-1-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsinstallationkubectl-apply-1-0>
+<p><p><strong>Go to the installation directory of the selected storage component</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#204a87>cd</span> ./deploy/internalstorage/postgres
+</code></pre></div></div>
+<div id=tabset-docsinstallationkubectl-apply-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsinstallationkubectl-apply-1-1>
+<p><p><strong>Go to the installation directory of the selected storage component</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#204a87>cd</span> ./deploy/internalstorage/mysql
+</code></pre></div></div></div>
+<p><strong>The storage component uses the Local PV method to store data, and you shall specify the node where the Local PV is located during deployment</strong></p>
+<blockquote>
+<p>You can choose to provide your own PV</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#204a87>export</span> <span style=color:#000>STORAGE_NODE_NAME</span><span style=color:#ce5c00;font-weight:700>=</span>&lt;nodename&gt;
+sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000>$STORAGE_NODE_NAME</span><span style=color:#4e9a06>|g&#34;</span> <span style=color:#4e9a06>`</span>grep __NODE_NAME__ -rl ./templates<span style=color:#4e9a06>`</span> &gt; clusterpedia_internalstorage_pv.yaml
+</code></pre></div><p><strong>Deploy storage component</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl create -f .
+
+<span style=color:#8f5902;font-style:italic># Go back to Clusterpedia root directory</span>
+<span style=color:#204a87>cd</span> ../../../
+</code></pre></div><h2 id=install-clusterpedia>Install Clusterpedia</h2>
+<p>Once the storage component are successfully deployed, you can install the Clusterpedia.</p>
+<p><strong>If you uses existing storage component, refer to <a href=../configuration/configure-internalstorage>Configure Storage Layer</a> to set the storage component into <code>Default Storage Layer</code></strong></p>
+<blockquote>
+<p>Run the following code in the clusterpedia root directory</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Deploy crds</span>
+kubectl apply -f ./deploy/crds
+
+<span style=color:#8f5902;font-style:italic># Deploy Clusterpedia components</span>
+kubectl apply -f ./deploy
+</code></pre></div><h2 id=final-check>Final check</h2>
+<p>Check if the component Pods are running properly</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n clusterpedia-system get pods
+</code></pre></div>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-8aa1a9a3bda410f713c9c386ab4e389b>1.2 - Helm</h1>
+<p>How to install by Helm is in the process of developing, refer to <a href=https://github.com/clusterpedia-io/clusterpedia/issues/43>clusterpedia required helm deployment</a></p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-be1d3247596952e01a50b42f0b830dac>1.3 - Configuration</h1>
+</div>
+<div class=td-content>
+<h1 id=pg-231303eecf780ab7b7e152cd9a8008c0>1.3.1 - Configure Storage Layer</h1>
+<p><code>Default Storage Layer</code> of Clusterpedia supports two storage components: <strong>MySQL</strong> and <strong>PostgreSQL</strong>.</p>
+<p>When installing Clusterpedia, you can use existing storage component and create <a href=#configure-the-default-storage-layer><code>Default Storage Layer</code>(ConfigMap)</a> and <a href=#configure-secret><code>Secret of storage component</code></a>.</p>
+<h2 id=configure-the-default-storage-layer>Configure the Default Storage Layer</h2>
+<p>You shall create <code>clusterpedia-internalstorage</code> ConfigMap in the <code>clusterpedia-system</code> namespace.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># internalstorage configmap example</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ConfigMap</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia-internalstorage</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>namespace</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia-system</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>data</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>internalstorage-config.yaml</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>    type: &#34;mysql&#34;
+</span><span style=color:#8f5902;font-style:italic>    host: &#34;clusterpedia-internalstorage-mysql&#34;
+</span><span style=color:#8f5902;font-style:italic>    port: 3306
+</span><span style=color:#8f5902;font-style:italic>    user: root
+</span><span style=color:#8f5902;font-style:italic>    database: &#34;clusterpedia&#34;
+</span><span style=color:#8f5902;font-style:italic>    log:
+</span><span style=color:#8f5902;font-style:italic>      slowThreshold: &#34;100ms&#34;</span><span style=color:#f8f8f8;text-decoration:underline>    
+</span></code></pre></div><p>internalstorage config supports the following fields:</p>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>type of storage component such as &ldquo;postgres&rdquo; and &ldquo;mysql&rdquo;</td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td>host for storage component such as IP address or Service Name</td>
+</tr>
+<tr>
+<td><code>port</code></td>
+<td>port for storage component</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>user for storage component</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>password for storage component</td>
+</tr>
+<tr>
+<td><code>database</code></td>
+<td>the database used by Clusterpedia</td>
+</tr>
+</tbody>
+</table>
+<p><strong>It is a good choice to store the access password to Secret. For details see <a href=#configure-secret>Configure Secret of storage component</a></strong></p>
+<h3 id=configure-log>Configure log</h3>
+<p>Clusterpedia supports to configure logs for storage layer, enabling the log to record <code>slow SQL queries</code> and <code>errors</code> via the <code>log</code> field.</p>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>log.stdout</code></td>
+<td>Output log to standard device</td>
+</tr>
+<tr>
+<td><code>log.colorful</code></td>
+<td>Enable color print or not</td>
+</tr>
+<tr>
+<td><code>log.slowThreshold</code></td>
+<td>Set threshold for slow SQL queries such as &ldquo;100ms&rdquo;</td>
+</tr>
+<tr>
+<td><code>log.level</code></td>
+<td>Set the severity level such as Slient, Error, Warn, Info</td>
+</tr>
+</tbody>
+</table>
+<p>After enabling log, if <code>log.stdout</code> is not set to true, the log will be output to <em>/var/log/clusterpedia/internalstorage.log</em></p>
+<h4 id=disable-log>Disable log</h4>
+<p>If the <code>log</code> field is not filled in the internalstorage config, log will be ignored, for example:</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;mysql&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>host</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;clusterpedia-internalstorage-mysql&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>port</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>3306</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>user</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>root</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>database</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;clusterpedia&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><h3 id=more-configuration>More configuration</h3>
+<p>The default storage layer also provides more configurations. Refer to <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go>internalstorage/config.go</a>.</p>
+<h2 id=configure-secret>Configure Secret</h2>
+<p>The yaml file that is used to install Clusterpedia may get the password from <code>internalstroage-password</code> Secret.</p>
+<p>Configure the storage component password to Secret</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n clusterpedia-system create secret generic <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    internalstorage-password --from-literal<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#000>password</span><span style=color:#ce5c00;font-weight:700>=</span>&lt;password to access storage components&gt;
+</code></pre></div>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-dd948255948d6b59b32c471abcb62997>2 - Concepts</h1>
+</div>
+<div class=td-content>
+<h1 id=pg-40243a331b263af5e1b61fd771638878>2.1 - Collection Resource</h1>
+<p>In order to query multiple types of resources at once, Clusterpedia provides a new resource: <code>Collection Resource</code>.</p>
+<p><code>Collection Resource</code> is composed of different resource types that can be retrieved and paginated uniformly.</p>
+<p><strong>What Collection Resources are supported by the Clusterpedia depends on the <code>Storage Layer</code>.</strong> For example, the <code>Default Storage Layer</code> temporarily only supports the <code>workloads</code>, which is used to represent workloads.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources
+</code></pre></div><pre tabindex=0><code># Output:
+NAME        RESOURCES
+workloads   deployments.apps,daemonsets.apps,statefulsets.apps
+</code></pre><p>View the supported <code>Collection Resource</code> in a yaml file</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources -o yaml
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># Output:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>items</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>pedia.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>CollectionResource</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>creationTimestamp</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>null</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>workloads</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>reosurceTypes</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>version</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>daemonsets</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>version</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>statefulsets</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>version</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>List</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resourceVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>selfLink</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>It is found that <code>workloads</code> includes three resources: <code>deployments</code>, <code>daemonsets</code>, and <code>statefulsets</code>.</p>
+<p>For details about <code>Collection Resource</code>, see <a href=../../usage/search/collection-resource>Search for Collection Resource</a></p>
+<h2 id=custom-collection-resource>Custom collection resource</h2>
+<p><code>Default Storage Layer</code> will support <code>Custom Collection Resource</code> in future to enable users to combine any resource types freely.</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-911128911953cea7ceaaad409a1badf1>2.2 - PediaCluster</h1>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-ec5a5e9379174e59d723f74f5206953c>3 - Usage</h1>
+</div>
+<div class=td-content>
+<h1 id=pg-926b93f86224309ec4277c2c1b97fe8c>3.1 - Import Clusters</h1>
+<p>Clusterpedia uses <code>PediaCluster</code> to import a cluster and configures cluster APIServer address and authentication information to connect a specific cluster.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusters.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-example</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserverURL</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;https://10.30.43.43:6443&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>caData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>tokenData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>certData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>keyData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p><code>apiserverURL</code> is required as the address of a connected cluster and you have several options to configure the authentication fields:</p>
+<ul>
+<li><code>caData</code> + <code>tokenData</code></li>
+<li><code>caData</code> + <code>certData</code> + <code>keyData</code></li>
+</ul>
+<blockquote>
+<p><code>caData</code> can be left blank if the cluster APIServer allows Insecure connections</p>
+</blockquote>
+<p>All these authentication fields need to be encoded by base64. If the field values are obtained directly from ConfigMap or Secret, they have already been encoded by base64.</p>
+<h2 id=use-serviceaccount-to-import-a-cluster>Use ServiceAccount to import a cluster</h2>
+<p>You can choose to create a ServiceAccount in the <strong>Imported Cluster</strong> and configure the proper RBAC to import the cluster.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Connect the current kubectl to the imported cluster</span>
+kubectl apply -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/examples/clusterpedia_synchro_rbac.yaml
+
+<span style=color:#8f5902;font-style:italic># Get CA and Token for Service Account</span>
+<span style=color:#000>SYNCHRO_CA</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87;font-weight:700>$(</span>kubectl get secret <span style=color:#204a87;font-weight:700>$(</span>kubectl get serviceaccount clusterpedia-synchro -o <span style=color:#000>jsonpath</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#39;{.secrets[0].name}&#39;</span><span style=color:#204a87;font-weight:700>)</span> -o <span style=color:#000>jsonpath</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#39;{.data.ca\.crt}&#39;</span><span style=color:#204a87;font-weight:700>)</span>
+<span style=color:#000>SYNCHRO_TOKEN</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87;font-weight:700>$(</span>kubectl get secret <span style=color:#204a87;font-weight:700>$(</span>kubectl get serviceaccount clusterpedia-synchro -o <span style=color:#000>jsonpath</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#39;{.secrets[0].name}&#39;</span><span style=color:#204a87;font-weight:700>)</span> -o <span style=color:#000>jsonpath</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#39;{.data.token}&#39;</span><span style=color:#204a87;font-weight:700>)</span>
+</code></pre></div><p>Fill <code>$SYNCHRO_CA</code> and <code>SYNCHRO_TOKEN</code> into <code>spec.caData</code> and <code>spec.tokenData</code> fields for the PediaCluster resource.</p>
+<h2 id=create-pediacluster>Create PediaCluster</h2>
+<p>After completing the cluster authentication fields, you can get a complete <code>PediaCluster</code> resource and can directly use <code>kubectl apply -f</code> to create it.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusters.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-example</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserverURL</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://10.6.100.10:6443</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>caData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>tokenData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklrMHRSalJtZGpSdVgxcFljMGxsU1ZneFlXMHpPSFZOY0Zwbk1UTkhiVFpsVFZwQ2JIWk9SbU5XYW5NaWZRLmV5SnBjM01pT2lKcmRXSmxjbTVsZEdWekwzTmxjblpwWTJWaFkyTnZkVzUwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXVZVzFsYzNCaFkyVWlPaUprWldaaGRXeDBJaXdpYTNWaVpYSnVaWFJsY3k1cGJ5OXpaWEoyYVdObFlXTmpiM1Z1ZEM5elpXTnlaWFF1Ym1GdFpTSTZJbU5zZFhOMFpYSndaV1JwWVMxemVXNWphSEp2TFhSdmEyVnVMVGsxYTJSNElpd2lhM1ZpWlhKdVpYUmxjeTVwYnk5elpYSjJhV05sWVdOamIzVnVkQzl6WlhKMmFXTmxMV0ZqWTI5MWJuUXVibUZ0WlNJNkltTnNkWE4wWlhKd1pXUnBZUzF6ZVc1amFISnZJaXdpYTNWaVpYSnVaWFJsY3k1cGJ5OXpaWEoyYVdObFlXTmpiM1Z1ZEM5elpYSjJhV05sTFdGalkyOTFiblF1ZFdsa0lqb2lNREl5WXpNMk5USXRPR1k0WkMwME5qSmtMV0l6TnpFdFpUVXhPREF3TnpFeE9HUTBJaXdpYzNWaUlqb2ljM2x6ZEdWdE9uTmxjblpwWTJWaFkyTnZkVzUwT21SbFptRjFiSFE2WTJ4MWMzUmxjbkJsWkdsaExYTjVibU5vY204aWZRLkF4ZjhmbG5oR0lDYjJaMDdkT0FKUW11aHVIX0ZzRzZRSVY5Sm5sSmtPUnF5aGpWSDMyMkVqWDk1bVhoZ2RVQ2RfZXphRFJ1RFFpLTBOWDFseGc5OXpYRks1MC10ZzNfYlh5NFA1QnRFOUpRNnNraUt4dDFBZVJHVUF4bG5fVFU3SHozLTU5Vnl5Q3NwckFZczlsQWQwRFB6bTRqb1dyS1lKUXpPaGl5VjkzOWpaX2ZkS1BVUmNaMVVKVGpXUTlvNEFFY0hMdDlyTEJNMTk2eDRkbzA4ZHFaUnVtTzJZRXFkQTB3ZnRxZ2NGQzdtTGlSVVhkWElkYW9CY1BuWXBwM01MU3B5QjJQMV9vSlRFNS1nd3k4N2Jwb3U1RXo2TElSSExIeW5NWXAtWVRLR2hBbDJwMXdJb0tDZUNnQng4RlRfdzM4Rnh1TnE0UDRoQW5RUUh6bU9Ndw==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><h2 id=view-cluster>View Cluster</h2>
+<p>After a cluster is successfully imported, you can use <code>kubectl get pediacluster</code> to view the imported clusters and check its status</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
+</code></pre></div><pre tabindex=0><code># Output:
+NAME           APISERVER URL               VERSION    STATUS
+cluster-1      https://10.6.100.10:6443    v1.22.2    Healthy
+cluster-2      https://10.50.10.11:16443   v1.10.11   Healthy
+</code></pre><h2 id=next>Next</h2>
+<p>See <a href=../sync-resources>Synchronize Cluster Resources</a></p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-64bebf7ca20899cc843d095cee1d0313>3.2 - Synchronize Cluster Resources</h1>
+<p>The main function of Clusterpedia is to provide complex search for resources in multiple clusters.</p>
+<p>Clusterpedia uses the <code>PediaCluster</code> resource to specify which resources in the cluster need to support complex search,
+and synchronizes these resources onto the <code>Storage Component</code> via <code>Storage Layer</code> in real time.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># example</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusters.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-example</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserverURL</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;https://10.30.43.43:6443&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>pods</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>configmsp</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cert-manager.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>versions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#000>certificates</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><h2 id=synchronize-built-in-resources>Synchronize built-in resources</h2>
+<p>In order to manage and view these synchronized resources through <code>PediaCluster</code>, you need to configure resources in groups</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline> </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>   </span><span style=color:#204a87;font-weight:700>versions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>   </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>daemonsets</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p><strong>For built-in resources, <code>versions</code> is not required.</strong></p>
+<p>Clusterpedia will automatically select the appropriate version to synchronize based on the resource version supported in the cluster.</p>
+<p>Also, you do not need to worry about version conversion because Clusterpedia will open all version interfaces for built-in resources.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
+  <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;APIGroup&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;versions&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1beta2&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1beta2&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1beta1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1beta1&#34;</span>
+    <span style=color:#000;font-weight:700>}</span>
+  <span style=color:#000;font-weight:700>],</span>
+  <span style=color:#204a87;font-weight:700>&#34;preferredVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span>
+  <span style=color:#000;font-weight:700>}</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><p>Clusterpedia supports three versions of <code>Deployment</code>: <code>v1</code>, <code>v1beta2</code>, and <code>v1beta1</code>.</p>
+<h2 id=synchronize-custom-resources>Synchronize custom resources</h2>
+<p>Compared with built-in resources, custom resources have slightly different configuration on resource versions.</p>
+<pre tabindex=0><code class=language-yaml: data-lang=yaml:>resources:
+ - group: cert-manager.io
+   versions: []
+   resources:
+    - certificates
+</code></pre><p><strong>You can also ignore the versions field and then Clusterpedia will synchronize the previous three cluster versions in the Group.</strong></p>
+<p>Take cert-manager.io as an example to get the Group supported by cert-manager.io in an imported cluster</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Run the command in an imported cluster</span>
+kubectl --cluster clusterpedia get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/cert-manager.io&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
+  <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;APIGroup&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;cert-manager.io&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;versions&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;cert-manager.io/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;cert-manager.io/v1beta1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1beta1&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;cert-manager.io/v1alpha3&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1alpha3&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;cert-manager.io/v1alpha2&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1alpha2&#34;</span>
+    <span style=color:#000;font-weight:700>}</span>
+  <span style=color:#000;font-weight:700>],</span>
+  <span style=color:#204a87;font-weight:700>&#34;preferredVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;cert-manager.io/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span>
+  <span style=color:#000;font-weight:700>}</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><p>The imported cluster supports four versions for <em>cert-manager.io</em>: <code>v1</code>, <code>v1beta1</code>, <code>v1alpha3</code>, <code>v1alpha2</code>.</p>
+<p>When <code>resources.[group].versions</code> is left blank, Clusterpedia will synchronize three versions <code>v1</code>, <code>v1beta1</code>, <code>v1alpah3</code> in the order of the <code>APIGroup.versions</code> list except for <code>v1alpha2</code>.</p>
+<h3 id=specify-a-sync-version-for-custom-resources>Specify a sync version for custom resources</h3>
+<p>If you specified <code>versions</code>, the specific resource would be synchronized by <code>versions</code>.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline> </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cert-manager.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>   </span><span style=color:#204a87;font-weight:700>versions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#000>v1beta1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>   </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#000>certificates</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>The above snippet only synchronizes <code>v1beta1</code>.</p>
+<h3 id=usage-notes>Usage notes</h3>
+<p>The custom resource synchronization does not support version conversion currently. The versions are fixed after synchronization.</p>
+<p>If cluster-1 only synchronizes <code>v1beta1</code> resources when you are searching for multi-cluster resources, the request to search for version v1 will ignore the version <code>v1beta1</code>.</p>
+<p>You are required to learn and handle the different versions in multiple clusters for custom resources.</p>
+<h2 id=view-synchronized-resources>View synchronized resources</h2>
+<p>You can view resources, sync versions, and storage versions by using <code>Status</code> of the <code>PediaCluster</code> resource.</p>
+<p>For <code>Status</code>, a resource may have <strong>Sync Version</strong> and <strong>Storage Version</strong>:</p>
+<ul>
+<li><strong>Sync Version</strong> refers to the resource version from a synchronized cluster by Clusterpedia</li>
+<li><strong>Storage Version</strong> refers to the version stored at the storage layer by Clusterpedia</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>namespaced</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>syncConditions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>lastTransitionTime</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;2022-01-13T04:34:08Z&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Syncing</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>storageVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>version</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>In general, <strong>Sync Version</strong> is same as <strong>Storage Version</strong> for a cluster resource.</p>
+<p>However, if an imported cluster only provides the <code>Deployment</code> resource of the <code>v1beta1</code> version, the <strong>Sync Version</strong> is <code>v1beta1</code> and the <strong>Storage Version</strong> is <code>v1</code>.</p>
+<p>For example, when synchronizing a Deployment of Kubernetes 1.10, the synchronization status is as follows:</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>namespaced</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>syncConditions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>lastTransitionTime</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;2022-01-13T04:34:04Z&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Syncing</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>storageVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>version</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1beta1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>For a custom resource, <strong>Synchronized Version</strong> is same as <strong>Storage Version</strong></p>
+<h2 id=next>Next</h2>
+<p>After resource synchronization, you can <a href=../access-clusterpedia>Access the Clusterpedia</a> to <a href=../search>Search for Resources</a></p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-bbba5e1deb968130546edf7495679ad0>3.3 - Access the Clusterpedia</h1>
+<p>Clusterpedia has two main components:</p>
+<ul>
+<li><code>ClusterSynchroManager</code> manages the <code>PediaCluster</code> resource in the <em>master cluster</em>, connects to the specified cluster through the <code>PediaCluster</code> authentication information, and synchronizes the corresponding resources in real time.</li>
+<li><code>APIServer</code> also listens to the <code>PediaCluster</code> resource in the <em>master cluster</em> and provides complex search for resources in a <strong>compatible Kubernetes OpenAPI</strong> manner based on the resources synchronized by the cluster.</li>
+</ul>
+<p>Also, the <code>Clusterpedia APIServer</code> will be registered to the <em>master cluster</em> APIServer in the way of <a href=https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation>Aggregation API</a>, so that we can access Clusterpedia through the same entry as the master cluster.</p>
+<h2 id=resources-and-collection-resourceconceptscollection-resource>Resources and <a href=../../concepts/collection-resource>Collection Resource</a></h2>
+<p>Clusterpedia APIServer will provide two different resources to search under Group - <em>pedia.clusterpedia.io</em>:</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl api-resources <span style=color:#000;font-weight:700>|</span> grep pedia.clusterpedia.io
+</code></pre></div><pre tabindex=0><code># Output:
+NAME                 SHORTNAMES    APIVERSION                        NAMESPACED   KIND
+collectionresources                pedia.clusterpedia.io/v1alpha1    false        CollectionResource
+resources                          pedia.clusterpedia.io/v1alpha1    false        Resources
+</code></pre><ul>
+<li><code>Resources</code> is used to specify a resource type to search for, compatible with Kubernetes OpenAPI</li>
+<li><code>CollectionResource</code> is used to search for new resource aggregated by different types to find multiple resource types at one time</li>
+</ul>
+<blockquote>
+<p>For concepts and usage about Collection Resource, refer to <a href=../../concepts/collection-resource>What is Collection Resource</a> and <a href=../search/collection-resource>Search for Collection Resource</a>.</p>
+</blockquote>
+<h2 id=access-the-clusterpedia-resources>Access the Clusterpedia resources</h2>
+<p>When searching for a resource of a specific type, you can request it according to the <code>Get</code>/<code>List</code> specification of <strong>Kubernetes OpenAPI</strong>. <strong>In this way we can not only use the URL to access Clusterpedia resources, but also directly use <code>kubectl</code> or <code>client-go</code> to search for the resources.</strong></p>
+<p>Clusterpedia uses URL Path to distinguish whether the request is a multi-cluster resource or a specific cluster:</p>
+<p><strong>Multi-cluster resource path</strong>, directly prefix the Resources path:</p>
+<p><em>/apis/pedia.clusterpedia.io/v1alpha1/resources</em></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alhpa1/version&#34;</span>
+</code></pre></div><p><strong>Specific cluster resource path</strong>, specify a cluster by setting the resource name based on the Resources path
+<em>/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/<cluster name></em></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/version&#34;</span>
+</code></pre></div><p><strong>Regardless of a resource path of multiple clusters or a specific cluster, the path can be spliced and followed by Kubernetes <code>Get</code>/<code>List</code> Path</strong></p>
+<h3 id=configure-the-cluster-shortcut-for-kubectl>Configure the cluster shortcut for kubectl</h3>
+<p>Although we can use URLs to access Clusterpedia resources, if we want to use kubectl to query more conveniently, we need to configure the kubeconfig cluster.</p>
+<p>Clusterpedia provides a simple script to generate <code>cluster kubeconfig</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
+</code></pre></div><pre tabindex=0><code># Output:
+Current Context: kubernetes-admin@kubernetes
+Current Cluster: kubernetes
+        Server: https://10.6.100.10:6443
+        TLS Server Name:
+        Insecure Skip TLS Verify:
+        Certificate Authority:
+        Certificate Authority Data: ***
+
+Cluster &quot;clusterpedia&quot; set.
+Cluster &quot;cluster-1&quot; set.
+Cluster &quot;cluster-2&quot; set.
+</code></pre><blockquote>
+<p>Check the script from <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/hack/gen-clusterconfigs.sh>hack/gen-clusterconfigs.sh</a></p>
+</blockquote>
+<p>The script prints the current cluster information and configures the <code>PediaCluster</code> into kubeconfig.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>cat ~/.kube/config
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># .kube/config</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>cluster</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>certificate-authority-data</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>server</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://10.6.100.10:6443/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>cluster</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>certificate-authority-data</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>server</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://10.6.100.10:6443/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>cluster</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>certificate-authority-data</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>server</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://10.6.100.10:6443/apis/pedia.clusterpedia.io/v1alpha1/resources</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>cluster</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>certificate-authority-data</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>server</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://10.6.100.10:6443</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>kubernetes</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>The script generates <em>clusterpedia</em> clusters for multi-cluster access and other cluster configs in the name of <code>PediaCluster</code>, and reuses the master cluster&rsquo;s entry and authentication information when accessing Clusterpedia.</p>
+<p>Compared with the master cluster entry, it only adds Clusterpedia Resources path.</p>
+<p>After multi-cluster kubeconfig is generated, you can use <code>kubectl --cluster</code> to specify the cluster access</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Supported resources for multi-cluster search</span>
+kubectl --cluster clusterpedia api-resources
+
+<span style=color:#8f5902;font-style:italic># Supported resources for cluster-1 search</span>
+kubectl --cluster cluster-1 api-resources
+</code></pre></div><h2 id=what-resources-are-supported-for-search>What resources are supported for search</h2>
+<p>We can get the global and specific resource information according to the URL path.</p>
+<p><strong>Global resource information is the union of resource types that are synchronized across all clusters</strong></p>
+<p><code>Discovery API</code> opened by Clusterpedia is similary <strong>compatible with Kubernetes OpenAPI</strong>. You can use <code>kubectl</code>, <a href=https://pkg.go.dev/k8s.io/client-go/discovery#DiscoveryClient>client-go/discovery</a>, <a href=https://pkg.go.dev/k8s.io/client-go/restmapper>client-go/restmapper</a> or <a href=https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/client/apiutil#NewDynamicRESTMapper>controller-runtime/dynamic-restmapper</a> to access it.</p>
+<ul class="nav nav-tabs" id=tabset-docsusageaccess-clusterpedia-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusageaccess-clusterpedia-1-0 role=tab aria-controls=tabset-docsusageaccess-clusterpedia-1-0 aria-selected=true>URL</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusageaccess-clusterpedia-1-1 role=tab aria-controls=tabset-docsusageaccess-clusterpedia-1-1>kubectl</a></li></ul>
+<div class=tab-content id=tabset-docsusageaccess-clusterpedia-1><div id=tabset-docsusageaccess-clusterpedia-1-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusageaccess-clusterpedia-1-0>
+<p><p><strong>Use URL to get APIGroupList and APIGroup information</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
+  <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;APIGroupList&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;groups&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;versions&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+        <span style=color:#000;font-weight:700>{</span>
+          <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+          <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span>
+        <span style=color:#000;font-weight:700>},</span>
+        <span style=color:#000;font-weight:700>{</span>
+          <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1beta2&#34;</span><span style=color:#000;font-weight:700>,</span>
+          <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1beta2&#34;</span>
+        <span style=color:#000;font-weight:700>},</span>
+        <span style=color:#000;font-weight:700>{</span>
+          <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1beta1&#34;</span><span style=color:#000;font-weight:700>,</span>
+          <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1beta1&#34;</span>
+        <span style=color:#000;font-weight:700>}</span>
+      <span style=color:#000;font-weight:700>],</span>
+      <span style=color:#204a87;font-weight:700>&#34;preferredVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+        <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+        <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span>
+      <span style=color:#000;font-weight:700>}</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;cert-manager.io&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;versions&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+        <span style=color:#000;font-weight:700>{</span>
+          <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;cert-manager.io/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+          <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span>
+        <span style=color:#000;font-weight:700>}</span>
+      <span style=color:#000;font-weight:700>],</span>
+      <span style=color:#204a87;font-weight:700>&#34;preferredVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+        <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;cert-manager.io/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+        <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span>
+      <span style=color:#000;font-weight:700>}</span>
+    <span style=color:#000;font-weight:700>}</span>
+  <span style=color:#000;font-weight:700>]</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
+  <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;APIGroup&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;versions&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1beta2&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1beta2&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1beta1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1beta1&#34;</span>
+    <span style=color:#000;font-weight:700>}</span>
+  <span style=color:#000;font-weight:700>],</span>
+  <span style=color:#204a87;font-weight:700>&#34;preferredVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;groupVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span>
+  <span style=color:#000;font-weight:700>}</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div></div>
+<div id=tabset-docsusageaccess-clusterpedia-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusageaccess-clusterpedia-1-1>
+<p><p><strong>Use kubectl to get api-resources</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia api-resources
+</code></pre></div><pre tabindex=0><code># Output:
+NAME          SHORTNAMES   APIVERSION           NAMESPACED   KIND
+configmaps    cm           v1                   true         ConfigMap
+namespaces    ns           v1                   false        Namespace
+nodes         no           v1                   false        Node
+pods          po           v1                   true         Pod
+secrets                    v1                   true         Secret
+daemonsets    ds           apps/v1              true         DaemonSet
+deployments   deploy       apps/v1              true         Deployment
+replicasets   rs           apps/v1              true         ReplicaSet
+issuers                    cert-manager.io/v1   true         Issuer
+</code></pre></div></div>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-48ab5663f4f8c240e7bf89c5454f249f>3.4 - Search</h1>
+<p>Clusterpedia supports complex search for <a href=multi-cluster>multi-cluster resources</a>, <a href=specified-cluster>specified cluster resoruces</a>, and <a href=collection-resource>Collection Resources</a>.</p>
+<p>And these complex search conditions can be passed to <code>Clusterpedia APIServer</code> in two ways:</p>
+<ul>
+<li><code>URL Query</code>: directly pass query conditions as Query</li>
+<li><code>Search Labels</code>: to keep <strong>compatible with Kubernetes OpenAPI</strong>, the search conditions can be set via Label Selector</li>
+</ul>
+<p><strong>Both <code>Search Labels</code> and <code>URL Query</code> support same operators as Label Selector:</strong></p>
+<ul>
+<li><code>exist</code>, <code>not exist</code></li>
+<li><code>=</code>, <code>==</code>, <code>!=</code></li>
+<li><code>in</code>, <code>notin</code></li>
+</ul>
+<p>In addition to conditional retrieval, Clusterpedia also enhances <a href=#field-selector><code>Field Selector</code></a> to meet the filtering requirements by fields such as <code>metadata.annotation</code> or <code>status.*</code>.</p>
+<h2 id=search-by-metadata>Search by metadata</h2>
+<blockquote>
+<p>It supports same operators as Label Selector: <code>exist</code>, <code>not exist</code>, <code>==</code>, <code>=</code>, <code>!=</code>, <code>in</code>, <code>notin</code>.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filter cluster names</td>
+<td>`search.clusterpedia.io/clusters</td>
+<td><code>clusters</code></td>
+</tr>
+<tr>
+<td>Filter namespaces</td>
+<td>`search.clusterpedia.io/namespaces</td>
+<td><code>namespaces</code></td>
+</tr>
+<tr>
+<td>Filter resource names</td>
+<td><code>search.clusterpedia.io/names</code></td>
+<td><code>names</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id=search-by-owner>Search by Owner</h2>
+<blockquote>
+<p>It only supports operators: <code>==</code>, <code>=</code>.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Specified Owner UID</td>
+<td><code>internalstorage.clusterpedia.io/owner-uid</code></td>
+<td><code>ownerID</code></td>
+</tr>
+<tr>
+<td>Specified Owner Name</td>
+<td><code>internalstorage.clusterpedia.io/owner-name</code></td>
+<td><code>ownerName</code></td>
+</tr>
+<tr>
+<td>Specified Owner Seniority</td>
+<td><code>internalstorage.clusterpedia.io/owner-seniority</code></td>
+<td><code>ownerSeniority</code></td>
+</tr>
+</tbody>
+</table>
+<p>Search by <code>owner name</code> is still under development. Join the <a href=https://github.com/clusterpedia-io/clusterpedia/issues/49>discussion</a></p>
+<h2 id=orderby>OrderBy</h2>
+<blockquote>
+<p>It only supports operators: <code>=</code>, <code>==</code>, <code>in</code>.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Order by fields</td>
+<td><code>search.clusterpedia.io/orderby</code></td>
+<td><code>orderby</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id=paging>Paging</h2>
+<blockquote>
+<p>It only supports operators: <code>=</code>, <code>==</code>.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Set page size</td>
+<td><code>search.clusterpedia.io/size</code></td>
+<td><code>limit</code></td>
+</tr>
+<tr>
+<td>Set page offset</td>
+<td><code>search.clusterpedia.io/offset</code></td>
+<td><code>continue</code></td>
+</tr>
+<tr>
+<td>Response required with Continue</td>
+<td><code>search.clusterpedia.io/with-continue</code></td>
+<td><code>withContinue</code></td>
+</tr>
+<tr>
+<td>Response required with remaining count</td>
+<td><code>search.clusterpedia.io/with-remaining-count</code></td>
+<td><code>withRemainingCount</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>When you perform operations with kubectl, the page size can only be set via <code>kubectl --chunk-size</code>, because kubectl will set the default limit to 500.</p>
+</blockquote>
+<h2 id=label-selector>Label Selector</h2>
+<p>Regardless of kubectl or URL, all Label Selectors that do not contain <em>clusterpedia.io</em> in the Key will be used as Label Selectors to filter resources.</p>
+<p>All behaviors are consistent with those provided by Kubernetes.</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>kubectl</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filter by labels</td>
+<td><code>kubectl -l</code> or <code>kubectl --label-selector</code></td>
+<td><code>labelSelector</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id=field-selector>Field Selector</h2>
+<p><strong>Field Selector is consistent with Label Selector in terms of operators, and Clusterpedia also supports:</strong></p>
+<p><strong><code>exist</code>, <code>not exist</code>, <code>==</code>, <code>=</code>, <code>!=</code>, <code>in</code>, <code>notin</code>.</strong></p>
+<p>All command parameters for URL and kubectl are same as those for Field Selector.</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>kubectl</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filter by fields</td>
+<td><code>kubectl --field-selector</code></td>
+<td>`fieldSelector\</td>
+</tr>
+</tbody>
+</table>
+<p>For details refer to:</p>
+<ul>
+<li><a href=./multi-cluster#field-selector>search for resources by filtering fields</a></li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia/pull/36>support field selector</a></li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/48>issue: support list field filtering</a></li>
+</ul>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-ec8e2360424d04fb82dc27fbc4824983>3.4.1 - Search in Multiple Clusters</h1>
+<p>Multi-cluster resource search allows us to <strong>filter resources in multiple clusters at once based on query criteria, and provides the ability to paginate and sort these resources</strong>.</p>
+<p>When using <code>kubectl</code>, we can see what resources are currently available for search</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia api-resources
+</code></pre></div><pre tabindex=0><code># Output：
+NAME          SHORTNAMES   APIVERSION           NAMESPACED   KIND
+configmaps    cm           v1                   true         ConfigMap
+namespaces    ns           v1                   false        Namespace
+nodes         no           v1                   false        Node
+pods          po           v1                   true         Pod
+secrets                    v1                   true         Secret
+daemonsets    ds           apps/v1              true         DaemonSet
+deployments   deploy       apps/v1              true         Deployment
+replicasets   rs           apps/v1              true         ReplicaSet
+issuers                    cert-manager.io/v1   true         Issuer
+</code></pre><p>Clusterpedia provides multi-cluster resource search based on all cluster-synchronized resources,
+and we can view <a href=../../sync-resources>Sync Cluster Resources</a> to update the resources that need to be synchronized.</p>
+<h2 id=basic-features>Basic Features</h2>
+<h3 id=specify-cluster>Specify Cluster</h3>
+<p>When searching multiple clusters, all clusters will be retrieved by default, we can also specify a single cluster or a group of clusters</p>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-1-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-1-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-1-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-1-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-1><div id=tabset-docsusagesearchmulti-cluster-1-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-1-0>
+<p><p>Use <a href=../#search-by-metadata>Search Label</a> <code>search.clusterpedia.io/clusters</code> to specify a group of clusters.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/clusters in (cluster-1,cluster-2)&#34;</span>
+</code></pre></div><pre tabindex=0><code># Output：
+NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   cluster-1   coredns                   2/2     2            2           68d
+kube-system   cluster-2   coredns                   2/2     2            2           64d
+</code></pre><p>For specifying a single cluster search, we can also use Search Label to set it up, or see <a href=../specified-cluster>Search in Specified Cluster</a> to specify a cluster using <strong>URL Path</strong>.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># specifying a single cluster</span>
+kubectl --cluster clusterpedia get deployments -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/clusters=cluster-1&#34;</span>
+
+<span style=color:#8f5902;font-style:italic># specifying a cluster can also be done with --cluster &lt;cluster name&gt;</span>
+kubectl --cluster cluster-1 get deployments<span style=color:#4e9a06>&#34;
+</span></code></pre></div></div>
+<div id=tabset-docsusagesearchmulti-cluster-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-1-1>
+<p><p>When using URL, use <code>clusters</code> as URL Query to pass.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
+</code></pre></div><p>If we specify a single cluster, we can also put the cluster name in the URL Path.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
+</code></pre></div><p>Lean More <a href=../specified-cluster>Specify Cluster Search</a></p>
+</div></div>
+<h3 id=specify-namespace>Specify Namespace</h3>
+<p>We can <strong>specify a single namespace or all namespaces</strong> as if we were viewing a native Kubernetes resource.</p>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-2 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-2-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-2-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-2-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-2-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-2><div id=tabset-docsusagesearchmulti-cluster-2-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-2-0>
+<p><p>Use <code>-n &lt;namespace></code> to specify the namespace, the default is in the <em>default</em> namespace</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -n kube-system
+</code></pre></div><pre tabindex=0><code># Output：
+CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+cluster-1   coredns                   2/2     2            2           68d
+cluster-2   calico-kube-controllers   1/1     1            1           64d
+cluster-2   coredns                   2/2     2            2           64d
+</code></pre><p>Use <code>-A</code> or <code>--all-namespaces</code> to see the resources under all namespaces for all clusters</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -A
+</code></pre></div><pre tabindex=0><code># Output：
+NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   cluster-1   coredns                   2/2     2            2           68d
+kube-system   cluster-2   calico-kube-controllers   1/1     1            1           64d
+kube-system   cluster-2   coredns                   2/2     2            2           64d
+default       cluster-2   dd-airflow-scheduler      0/1     1            0           54d
+default       cluster-2   dd-airflow-web            0/1     1            0           54d
+</code></pre></div>
+<div id=tabset-docsusagesearchmulti-cluster-2-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-2-1>
+<p><p>The <strong>URL Path</strong> to get the resources is the same as the native Kubernetes <em>/apis/apps/v1/deployments</em>.</p>
+<p>We just need to prefix the path to Clusterpedia Resources with <strong>/apis/pedia.clusterpedia.io/v1alpha1/resources</strong> to indicate that it is currently a Clusterpedia request.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments&#34;</span>
+
+<span style=color:#8f5902;font-style:italic># Specify namespace</span>
+kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/namespaces/kube-system/deployments&#34;</span>
+</code></pre></div></div></div>
+<hr>
+<p>In addition to specifying a single namespace, we can also <strong>specify to search the resources under a group of namespaces</strong>.
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-3 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-3-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-3-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-3-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-3-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-3><div id=tabset-docsusagesearchmulti-cluster-3-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-3-0>
+<p><p>Use <a href=../#search-by-metadata>Search Label</a> <code>search.clusterpedia.io/namespaces</code> to specify a group of namespaces.</p>
+<blockquote>
+<p>Be sure to specify the <code>-A</code> flag to avoid kubectl setting default namespace in the path.</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -A -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/namespaces in (kube-system, default)&#34;</span>
+</code></pre></div><pre tabindex=0><code># Output：
+NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   cluster-1   coredns                   2/2     2            2           68d
+kube-system   cluster-2   calico-kube-controllers   1/1     1            1           64d
+kube-system   cluster-2   coredns                   2/2     2            2           64d
+default       cluster-2   dd-airflow-scheduler      0/1     1            0           54d
+default       cluster-2   dd-airflow-web            0/1     1            0           54d
+</code></pre></div>
+<div id=tabset-docsusagesearchmulti-cluster-3-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-3-1>
+<p><p>When using URL, we don&rsquo;t need to use Label Selector to pass parameters, just use URL Query - <code>namespaces</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?namespaces=kube-system,default&#34;</span>
+</code></pre></div></div></div>
+</p>
+<h3 id=specify-resource-name>Specify Resource Name</h3>
+<p>Users can filter resources by a group of resource names</p>
+<blockquote>
+<p>Fuzzy search is not supported at the moment.</p>
+</blockquote>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-4 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-4-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-4-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-4-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-4-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-4><div id=tabset-docsusagesearchmulti-cluster-4-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-4-0>
+<p><p>Use Search Label <code>search.clusterpedia.io/names</code> to specify a group of resource names.</p>
+<blockquote>
+<p><strong>Note: To search for resources under all namespaces, specify the <code>-A</code> flag, or use <code>-n</code> to specify the namespace.</strong></p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -A -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/names=coredns&#34;</span>
+</code></pre></div><pre tabindex=0><code># Output:
+NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   cluster-1   coredns                   2/2     2            2           68d
+kube-system   cluster-2   coredns                   2/2     2            2           64d
+</code></pre></div>
+<div id=tabset-docsusagesearchmulti-cluster-4-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-4-1>
+<p><p>When using URL, use <code>names</code> to pass as <strong>URL Query</strong>, and if you need to specify namespaces, then add namespace to the path.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?names=kube-coredns,dd-airflow-web&#34;</span>
+
+<span style=color:#8f5902;font-style:italic># search resources with specified names under default namespace</span>
+kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/namespaces/default/deployments?names=kube-coredns,dd-airflow-web&#34;</span>
+</code></pre></div><p>When searching from multiple clusters, the data returned is actually encapsulated in a structure similar to <code>DeploymentList</code>.</p>
+<p>If we want to get a single <code>Deployment</code> then we need to specify the cluster name in the URL path, refer to <a href>Get Single Resource</a></p>
+</div></div>
+<h2 id=field-selector>Field Selector</h2>
+<p>Native Kubernetes currently only supports field filtering on <code>metadata.name</code> and <code>metadata.namespace</code>, and the operators only support <code>=, </code>!=<code>, </code>==`, which is very limited.</p>
+<p><strong>Clusterpedia provides more powerful features based on the compatibility with existing Field Selector features, and supports the same operators as <code>Label Selector</code>.</strong></p>
+<p>Field Selector&rsquo;s key currently supports three formats.</p>
+<ul>
+<li><strong>Use <code>.</code> to sperate fields</strong></li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;status.phase=Running&#34;</span>
+
+<span style=color:#8f5902;font-style:italic># we can also add the first character `.`</span>
+kubectl --cluster clusterpedia get pods --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;.status.phase not in (Running,Succeeded)&#34;</span>
+</code></pre></div><ul>
+<li><strong>Field names wrapped in <code>''</code> or <code>""</code></strong> can be used for fields with illegal characters like <code>.</code></li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deploy <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;metadata.annotations[&#39;test.io&#39;] in (value1,value2),spec.replica=3&#34;</span>
+</code></pre></div><ul>
+<li><strong>Use <code>[]</code> to separate fields</strong>, the string inside <code>[]</code> must be wrapped with <code>''</code> or <code>""</code></li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;status[&#39;phase&#39;]!=Running&#34;</span>
+</code></pre></div><h3 id=support-list-fields>Support List Fields</h3>
+<p>The actual design of field filtering takes into account the filtering of fields within <code>list elements</code>, but more discussion is needed as to whether the usage scenario actually makes sense:
+<a href=https://github.com/clusterpedia-io/clusterpedia/issues/48>issue: support list field filtering</a></p>
+<p>Examples：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;spec.containers[].name!=container1&#34;</span>
+
+kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;spec.containers[].name == container1&#34;</span>
+
+kubectl get po --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;spec.containers[1].name in (container1,container2)&#34;</span>
+</code></pre></div><h2 id=search-by-parent-or-ancestor-owner>Search by Parent or Ancestor Owner</h2>
+<p>Searching by Owner is a very useful search function,
+and Clusterpedia also supports <strong>the seniority advancement of Owner to search for grandparents and even higher seniority</strong>.</p>
+<p>By searching by Owner, we can query all <code>Pods</code> under <code>Deployment</code> at once, without having to query <code>ReplicaSet</code> in between.</p>
+<p><strong>When using the Owner query, we must specify a single cluster, either as a <a href=../#search-by-owner>Serach Label</a> or <a href=../#search-by-owner>URL Query</a>, or you can specify the cluster name in the URL Path.</strong></p>
+<p>For details on how to <strong>search by Owner</strong>, you can refer to <a href=../specified-cluster#search-by-parent-or-ancestor-owner>Search by Parent or Ancestor Owenr within a specified cluster</a></p>
+<h2 id=paging-and-sorting>Paging and Sorting</h2>
+<p>Paging and sorting are essential features for resource retrieval.</p>
+<h3 id=sorting-by-multiple-fields>Sorting by multiple fields</h3>
+<p>Multiple fields can be specified for sorting, and the support for sorting fields is determined by the Storage Layer.</p>
+<p>The current <code>Default Storage Layer</code> supports sorting <code>cluster</code>，<code>namespace</code>，<code>name</code>，<code>created_at</code>，<code>resource_version</code> in both asc and desc,
+and the fields are also supported in any combination
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-5 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-5-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-5-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-5-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-5-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-5><div id=tabset-docsusagesearchmulti-cluster-5-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-5-0>
+<p><p>Sorting using multiple fields</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods -l <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/orderby in (cluster, name)&#34;</span>
+</code></pre></div><p>Because of Label Selector&rsquo;s validation of value, order by desc requires <strong>_desc</strong> at the end of the field.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods -l <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/orderby in (namespace_desc, cluster, name)&#34;</span>
+</code></pre></div></div>
+<div id=tabset-docsusagesearchmulti-cluster-5-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-5-1>
+<p><p>Use <a href=../#orderby>URL Query</a> to specify sorting fields</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace,cluster&#34;</span>
+</code></pre></div><p>When specifying a field in order by desc, add <strong>desc</strong> to the end of the field, separated by spaces</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace desc,cluster&#34;</span>
+</code></pre></div></div></div>
+</p>
+<h3 id=paging>Paging</h3>
+<p>Native Kubernetes actually supports paging, and fields for paging queries already exist in <a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListOptions>ListOptions</a>.</p>
+<p>Clusterpedia reuses the <code>ListOptions.Limit</code> and <code>ListOptions.Continue</code> fields as the <code>size</code> and <code>offset</code> for paging.</p>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-6 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-6-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-6-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-6-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-6-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-6><div id=tabset-docsusagesearchmulti-cluster-6-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-6-0>
+<p><p><code>kubectl --chunk-size</code> is actually used for paging pulls by setting <code>ListOptions.Limit</code>.</p>
+<p>The native Kubernetes APIServer carries the <code>continue</code> for the next list in the returned response,
+and performs the next list based on <code>--chunk-size</code> and <code>conintue</code> until the <code>conintue</code> is empty in the response data.</p>
+<p>Clusterpedia does not return the <code>continue</code> field in the response by default in order to ensure paged search in <code>kubectl</code>,
+which prevents <code>kubectl</code> from pulling all data using chunks.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get pods --chunk-size <span style=color:#0000cf;font-weight:700>10</span>
+</code></pre></div><p>Note that kubectl sets the <code>limit</code> to the default value of 500 without setting <code>--chunk-size</code>,
+which means that <code>search.clusterpedia.io/size</code> does not actually take effect and is only used to correspond to <code>search.clusterpedia.io/offset</code>.</p>
+<blockquote>
+<p><code>URL Query</code> has a higher priority than <code>Search Label</code></p>
+</blockquote>
+<p>There is no flag to set for <code>continue</code> in kubectl. So you have to use <a href=../#paging>Search Label</a> to pass it.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods --chunk-size <span style=color:#0000cf;font-weight:700>10</span> -l <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/offset=10&#34;</span>
+</code></pre></div></div>
+<div id=tabset-docsusagesearchmulti-cluster-6-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-6-1>
+<p><p>To paginate resources, just set the <code>limit</code> and <code>continue</code> in the URL.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?limit=10&amp;continue=5&#34;</span>
+</code></pre></div></div></div>
+<h3 id=response-with-continue>Response With Continue</h3>
+<p><a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta>ListMeta.Continue</a> can be used in <a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListOptions>ListOptions.Continue</a> as the offset for the next request.</p>
+<p>As mentioned in the paging feature, Clusterepdia does not have <code>continue</code> in the response to prevent kubectl from pulling the full amount of data in pieces.</p>
+<p>However, if the user requires it, he can request that the response include <code>continue</code>.
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-7 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-7-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-7-0 aria-selected=true>URL</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-7-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-7-1>kubectl</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-7><div id=tabset-docsusagesearchmulti-cluster-7-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-7-0>
+<p><p>When accessing Clusterepdia using a URL, the response' <code>continue</code> can be used as the offset for the next request.</p>
+<blockquote>
+<p>Use with paging</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?withContinue=true&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
+  <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;DeploymentList&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;metadata&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;continue&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;1&#34;</span>
+  <span style=color:#000;font-weight:700>},</span>
+  <span style=color:#204a87;font-weight:700>&#34;items&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+    <span style=color:#a40000>...</span>
+  <span style=color:#000;font-weight:700>]</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div></div>
+<div id=tabset-docsusagesearchmulti-cluster-7-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-7-1>
+<p><p><strong>Setting <code>search.clusterpedia.io/with-continue</code> in kubectl will result in pulling the full amount of resources as a paged pull.</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deploy -l <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/with-continue=true&#34;</span>
+</code></pre></div></div></div>
+</p>
+<h3 id=response-with-remaining-count>Response With Remaining Count</h3>
+<p><strong>In some UI cases, it is often necessary to get the total number of resources in the current search condition.</strong></p>
+<p>The <code>RemainingItemCount</code> field exists in the <a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta>ListMeta</a> of the Kubernetes List response.</p>
+<p>By reusing this field, the total number of resources can be returned in a Kubernetes OpenAPI-compatible manner:</p>
+<p><strong><code>offset + len(list.items) + list.metadata.remainingItemCount</code></strong>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-8 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-8-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-8-0 aria-selected=true>URL</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-8-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-8-1>kubectl</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-8><div id=tabset-docsusagesearchmulti-cluster-8-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-8-0>
+<p><p>Set <code>withRemainingCount</code> in the <a href=../#paging>URL Query</a> to request that the response include the number of remaining resources.</p>
+<blockquote>
+<p>Use with paging</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?withRemainingCount&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
+  <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;DeploymentList&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;metadata&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;remainingItemCount&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>23</span>
+  <span style=color:#000;font-weight:700>},</span>
+  <span style=color:#204a87;font-weight:700>&#34;items&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+    <span style=color:#a40000>...</span>
+  <span style=color:#000;font-weight:700>]</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div></div>
+<div id=tabset-docsusagesearchmulti-cluster-8-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-8-1>
+<p><p>Need to use this feature as a URL</p>
+</div></div>
+</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-d30ab8cb55be590100ae14cd7d8c1d47>3.4.2 - Search in a Specified Cluster</h1>
+<p>In addition to searching in multiple clusters, Clusterpedia can also search for resources in a specified cluster.</p>
+<blockquote>
+<p>Using <a href=../#search-by-metadata><code>Search Label</code></a> or <a href=../#search-by-metadata><code>URL Query</code></a> to specify a single cluster is not different from specifying a cluster in URL Path in terms of performance</p>
+<p>This topic focuses on specifying clusters in URL Path</p>
+</blockquote>
+<p>Before using kubectl in the way of specifying a cluster, you need to <a href=../../access-clusterpedia#configure-the-cluster-shortcut-for-kubectl>configure the cluster shortcut for kubectl</a></p>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchspecified-cluster-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchspecified-cluster-1-0 role=tab aria-controls=tabset-docsusagesearchspecified-cluster-1-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchspecified-cluster-1-1 role=tab aria-controls=tabset-docsusagesearchspecified-cluster-1-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchspecified-cluster-1><div id=tabset-docsusagesearchspecified-cluster-1-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-1-0>
+<p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get deployments -n kube-system
+</code></pre></div><pre tabindex=0><code># Output:
+NAMESPACE     CLUSTER     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   cluster-1   coredns                   2/2     2            2           68d
+</code></pre></div>
+<div id=tabset-docsusagesearchspecified-cluster-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-1-1>
+<p><p>Specify a cluster by using the cluster name in the URL path</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
+</code></pre></div><p>You can also specify a single cluster by <code>URL Query</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
+</code></pre></div></div></div>
+<p>The function supported by searching in a specified cluster is basically the same as that of <a href=../multi-cluster>multi-cluster search</a>.</p>
+<p>It is more convenient for searching by Owner in a specified cluster. In addition, when <strong>getting a single resource, you can only use the specified cluster in the URL Path</strong>.</p>
+<h2 id=search-by-parent-or-ancestor-owner>Search by Parent or Ancestor Owner</h2>
+<p>To query by Owner, you shall specify a single cluster. You can use <a href=../#search-by-metadata>Search Label</a> or <a href=../#search-by-metadata>URL Query</a> to specify, or specify the cluster name in the URL Path.</p>
+<p><strong>Resource search based on ancestors Owner can be completed through <code>Owenr UID</code> and <code>Owenr Senirority</code>.</strong></p>
+<blockquote>
+<p>Currently only supports query by <code>Owner UID</code></p>
+</blockquote>
+<p>For example, directly query the corresponding <code>Pods</code> by using <code>Deployment UID</code>, without querying which <code>ReplicaSet</code> belongs to the <code>Deployment</code>.</p>
+<p>Firstly use kubectl to get <code>Deployment</code> UID</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get deploy fake-deploy -o <span style=color:#000>jsonpath</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;{.metadata.uid}&#34;</span>
+</code></pre></div><pre tabindex=0><code>#Output:
+151ae265-28fe-4734-850e-b641266cd5da
+</code></pre><blockquote>
+<p>Getting the uid under kubectl may be tricky, but it&rsquo;s usually already easier to check <code>metadata.uid</code> in UI scenarios</p>
+</blockquote>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchspecified-cluster-2 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchspecified-cluster-2-0 role=tab aria-controls=tabset-docsusagesearchspecified-cluster-2-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchspecified-cluster-2-1 role=tab aria-controls=tabset-docsusagesearchspecified-cluster-2-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchspecified-cluster-2><div id=tabset-docsusagesearchspecified-cluster-2-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-2-0>
+<p><p>Use <code>owner-uid</code> to specify Owner UID and use <code>owner-seniority</code> to promote the Owner&rsquo;s seniority.</p>
+<blockquote>
+<p><em><code>owner-seniority</code> is 0 by default, which represents Owner is parent. If you set it to 1, Owenr can be promoted to grandfather</em></p>
+</blockquote>
+<pre tabindex=0><code>kubectl --cluster cluster-1 get pods -l \
+    &quot;internalstorage.clusterpedia.io/owner-uid=151ae265-28fe-4734-850e-b641266cd5da,\
+     internalstorage.clusterpedia.io/owner-seniority=1&quot;
+</code></pre></div>
+<div id=tabset-docsusagesearchspecified-cluster-2-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-2-1>
+<p><p>Search by Owner is an experimental feature and URL Query has not been provided yet</p>
+</div></div>
+<blockquote>
+<p>Search by Owner is an experimental feature, temporarily prefixed with <em>internalstorage.clusterpedia.io</em> as <a href=../#search-by-owner>Search Label</a></p>
+<p>After you confirm the availability and usefulness of relevant features, move it under <em>search.clusterpedia.io</em>.</p>
+</blockquote>
+<p>The search feature of combining <code>Owner Namespace</code> and <code>Owenr Name</code> into <code>Owner Key</code> is still in discussion, welcome to join <a href=https://github.com/clusterpedia-io/clusterpedia/issues/49>issue: Support for searching resources by owner</a> and discuss together.</p>
+<h2 id=get-a-single-resource>Get a single resource</h2>
+<p>When we want to use the resource name to get (Get) a resource, we must pass the cluster name in the URL Path, just like namespace.</p>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchspecified-cluster-3 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchspecified-cluster-3-0 role=tab aria-controls=tabset-docsusagesearchspecified-cluster-3-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchspecified-cluster-3-1 role=tab aria-controls=tabset-docsusagesearchspecified-cluster-3-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchspecified-cluster-3><div id=tabset-docsusagesearchspecified-cluster-3-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-3-0>
+<p><p>If a resource name is passed in a multi-cluster mode, an error will be reported</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get deploy fake-deploy 
+</code></pre></div><pre tabindex=0><code># Output:
+CLUSTER     NAME        READY   UP-TO-DATE   AVAILABLE   AGE
+cluster-1   fake-deploy 1/1     1            1           35d
+</code></pre><p>Certainly, you can use <a href=../#search-by-metadata>Search Label</a> to specify a resource name in the case of kubectl.</p>
+<p>However, if you use <code>-o yaml</code> or other methods to check the returned source data, it is different from using <code>kubectl --cluster &lt;cluster name></code>.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># The actual server returns the DeploymentList resource, which is replaced with a list by kubectl</span>
+kubectl --cluster clusterpedia get deploy -l 
+    <span style=color:#4e9a06>&#34;search.clusterpedia.io/clusters=cluster-1,\
+</span><span style=color:#4e9a06>     search.clusterpedia.io/names=fake-deploy&#34;</span> -o yaml
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># Output:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>items</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>List</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resourceVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>selfLink</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>The actual returned resource is still a <code>KindList</code>, while <code>kubectl --cluster &lt;clsuter name></code> returns a specific <code>Kind</code>.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get deploy fake-deploy -o yaml
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># Output:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps/v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>annotations</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>deployment.kubernetes.io/revision</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;1&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>shadow.clusterpedia.io/cluster-name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>creationTimestamp</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;2021-12-16T02:26:29Z&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>generation</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>fake-deploy</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>namespace</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>default</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resourceVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;38085769&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>uid</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>151ae265-28fe-4734-850e-b641266cd5da</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div></div>
+<div id=tabset-docsusagesearchspecified-cluster-3-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-3-1>
+<p><p>The URL to get a specified resource can be divided into three parts:</p>
+<ul>
+<li>Prefix to search for resource: <em>/apis/pedia.clusterpedia.io/v1alpha1/resources</em></li>
+<li>Specified cluster name: <em>/clusters/&lt; cluster name ></em></li>
+<li>Resource name for Kubernetes API: Path <em>/apis/apps/v1/deployments/namespaces/<namespace>/<resource name></em></li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alhpa1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy&#34;</span>
+</code></pre></div></div></div>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-83e3a820b19f3a40c674f197775a60c8>3.4.3 - Search for Collection Resource</h1>
+<p>For collection resource, refer to <a href=../../../concepts/collection-resource>What is Collection Resource</a></p>
+<p>Due to the limitation of kubectl, we cannot pass search conditions through <code>Label Selector</code> or other methods, so <strong>it is recommended to search for <code>Collection Resource</code></strong> by using a URL.</p>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchcollection-resource-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchcollection-resource-1-0 role=tab aria-controls=tabset-docsusagesearchcollection-resource-1-0 aria-selected=true>URL</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchcollection-resource-1-1 role=tab aria-controls=tabset-docsusagesearchcollection-resource-1-1>kubectl</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchcollection-resource-1><div id=tabset-docsusagesearchcollection-resource-1-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchcollection-resource-1-0>
+<p><blockquote>
+<p><strong>When requesting <code>Collection Resource</code>, you shall use <a href=../#paging>paging</a> because the number of resources may be very large.</strong></p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/collectionresources/workloads?limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#a40000>#</span> <span style=color:#a40000>Output</span>
+<span style=color:#000;font-weight:700>{</span>
+  <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;CollectionResource&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pedia.clusterpedia.io/v1alpha1&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;metadata&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;workloads&#34;</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;creationTimestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>null</span>
+  <span style=color:#000;font-weight:700>},</span>
+  <span style=color:#204a87;font-weight:700>&#34;reosurceTypes&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;group&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Deployment&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;resource&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;deployments&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;group&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;resource&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;daemonsets&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;group&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;resource&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;statefulsets&#34;</span>
+    <span style=color:#000;font-weight:700>}</span>
+  <span style=color:#000;font-weight:700>],</span>
+  <span style=color:#204a87;font-weight:700>&#34;items&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+    <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Deployment&#34;</span><span style=color:#000;font-weight:700>,</span>
+      <span style=color:#a40000>...</span>
+    <span style=color:#000;font-weight:700>}</span>
+  <span style=color:#000;font-weight:700>]</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><p>The complex search of <code>Collection Resource</code> is basically the same as the function of <a href=../multi-cluster>multi-cluster resource search</a>, only some operations are not supported:</p>
+<ul>
+<li>Search by Owner is not supported. If you need to specify a specific resource type to search by Owner, you can refer to <a href=../multi-cluster#query-by-parent-or-ancestor-owner><code>multi-cluster resource search</code></a> and <a href=../specified-cluster#search-by-parent-or-ancestor-owner><code>specified cluster search</code></a></li>
+<li>Getting a specific single resource in <code>Collection Resource</code> is not supported, because you shall specify cluster and type for a specific resource. In this case, you can use <a href=../specified-cluster#get-a-single-resource>Get a single resource</a>.</li>
+</ul>
+</div>
+<div id=tabset-docsusagesearchcollection-resource-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchcollection-resource-1-1>
+<p><p>It is not easy to search for <code>Collection Resource</code> by using kubectl. However, you can have a try.</p>
+<blockquote>
+<p>kubectl cannot pass pages and other search conditions and may get all <code>Collection Resources</code> at one time. It is not recommended to use kubectl to view <code>Collection Resource</code> if a large number of clusters are imported or a cluster has many <code>deployments</code>, <code>daemonsets</code> and <code>statefulsets</code> resources.</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources workloads
+</code></pre></div><pre tabindex=0><code># Output
+CLUSTER     GROUP   VERSION   KIND         NAMESPACE                     NAME                                          AGE
+cluster-1   apps    v1        DaemonSet    kube-system                   vsphere-cloud-controller-manager              63d
+cluster-2   apps    v1        Deployment   kube-system                   calico-kube-controllers                       109d
+cluster-2   apps    v1        Deployment   kube-system                   coredns-coredns                               109d
+...
+</code></pre><p><strong>Search for <code>Collection Resource</code> by using URL</strong></p>
+</div></div>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-c9da5865a77748e4db7d4db31200b34f>4 - Release notes</h1>
 </div>
 </main>
 </div>
