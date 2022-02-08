@@ -9,3 +9,9 @@ Add styles or override variables from the theme here.
 .asciinema-player .start-prompt {
   display: none;
 }
+
+.asciinema-player.asciinema-theme-asciinema .asciinema-terminal {
+    background-color: rgba(18,19,20,0.8);
+    border-width: 0;
+    padding: 0.5em;
+}
