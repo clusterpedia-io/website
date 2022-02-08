@@ -38,10 +38,11 @@ URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一�
 由于 kubectl 的限制，我们无法通过 Label Selector 或者其他方式来传递检索参数， 所以建议以 URL 的方式来检索聚合资源。
 URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一定要搭配分页功能使用。
  kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/collectionresources/workloads?limit=1&#34; | jq # 输出 { &#34;kind&#34;: &#34;CollectionResource&#34;, &#34;apiVersion&#34;: &#34;pedia.clusterpedia.io/v1alpha1&#34;, &#34;metadata&#34;: { &#34;name&#34;: &#34;workloads&#34;, &#34;creationTimestamp&#34;: null }, &#34;reosurceTypes&#34;: [ { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;kind&#34;: &#34;Deployment&#34;, &#34;resource&#34;: &#34;deployments&#34; }, { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;resource&#34;: &#34;daemonsets&#34; }, { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;resource&#34;: &#34;statefulsets&#34; } ], &#34;items&#34;: [ { &#34;apiVersion&#34;: &#34;apps/v1&#34;, &#34;kind&#34;: &#34;Deployment&#34;, .">
-<link rel=preload href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css as=style>
-<link href=/scss/main.min.e971a131bb46471388eb21aac586eb4a5400b903c00c77a4322cb2cebfbb3454.css rel=stylesheet integrity>
+<link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
+<link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script src=https://unpkg.com/lunr@2.3.9/lunr.min.js integrity=sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli crossorigin=anonymous></script>
+<link href=https://cdn.bootcdn.net/ajax/libs/asciinema-player/2.6.1/asciinema-player.min.css rel=stylesheet>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZQPMJ4HH3"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NZQPMJ4HH3',{anonymize_ip:!1})}</script>
 </head>
@@ -75,7 +76,7 @@ URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一�
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.87ed13ed3074c25c333cf9c6e61524c2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b7a43eab0b29c7e1b517703d24758675.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -85,7 +86,7 @@ URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一�
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.87ed13ed3074c25c333cf9c6e61524c2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b7a43eab0b29c7e1b517703d24758675.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -309,5 +310,6 @@ Sorry to hear that. Please <a href=https://github.com/USERNAME/REPOSITORY/issues
 <script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
 <script src=/js/tabpane-persist.js></script>
 <script src=/js/main.min.8ab8f81ff7e1454d30024cd6f956d4d341c3a97e2a673f988065f2ee4e147922.js integrity="sha256-irj4H/fhRU0wAkzW+VbU00HDqX4qZz+YgGXy7k4UeSI=" crossorigin=anonymous></script>
+<script src=https://cdn.bootcdn.net/ajax/libs/asciinema-player/2.6.1/asciinema-player.min.js></script>
 </body>
 </html>
