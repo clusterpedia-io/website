@@ -52,7 +52,7 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/clust
 
 Clusterpedia 提供了一个简单的脚本来帮助生成 `cluster kube config`
 ```bash
-curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/hack/gen-clusterconfigs.sh | sh -
+curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/gen-clusterconfigs.sh | sh -
 ```
 ```
 # 输出：
@@ -68,7 +68,7 @@ Cluster "clusterpedia" set.
 Cluster "cluster-1" set.
 Cluster "cluster-2" set.
 ```
-> 可以在 [hack/gen-clusterconfigs.sh](https://github.com/clusterpedia-io/clusterpedia/blob/main/hack/gen-clusterconfigs.sh) 找到该脚本
+> 可以在 [hack/gen-clusterconfigs.sh](https://github.com/clusterpedia-io/clusterpedia/blob/v0.0.9-alpha/hack/gen-clusterconfigs.sh) 找到该脚本
 
 脚本会打印当前的集群信息，并将集群中 PediaCluster 配置到 kubeconfig 中。
 ```bash
