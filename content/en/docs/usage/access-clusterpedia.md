@@ -51,7 +51,7 @@ Although we can use URLs to access Clusterpedia resources, if we want to use kub
 
 Clusterpedia provides a simple script to generate `cluster config` in the kubeconfig.
 ```bash
-curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/hack/gen-clusterconfigs.sh | sh -
+curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/gen-clusterconfigs.sh | sh -
 ```
 ```
 # Output:
@@ -67,7 +67,7 @@ Cluster "clusterpedia" set.
 Cluster "cluster-1" set.
 Cluster "cluster-2" set.
 ```
-> Check the script from [hack/gen-clusterconfigs.sh](https://github.com/clusterpedia-io/clusterpedia/blob/main/hack/gen-clusterconfigs.sh)
+> Check the script from [hack/gen-clusterconfigs.sh](https://github.com/clusterpedia-io/clusterpedia/blob/v0.0.9-alpha/hack/gen-clusterconfigs.sh)
 
 The script prints the current cluster information and configures the `PediaCluster` into kubeconfig.
 ```bash
