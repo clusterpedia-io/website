@@ -12,6 +12,7 @@ The installation of Clusterpedia is divided into several parts:
 Pull clusterpedia project:
 ```bash
 git clone https://github.com/clusterpedia-io/clusterpedia.git
+git checkout v0.0.9-alpha
 cd clusterpedia
 ```
 
