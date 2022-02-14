@@ -8,13 +8,13 @@ Clusterpedia 的主要功能，便是提供对多集群内的资源进行复杂�
 通过 `PediaCluster` 资源来指定该集群中哪些资源需要支持复杂检索，Clusterpedia 会将这些资源实时的通过`存储层`同步到`存储组件`中
 ```yaml
 # example
-apiVersion: clusters.clusterpedia.io/v1alpha1
+apiVersion: cluster.clusterpedia.io/v1alpha2
 kind: PediaCluster
 metadata:
   name: cluster-example
 spec:
-  apiserverURL: "https://10.30.43.43:6443"
-  resources:
+  apiserver: "https://10.30.43.43:6443"
+  syncResources:
   - group: apps
     resources:
      - deployments
@@ -32,7 +32,7 @@ spec:
 ## 内置资源同步
 `PediaCluster` 为了方便管理和查看这些同步的资源，用户需要以 Group 为单位来配置资源
 ```yaml
-resources:
+syncResources:
  - group: apps
    versions: []
    resources:
@@ -44,7 +44,7 @@ resources:
 Clusterpedia 会根据该集群内所支持的资源版本自动选择合适的版本来收集，
 并且用户无需担心版本转换的问题， Clusterpedia 会开放出该内置资源的所有版本接口。
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps" | jq
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps" | jq
 ```
 ```json
 {
@@ -76,7 +76,7 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps" | j
 ## 自定义资源同步
 相比内置资源，自定义资源在资源版本的配置上会稍有不同。
 ```yaml:
-resources:
+syncResources:
  - group: cert-manager.io
    versions: []
    resources:
@@ -87,7 +87,7 @@ resources:
 以 cert-manager.io 为例，获取被接入集群中 cert-manager.io 支持的 Group
 ```bash
 # 在被接入集群内执行
-kubectl --cluster clusterpedia get --raw="/apis/cert-manager.io" | jq
+kubectl get --raw="/apis/cert-manager.io" | jq
 ```
 ```json
 {
@@ -120,12 +120,12 @@ kubectl --cluster clusterpedia get --raw="/apis/cert-manager.io" | jq
 ```
 可以看到，被接入集群支持 *cert-manager.io*  的 `v1`，`v1beta1`，`v1alpha3`，`v1alpha2` 四个版本。
 
-当 `resources.[group].versions` 为空时，Clusterpedia 就会以 `APIGroup.versions` 列表的顺序，收集 `v1`， `v1beta1`，`v1alpah3` 三个版本，而 `v1alpha2` 不会被收集
+当 `syncResources.[group].versions` 为空时，Clusterpedia 就会以 `APIGroup.versions` 列表的顺序，收集 `v1`， `v1beta1`，`v1alpah3` 三个版本，而 `v1alpha2` 不会被收集
 
 ### 指定自定义资源的同步版本
 如果用户指定了 `versions`，那么就会按照 `versions` 的配置来收集指定的版本资源。
 ```yaml
-resources:
+syncResources:
  - group: cert-manager.io
    versions:
     - v1beta1
@@ -150,12 +150,12 @@ resources:
 
 ```yaml
 status:
-  resources:
+  syncResources:
   - group: apps
     resources:
-    - kind: Deployment
+    - name: deployments
+      kind: Deployment
       namespaced: true
-      resource: deployments
       syncConditions:
       - lastTransitionTime: "2022-01-13T04:34:08Z"
         status: Syncing
@@ -169,12 +169,12 @@ status:
 例如，同步 1.10 版本 Kubernetes 的 Deployment 时，同步状态为：
 ```yaml
 status:
-  resources:
+  syncResources:
   - group: apps
     resources:
-    - kind: Deployment
+    - name: deployments
+      kind: Deployment
       namespaced: true
-      resource: deployments
       syncConditions:
       - lastTransitionTime: "2022-01-13T04:34:04Z"
         status: Syncing

@@ -54,12 +54,12 @@ kubectl --cluster cluster-1 get deployments"
 {{% tab name="URL" %}}
 使用 URL 时，使用 `clusters` 作为 [URL Query](../#元信息检索) 来传递
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?clusters=cluster-1"
 ```
 
 如果指定单个集群，也可以将 cluster name 放到 URL 路径中
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/deployments"
 ```
 了解更多[指定集群检索](../specified-cluster)
 {{< /tab >}}
@@ -102,12 +102,12 @@ default       cluster-2   dd-airflow-web            0/1     1            0      
 {{% tab name="URL" %}}
 获取资源的 **URL Path** 和原生 Kubernetes 一样 */apis/apps/v1/deployments*，
 
-只是需要加上 Clusterpedia Resources 的路径前缀 */apis/pedia.clusterpedia.io/v1alpha1/resources* 来表示当前是 Clusterpedia 请求。
+只是需要加上 Clusterpedia Resources 的路径前缀 */apis/clusterpedia.io/v1beta1/resources* 来表示当前是 Clusterpedia 请求。
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments"
 
 # 指定命名空间
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/namespaces/kube-system/deployments"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/namespaces/kube-system/deployments"
 ```
 {{< /tab >}}
 
@@ -138,7 +138,7 @@ default       cluster-2   dd-airflow-web            0/1     1            0      
 {{% tab name="URL" %}}
 使用 URL 时，就不需要使用 Label Selector 来传递参数了，直接使用 URL Query `namespaces` 即可
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?namespaces=kube-system,default"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?namespaces=kube-system,default"
 ```
 {{< /tab >}}
 
@@ -167,10 +167,10 @@ kube-system   cluster-2   coredns                   2/2     2            2      
 {{% tab name="URL" %}}
 使用 URL 时，使用 `names` 作为 URL Query 来传递，如果需要指定命名空间，那么就在路径中加上 namespace。
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?names=kube-coredns,dd-airflow-web"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?names=kube-coredns,dd-airflow-web"
 
 # 在 default 命名空间下检索指定名字的资源
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/namespaces/default/deployments?names=kube-coredns,dd-airflow-web"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/namespaces/default/deployments?names=kube-coredns,dd-airflow-web"
 ```
 
 在多集群检索时，返回的数据实际是以类似 `DeploymentList` 的结构封装的数据。
@@ -253,12 +253,12 @@ kubectl --cluster clusterpedia get pods -l \
 {{% tab name="URL" %}}
 使用 [URL Query](../#排序) 来指定排序字段
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace,cluster"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?orderby=namespace,cluster"
 ```
 
 指定倒序字段时，在字段后添加 desc，以空格分隔
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace desc,cluster"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?orderby=namespace desc,cluster"
 ```
 {{< /tab >}}
 
@@ -295,7 +295,7 @@ kubectl --cluster clusterpedia get pods --chunk-size 10 -l \
 {{% tab name="URL" %}}
 对资源进行分页检索，只需要在 URL 中设置 `limit` 和 `continue` 即可
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?limit=10&continue=5"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?limit=10&continue=5"
 ```
 {{< /tab >}}
 
@@ -314,7 +314,7 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/d
 > 搭配分页功能使用
 
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?withContinue=true&limit=1" | jq
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?withContinue=true&limit=1" | jq
 ```
 ```json
 {
@@ -354,7 +354,7 @@ Kubernetes List 响应的 [ListMeta](https://pkg.go.dev/k8s.io/apimachinery/pkg/
 在 [URL Query](../#分页) 设置 `withRemainingCount` 即可要求响应携带剩余资源数量
 > 搭配[分页](#分页)功能使用
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?withRemainingCount&limit=1" | jq
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?withRemainingCount&limit=1" | jq
 ```
 ```json
 {

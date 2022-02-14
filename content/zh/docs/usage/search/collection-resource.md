@@ -13,18 +13,18 @@ weight: 12
 {{% tab name="URL" %}}
 > **请求`聚合资源`时，由于资源数量可能会非常大，一定要搭配[分页功能](../#分页)使用。**
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/collectionresources/workloads?limit=1" | jq
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/collectionresources/workloads?limit=1" | jq
 ```
 ```json
 # 输出
 {
   "kind": "CollectionResource",
-  "apiVersion": "pedia.clusterpedia.io/v1alpha1",
+  "apiVersion": "clusterpedia.io/v1beta1",
   "metadata": {
     "name": "workloads",
     "creationTimestamp": null
   },
-  "reosurceTypes": [
+  "resourceTypes": [
     {
       "group": "apps",
       "version": "v1",
