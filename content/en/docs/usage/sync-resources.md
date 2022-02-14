@@ -9,13 +9,13 @@ Clusterpedia uses the `PediaCluster` resource to specify which resources in the 
 and synchronizes these resources onto the `Storage Component` via `Storage Layer` in real time.
 ```yaml
 # example
-apiVersion: clusters.clusterpedia.io/v1alpha1
+apiVersion: cluster.clusterpedia.io/v1alpha2
 kind: PediaCluster
 metadata:
   name: cluster-example
 spec:
-  apiserverURL: "https://10.30.43.43:6443"
-  resources:
+  apiserver: "https://10.30.43.43:6443"
+  syncResources:
   - group: apps
     resources:
      - deployments
@@ -33,7 +33,7 @@ spec:
 ## Synchronize built-in resources
 In order to manage and view these synchronized resources through `PediaCluster`, you need to configure resources in groups
 ```yaml
-resources:
+syncResources:
  - group: apps
    versions: []
    resources:
@@ -46,7 +46,7 @@ Clusterpedia will automatically select the appropriate version to synchronize ba
 
 Also, you do not need to worry about version conversion because Clusterpedia will open all version interfaces for built-in resources.
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps" | jq
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps" | jq
 ```
 ```json
 {
@@ -78,7 +78,7 @@ Clusterpedia supports three versions of `Deployment`: `v1`, `v1beta2`, and `v1be
 ## Synchronize custom resources
 Compared with built-in resources, custom resources have slightly different configuration on resource versions.
 ```yaml:
-resources:
+syncResources:
  - group: cert-manager.io
    versions: []
    resources:
@@ -89,7 +89,7 @@ resources:
 Take cert-manager.io as an example to get the Group supported by cert-manager.io in an imported cluster
 ```bash
 # Run the command in an imported cluster
-kubectl --cluster clusterpedia get --raw="/apis/cert-manager.io" | jq
+kubectl get --raw="/apis/cert-manager.io" | jq
 ```
 ```json
 {
@@ -122,12 +122,12 @@ kubectl --cluster clusterpedia get --raw="/apis/cert-manager.io" | jq
 ```
 The imported cluster supports four versions for *cert-manager.io*: `v1`, `v1beta1`, `v1alpha3`, `v1alpha2`.  
 
-When `resources.[group].versions` is left blank, Clusterpedia will synchronize three versions `v1`, `v1beta1`, `v1alpah3` in the order of the `APIGroup.versions` list except for `v1alpha2`.
+When `syncResources.[group].versions` is left blank, Clusterpedia will synchronize three versions `v1`, `v1beta1`, `v1alpah3` in the order of the `APIGroup.versions` list except for `v1alpha2`.
 
 ### Specify a sync version for custom resources
 If you specified `versions`, the specific resource would be synchronized by `versions`.
 ```yaml
-resources:
+syncResources:
  - group: cert-manager.io
    versions:
     - v1beta1
@@ -152,12 +152,12 @@ For `Status`, a resource may have **Sync Version** and **Storage Version**:
 
 ```yaml
 status:
-  resources:
+  syncResources:
   - group: apps
     resources:
-    - kind: Deployment
+    - name: deployments
+      kind: Deployment
       namespaced: true
-      resource: deployments
       syncConditions:
       - lastTransitionTime: "2022-01-13T04:34:08Z"
         status: Syncing
@@ -171,12 +171,12 @@ However, if an imported cluster only provides the `Deployment` resource of the `
 For example, when synchronizing a Deployment of Kubernetes 1.10, the synchronization status is as follows:
 ```yaml
 status:
-  resources:
+  syncResources:
   - group: apps
     resources:
-    - kind: Deployment
+    - name: deployments
+      kind: Deployment
       namespaced: true
-      resource: deployments
       syncConditions:
       - lastTransitionTime: "2022-01-13T04:34:04Z"
         status: Syncing

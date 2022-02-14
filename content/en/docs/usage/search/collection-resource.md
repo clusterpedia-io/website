@@ -13,18 +13,18 @@ Due to the limitation of kubectl, we cannot pass search conditions through `Labe
 {{% tab name="URL" %}}
 > **When requesting `Collection Resource`, you shall use [paging](../#paging) because the number of resources may be very large.**
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/collectionresources/workloads?limit=1" | jq
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/collectionresources/workloads?limit=1" | jq
 ```
 ```json
 # Output
 {
   "kind": "CollectionResource",
-  "apiVersion": "pedia.clusterpedia.io/v1alpha1",
+  "apiVersion": "clusterpedia.io/v1beta1",
   "metadata": {
     "name": "workloads",
     "creationTimestamp": null
   },
-  "reosurceTypes": [
+  "resourceTypes": [
     {
       "group": "apps",
       "version": "v1",

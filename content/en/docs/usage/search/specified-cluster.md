@@ -27,12 +27,12 @@ kube-system   cluster-1   coredns                   2/2     2            2      
 {{% tab name="URL" %}}
 Specify a cluster by using the cluster name in the URL path
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/deployments"
 ```
 
 You can also specify a single cluster by `URL Query`
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?clusters=cluster-1"
 ```
 {{< /tab >}}
 
@@ -149,12 +149,12 @@ status:
 
 {{% tab name="URL" %}}
 The URL to get a specified resource can be divided into three parts:
-* Prefix to search for resource: */apis/pedia.clusterpedia.io/v1alpha1/resources*
+* Prefix to search for resource: */apis/clusterpedia.io/v1beta1/resources*
 * Specified cluster name: */clusters/< cluster name >*
 * Resource name for Kubernetes API: Path */apis/apps/v1/deployments/namespaces/<namespace>/<resource name>*
 
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alhpa1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy"
 ```
 {{< /tab >}}
 
