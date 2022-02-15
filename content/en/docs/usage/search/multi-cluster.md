@@ -192,7 +192,7 @@ Field Selector's key currently supports three formats.
 kubectl --cluster clusterpedia get pods --field-selector="status.phase=Running"
 
 # we can also add the first character `.`
-kubectl --cluster clusterpedia get pods --field-selector=".status.phase not in (Running,Succeeded)"
+kubectl --cluster clusterpedia get pods --field-selector=".status.phase notin (Running,Succeeded)"
 ```
 
 * **Field names wrapped in `''` or `""`** can be used for fields with illegal characters like `.`
