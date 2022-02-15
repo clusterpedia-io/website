@@ -55,12 +55,12 @@ kubectl --cluster cluster-1 get deployments"
 {{% tab name="URL" %}}
 When using URL, use `clusters` as URL Query to pass.
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?clusters=cluster-1"
 ```
 
 If we specify a single cluster, we can also put the cluster name in the URL Path.
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/deployments"
 ```
 Lean More [Specify Cluster Search](../specified-cluster)
 {{< /tab >}}
@@ -103,12 +103,12 @@ default       cluster-2   dd-airflow-web            0/1     1            0      
 {{% tab name="URL" %}}
 The **URL Path** to get the resources is the same as the native Kubernetes */apis/apps/v1/deployments*.
 
-We just need to prefix the path to Clusterpedia Resources with **/apis/pedia.clusterpedia.io/v1alpha1/resources** to indicate that it is currently a Clusterpedia request.
+We just need to prefix the path to Clusterpedia Resources with **/apis/clusterpedia.io/v1beta1/resources** to indicate that it is currently a Clusterpedia request.
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments"
 
 # Specify namespace
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/namespaces/kube-system/deployments"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/namespaces/kube-system/deployments"
 ```
 {{< /tab >}}
 
@@ -139,7 +139,7 @@ default       cluster-2   dd-airflow-web            0/1     1            0      
 {{% tab name="URL" %}}
 When using URL, we don't need to use Label Selector to pass parameters, just use URL Query - `namespaces`
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?namespaces=kube-system,default"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?namespaces=kube-system,default"
 ```
 {{< /tab >}}
 
@@ -168,10 +168,10 @@ kube-system   cluster-2   coredns                   2/2     2            2      
 {{% tab name="URL" %}}
 When using URL, use `names` to pass as **URL Query**, and if you need to specify namespaces, then add namespace to the path.
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?names=kube-coredns,dd-airflow-web"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?names=kube-coredns,dd-airflow-web"
 
 # search resources with specified names under default namespace
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/namespaces/default/deployments?names=kube-coredns,dd-airflow-web"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/namespaces/default/deployments?names=kube-coredns,dd-airflow-web"
 ```
 
 When searching from multiple clusters, the data returned is actually encapsulated in a structure similar to `DeploymentList`.
@@ -256,12 +256,12 @@ kubectl --cluster clusterpedia get pods -l \
 {{% tab name="URL" %}}
 Use [URL Query](../#orderby) to specify sorting fields
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace,cluster"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?orderby=namespace,cluster"
 ```
 
 When specifying a field in order by desc, add **desc** to the end of the field, separated by spaces
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace desc,cluster"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?orderby=namespace desc,cluster"
 ```
 {{< /tab >}}
 
@@ -300,7 +300,7 @@ kubectl --cluster clusterpedia get pods --chunk-size 10 -l \
 {{% tab name="URL" %}}
 To paginate resources, just set the `limit` and `continue` in the URL.
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?limit=10&continue=5"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?limit=10&continue=5"
 ```
 {{< /tab >}}
 
@@ -318,7 +318,7 @@ However, if the user requires it, he can request that the response include `cont
 When accessing Clusterepdia using a URL, the response' `continue` can be used as the offset for the next request.
 > Use with paging
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?withContinue=true&limit=1" | jq
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?withContinue=true&limit=1" | jq
 ```
 ```json
 {
@@ -358,7 +358,7 @@ By reusing this field, the total number of resources can be returned in a Kubern
 Set `withRemainingCount` in the [URL Query](../#paging) to request that the response include the number of remaining resources.
 > Use with paging
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?withRemainingCount&limit=1" | jq
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?withRemainingCount&limit=1" | jq
 ```
 ```json
 {

@@ -69,7 +69,7 @@ All behaviors are consistent with those provided by Kubernetes.
 All command parameters for URL and kubectl are same as those for Field Selector.
 |Role|kubectl|url query|
 | -- | --------------- | ------- |
-|Filter by fields|`kubectl --field-selector`|`fieldSelector\|
+|Filter by fields|`kubectl --field-selector`|`fieldSelector`|
 
 For details refer to:
 * [search for resources by filtering fields](./multi-cluster#field-selector)
