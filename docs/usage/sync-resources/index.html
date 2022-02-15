@@ -19,20 +19,20 @@ Clusterpedia uses the PediaCluster resource to …">
 <meta property="og:title" content="Synchronize Cluster Resources">
 <meta property="og:description" content="The main function of Clusterpedia is to provide complex search for resources in multiple clusters.
 Clusterpedia uses the PediaCluster resource to specify which resources in the cluster need to support complex search, and synchronizes these resources onto the Storage Component via Storage Layer in real time.
-# exampleapiVersion:clusters.clusterpedia.io/v1alpha1kind:PediaClustermetadata:name:cluster-examplespec:apiserverURL:&#34;https://10.30.43.43:6443&#34;resources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmsp- group:cert-manager.ioversions:- v1resources:- certificatesSynchronize built-in resources In order to manage and view these synchronized resources through PediaCluster, you need to configure resources in groups">
+# exampleapiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;syncResources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmsp- group:cert-manager.ioversions:- v1resources:- certificatesSynchronize built-in resources In order to manage and view these synchronized resources through PediaCluster, you need to configure resources in groups">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/usage/sync-resources/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
 <meta itemprop=name content="Synchronize Cluster Resources">
 <meta itemprop=description content="The main function of Clusterpedia is to provide complex search for resources in multiple clusters.
 Clusterpedia uses the PediaCluster resource to specify which resources in the cluster need to support complex search, and synchronizes these resources onto the Storage Component via Storage Layer in real time.
-# exampleapiVersion:clusters.clusterpedia.io/v1alpha1kind:PediaClustermetadata:name:cluster-examplespec:apiserverURL:&#34;https://10.30.43.43:6443&#34;resources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmsp- group:cert-manager.ioversions:- v1resources:- certificatesSynchronize built-in resources In order to manage and view these synchronized resources through PediaCluster, you need to configure resources in groups">
-<meta itemprop=wordCount content="554">
+# exampleapiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;syncResources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmsp- group:cert-manager.ioversions:- v1resources:- certificatesSynchronize built-in resources In order to manage and view these synchronized resources through PediaCluster, you need to configure resources in groups">
+<meta itemprop=wordCount content="552">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Synchronize Cluster Resources">
 <meta name=twitter:description content="The main function of Clusterpedia is to provide complex search for resources in multiple clusters.
 Clusterpedia uses the PediaCluster resource to specify which resources in the cluster need to support complex search, and synchronizes these resources onto the Storage Component via Storage Layer in real time.
-# exampleapiVersion:clusters.clusterpedia.io/v1alpha1kind:PediaClustermetadata:name:cluster-examplespec:apiserverURL:&#34;https://10.30.43.43:6443&#34;resources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmsp- group:cert-manager.ioversions:- v1resources:- certificatesSynchronize built-in resources In order to manage and view these synchronized resources through PediaCluster, you need to configure resources in groups">
+# exampleapiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;syncResources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmsp- group:cert-manager.ioversions:- v1resources:- certificatesSynchronize built-in resources In order to manage and view these synchronized resources through PediaCluster, you need to configure resources in groups">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -74,7 +74,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.ba45f37a392747d4a2b5fc5fa442e29a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.329a2a1bdcb107ace0e7aee80aa17654.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -84,7 +84,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.ba45f37a392747d4a2b5fc5fa442e29a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.329a2a1bdcb107ace0e7aee80aa17654.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -203,13 +203,13 @@ English
 <p>Clusterpedia uses the <code>PediaCluster</code> resource to specify which resources in the cluster need to support complex search,
 and synchronizes these resources onto the <code>Storage Component</code> via <code>Storage Layer</code> in real time.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># example</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusters.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-example</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserverURL</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;https://10.30.43.43:6443&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserver</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;https://10.30.43.43:6443&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -224,7 +224,7 @@ and synchronizes these resources onto the <code>Storage Component</code> via <co
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#000>certificates</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><h2 id=synchronize-built-in-resources>Synchronize built-in resources</h2>
 <p>In order to manage and view these synchronized resources through <code>PediaCluster</code>, you need to configure resources in groups</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline> </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>   </span><span style=color:#204a87;font-weight:700>versions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[]</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>   </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -233,7 +233,7 @@ and synchronizes these resources onto the <code>Storage Component</code> via <co
 </span></code></pre></div><p><strong>For built-in resources, <code>versions</code> is not required.</strong></p>
 <p>Clusterpedia will automatically select the appropriate version to synchronize based on the resource version supported in the cluster.</p>
 <p>Also, you do not need to worry about version conversion because Clusterpedia will open all version interfaces for built-in resources.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
 </code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
   <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;APIGroup&#34;</span><span style=color:#000;font-weight:700>,</span>
   <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
@@ -260,7 +260,7 @@ and synchronizes these resources onto the <code>Storage Component</code> via <co
 </code></pre></div><p>Clusterpedia supports three versions of <code>Deployment</code>: <code>v1</code>, <code>v1beta2</code>, and <code>v1beta1</code>.</p>
 <h2 id=synchronize-custom-resources>Synchronize custom resources</h2>
 <p>Compared with built-in resources, custom resources have slightly different configuration on resource versions.</p>
-<pre tabindex=0><code class=language-yaml: data-lang=yaml:>resources:
+<pre tabindex=0><code class=language-yaml: data-lang=yaml:>syncResources:
  - group: cert-manager.io
    versions: []
    resources:
@@ -268,7 +268,7 @@ and synchronizes these resources onto the <code>Storage Component</code> via <co
 </code></pre><p><strong>You can also ignore the versions field and then Clusterpedia will synchronize the previous three cluster versions in the Group.</strong></p>
 <p>Take cert-manager.io as an example to get the Group supported by cert-manager.io in an imported cluster</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Run the command in an imported cluster</span>
-kubectl --cluster clusterpedia get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/cert-manager.io&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/cert-manager.io&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
 </code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
   <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;APIGroup&#34;</span><span style=color:#000;font-weight:700>,</span>
   <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
@@ -297,10 +297,10 @@ kubectl --cluster clusterpedia get --raw<span style=color:#ce5c00;font-weight:70
   <span style=color:#000;font-weight:700>}</span>
 <span style=color:#000;font-weight:700>}</span>
 </code></pre></div><p>The imported cluster supports four versions for <em>cert-manager.io</em>: <code>v1</code>, <code>v1beta1</code>, <code>v1alpha3</code>, <code>v1alpha2</code>.</p>
-<p>When <code>resources.[group].versions</code> is left blank, Clusterpedia will synchronize three versions <code>v1</code>, <code>v1beta1</code>, <code>v1alpah3</code> in the order of the <code>APIGroup.versions</code> list except for <code>v1alpha2</code>.</p>
+<p>When <code>syncResources.[group].versions</code> is left blank, Clusterpedia will synchronize three versions <code>v1</code>, <code>v1beta1</code>, <code>v1alpah3</code> in the order of the <code>APIGroup.versions</code> list except for <code>v1alpha2</code>.</p>
 <h3 id=specify-a-sync-version-for-custom-resources>Specify a sync version for custom resources</h3>
 <p>If you specified <code>versions</code>, the specific resource would be synchronized by <code>versions</code>.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline> </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cert-manager.io</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>   </span><span style=color:#204a87;font-weight:700>versions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#000>v1beta1</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -319,12 +319,12 @@ kubectl --cluster clusterpedia get --raw<span style=color:#ce5c00;font-weight:70
 <li><strong>Storage Version</strong> refers to the version stored at the storage layer by Clusterpedia</li>
 </ul>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>namespaced</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>syncConditions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>lastTransitionTime</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;2022-01-13T04:34:08Z&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Syncing</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -334,12 +334,12 @@ kubectl --cluster clusterpedia get --raw<span style=color:#ce5c00;font-weight:70
 <p>However, if an imported cluster only provides the <code>Deployment</code> resource of the <code>v1beta1</code> version, the <strong>Sync Version</strong> is <code>v1beta1</code> and the <strong>Storage Version</strong> is <code>v1</code>.</p>
 <p>For example, when synchronizing a Deployment of Kubernetes 1.10, the synchronization status is as follows:</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>namespaced</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>syncConditions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>lastTransitionTime</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;2022-01-13T04:34:04Z&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Syncing</span><span style=color:#f8f8f8;text-decoration:underline>

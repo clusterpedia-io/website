@@ -66,7 +66,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.ba45f37a392747d4a2b5fc5fa442e29a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.329a2a1bdcb107ace0e7aee80aa17654.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -257,7 +257,7 @@ This is the multi-page printable view of this section.
 <tr>
 <td>Filter by fields</td>
 <td><code>kubectl --field-selector</code></td>
-<td>`fieldSelector\</td>
+<td><code>fieldSelector</code></td>
 </tr>
 </tbody>
 </table>
@@ -308,9 +308,9 @@ kubectl --cluster cluster-1 get deployments<span style=color:#4e9a06>&#34;
 </span></code></pre></div></div>
 <div id=tabset-docsusagesearchmulti-cluster-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-1-1>
 <p><p>When using URL, use <code>clusters</code> as URL Query to pass.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
 </code></pre></div><p>If we specify a single cluster, we can also put the cluster name in the URL Path.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
 </code></pre></div><p>Lean More <a href=../specified-cluster>Specify Cluster Search</a></p>
 </div></div>
 <h3 id=specify-namespaces>Specify Namespaces</h3>
@@ -337,11 +337,11 @@ default       cluster-2   dd-airflow-web            0/1     1            0      
 </code></pre></div>
 <div id=tabset-docsusagesearchmulti-cluster-2-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-2-1>
 <p><p>The <strong>URL Path</strong> to get the resources is the same as the native Kubernetes <em>/apis/apps/v1/deployments</em>.</p>
-<p>We just need to prefix the path to Clusterpedia Resources with <strong>/apis/pedia.clusterpedia.io/v1alpha1/resources</strong> to indicate that it is currently a Clusterpedia request.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments&#34;</span>
+<p>We just need to prefix the path to Clusterpedia Resources with <strong>/apis/clusterpedia.io/v1beta1/resources</strong> to indicate that it is currently a Clusterpedia request.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments&#34;</span>
 
 <span style=color:#8f5902;font-style:italic># Specify namespace</span>
-kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/namespaces/kube-system/deployments&#34;</span>
+kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/namespaces/kube-system/deployments&#34;</span>
 </code></pre></div></div></div>
 <hr>
 <p>In addition to specifying a single namespace, we can also <strong>specify to search the resources under a group of namespaces</strong>.
@@ -363,7 +363,7 @@ default       cluster-2   dd-airflow-web            0/1     1            0      
 </code></pre></div>
 <div id=tabset-docsusagesearchmulti-cluster-3-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-3-1>
 <p><p>When using URL, we don&rsquo;t need to use Label Selector to pass parameters, just use URL Query - <code>namespaces</code></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?namespaces=kube-system,default&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?namespaces=kube-system,default&#34;</span>
 </code></pre></div></div></div>
 </p>
 <h3 id=specify-resource-names>Specify Resource Names</h3>
@@ -386,10 +386,10 @@ kube-system   cluster-2   coredns                   2/2     2            2      
 </code></pre></div>
 <div id=tabset-docsusagesearchmulti-cluster-4-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-4-1>
 <p><p>When using URL, use <code>names</code> to pass as <strong>URL Query</strong>, and if you need to specify namespaces, then add namespace to the path.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?names=kube-coredns,dd-airflow-web&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?names=kube-coredns,dd-airflow-web&#34;</span>
 
 <span style=color:#8f5902;font-style:italic># search resources with specified names under default namespace</span>
-kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/namespaces/default/deployments?names=kube-coredns,dd-airflow-web&#34;</span>
+kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/namespaces/default/deployments?names=kube-coredns,dd-airflow-web&#34;</span>
 </code></pre></div><p>When searching from multiple clusters, the data returned is actually encapsulated in a structure similar to <code>DeploymentList</code>.</p>
 <p>If we want to get a single <code>Deployment</code> then we need to specify the cluster name in the URL path, refer to <a href>Get Single Resource</a></p>
 </div></div>
@@ -446,9 +446,9 @@ and the fields are also supported in any combination
 </code></pre></div></div>
 <div id=tabset-docsusagesearchmulti-cluster-5-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-5-1>
 <p><p>Use <a href=../#orderby>URL Query</a> to specify sorting fields</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace,cluster&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?orderby=namespace,cluster&#34;</span>
 </code></pre></div><p>When specifying a field in order by desc, add <strong>desc</strong> to the end of the field, separated by spaces</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?orderby=namespace desc,cluster&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?orderby=namespace desc,cluster&#34;</span>
 </code></pre></div></div></div>
 </p>
 <h3 id=paging>Paging</h3>
@@ -474,7 +474,7 @@ which means that <code>search.clusterpedia.io/size</code> does not actually take
 </code></pre></div></div>
 <div id=tabset-docsusagesearchmulti-cluster-6-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-6-1>
 <p><p>To paginate resources, just set the <code>limit</code> and <code>continue</code> in the URL.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?limit=10&amp;continue=5&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?limit=10&amp;continue=5&#34;</span>
 </code></pre></div></div></div>
 <h3 id=response-with-continue>Response With Continue</h3>
 <p><a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta>ListMeta.Continue</a> can be used in <a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListOptions>ListOptions.Continue</a> as the offset for the next request.</p>
@@ -487,7 +487,7 @@ which means that <code>search.clusterpedia.io/size</code> does not actually take
 <blockquote>
 <p>Use with paging</p>
 </blockquote>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?withContinue=true&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?withContinue=true&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
 </code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
   <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;DeploymentList&#34;</span><span style=color:#000;font-weight:700>,</span>
   <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
@@ -517,7 +517,7 @@ which means that <code>search.clusterpedia.io/size</code> does not actually take
 <blockquote>
 <p>Use with paging</p>
 </blockquote>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?withRemainingCount&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?withRemainingCount&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
 </code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
   <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;DeploymentList&#34;</span><span style=color:#000;font-weight:700>,</span>
   <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps/v1&#34;</span><span style=color:#000;font-weight:700>,</span>
@@ -552,9 +552,9 @@ kube-system   cluster-1   coredns                   2/2     2            2      
 </code></pre></div>
 <div id=tabset-docsusagesearchspecified-cluster-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-1-1>
 <p><p>Specify a cluster by using the cluster name in the URL path</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
 </code></pre></div><p>You can also specify a single cluster by <code>URL Query</code></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
 </code></pre></div></div></div>
 <p>The function supported by searching in a specified cluster is basically the same as that of <a href=../multi-cluster>multi-cluster search</a>.</p>
 <p>It is more convenient for searching by Owner in a specified cluster. In addition, when <strong>getting a single resource, you can only use the specified cluster in the URL Path</strong>.</p>
@@ -638,11 +638,11 @@ kubectl --cluster clusterpedia get deploy -l
 <div id=tabset-docsusagesearchspecified-cluster-3-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-3-1>
 <p><p>The URL to get a specified resource can be divided into three parts:</p>
 <ul>
-<li>Prefix to search for resource: <em>/apis/pedia.clusterpedia.io/v1alpha1/resources</em></li>
+<li>Prefix to search for resource: <em>/apis/clusterpedia.io/v1beta1/resources</em></li>
 <li>Specified cluster name: <em>/clusters/&lt; cluster name ></em></li>
 <li>Resource name for Kubernetes API: Path <em>/apis/apps/v1/deployments/namespaces/<namespace>/<resource name></em></li>
 </ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alhpa1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy&#34;</span>
 </code></pre></div></div></div>
 </div>
 <div class=td-content style=page-break-before:always>
@@ -655,16 +655,16 @@ kubectl --cluster clusterpedia get deploy -l
 <p><blockquote>
 <p><strong>When requesting <code>Collection Resource</code>, you shall use <a href=../#paging>paging</a> because the number of resources may be very large.</strong></p>
 </blockquote>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/collectionresources/workloads?limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/collectionresources/workloads?limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
 </code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#a40000>#</span> <span style=color:#a40000>Output</span>
 <span style=color:#000;font-weight:700>{</span>
   <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;CollectionResource&#34;</span><span style=color:#000;font-weight:700>,</span>
-  <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pedia.clusterpedia.io/v1alpha1&#34;</span><span style=color:#000;font-weight:700>,</span>
+  <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;clusterpedia.io/v1beta1&#34;</span><span style=color:#000;font-weight:700>,</span>
   <span style=color:#204a87;font-weight:700>&#34;metadata&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
     <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;workloads&#34;</span><span style=color:#000;font-weight:700>,</span>
     <span style=color:#204a87;font-weight:700>&#34;creationTimestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>null</span>
   <span style=color:#000;font-weight:700>},</span>
-  <span style=color:#204a87;font-weight:700>&#34;reosurceTypes&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+  <span style=color:#204a87;font-weight:700>&#34;resourceTypes&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
     <span style=color:#000;font-weight:700>{</span>
       <span style=color:#204a87;font-weight:700>&#34;group&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#000;font-weight:700>,</span>
       <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>

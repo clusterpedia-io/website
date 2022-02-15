@@ -78,7 +78,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.ba45f37a392747d4a2b5fc5fa442e29a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.329a2a1bdcb107ace0e7aee80aa17654.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -88,7 +88,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.ba45f37a392747d4a2b5fc5fa442e29a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.329a2a1bdcb107ace0e7aee80aa17654.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -215,9 +215,9 @@ kube-system   cluster-1   coredns                   2/2     2            2      
 </code></pre></div>
 <div id=tabset-docsusagesearchspecified-cluster-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-1-1>
 <p><p>Specify a cluster by using the cluster name in the URL path</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
 </code></pre></div><p>You can also specify a single cluster by <code>URL Query</code></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
 </code></pre></div></div></div>
 <p>The function supported by searching in a specified cluster is basically the same as that of <a href=../multi-cluster>multi-cluster search</a>.</p>
 <p>It is more convenient for searching by Owner in a specified cluster. In addition, when <strong>getting a single resource, you can only use the specified cluster in the URL Path</strong>.</p>
@@ -301,11 +301,11 @@ kubectl --cluster clusterpedia get deploy -l
 <div id=tabset-docsusagesearchspecified-cluster-3-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-3-1>
 <p><p>The URL to get a specified resource can be divided into three parts:</p>
 <ul>
-<li>Prefix to search for resource: <em>/apis/pedia.clusterpedia.io/v1alpha1/resources</em></li>
+<li>Prefix to search for resource: <em>/apis/clusterpedia.io/v1beta1/resources</em></li>
 <li>Specified cluster name: <em>/clusters/&lt; cluster name ></em></li>
 <li>Resource name for Kubernetes API: Path <em>/apis/apps/v1/deployments/namespaces/<namespace>/<resource name></em></li>
 </ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alhpa1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy&#34;</span>
 </code></pre></div></div></div>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
