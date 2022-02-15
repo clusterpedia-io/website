@@ -26,8 +26,8 @@
 本文主要讲述在 URL Path 中指定集群
  在以指定集群的方式使用 kubectl 前，需要先配置 kubectl 的集群快捷方式
 kubectl URL kubectl --cluster cluster-1 get deployments -n kube-system # 输出： NAMESPACE CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE kube-system cluster-1 coredns 2/2 2 2 68d  将 cluster name 放到 URL 路径中来指定集群
-kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34; 也可以通过 URL Query 来指定单个集群
-kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;  指定集群支持的功能和多集群检索的作用基本相同，而且在 Owner 检索上更加方便， 另外在获取单个资源时也只能使用在 URL Path 中指定集群的方式。">
+kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34; 也可以通过 URL Query 来指定单个集群
+kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;  指定集群支持的功能和多集群检索的作用基本相同，而且在 Owner 检索上更加方便， 另外在获取单个资源时也只能使用在 URL Path 中指定集群的方式。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/zh-cn/docs/usage/search/specified-cluster/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
@@ -37,8 +37,8 @@ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/
 本文主要讲述在 URL Path 中指定集群
  在以指定集群的方式使用 kubectl 前，需要先配置 kubectl 的集群快捷方式
 kubectl URL kubectl --cluster cluster-1 get deployments -n kube-system # 输出： NAMESPACE CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE kube-system cluster-1 coredns 2/2 2 2 68d  将 cluster name 放到 URL 路径中来指定集群
-kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34; 也可以通过 URL Query 来指定单个集群
-kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;  指定集群支持的功能和多集群检索的作用基本相同，而且在 Owner 检索上更加方便， 另外在获取单个资源时也只能使用在 URL Path 中指定集群的方式。">
+kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34; 也可以通过 URL Query 来指定单个集群
+kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;  指定集群支持的功能和多集群检索的作用基本相同，而且在 Owner 检索上更加方便， 另外在获取单个资源时也只能使用在 URL Path 中指定集群的方式。">
 <meta itemprop=wordCount content="295">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="指定集群检索">
@@ -47,8 +47,8 @@ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/
 本文主要讲述在 URL Path 中指定集群
  在以指定集群的方式使用 kubectl 前，需要先配置 kubectl 的集群快捷方式
 kubectl URL kubectl --cluster cluster-1 get deployments -n kube-system # 输出： NAMESPACE CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE kube-system cluster-1 coredns 2/2 2 2 68d  将 cluster name 放到 URL 路径中来指定集群
-kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34; 也可以通过 URL Query 来指定单个集群
-kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;  指定集群支持的功能和多集群检索的作用基本相同，而且在 Owner 检索上更加方便， 另外在获取单个资源时也只能使用在 URL Path 中指定集群的方式。">
+kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34; 也可以通过 URL Query 来指定单个集群
+kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;  指定集群支持的功能和多集群检索的作用基本相同，而且在 Owner 检索上更加方便， 另外在获取单个资源时也只能使用在 URL Path 中指定集群的方式。">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -90,7 +90,7 @@ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.329a2a1bdcb107ace0e7aee80aa17654.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1c9ce1a7854859d7e74d6b5231f529e8.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -100,7 +100,7 @@ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.329a2a1bdcb107ace0e7aee80aa17654.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1c9ce1a7854859d7e74d6b5231f529e8.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -227,9 +227,9 @@ kube-system   cluster-1   coredns                   2/2     2            2      
 </code></pre></div>
 <div id=tabset-zh-cndocsusagesearchspecified-cluster-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchspecified-cluster-1-1>
 <p><p>将 cluster name 放到 URL 路径中来指定集群</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/deployments&#34;</span>
 </code></pre></div><p>也可以通过 <code>URL Query</code> 来指定单个集群</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
 </code></pre></div></div></div>
 <p>指定集群支持的功能和<a href=../multi-cluster>多集群检索</a>的作用基本相同，而且在 Owner 检索上更加方便，
 另外在<strong>获取单个资源时也只能使用在 URL Path 中指定集群的方式</strong>。</p>
@@ -314,11 +314,11 @@ kubectl --cluster clusterpedia get deploy -l
 <div id=tabset-zh-cndocsusagesearchspecified-cluster-3-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchspecified-cluster-3-1>
 <p><p>获取指定资源的 URL 可以分为三部分</p>
 <ul>
-<li>资源检索前缀： <em>/apis/pedia.clusterpedia.io/v1alpha1/resources</em></li>
+<li>资源检索前缀： <em>/apis/clusterpedia.io/v1beta1/resources</em></li>
 <li>指定集群名称 <em>/clusters/&lt; cluster name ></em></li>
 <li>原生 Kubernetes API 的资源 Path <em>/apis/apps/v1/deployments/namespaces/<namespace>/<resource name></em></li>
 </ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alhpa1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy&#34;</span>
 </code></pre></div></div></div>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>

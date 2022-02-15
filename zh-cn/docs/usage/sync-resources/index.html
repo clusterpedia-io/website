@@ -21,29 +21,29 @@ apiVersion: …">
 <meta property="og:title" content="同步集群资源">
 <meta property="og:description" content="Clusterpedia 的主要功能，便是提供对多集群内的资源进行复杂检索。
 通过 PediaCluster 资源来指定该集群中哪些资源需要支持复杂检索，Clusterpedia 会将这些资源实时的通过存储层同步到存储组件中
-# exampleapiVersion:clusters.clusterpedia.io/v1alpha1kind:PediaClustermetadata:name:cluster-examplespec:apiserverURL:&#34;https://10.30.43.43:6443&#34;resources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmsp- group:cert-manager.ioversions:- v1resources:- certificates内置资源同步 PediaCluster 为了方便管理和查看这些同步的资源，用户需要以 Group 为单位来配置资源
-resources:- group:appsversions:[]resources:- deployments- daemonsets对于内置资源，不需要填写 versions 字段。
+# exampleapiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;syncResources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmsp- group:cert-manager.ioversions:- v1resources:- certificates内置资源同步 PediaCluster 为了方便管理和查看这些同步的资源，用户需要以 Group 为单位来配置资源
+syncResources:- group:appsversions:[]resources:- deployments- daemonsets对于内置资源，不需要填写 versions 字段。
 Clusterpedia 会根据该集群内所支持的资源版本自动选择合适的版本来收集， 并且用户无需担心版本转换的问题， Clusterpedia 会开放出该内置资源的所有版本接口。
-kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&#34; | jq { &#34;kind&#34;: &#34;APIGroup&#34;, &#34;apiVersion&#34;: &#34;v1&#34;, &#34;name&#34;: &#34;apps&#34;, &#34;versions&#34;: [ { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta2&#34;, &#34;version&#34;: &#34;v1beta2&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta1&#34;, &#34;version&#34;: &#34;v1beta1&#34; } ], &#34;preferredVersion&#34;: { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; } } 可以看到 Clusterpedia 支持 v1，v1beta2，v1beta1 三个版本的 Deployment">
+kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps&#34; | jq { &#34;kind&#34;: &#34;APIGroup&#34;, &#34;apiVersion&#34;: &#34;v1&#34;, &#34;name&#34;: &#34;apps&#34;, &#34;versions&#34;: [ { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta2&#34;, &#34;version&#34;: &#34;v1beta2&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta1&#34;, &#34;version&#34;: &#34;v1beta1&#34; } ], &#34;preferredVersion&#34;: { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; } } 可以看到 Clusterpedia 支持 v1，v1beta2，v1beta1 三个版本的 Deployment">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/zh-cn/docs/usage/sync-resources/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
 <meta itemprop=name content="同步集群资源">
 <meta itemprop=description content="Clusterpedia 的主要功能，便是提供对多集群内的资源进行复杂检索。
 通过 PediaCluster 资源来指定该集群中哪些资源需要支持复杂检索，Clusterpedia 会将这些资源实时的通过存储层同步到存储组件中
-# exampleapiVersion:clusters.clusterpedia.io/v1alpha1kind:PediaClustermetadata:name:cluster-examplespec:apiserverURL:&#34;https://10.30.43.43:6443&#34;resources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmsp- group:cert-manager.ioversions:- v1resources:- certificates内置资源同步 PediaCluster 为了方便管理和查看这些同步的资源，用户需要以 Group 为单位来配置资源
-resources:- group:appsversions:[]resources:- deployments- daemonsets对于内置资源，不需要填写 versions 字段。
+# exampleapiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;syncResources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmsp- group:cert-manager.ioversions:- v1resources:- certificates内置资源同步 PediaCluster 为了方便管理和查看这些同步的资源，用户需要以 Group 为单位来配置资源
+syncResources:- group:appsversions:[]resources:- deployments- daemonsets对于内置资源，不需要填写 versions 字段。
 Clusterpedia 会根据该集群内所支持的资源版本自动选择合适的版本来收集， 并且用户无需担心版本转换的问题， Clusterpedia 会开放出该内置资源的所有版本接口。
-kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&#34; | jq { &#34;kind&#34;: &#34;APIGroup&#34;, &#34;apiVersion&#34;: &#34;v1&#34;, &#34;name&#34;: &#34;apps&#34;, &#34;versions&#34;: [ { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta2&#34;, &#34;version&#34;: &#34;v1beta2&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta1&#34;, &#34;version&#34;: &#34;v1beta1&#34; } ], &#34;preferredVersion&#34;: { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; } } 可以看到 Clusterpedia 支持 v1，v1beta2，v1beta1 三个版本的 Deployment">
-<meta itemprop=wordCount content="234">
+kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps&#34; | jq { &#34;kind&#34;: &#34;APIGroup&#34;, &#34;apiVersion&#34;: &#34;v1&#34;, &#34;name&#34;: &#34;apps&#34;, &#34;versions&#34;: [ { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta2&#34;, &#34;version&#34;: &#34;v1beta2&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta1&#34;, &#34;version&#34;: &#34;v1beta1&#34; } ], &#34;preferredVersion&#34;: { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; } } 可以看到 Clusterpedia 支持 v1，v1beta2，v1beta1 三个版本的 Deployment">
+<meta itemprop=wordCount content="232">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="同步集群资源">
 <meta name=twitter:description content="Clusterpedia 的主要功能，便是提供对多集群内的资源进行复杂检索。
 通过 PediaCluster 资源来指定该集群中哪些资源需要支持复杂检索，Clusterpedia 会将这些资源实时的通过存储层同步到存储组件中
-# exampleapiVersion:clusters.clusterpedia.io/v1alpha1kind:PediaClustermetadata:name:cluster-examplespec:apiserverURL:&#34;https://10.30.43.43:6443&#34;resources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmsp- group:cert-manager.ioversions:- v1resources:- certificates内置资源同步 PediaCluster 为了方便管理和查看这些同步的资源，用户需要以 Group 为单位来配置资源
-resources:- group:appsversions:[]resources:- deployments- daemonsets对于内置资源，不需要填写 versions 字段。
+# exampleapiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;syncResources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmsp- group:cert-manager.ioversions:- v1resources:- certificates内置资源同步 PediaCluster 为了方便管理和查看这些同步的资源，用户需要以 Group 为单位来配置资源
+syncResources:- group:appsversions:[]resources:- deployments- daemonsets对于内置资源，不需要填写 versions 字段。
 Clusterpedia 会根据该集群内所支持的资源版本自动选择合适的版本来收集， 并且用户无需担心版本转换的问题， Clusterpedia 会开放出该内置资源的所有版本接口。
-kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&#34; | jq { &#34;kind&#34;: &#34;APIGroup&#34;, &#34;apiVersion&#34;: &#34;v1&#34;, &#34;name&#34;: &#34;apps&#34;, &#34;versions&#34;: [ { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta2&#34;, &#34;version&#34;: &#34;v1beta2&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta1&#34;, &#34;version&#34;: &#34;v1beta1&#34; } ], &#34;preferredVersion&#34;: { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; } } 可以看到 Clusterpedia 支持 v1，v1beta2，v1beta1 三个版本的 Deployment">
+kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps&#34; | jq { &#34;kind&#34;: &#34;APIGroup&#34;, &#34;apiVersion&#34;: &#34;v1&#34;, &#34;name&#34;: &#34;apps&#34;, &#34;versions&#34;: [ { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta2&#34;, &#34;version&#34;: &#34;v1beta2&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta1&#34;, &#34;version&#34;: &#34;v1beta1&#34; } ], &#34;preferredVersion&#34;: { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; } } 可以看到 Clusterpedia 支持 v1，v1beta2，v1beta1 三个版本的 Deployment">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -85,7 +85,7 @@ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.329a2a1bdcb107ace0e7aee80aa17654.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1c9ce1a7854859d7e74d6b5231f529e8.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -95,7 +95,7 @@ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.329a2a1bdcb107ace0e7aee80aa17654.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1c9ce1a7854859d7e74d6b5231f529e8.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -213,13 +213,13 @@ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&
 <p>Clusterpedia 的主要功能，便是提供对多集群内的资源进行复杂检索。</p>
 <p>通过 <code>PediaCluster</code> 资源来指定该集群中哪些资源需要支持复杂检索，Clusterpedia 会将这些资源实时的通过<code>存储层</code>同步到<code>存储组件</code>中</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># example</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusters.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-example</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserverURL</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;https://10.30.43.43:6443&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserver</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;https://10.30.43.43:6443&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -234,7 +234,7 @@ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#000>certificates</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><h2 id=内置资源同步>内置资源同步</h2>
 <p><code>PediaCluster</code> 为了方便管理和查看这些同步的资源，用户需要以 Group 为单位来配置资源</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline> </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>   </span><span style=color:#204a87;font-weight:700>versions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[]</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>   </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -243,7 +243,7 @@ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&
 </span></code></pre></div><p><strong>对于内置资源，不需要填写 <code>versions</code> 字段。</strong></p>
 <p>Clusterpedia 会根据该集群内所支持的资源版本自动选择合适的版本来收集，
 并且用户无需担心版本转换的问题， Clusterpedia 会开放出该内置资源的所有版本接口。</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
 </code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
   <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;APIGroup&#34;</span><span style=color:#000;font-weight:700>,</span>
   <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
@@ -270,7 +270,7 @@ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&
 </code></pre></div><p>可以看到 Clusterpedia 支持 <code>v1</code>，<code>v1beta2</code>，<code>v1beta1</code> 三个版本的 <code>Deployment</code></p>
 <h2 id=自定义资源同步>自定义资源同步</h2>
 <p>相比内置资源，自定义资源在资源版本的配置上会稍有不同。</p>
-<pre tabindex=0><code class=language-yaml: data-lang=yaml:>resources:
+<pre tabindex=0><code class=language-yaml: data-lang=yaml:>syncResources:
  - group: cert-manager.io
    versions: []
    resources:
@@ -278,7 +278,7 @@ kubectl get --raw=&#34;/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps&
 </code></pre><p><strong>用户同样可以忽略 versions 字段，这时 Clusterpedia 就会同步该 Group 在该集群的前三个版本。</strong></p>
 <p>以 cert-manager.io 为例，获取被接入集群中 cert-manager.io 支持的 Group</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 在被接入集群内执行</span>
-kubectl --cluster clusterpedia get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/cert-manager.io&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/cert-manager.io&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
 </code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
   <span style=color:#204a87;font-weight:700>&#34;kind&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;APIGroup&#34;</span><span style=color:#000;font-weight:700>,</span>
   <span style=color:#204a87;font-weight:700>&#34;apiVersion&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v1&#34;</span><span style=color:#000;font-weight:700>,</span>
@@ -307,10 +307,10 @@ kubectl --cluster clusterpedia get --raw<span style=color:#ce5c00;font-weight:70
   <span style=color:#000;font-weight:700>}</span>
 <span style=color:#000;font-weight:700>}</span>
 </code></pre></div><p>可以看到，被接入集群支持 <em>cert-manager.io</em> 的 <code>v1</code>，<code>v1beta1</code>，<code>v1alpha3</code>，<code>v1alpha2</code> 四个版本。</p>
-<p>当 <code>resources.[group].versions</code> 为空时，Clusterpedia 就会以 <code>APIGroup.versions</code> 列表的顺序，收集 <code>v1</code>， <code>v1beta1</code>，<code>v1alpah3</code> 三个版本，而 <code>v1alpha2</code> 不会被收集</p>
+<p>当 <code>syncResources.[group].versions</code> 为空时，Clusterpedia 就会以 <code>APIGroup.versions</code> 列表的顺序，收集 <code>v1</code>， <code>v1beta1</code>，<code>v1alpah3</code> 三个版本，而 <code>v1alpha2</code> 不会被收集</p>
 <h3 id=指定自定义资源的同步版本>指定自定义资源的同步版本</h3>
 <p>如果用户指定了 <code>versions</code>，那么就会按照 <code>versions</code> 的配置来收集指定的版本资源。</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline> </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cert-manager.io</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>   </span><span style=color:#204a87;font-weight:700>versions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#000>v1beta1</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -329,12 +329,12 @@ kubectl --cluster clusterpedia get --raw<span style=color:#ce5c00;font-weight:70
 <li><strong>存储版本</strong>是 Clusterpedia 存储到存储层中的版本</li>
 </ul>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>namespaced</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>syncConditions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>lastTransitionTime</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;2022-01-13T04:34:08Z&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Syncing</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -344,12 +344,12 @@ kubectl --cluster clusterpedia get --raw<span style=color:#ce5c00;font-weight:70
 <p>但是当接入一个比较老的集群时，集群只提供了 <code>v1beta1</code> 版本的 <code>Deployment</code> 资源，而这时资源的<strong>同步版本</strong>为 <code>v1beta1</code>，<strong>存储版本</strong>为 <code>v1</code></p>
 <p>例如，同步 1.10 版本 Kubernetes 的 Deployment 时，同步状态为：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Deployment</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>namespaced</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>syncConditions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>lastTransitionTime</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;2022-01-13T04:34:04Z&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Syncing</span><span style=color:#f8f8f8;text-decoration:underline>

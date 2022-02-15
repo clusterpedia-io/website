@@ -22,7 +22,7 @@
 聚合资源是由不同的资源类型组合而成，可以对这些资源类型进行统一的检索和分页。
 具体支持哪些聚合资源是由存储层来决定的，例如 内置存储层 暂时只支持 workloads 这一种聚合资源，用来表示工作负载。
 kubectl get collectionresources # 输出: NAME RESOURCES workloads deployments.apps,daemonsets.apps,statefulsets.apps 以 yaml 形式查看支持的聚合资源
-kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersion:pedia.clusterpedia.io/v1alpha1kind:CollectionResourcemetadata:creationTimestamp:nullname:workloadsreosurceTypes:- group:appsresource:deploymentsversion:v1- group:appsresource:daemonsetsversion:v1- group:appsresource:statefulsetsversion:v1kind:Listmetadata:resourceVersion:&#34;&#34;selfLink:&#34;&#34;可以看到 workloads 包含了 deployments，daemonsets， statefulsets 三种资源。
+kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersion:clusterpedia.io/v1beta1kind:CollectionResourcemetadata:creationTimestamp:nullname:workloadsresourceTypes:- group:appsresource:deploymentsversion:v1- group:appsresource:daemonsetsversion:v1- group:appsresource:statefulsetsversion:v1kind:Listmetadata:resourceVersion:&#34;&#34;selfLink:&#34;&#34;可以看到 workloads 包含了 deployments，daemonsets， statefulsets 三种资源。
 更多关于聚合资源的操作可以查看 聚合资源检索
 自定义聚合资源 内置存储层未来会支持自定义聚合资源，允许用户随意组合任意的资源类型。">
 <meta property="og:type" content="article">
@@ -33,7 +33,7 @@ kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersi
 聚合资源是由不同的资源类型组合而成，可以对这些资源类型进行统一的检索和分页。
 具体支持哪些聚合资源是由存储层来决定的，例如 内置存储层 暂时只支持 workloads 这一种聚合资源，用来表示工作负载。
 kubectl get collectionresources # 输出: NAME RESOURCES workloads deployments.apps,daemonsets.apps,statefulsets.apps 以 yaml 形式查看支持的聚合资源
-kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersion:pedia.clusterpedia.io/v1alpha1kind:CollectionResourcemetadata:creationTimestamp:nullname:workloadsreosurceTypes:- group:appsresource:deploymentsversion:v1- group:appsresource:daemonsetsversion:v1- group:appsresource:statefulsetsversion:v1kind:Listmetadata:resourceVersion:&#34;&#34;selfLink:&#34;&#34;可以看到 workloads 包含了 deployments，daemonsets， statefulsets 三种资源。
+kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersion:clusterpedia.io/v1beta1kind:CollectionResourcemetadata:creationTimestamp:nullname:workloadsresourceTypes:- group:appsresource:deploymentsversion:v1- group:appsresource:daemonsetsversion:v1- group:appsresource:statefulsetsversion:v1kind:Listmetadata:resourceVersion:&#34;&#34;selfLink:&#34;&#34;可以看到 workloads 包含了 deployments，daemonsets， statefulsets 三种资源。
 更多关于聚合资源的操作可以查看 聚合资源检索
 自定义聚合资源 内置存储层未来会支持自定义聚合资源，允许用户随意组合任意的资源类型。">
 <meta itemprop=wordCount content="43">
@@ -43,7 +43,7 @@ kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersi
 聚合资源是由不同的资源类型组合而成，可以对这些资源类型进行统一的检索和分页。
 具体支持哪些聚合资源是由存储层来决定的，例如 内置存储层 暂时只支持 workloads 这一种聚合资源，用来表示工作负载。
 kubectl get collectionresources # 输出: NAME RESOURCES workloads deployments.apps,daemonsets.apps,statefulsets.apps 以 yaml 形式查看支持的聚合资源
-kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersion:pedia.clusterpedia.io/v1alpha1kind:CollectionResourcemetadata:creationTimestamp:nullname:workloadsreosurceTypes:- group:appsresource:deploymentsversion:v1- group:appsresource:daemonsetsversion:v1- group:appsresource:statefulsetsversion:v1kind:Listmetadata:resourceVersion:&#34;&#34;selfLink:&#34;&#34;可以看到 workloads 包含了 deployments，daemonsets， statefulsets 三种资源。
+kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersion:clusterpedia.io/v1beta1kind:CollectionResourcemetadata:creationTimestamp:nullname:workloadsresourceTypes:- group:appsresource:deploymentsversion:v1- group:appsresource:daemonsetsversion:v1- group:appsresource:statefulsetsversion:v1kind:Listmetadata:resourceVersion:&#34;&#34;selfLink:&#34;&#34;可以看到 workloads 包含了 deployments，daemonsets， statefulsets 三种资源。
 更多关于聚合资源的操作可以查看 聚合资源检索
 自定义聚合资源 内置存储层未来会支持自定义聚合资源，允许用户随意组合任意的资源类型。">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
@@ -87,7 +87,7 @@ kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersi
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.329a2a1bdcb107ace0e7aee80aa17654.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1c9ce1a7854859d7e74d6b5231f529e8.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -97,7 +97,7 @@ kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersi
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.329a2a1bdcb107ace0e7aee80aa17654.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1c9ce1a7854859d7e74d6b5231f529e8.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -211,12 +211,12 @@ workloads   deployments.apps,daemonsets.apps,statefulsets.apps
 </code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># 输出：</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>items</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>pedia.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia.io/v1beta1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>CollectionResource</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>creationTimestamp</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>null</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>workloads</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>reosurceTypes</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resourceTypes</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>version</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
