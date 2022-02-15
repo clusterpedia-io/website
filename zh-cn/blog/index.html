@@ -44,6 +44,9 @@
 <a class=nav-link href=/zh-cn/about/><span>关于</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class="nav-link active" href=/zh-cn/blog/><i class="fas fa-blog"></i><span class=active>博客</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=/zh-cn/docs/><i class="fas fa-book"></i><span>文档</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -62,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.208ae68cf51d77f7681f7b6fb0d12558.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.ba45f37a392747d4a2b5fc5fa442e29a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -72,7 +75,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.208ae68cf51d77f7681f7b6fb0d12558.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.ba45f37a392747d4a2b5fc5fa442e29a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -86,8 +89,13 @@
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zh-cnblog-li>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zh-cnblog-li>
 <a href=/zh-cn/blog/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__section tree-root" id=m-zh-cnblog><span class=td-sidebar-nav-active-item>博客</span></a>
+<ul class=ul-1>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cnblog20220215e58d87e7baa7e588b0-clusterpedia-010-li>
+<a href=/zh-cn/blog/2022/02/15/%E5%8D%87%E7%BA%A7%E5%88%B0-clusterpedia-0.1.0/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cnblog20220215e58d87e7baa7e588b0-clusterpedia-010><span>升级到 Clusterpedia 0.1.0</span></a>
+</li>
+</ul>
 </li>
 </ul>
 </nav>
@@ -106,6 +114,22 @@
 <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role=main>
 <div class=row>
 <div class=col-12>
+<h2>Posts in 2022</h2>
+<ul class="list-unstyled mt-4">
+<li class="media mb-4">
+<div class=media-body>
+<h5 class="mt-0 mb-1"><a href=/zh-cn/blog/2022/02/15/%E5%8D%87%E7%BA%A7%E5%88%B0-clusterpedia-0.1.0/>升级到 Clusterpedia 0.1.0</a></h5>
+<p class="mb-2 mb-md-3"><small class=text-muted>2022.02.15 in 博客</small></p>
+<header class=article-meta>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 少于1分钟 &nbsp;</p>
+</header>
+<p class="pt-0 mt-0">随着 Clusterpedia 0.1.0 版本的发布，我们可以将早期的 0.0.9-alpha 或者 0.0.8 更新到 0.1.0 了。
+旧版本资源清理 由于资源检索的路径发生了修改(#73)，所以需要使用 0.0.9-alpha 的 clean-clusterconfigs.sh 来清理 .kube/config 中的 Clusterpedia 集群访问配置
+curl -sfL …</p>
+<p class=pt-0><a href=/zh-cn/blog/2022/02/15/%E5%8D%87%E7%BA%A7%E5%88%B0-clusterpedia-0.1.0/ aria-label="更多 - 升级到 Clusterpedia 0.1.0">更多</a></p>
+</div>
+</li>
+</ul>
 </div>
 </div>
 <div class="row pl-2 pt-2">

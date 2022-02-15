@@ -44,6 +44,9 @@
 <a class=nav-link href=/zh-cn/about/><span>关于</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class="nav-link active" href=/zh-cn/blog/><i class="fas fa-blog"></i><span class=active>博客</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=/zh-cn/docs/><i class="fas fa-book"></i><span>文档</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -62,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.208ae68cf51d77f7681f7b6fb0d12558.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.ba45f37a392747d4a2b5fc5fa442e29a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -85,9 +88,88 @@
 </div>
 <h1 class=title>博客</h1>
 <ul>
+<li><a href=#pg-a32dbb6812755843c6db353189298112>升级到 Clusterpedia 0.1.0</a></li>
 </ul>
 <div class=content>
 </div>
+</div>
+<div class=td-content>
+<h1 id=pg-a32dbb6812755843c6db353189298112>升级到 Clusterpedia 0.1.0</h1>
+<div class="td-byline mb-4">
+<time datetime=2022-02-15 class=text-muted>2022.02.15</time>
+</div>
+<p>随着 Clusterpedia 0.1.0 版本的发布，我们可以将早期的 0.0.9-alpha 或者 0.0.8 更新到 0.1.0 了。</p>
+<h2 id=旧版本资源清理>旧版本资源清理</h2>
+<p>由于资源检索的路径发生了修改(<a href=https://github.com/clusterpedia-io/clusterpedia/pull/73>#73</a>)，所以需要使用 0.0.9-alpha 的 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/v0.0.9-alpha/hack/clean-clusterconfigs.sh>clean-clusterconfigs.sh</a> 来清理 <em>.kube/config</em> 中的 Clusterpedia 集群访问配置</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/clean-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
+</code></pre></div><p>备份并删除 <code>PediaCluster</code> 资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster -o clusters.yaml.bak
+
+kubectl delete pediacluster --all
+</code></pre></div><p>所有的 <code>PediaCluster</code> 资源都删除后，删除 <code>PediaCluster CRD</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete crd pediaclusters.clusters.clusterpedia.io
+</code></pre></div><p>删除用于注册聚合式 API 的 <code>APIServices</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete apiservices v1alpha1.pedia.clusterpedia.io
+</code></pre></div><h2 id=更新-clusterpedia>更新 Clusterpedia</h2>
+<p>新建 <code>PediaCluster CRD</code>, 并且更新 <code>Clusterpedia APIServer</code> 和 <code>Clustersynchro Manager</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#000>DEPLOY_YAML_PATH</span><span style=color:#ce5c00;font-weight:700>=</span>https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.1.0/deploy
+<span style=color:#000>CRD_YAML_PATH</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#000>$DEPLOY_YAML_PATH</span>/crds
+
+kubectl apply -f <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#000>$CRD_YAML_PATH</span>/cluster.clusterpedia.io_pediaclusters.yaml,<span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#000>$DEPLOY_YAML_PATH</span>/clusterpedia_clustersynchro_manager_deployment.yaml,<span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#000>$DEPLOY_YAML_PATH</span>/clusterpedia_apiserver_deployment.yaml,<span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#000>$DEPLOY_YAML_PATH</span>/clusterpedia_apiserver_apiservice.yaml
+</code></pre></div><p>可以将 YAML 下载到本地，或者拉取项目到本地，进入 ./deploy 目录下执行 kubectl apply。</p>
+<h2 id=重新接入集群>重新接入集群</h2>
+<p>由于 <code>PediaCluster</code> 的 APIVersion 和结构都进行了一些不兼容的优化，所以需要重新根据备份的 <em>clusters.yaml.bak</em> 来重新创建 <code>PediaCluster</code>。</p>
+<p>当前 <code>PediaCluster</code> 的示例为：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-example</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserver</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;https://10.30.43.43:6443&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>caData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>tokenData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>certData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>keyData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>pods</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>相比 0.0.9-alpha 主要有三个修改：</p>
+<ul>
+<li><code>apiVersion</code> 由 <em>clusters.clusterpedia.io/v1alpha1</em> -> <em>cluster.clusterpedia.io/v1alpha2</em></li>
+<li><code>spec.apiserverURL</code> -> <code>spec.apiserver</code></li>
+<li><code>spec.resources</code> -> <code>spec.syncResources</code></li>
+</ul>
+<blockquote>
+<p>具体的修改可以查看: <a href=https://github.com/clusterpedia-io/clusterpedia/pull/70>#70</a>
+<a href=https://github.com/clusterpedia-io/clusterpedia/pull/67>#67</a>
+<a href=https://github.com/clusterpedia-io/clusterpedia/pull/76>#76</a>
+<a href=https://github.com/clusterpedia-io/clusterpedia/pull/77>#77</a></p>
+</blockquote>
+<p>根据 <em>clusters.yaml.bak</em> 内旧的 PediaCluster 来创建新的 <code>PediaCluster</code>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span>{}<span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000>---</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span>{}<span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>查看集群接入状态</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
+</code></pre></div><p>为多集群检索生成快捷访问配置</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.1.0/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
+</code></pre></div>
 </div>
 </main>
 </div>
