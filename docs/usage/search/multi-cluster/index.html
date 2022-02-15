@@ -26,7 +26,7 @@ kubectl --cluster clusterpedia api-resources # Output： NAME SHORTNAMES APIVERS
 <meta itemprop=description content="Multi-cluster resource search allows us to filter resources in multiple clusters at once based on query criteria, and provides the ability to paginate and sort these resources.
 When using kubectl, we can see what resources are currently available for search
 kubectl --cluster clusterpedia api-resources # Output： NAME SHORTNAMES APIVERSION NAMESPACED KIND configmaps cm v1 true ConfigMap namespaces ns v1 false Namespace nodes no v1 false Node pods po v1 true Pod secrets v1 true Secret daemonsets ds apps/v1 true DaemonSet deployments deploy apps/v1 true Deployment replicasets rs apps/v1 true ReplicaSet issuers cert-manager.">
-<meta itemprop=wordCount content="1612">
+<meta itemprop=wordCount content="1611">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Search in Multiple Clusters">
 <meta name=twitter:description content="Multi-cluster resource search allows us to filter resources in multiple clusters at once based on query criteria, and provides the ability to paginate and sort these resources.
@@ -70,7 +70,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.1ed7f7ee6a5a8e43ab713b4bbefadf86.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.208ae68cf51d77f7681f7b6fb0d12558.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -80,7 +80,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.1ed7f7ee6a5a8e43ab713b4bbefadf86.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.208ae68cf51d77f7681f7b6fb0d12558.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -342,7 +342,7 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;status.phase=Running&#34;</span>
 
 <span style=color:#8f5902;font-style:italic># we can also add the first character `.`</span>
-kubectl --cluster clusterpedia get pods --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;.status.phase not in (Running,Succeeded)&#34;</span>
+kubectl --cluster clusterpedia get pods --field-selector<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;.status.phase notin (Running,Succeeded)&#34;</span>
 </code></pre></div><ul>
 <li><strong>Field names wrapped in <code>''</code> or <code>""</code></strong> can be used for fields with illegal characters like <code>.</code></li>
 </ul>

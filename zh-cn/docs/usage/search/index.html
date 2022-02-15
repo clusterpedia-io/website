@@ -66,7 +66,7 @@ Search Labels： …">
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1ed7f7ee6a5a8e43ab713b4bbefadf86.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.208ae68cf51d77f7681f7b6fb0d12558.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -76,7 +76,7 @@ Search Labels： …">
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1ed7f7ee6a5a8e43ab713b4bbefadf86.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.208ae68cf51d77f7681f7b6fb0d12558.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -198,13 +198,13 @@ Search Labels： …">
 <ul>
 <li><code>exist</code>，<code>not exist</code></li>
 <li><code>=</code>，<code>==</code>，<code>!=</code></li>
-<li><code>in</code>，<code>not in</code></li>
+<li><code>in</code>，<code>notin</code></li>
 </ul>
 <p>除了条件检索，Clusterpedia 还增强了 <a href=#%E5%AD%97%E6%AE%B5%E8%BF%87%E6%BB%A4>Field Selector</a>
 ，满足我们通过 <code>metadata.annotation</code> 或者 <code>status.*</code> 等字段的过滤需求。</p>
 <h2 id=元信息检索>元信息检索</h2>
 <blockquote>
-<p>支持和 Label Selector 相同的操作符：<code>exist</code>，<code>not exist</code>，<code>==</code>，<code>=</code>，<code>!=</code>，<code>in</code>，<code>not in</code>。</p>
+<p>支持和 Label Selector 相同的操作符：<code>exist</code>，<code>not exist</code>，<code>==</code>，<code>=</code>，<code>!=</code>，<code>in</code>，<code>notin</code>。</p>
 </blockquote>
 <table>
 <thead>
@@ -341,7 +341,7 @@ Search Labels： …">
 </table>
 <h2 id=字段过滤>字段过滤</h2>
 <p><strong>Clusterpedia 的 Field Selector 在操作符上与 Label Selector 保持一致，同样支持：</strong></p>
-<p><strong><code>exist</code>，<code>not exist</code>，<code>==</code>，<code>=</code>，<code>!=</code>，<code>in</code>，<code>not in</code>。</strong></p>
+<p><strong><code>exist</code>，<code>not exist</code>，<code>==</code>，<code>=</code>，<code>!=</code>，<code>in</code>，<code>notin</code>。</strong></p>
 <p>无论是 URL 还是 kubectl 上的命令参数都原生 Field Selector 一致</p>
 <table>
 <thead>
