@@ -17,7 +17,7 @@
 <meta name=description content="Clusterpedia uses PediaCluster to import a cluster and configures cluster APIServer address and authentication information to connect a specific …">
 <meta property="og:title" content="Import Clusters">
 <meta property="og:description" content="Clusterpedia uses PediaCluster to import a cluster and configures cluster APIServer address and authentication information to connect a specific cluster.
-apiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;caData:tokenData:certData:keyData:apiserver is required as the address of a connected cluster and you have several options to configure the authentication fields:
+apiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;caData:tokenData:certData:keyData:syncResources:[]apiserver is required as the address of a connected cluster and you have several options to configure the authentication fields:
  caData + tokenData caData + certData + keyData   caData can be left blank if the cluster APIServer allows Insecure connections
  All these authentication fields need to be encoded by base64.">
 <meta property="og:type" content="article">
@@ -25,14 +25,14 @@ apiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluste
 <meta property="og:site_name" content="Clusterpedia.io">
 <meta itemprop=name content="Import Clusters">
 <meta itemprop=description content="Clusterpedia uses PediaCluster to import a cluster and configures cluster APIServer address and authentication information to connect a specific cluster.
-apiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;caData:tokenData:certData:keyData:apiserver is required as the address of a connected cluster and you have several options to configure the authentication fields:
+apiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;caData:tokenData:certData:keyData:syncResources:[]apiserver is required as the address of a connected cluster and you have several options to configure the authentication fields:
  caData + tokenData caData + certData + keyData   caData can be left blank if the cluster APIServer allows Insecure connections
  All these authentication fields need to be encoded by base64.">
 <meta itemprop=wordCount content="241">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Import Clusters">
 <meta name=twitter:description content="Clusterpedia uses PediaCluster to import a cluster and configures cluster APIServer address and authentication information to connect a specific cluster.
-apiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;caData:tokenData:certData:keyData:apiserver is required as the address of a connected cluster and you have several options to configure the authentication fields:
+apiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;caData:tokenData:certData:keyData:syncResources:[]apiserver is required as the address of a connected cluster and you have several options to configure the authentication fields:
  caData + tokenData caData + certData + keyData   caData can be left blank if the cluster APIServer allows Insecure connections
  All these authentication fields need to be encoded by base64.">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
@@ -76,7 +76,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.1c9ce1a7854859d7e74d6b5231f529e8.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.60a47e3c1d4d7728421e835f50240f67.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -86,7 +86,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.1c9ce1a7854859d7e74d6b5231f529e8.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.60a47e3c1d4d7728421e835f50240f67.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -207,6 +207,7 @@ English
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>tokenData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>certData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>keyData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[]</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><p><code>apiserver</code> is required as the address of a connected cluster and you have several options to configure the authentication fields:</p>
 <ul>
 <li><code>caData</code> + <code>tokenData</code></li>
@@ -235,6 +236,7 @@ kubectl apply -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserver</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://10.6.100.10:6443</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>caData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>tokenData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklrMHRSalJtZGpSdVgxcFljMGxsU1ZneFlXMHpPSFZOY0Zwbk1UTkhiVFpsVFZwQ2JIWk9SbU5XYW5NaWZRLmV5SnBjM01pT2lKcmRXSmxjbTVsZEdWekwzTmxjblpwWTJWaFkyTnZkVzUwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXVZVzFsYzNCaFkyVWlPaUprWldaaGRXeDBJaXdpYTNWaVpYSnVaWFJsY3k1cGJ5OXpaWEoyYVdObFlXTmpiM1Z1ZEM5elpXTnlaWFF1Ym1GdFpTSTZJbU5zZFhOMFpYSndaV1JwWVMxemVXNWphSEp2TFhSdmEyVnVMVGsxYTJSNElpd2lhM1ZpWlhKdVpYUmxjeTVwYnk5elpYSjJhV05sWVdOamIzVnVkQzl6WlhKMmFXTmxMV0ZqWTI5MWJuUXVibUZ0WlNJNkltTnNkWE4wWlhKd1pXUnBZUzF6ZVc1amFISnZJaXdpYTNWaVpYSnVaWFJsY3k1cGJ5OXpaWEoyYVdObFlXTmpiM1Z1ZEM5elpYSjJhV05sTFdGalkyOTFiblF1ZFdsa0lqb2lNREl5WXpNMk5USXRPR1k0WkMwME5qSmtMV0l6TnpFdFpUVXhPREF3TnpFeE9HUTBJaXdpYzNWaUlqb2ljM2x6ZEdWdE9uTmxjblpwWTJWaFkyTnZkVzUwT21SbFptRjFiSFE2WTJ4MWMzUmxjbkJsWkdsaExYTjVibU5vY204aWZRLkF4ZjhmbG5oR0lDYjJaMDdkT0FKUW11aHVIX0ZzRzZRSVY5Sm5sSmtPUnF5aGpWSDMyMkVqWDk1bVhoZ2RVQ2RfZXphRFJ1RFFpLTBOWDFseGc5OXpYRks1MC10ZzNfYlh5NFA1QnRFOUpRNnNraUt4dDFBZVJHVUF4bG5fVFU3SHozLTU5Vnl5Q3NwckFZczlsQWQwRFB6bTRqb1dyS1lKUXpPaGl5VjkzOWpaX2ZkS1BVUmNaMVVKVGpXUTlvNEFFY0hMdDlyTEJNMTk2eDRkbzA4ZHFaUnVtTzJZRXFkQTB3ZnRxZ2NGQzdtTGlSVVhkWElkYW9CY1BuWXBwM01MU3B5QjJQMV9vSlRFNS1nd3k4N2Jwb3U1RXo2TElSSExIeW5NWXAtWVRLR2hBbDJwMXdJb0tDZUNnQng4RlRfdzM4Rnh1TnE0UDRoQW5RUUh6bU9Ndw==</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[]</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><h2 id=view-cluster>View Cluster</h2>
 <p>After a cluster is successfully imported, you can use <code>kubectl get pediacluster</code> to view the imported clusters and check its status</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
