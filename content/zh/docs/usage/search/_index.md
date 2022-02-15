@@ -11,12 +11,12 @@ Clusterpedia 支持对 [多个集群内资源](multi-cluster)，[指定集群的
 **`Search Labels` 和 `URL Query` 都支持与 Label Selector 相同的操作符：**
 * `exist`，`not exist`
 * `=`，`==`，`!=`
-* `in`，`not in`
+* `in`，`notin`
 
 除了条件检索，Clusterpedia 还增强了 [Field Selector](#字段过滤)
 ，满足我们通过 `metadata.annotation` 或者 `status.*` 等字段的过滤需求。
 ## 元信息检索
-> 支持和 Label Selector 相同的操作符：`exist`，`not exist`，`==`，`=`，`!=`，`in`，`not in`。
+> 支持和 Label Selector 相同的操作符：`exist`，`not exist`，`==`，`=`，`!=`，`in`，`notin`。
 
 |作用| search label key|url query|
 | -- | --------------- | ------- |
@@ -63,7 +63,7 @@ Clusterpedia 支持对 [多个集群内资源](multi-cluster)，[指定集群的
 ## 字段过滤
 **Clusterpedia 的 Field Selector 在操作符上与 Label Selector 保持一致，同样支持：** 
 
-**`exist`，`not exist`，`==`，`=`，`!=`，`in`，`not in`。**
+**`exist`，`not exist`，`==`，`=`，`!=`，`in`，`notin`。**
 
 无论是 URL 还是 kubectl 上的命令参数都原生 Field Selector 一致
 |作用|kubectl|url query|

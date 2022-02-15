@@ -191,7 +191,7 @@ Field Selector 的 key 当前支持三种格式：
 kubectl --cluster clusterpedia get pods --field-selector="status.phase=Running"
 
 # 也可以在首字符添加 `.`
-kubectl --cluster clusterpedia get pods --field-selector=".status.phase not in (Running,Succeeded)"
+kubectl --cluster clusterpedia get pods --field-selector=".status.phase notin (Running,Succeeded)"
 ```
 
 * **字段名称使用 `''` 或者 `""` 来包裹**，可以用于带 `.` 之类的非法字符的字段
