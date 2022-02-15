@@ -27,12 +27,12 @@ kube-system   cluster-1   coredns                   2/2     2            2      
 {{% tab name="URL" %}}
 将 cluster name 放到 URL 路径中来指定集群
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/apis/apps/v1/deployments"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/deployments"
 ```
 
 也可以通过 `URL Query` 来指定单个集群
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps/v1/deployments?clusters=cluster-1"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?clusters=cluster-1"
 ```
 {{< /tab >}}
 
@@ -151,12 +151,12 @@ status:
 
 {{% tab name="URL" %}}
 获取指定资源的 URL 可以分为三部分
-* 资源检索前缀： */apis/pedia.clusterpedia.io/v1alpha1/resources*
+* 资源检索前缀： */apis/clusterpedia.io/v1beta1/resources*
 * 指定集群名称 */clusters/< cluster name >*
 * 原生 Kubernetes API 的资源 Path */apis/apps/v1/deployments/namespaces/<namespace>/<resource name>*
 
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alhpa1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy"
 ```
 {{< /tab >}}
 

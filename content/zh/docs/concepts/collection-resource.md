@@ -25,12 +25,12 @@ kubectl get collectionresources -o yaml
 # 输出：
 apiVersion: v1
 items:
-- apiVersion: pedia.clusterpedia.io/v1alpha1
+- apiVersion: clusterpedia.io/v1beta1
   kind: CollectionResource
   metadata:
     creationTimestamp: null
     name: workloads
-  reosurceTypes:
+  resourceTypes:
   - group: apps
     resource: deployments
     version: v1

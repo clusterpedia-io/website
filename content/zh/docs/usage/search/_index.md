@@ -68,7 +68,7 @@ Clusterpedia 支持对 [多个集群内资源](multi-cluster)，[指定集群的
 无论是 URL 还是 kubectl 上的命令参数都原生 Field Selector 一致
 |作用|kubectl|url query|
 | -- | --------------- | ------- |
-|字段过滤|`kubectl --field-selector`|fieldSelector|
+|字段过滤|`kubectl --field-selector`|`fieldSelector`|
 
 详细可以查看：
 * [使用字段过滤来检索资源](./multi-cluster#字段过滤)

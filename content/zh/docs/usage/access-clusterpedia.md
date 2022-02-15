@@ -11,15 +11,15 @@ Clusterpedia 主要有两个组件：
 这样我们通过和主集群相同的入口便可访问 Clusterpedia
 
 ## Resources 和[聚合资源](../../concepts/collection-resource)
-Clusterpedia APIServer 会在 Group —— *pedia.clusterpedia.io* 下提供两种检索资源：
+Clusterpedia APIServer 会在 Group —— *clusterpedia.io* 下提供两种检索资源：
 ```bash
-kubectl api-resources | grep pedia.clusterpedia.io
+kubectl api-resources | grep clusterpedia.io
 ```
 ```
 # 输出：
-NAME                 SHORTNAMES    APIVERSION                        NAMESPACED   KIND
-collectionresources                pedia.clusterpedia.io/v1alpha1    false        CollectionResource
-resources                          pedia.clusterpedia.io/v1alpha1    false        Resources
+NAME                 SHORTNAMES    APIVERSION                 NAMESPACED   KIND
+collectionresources                clusterpedia.io/v1beta1    false        CollectionResource
+resources                          clusterpedia.io/v1beta1    false        Resources
 ```
 * `Resources` 用于指定资源类型的方式来检索，在使用上兼容 Kubernetes OpenAPI
 * `CollectionResource` 用于检索由多个资源类型聚合而成的新的资源类型，以达到同时检索多种资源的目的
@@ -34,15 +34,15 @@ resources                          pedia.clusterpedia.io/v1alpha1    false      
 Clusterpedia 通过 URL Path 来区分请求是多集群资源还是指定集群：
 
 **多集群资源路径** 直接以 Resources 资源路径为前缀
-*/apis/pedia.clusterpedia.io/v1alpha1/resources*
+*/apis/clusterpedia.io/v1beta1/resources*
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alhpa1/version"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/version"
 ```
 
 **指定集群资源路径** 在 Resources 资源路径的基础上设置资源名称来指定集群
-*/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/<cluster name>*
+*/apis/clusterpedia.io/v1beta1/resources/clusters/<cluster name>*
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1/version"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/version"
 ```
 
 **无论是多集群资源路径还是指定集群的资源路径，都可以在路径后拼接 Kubernetes 的 Get/List Path**
@@ -52,7 +52,7 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/clust
 
 Clusterpedia 提供了一个简单的脚本来帮助生成 `cluster kube config`
 ```bash
-curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/gen-clusterconfigs.sh | sh -
+curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.1.0/hack/gen-clusterconfigs.sh | sh -
 ```
 ```
 # 输出：
@@ -68,7 +68,7 @@ Cluster "clusterpedia" set.
 Cluster "cluster-1" set.
 Cluster "cluster-2" set.
 ```
-> 可以在 [hack/gen-clusterconfigs.sh](https://github.com/clusterpedia-io/clusterpedia/blob/v0.0.9-alpha/hack/gen-clusterconfigs.sh) 找到该脚本
+> 可以在 [hack/gen-clusterconfigs.sh](https://github.com/clusterpedia-io/clusterpedia/blob/v0.1.0/hack/gen-clusterconfigs.sh) 找到该脚本
 
 脚本会打印当前的集群信息，并将集群中 PediaCluster 配置到 kubeconfig 中。
 ```bash
@@ -78,15 +78,15 @@ cat ~/.kube/config
 # .kube/config
 - cluster:
     certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-    server: https://10.6.100.10:6443/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-1
+    server: https://10.6.100.10:6443/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1
   name: cluster-1
 - cluster:
     certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-    server: https://10.6.100.10:6443/apis/pedia.clusterpedia.io/v1alpha1/resources/clusters/cluster-2
+    server: https://10.6.100.10:6443/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-2
   name: cluster-2
 - cluster:
     certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-    server: https://10.6.100.10:6443/apis/pedia.clusterpedia.io/v1alpha1/resources
+    server: https://10.6.100.10:6443/apis/clusterpedia.io/v1beta1/resources
   name: clusterpedia
 - cluster:
     certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1Ea3lOREV3TVRNeU5Gb1hEVE14TURreU1qRXdNVE15TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTy9TCnZta1U5bk1uUlRIT3lvK3hjdFRJY0lPYnMzc0F5cTI2djRQYkVtb3ZWM2xPOVQwMTF2cE96S0pyOUFxeVZMRnYKVXFBRHBTakM3WXd3MnZwSld3bDEySlBvUm1xZ1FBSFNkYlJpU3BDTDRudjlvR25VOWI2dllWSy9iRitkUVFCSApnQ1h6NnZoTGY4Wmd2N2tUQ2JBdkFPaE9OSlU3MllYTE8zT0lZQjJva1NCRGFVUjNvNnpwZGVWTkt5V0EyNVA3CkRobk8yTk01QzlpRERqTTRLY2FTa3JPSkJvbUlsSHFZRjRwVXdTTlFvcGVGRVRyZ3ZzcTkwSks2YUJVS0t5ajYKK2NGdjI3S0k4K1ZMUEtaSTE2c25Mbng2RXRTazZtZjJXTHdJZlhyQlgwREsvYXBEQ015R2pEb2dCaGpJSVhoVAp2bjVQZndFWUNsdGZFTEhKSkdVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZJVDhLRHdCbUVvMHladUFEZkhkKzQ1L3ZFYzdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBT0F5VHQ4S3ZFN0dvREhQT09pdgoyR2I2WWVsUU5KcUMza1dIOXc1NTFNaGZvS3ZiM21VaUV6ZVMwOUNwZUQrTFh5ZnlqQzhZYkJxQjZXSFhNZWMrCnpPdDNPazRYV0FmZVVZTXhOQ1FJblc4cjI4cmZnblErc1NCdHQyeERQN1RZY09oNVZGZkI2K3JtTmFTblZ1NjgKSFFxdlFMNEFXbVhkR09jRWNBRThYdkdiOWhwSjVNckRHdzQ0UTYyOG9YazZ0N01aWTFOMUNQdW9HZ1VmS1N3bgo1MUFWRTFOVVdNV0tEQXhaa2I4bEhvR3VWaDFzWmd3SnJRQjR5clh1cmxGN0Y2bVRlYm4rcDVKM0toT0V4KzlsCjFXdkwwbWkxL1J2bVJKNm11YmtjWUwzN1FJWjI1YXdyaEZMN0Z1ejNRSTFqTTdYMHZET2VUM2VuVUFCZW5SMS8KUnlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
@@ -117,7 +117,7 @@ Clusterpedia 开放的 `Discovery API` 同样**兼容 Kubernetes OpenAPI**，可
 {{% tab name="URL" %}}
 **使用 URL 来获取 APIGroupList 以及 APIGroup 信息**
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis" | jq
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis" | jq
 ```
 ```json
 {
@@ -163,7 +163,7 @@ kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis" | jq
 ```
 
 ```bash
-kubectl get --raw="/apis/pedia.clusterpedia.io/v1alpha1/resources/apis/apps" | jq
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps" | jq
 ```
 ```json
 {
