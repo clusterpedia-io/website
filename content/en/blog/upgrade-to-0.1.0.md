@@ -12,7 +12,7 @@ curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-
 
 Backup and delete the `PediaCluster` resources.
 ```bash
-kubectl get pediacluster -o yaml > clusters.yaml.bak
+kubectl get pediacluster -o clusters.yaml.bak
 
 kubectl delete pediacluster --all
 ```
@@ -34,10 +34,10 @@ DEPLOY_YAML_PATH=https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/
 CRD_YAML_PATH=$DEPLOY_YAML_PATH/crds
 
 kubectl apply -f \
-    $CRD_YAML_PATH/cluster.clusterpedia.io_pediaclusters.yaml,\
-    $DEPLOY_YAML_PATH/clusterpedia_clustersynchro_manager_deployment.yaml,\
-    $DEPLOY_YAML_PATH/clusterpedia_apiserver_deployment.yaml,\
-    $DEPLOY_YAML_PATH/clusterpedia_apiserver_apiservice.yaml
+$CRD_YAML_PATH/cluster.clusterpedia.io_pediaclusters.yaml,\
+$DEPLOY_YAML_PATH/clusterpedia_clustersynchro_manager_deployment.yaml,\
+$DEPLOY_YAML_PATH/clusterpedia_apiserver_deployment.yaml,\
+$DEPLOY_YAML_PATH/clusterpedia_apiserver_apiservice.yaml
 ```
 We can also download the YAML locally, or pull the [clusterpedia](https://github.com/clusterpedia-io/clusterpedia) locally and go to *./deploy* directory and run `kubectl apply`
 
