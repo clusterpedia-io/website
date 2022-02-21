@@ -21,7 +21,7 @@ Since the url path to search …">
 <meta property="og:description" content="With the release of Clusterpedia 0.1.0, we can now update the earlier 0.0.9-alpha or 0.0.8 to 0.1.0
 Clean Resources Since the url path to search resources has been modified(#73), we need to use cealn-clusterconfigs.sh in 0.0.9-alpha to clean up the cluster shortcut in the .kube/config
 curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/clean-clusterconfigs.sh | sh - Backup and delete the PediaCluster resources.
-kubectl get pediacluster -o clusters.yaml.bak kubectl delete pediacluster --all After all PediaCluster resources have been deleted, remove the PediaCluster CRD">
+kubectl get pediacluster -o yaml > clusters.yaml.bak kubectl delete pediacluster --all After all PediaCluster resources have been deleted, remove the PediaCluster CRD">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/blog/2022/02/15/upgrade-to-clusterpedia-0.1.0/"><meta property="article:section" content="blog">
 <meta property="article:published_time" content="2022-02-15T00:00:00+00:00">
@@ -30,15 +30,15 @@ kubectl get pediacluster -o clusters.yaml.bak kubectl delete pediacluster --all 
 <meta itemprop=description content="With the release of Clusterpedia 0.1.0, we can now update the earlier 0.0.9-alpha or 0.0.8 to 0.1.0
 Clean Resources Since the url path to search resources has been modified(#73), we need to use cealn-clusterconfigs.sh in 0.0.9-alpha to clean up the cluster shortcut in the .kube/config
 curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/clean-clusterconfigs.sh | sh - Backup and delete the PediaCluster resources.
-kubectl get pediacluster -o clusters.yaml.bak kubectl delete pediacluster --all After all PediaCluster resources have been deleted, remove the PediaCluster CRD"><meta itemprop=datePublished content="2022-02-15T00:00:00+00:00">
+kubectl get pediacluster -o yaml > clusters.yaml.bak kubectl delete pediacluster --all After all PediaCluster resources have been deleted, remove the PediaCluster CRD"><meta itemprop=datePublished content="2022-02-15T00:00:00+00:00">
 <meta itemprop=dateModified content="2022-02-15T00:00:00+00:00">
-<meta itemprop=wordCount content="229">
+<meta itemprop=wordCount content="231">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Upgrade to Clusterpedia 0.1.0">
 <meta name=twitter:description content="With the release of Clusterpedia 0.1.0, we can now update the earlier 0.0.9-alpha or 0.0.8 to 0.1.0
 Clean Resources Since the url path to search resources has been modified(#73), we need to use cealn-clusterconfigs.sh in 0.0.9-alpha to clean up the cluster shortcut in the .kube/config
 curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/clean-clusterconfigs.sh | sh - Backup and delete the PediaCluster resources.
-kubectl get pediacluster -o clusters.yaml.bak kubectl delete pediacluster --all After all PediaCluster resources have been deleted, remove the PediaCluster CRD">
+kubectl get pediacluster -o yaml > clusters.yaml.bak kubectl delete pediacluster --all After all PediaCluster resources have been deleted, remove the PediaCluster CRD">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -80,7 +80,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.60a47e3c1d4d7728421e835f50240f67.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.ad99ae9202ad0fba5ac2d6b16d79518d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -90,7 +90,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.60a47e3c1d4d7728421e835f50240f67.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.ad99ae9202ad0fba5ac2d6b16d79518d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -147,7 +147,7 @@ English
 <p>Since the url path to search resources has been modified(<a href=https://github.com/clusterpedia-io/clusterpedia/pull/73>#73</a>), we need to use <a href=https://github.com/clusterpedia-io/clusterpedia/blob/v0.0.9-alpha/hack/clean-clusterconfigs.sh>cealn-clusterconfigs.sh</a> in 0.0.9-alpha to clean up the cluster shortcut in the <em>.kube/config</em></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/clean-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
 </code></pre></div><p>Backup and delete the <code>PediaCluster</code> resources.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster -o clusters.yaml.bak
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster -o yaml &gt; clusters.yaml.bak
 
 kubectl delete pediacluster --all
 </code></pre></div><p>After all <code>PediaCluster</code> resources have been deleted, remove the <code>PediaCluster CRD</code></p>

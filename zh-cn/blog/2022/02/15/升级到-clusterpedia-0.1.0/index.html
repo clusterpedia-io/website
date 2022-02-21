@@ -21,7 +21,7 @@
 <meta property="og:description" content="随着 Clusterpedia 0.1.0 版本的发布，我们可以将早期的 0.0.9-alpha 或者 0.0.8 更新到 0.1.0 了。
 旧版本资源清理 由于资源检索的路径发生了修改(#73)，所以需要使用 0.0.9-alpha 的 clean-clusterconfigs.sh 来清理 .kube/config 中的 Clusterpedia 集群访问配置
 curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/clean-clusterconfigs.sh | sh - 备份并删除 PediaCluster 资源
-kubectl get pediacluster -o clusters.yaml.bak kubectl delete pediacluster --all 所有的 PediaCluster 资源都删除后，删除 PediaCluster CRD
+kubectl get pediacluster -o yaml > clusters.yaml.bak kubectl delete pediacluster --all 所有的 PediaCluster 资源都删除后，删除 PediaCluster CRD
 kubectl delete crd pediaclusters.clusters.clusterpedia.io 删除用于注册聚合式 API 的 APIServices
 kubectl delete apiservices v1alpha1.pedia.clusterpedia.io 更新 Clusterpedia 新建 PediaCluster CRD, 并且更新 Clusterpedia APIServer 和 Clustersynchro Manager
 DEPLOY_YAML_PATH=https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.1.0/deploy CRD_YAML_PATH=$DEPLOY_YAML_PATH/crds kubectl apply -f \  $CRD_YAML_PATH/cluster.">
@@ -33,18 +33,18 @@ DEPLOY_YAML_PATH=https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/
 <meta itemprop=description content="随着 Clusterpedia 0.1.0 版本的发布，我们可以将早期的 0.0.9-alpha 或者 0.0.8 更新到 0.1.0 了。
 旧版本资源清理 由于资源检索的路径发生了修改(#73)，所以需要使用 0.0.9-alpha 的 clean-clusterconfigs.sh 来清理 .kube/config 中的 Clusterpedia 集群访问配置
 curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/clean-clusterconfigs.sh | sh - 备份并删除 PediaCluster 资源
-kubectl get pediacluster -o clusters.yaml.bak kubectl delete pediacluster --all 所有的 PediaCluster 资源都删除后，删除 PediaCluster CRD
+kubectl get pediacluster -o yaml > clusters.yaml.bak kubectl delete pediacluster --all 所有的 PediaCluster 资源都删除后，删除 PediaCluster CRD
 kubectl delete crd pediaclusters.clusters.clusterpedia.io 删除用于注册聚合式 API 的 APIServices
 kubectl delete apiservices v1alpha1.pedia.clusterpedia.io 更新 Clusterpedia 新建 PediaCluster CRD, 并且更新 Clusterpedia APIServer 和 Clustersynchro Manager
 DEPLOY_YAML_PATH=https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.1.0/deploy CRD_YAML_PATH=$DEPLOY_YAML_PATH/crds kubectl apply -f \  $CRD_YAML_PATH/cluster."><meta itemprop=datePublished content="2022-02-15T00:00:00+00:00">
 <meta itemprop=dateModified content="2022-02-15T00:00:00+00:00">
-<meta itemprop=wordCount content="135">
+<meta itemprop=wordCount content="137">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="升级到 Clusterpedia 0.1.0">
 <meta name=twitter:description content="随着 Clusterpedia 0.1.0 版本的发布，我们可以将早期的 0.0.9-alpha 或者 0.0.8 更新到 0.1.0 了。
 旧版本资源清理 由于资源检索的路径发生了修改(#73)，所以需要使用 0.0.9-alpha 的 clean-clusterconfigs.sh 来清理 .kube/config 中的 Clusterpedia 集群访问配置
 curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/clean-clusterconfigs.sh | sh - 备份并删除 PediaCluster 资源
-kubectl get pediacluster -o clusters.yaml.bak kubectl delete pediacluster --all 所有的 PediaCluster 资源都删除后，删除 PediaCluster CRD
+kubectl get pediacluster -o yaml > clusters.yaml.bak kubectl delete pediacluster --all 所有的 PediaCluster 资源都删除后，删除 PediaCluster CRD
 kubectl delete crd pediaclusters.clusters.clusterpedia.io 删除用于注册聚合式 API 的 APIServices
 kubectl delete apiservices v1alpha1.pedia.clusterpedia.io 更新 Clusterpedia 新建 PediaCluster CRD, 并且更新 Clusterpedia APIServer 和 Clustersynchro Manager
 DEPLOY_YAML_PATH=https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.1.0/deploy CRD_YAML_PATH=$DEPLOY_YAML_PATH/crds kubectl apply -f \  $CRD_YAML_PATH/cluster.">
@@ -89,7 +89,7 @@ DEPLOY_YAML_PATH=https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.60a47e3c1d4d7728421e835f50240f67.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.ad99ae9202ad0fba5ac2d6b16d79518d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -99,7 +99,7 @@ DEPLOY_YAML_PATH=https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.60a47e3c1d4d7728421e835f50240f67.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.ad99ae9202ad0fba5ac2d6b16d79518d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -156,7 +156,7 @@ DEPLOY_YAML_PATH=https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/
 <p>由于资源检索的路径发生了修改(<a href=https://github.com/clusterpedia-io/clusterpedia/pull/73>#73</a>)，所以需要使用 0.0.9-alpha 的 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/v0.0.9-alpha/hack/clean-clusterconfigs.sh>clean-clusterconfigs.sh</a> 来清理 <em>.kube/config</em> 中的 Clusterpedia 集群访问配置</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/clean-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
 </code></pre></div><p>备份并删除 <code>PediaCluster</code> 资源</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster -o clusters.yaml.bak
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster -o yaml &gt; clusters.yaml.bak
 
 kubectl delete pediacluster --all
 </code></pre></div><p>所有的 <code>PediaCluster</code> 资源都删除后，删除 <code>PediaCluster CRD</code></p>

@@ -4,7 +4,7 @@
 &lt;p>由于资源检索的路径发生了修改(&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/73">#73&lt;/a>)，所以需要使用 0.0.9-alpha 的 &lt;a href="https://github.com/clusterpedia-io/clusterpedia/blob/v0.0.9-alpha/hack/clean-clusterconfigs.sh">clean-clusterconfigs.sh&lt;/a> 来清理 &lt;em>.kube/config&lt;/em> 中的 Clusterpedia 集群访问配置&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/clean-clusterconfigs.sh &lt;span style="color:#000;font-weight:bold">|&lt;/span> sh -
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>备份并删除 &lt;code>PediaCluster&lt;/code> 资源&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl get pediacluster -o clusters.yaml.bak
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl get pediacluster -o yaml &amp;gt; clusters.yaml.bak
 kubectl delete pediacluster --all
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>所有的 &lt;code>PediaCluster&lt;/code> 资源都删除后，删除 &lt;code>PediaCluster CRD&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl delete crd pediaclusters.clusters.clusterpedia.io
