@@ -12,7 +12,7 @@ curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-
 
 Backup and delete the `PediaCluster` resources.
 ```bash
-kubectl get pediacluster -o clusters.yaml.bak
+kubectl get pediacluster -o yaml > clusters.yaml.bak
 
 kubectl delete pediacluster --all
 ```
