@@ -12,8 +12,8 @@ The installation of Clusterpedia is divided into several parts:
 Pull clusterpedia project:
 ```bash
 git clone https://github.com/clusterpedia-io/clusterpedia.git
-git checkout v0.1.0
 cd clusterpedia
+git checkout v0.1.0
 ```
 
 ## Install storage component
