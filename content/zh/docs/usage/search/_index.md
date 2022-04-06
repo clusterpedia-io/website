@@ -16,7 +16,7 @@ Clusterpedia 支持对 [多个集群内资源](multi-cluster)，[指定集群的
 除了条件检索，Clusterpedia 还增强了 [Field Selector](#字段过滤)
 ，满足我们通过 `metadata.annotation` 或者 `status.*` 等字段的过滤需求。
 ## 元信息检索
-> 支持和 Label Selector 相同的操作符：`exist`，`not exist`，`==`，`=`，`!=`，`in`，`notin`。
+> 支持的操作符：`==`，`=`，`in`。
 
 |作用| search label key|url query|
 | -- | --------------- | ------- |
@@ -24,14 +24,50 @@ Clusterpedia 支持对 [多个集群内资源](multi-cluster)，[指定集群的
 |过滤命名空间|search.clusterpedia.io/namespaces|namespaces|
 |过滤资源名称|search.clusterpedia.io/names|names|
 
+> 暂时不支持例如 `!=`，`notin` 操作符，如果有这些需求或者场景，可以在 issue 中讨论
+
+## 模糊搜索
+> 支持的操作符：`==`，`=`，`in`。
+
+该功能暂时为试验性功能，暂时只提供 search label
+|作用| search label key|url query|
+| -- | --------------- | ------- |
+|模糊搜索资源名称|internalstorage.clusterpedia.io/fuzzy-name|-|
+
+## 创建时间区间检索
+> 支持的操作符：`==`，`=`。
+
+基于资源的创建时间区间进行检索，采用的是左闭右开的区间
+
+|作用| search label key|url query|
+| -- | --------------- | ------- |
+|指定 Since|search.clusterpedia.io/since|since|
+|指定 Before|search.clusterpedia.io/before|before|
+
+创建时间的格式有四种：
+1. `Unix 时间戳格式` 为了方便使用会根据时间戳的长度来区分单位为 s 还是 ms。
+10 位时间戳单位为秒，13 位时间戳单位为毫秒。
+2. `RFC3339` *2006-01-02T15:04:05Z* or *2006-01-02T15:04:05+08:00*
+3. `UTC Date` *2006-01-02*
+4. `UTC Datetime` *2006-01-02 15:04:05*
+
+由于 kube label selector 的限制，search label 只支持 `Unix 时间戳`，`UTC Date`.
+
+使用 url query 的方式可以所有的格式
+
 ## Owner 检索
 > 只支持操作符：`==`，`=`。
 
 |作用| search label key|url query|
 | -- | --------------- | ------- |
-|指定 Owner UID|internalstorage.clusterpedia.io/owner-uid|ownerID|
-|指定 Owner Key|internalstorage.clusterpedia.io/owner-key|ownerKey|
+|指定 Owner UID|search.clusterpedia.io/owner-uid|ownerUID|
+|指定 Owner Name|search.clusterpedia.io/owner-name|ownerName|
+|指定 Owner Group Resource|search.clusterpedia.io/owner-gr|ownerGR|
 |指定 Owner 辈分|internalstorage.clusterpedia.io/owner-seniority|ownerSeniority|
+
+需要注意指定 `Owner UID` 时，`Owner Name` 和 `Owner Group Resource` 会被忽略
+
+Owner Group 的格式为 `resource.group`，例如 *deployments.apps* 或者 *nodes*
 
 ## 排序
 > 只支持操作符：`=`，`==`，`in`。

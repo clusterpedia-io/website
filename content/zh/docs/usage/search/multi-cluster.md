@@ -146,7 +146,6 @@ kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployme
 
 ### 指定资源名称
 用户可以通过一组资源名称来过滤资源
-> 当前暂时不支持模糊搜索
 
 {{< tabs >}}
 
@@ -179,6 +178,41 @@ kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/namespac
 {{< /tab >}}
 
 {{< /tabs >}}
+
+### 创建时间的区间
+创建时间的区间以左闭右开的方式来进行检索，**since <= creation time < before**
+
+关于详细的时间区间参数可以查看 [创建时间区间检索](../#创建时间区间检索)
+
+{{< tabs >}}
+
+{{% tab name="kubectl" %}}
+使用 Search Label `search.clusterpedia.io/since` 和 `search.clusterpedia.io/before` 来指定时间区间
+```bash
+kubectl --cluster clusterpedia get deployments -A -l "search.clusterpedia.io/since=2022-03-24, \
+    search.clusterpedia.io/before=2022-04-10"
+```
+{{% /tab %}}
+
+{{% tab name="URL" %}}
+直接使用 URL 时，可以 Query `since` 和 `before` 来分别指定时间的区间
+```bash
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?since=2022-03-24&before=2022-04-10"
+```
+{{< /tab >}}
+
+{{< /tabs >}}
+
+## 模糊搜索
+当前支持根据资源名称进行模糊搜索，由于模糊搜索还需要继续讨论，所以暂时以试验性功能来提供
+
+只支持 Search Label 的方式，不支持 URL Query
+```bash
+kubectl --cluster clusterpedia get deployments -A -l "internalstorage.clusterpedia.io/fuzzy-name=test"
+```
+过滤出名字中包含 *test* 字符串的 deployments。
+
+可以使用 `in` 操作符来传递多个参数，这样可以过滤出名字中包含所有字符串的资源
 
 ## 字段过滤
 原生 Kubernetes 当前只支持对 `metadata.name` 和 `metadata.namespace` 的字段过滤，而且操作符只支持 `=`，`!=`，`==`，能力非常有限。
@@ -345,9 +379,12 @@ kubectl --cluster clusterpedia get deploy -l \
 
 Kubernetes List 响应的 [ListMeta](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta) 中存在 `RemainingItemCount` 字段，
 
-通过复用该字段，便可在兼容 Kubernetes OpenAPI 的基础下返回资源总量：
+通过复用该字段，便可在兼容 Kubernetes OpenAPI 的基础下计算出资源总量：
 
 **`offset + len(list.items) + list.metadata.remainingItemCount`**
+
+> 在 offset 过大时，`remainingItemCount` 可能为负数，保证总是可以计算出资源总量
+
 {{< tabs >}}
 
 {{% tab name="URL" %}}

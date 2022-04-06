@@ -45,10 +45,13 @@ kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployme
 ## 根据父辈或者祖辈 Owner 进行检索
 Owner 查询必须指定单个集群，可以使用 [Search Label](../#元信息检索) 或者 [URL Query](../#元信息检索) 来指定，也可以在 URL Path 中指定集群名称
 
-**通过 `Owenr UID` 以及用于 Owner 辈分提升的 `Owenr Senirority` 可以完成基于祖辈 Owner 的资源检索。**
-> 当前暂时只支持根据 `Owner UID` 查询
+**通过 `Owenr UID` 或者 `Owner Name`, 并且配合用于 Owner 辈分提升的 `Owenr Senirority` 可以完成基于祖辈 Owner 的资源检索。**
+> 关于具体的查询参数，可以参考 [Owner 检索](../#owner-检索)
 
-例如通过 `Deployment UID` 直接查询相应的 `Pods`，无需查询有哪些 `ReplicaSet` 属于该 `Deployment`
+通过这种方式，可以直接查询到 Deployment 相应的 Pods，无需查询有哪些 `ReplicaSet` 属于该 `Deployment`。
+
+### 指定 Owner  的 UID
+**在指定 `Owenr UID` 后，`Owner Name` 和 `Owenr Group Resource` 会被忽略**
 
 首先使用 kubectl 获取 `Deployment` 的 UID
 ```bash
@@ -69,25 +72,52 @@ kubectl --cluster cluster-1 get deploy fake-deploy -o jsonpath="{.metadata.uid}"
 
 ```
 kubectl --cluster cluster-1 get pods -l \
-    "internalstorage.clusterpedia.io/owner-uid=151ae265-28fe-4734-850e-b641266cd5da,\
-     internalstorage.clusterpedia.io/owner-seniority=1"
+    "search.clusterpedia.io/owner-uid=151ae265-28fe-4734-850e-b641266cd5da,\
+     search.clusterpedia.io/owner-seniority=1"
 ```
 
 {{% /tab %}}
 
 {{% tab name="URL" %}}
-Owner 检索作为试验性功能，暂时还没有提供 URL Query
+```bash
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/api/v1/namespaces/default/pods?ownerUID=151ae265-28fe-4734-850e-b641266cd5da&ownerSeniority=1"
+```
 {{< /tab >}}
 
 {{< /tabs >}}
 
-> Owner 检索作为试验性功能，暂时以 *internalstorage.clusterpedia.io* 作为 [Search Label](../#owner-检索) 前缀
->
-> 确定相关功能的可用性和实用性后，移到 *search.clusterpedia.io* 下。
+### 指定 Owner Name
+如果事先并不知道 Owner 的 UID，那么指定 `Owner UID` 是一种比较麻烦的方式。
 
-使用以 `Owner Namespace` 和 `Owenr Name` 结合成 `Owner Key` 来查询的功能尚在讨论中，
+我们可以通过 Owner 的名字来指定 Owner，同时还可以指定 `Owner Group Resource` 来限制 Owner 的 Group Resource。
 
-可以在 [issue: Support for searching resources by owner](https://github.com/clusterpedia-io/clusterpedia/issues/49) 参与讨论。
+同样，我们以获取 Deployment 下相应的 Pods 来举例
+{{< tabs >}}
+
+{{% tab name="kubectl" %}}
+```bash
+kubectl --cluster cluster-1 get pods -l \
+    "search.clusterpedia.io/owner-name=deploy-1,\
+     search.clusterpedia.io/owner-seniority=1"
+```
+
+另外为了避免某些情况下，owner 资源存在多种类型，我们可以使用 Owner Group Resource 来限制 Owner 的类型
+```bash
+kubectl --cluster cluster-1 get pods -l \
+    "search.clusterpedia.io/owner-name=deploy-1,\
+     search.clusterpedia.io/owner-gr=deployments.apps,\
+     search.clusterpedia.io/owner-seniority=1"
+```
+
+{{% /tab %}}
+
+{{% tab name="URL" %}}
+```bash
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/api/v1/namespaces/default/pods?ownerName=deploy-1&ownerSeniority=1"
+```
+{{< /tab >}}
+
+{{< /tabs >}}
 
 ## 获取单个资源
 当我们想要使用资源名称获取（Get）一个资源时，就必须要以 URL Path 的方式将集群名称传递进去，就像 namespace 一样。
@@ -153,10 +183,10 @@ status:
 获取指定资源的 URL 可以分为三部分
 * 资源检索前缀： */apis/clusterpedia.io/v1beta1/resources*
 * 指定集群名称 */clusters/< cluster name >*
-* 原生 Kubernetes API 的资源 Path */apis/apps/v1/deployments/namespaces/<namespace>/<resource name>*
+* 原生 Kubernetes API 的资源 Path */apis/apps/v1/namespaces/< namespace >/deployments/< resource name >*
 
 ```bash
-kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/namespaces/default/deployments/fake-deploy"
 ```
 {{< /tab >}}
 
