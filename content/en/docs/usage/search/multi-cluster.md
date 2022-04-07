@@ -1,5 +1,5 @@
 ---
-title: Search in Multiple Clusters
+title: Multiple Clusters
 weight: 10
 ---
 Multi-cluster resource search allows us to **filter resources in multiple clusters at once based on query criteria, and provides the ability to paginate and sort these resources**.
@@ -147,7 +147,6 @@ kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployme
 
 ### Specify Resource Names
 Users can filter resources by a group of resource names
-> Fuzzy search is not supported at the moment.
 
 {{< tabs >}}
 
@@ -180,6 +179,41 @@ If we want to get a single `Deployment` then we need to specify the cluster name
 {{< /tab >}}
 
 {{< /tabs >}}
+
+### Creation Time Interval
+The creation time interval used for the search is left closed and right open, **since <= creation time < before**.
+
+For more details on the time interval parameters, see [Search by Creation Time Interval](../#search-by-creation-time-interval)
+
+{{< tabs >}}
+{{% tab name="kubectl" %}}
+Use Search Label - `search.clusterpedia.io/since` and `search.clusterpedia.io/before` to specify the time interval respectively.
+```bash
+kubectl --cluster clusterpedia get deployments -A -l "search.clusterpedia.io/since=2022-03-24, \
+    search.clusterpedia.io/before=2022-04-10"
+```
+{{% /tab %}}
+{{% tab name="URL" %}}
+When using URLs, you can use Query - `since` and `before` to specify the time interval respectively.
+
+```bash
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?since=2022-03-24&before=2022-04-10"
+```
+{{< /tab >}}
+{{< /tabs >}}
+
+## Fuzzy Search
+Currently supports fuzzy search based on resource names. 
+
+Since fuzzy search needs to be discussed further, it is temporarily provided as an experimental feature.
+
+Only the Search Label method is supported, URL Query isn't supported.
+```bash
+kubectl --cluster clusterpedia get deployments -A -l "internalstorage.clusterpedia.io/fuzzy-name=test"
+```
+Filters out deployments whose names contain the *test* string.
+
+You can use the `in` operator to pass multiple fuzzy arguments, so that you can filter out resources that have all strings in their names.
 
 ## Field Selector
 Native Kubernetes currently only supports field filtering on `metadata.name` and `metadata.namespace`, and the operators only support `=, `!=`, `==`, which is very limited.
@@ -352,6 +386,8 @@ The `RemainingItemCount` field exists in the [ListMeta](https://pkg.go.dev/k8s.i
 By reusing this field, the total number of resources can be returned in a Kubernetes OpenAPI-compatible manner:
 
 **`offset + len(list.items) + list.metadata.remainingItemCount`**
+> **When offset is too large, `remainingItemCount` may be negative, ensuring that the total number of resources can always be calculated.**
+
 {{< tabs >}}
 
 {{% tab name="URL" %}}
