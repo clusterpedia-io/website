@@ -15,34 +15,68 @@ And these complex search conditions can be passed to `Clusterpedia APIServer` in
 
 In addition to conditional retrieval, Clusterpedia also enhances [`Field Selector`](#field-selector) to meet the filtering requirements by fields such as `metadata.annotation` or `status.*`.
 ## Search by metadata
-> It supports same operators as Label Selector: `exist`, `not exist`, `==`, `=`, `!=`, `in`, `notin`.
+> Supported Operators: `==`, `=`, `in`.
 
 |Role| search label key|url query|
 | -- | --------------- | ------- |
 |Filter cluster names|`search.clusterpedia.io/clusters`|`clusters`|
 |Filter namespaces|`search.clusterpedia.io/namespaces`|`namespaces`|
 |Filter resource names|`search.clusterpedia.io/names`|`names`|
+> Current, we don't support operators such as `!=`, `notin` operators,
+> if you have these needs or scenarios, you can discuss them in the issue.
 
-## Search by Owner
-> It only supports operators: `==`, `=`.
+## Fuzzy Search
+> Supported Operators: `==`, `=`, `in`.
+
+This feature is expermental and only search label are available for now
+|Role| search label key|url query|
+| -- | --------------- | ------- |
+|Fuzzy Search for resource name|internalstorage.clusterpedia.io/fuzzy-name|-|
+
+## Search by creation time interval
+> Supported Operators: `==`, `=`.
+
+The search is based on the creation time interval of the resource,
+using a left-closed, right-open internval.
 
 |Role| search label key|url query|
 | -- | --------------- | ------- |
-|Specified Owner UID|`internalstorage.clusterpedia.io/owner-uid`|`ownerID`|
-|Specified Owner Name|`internalstorage.clusterpedia.io/owner-name`|`ownerName`|
+|Search|search.clusterpedia.io/since|since|
+|Before|search.clusterpedia.io/before|before|
+
+There are four formats for creation time:
+1. `Unix Timestamp` for ease of use will distinguish between units of `s` or `ms` based on the length of the timestamp. The 10-bit timestamp is in seconds, the 13-bit timestamp is in milliseconds.
+2. `RFC3339` *2006-01-02T15:04:05Z* or *2006-01-02T15:04:05+08:00*
+3. `UTC Date` *2006-01-02*
+4. `UTC Datetime` *2006-01-02 15:04:05*
+
+Because of the limitation of the kube label selector, the search label only supports `Unix Timestamp` and `UTC Date`.
+
+All formats are available using the url query method.
+
+## Search by Owner
+> Supported Operators: `==`, `=`.
+
+|Role| search label key|url query|
+| -- | --------------- | ------- |
+|Specified Owner UID|search.clusterpedia.io/owner-uid|ownerUID|
+|Specified Owner Name|search.clusterpedia.io/owner-name|ownerName|
+|SPecified Owner Group Resource|search.clusterpedia.io/owner-gr|ownerGR|
 |Specified Owner Seniority|`internalstorage.clusterpedia.io/owner-seniority`|`ownerSeniority`|
 
-Search by `owner name` is still under development. Join the [discussion](https://github.com/clusterpedia-io/clusterpedia/issues/49)
+Note that when specifying `Owner UID`, `Owner Name` and `Owner Group Resource` will be ignored.
+
+The format of the `Owner Group Resource` is `resource.group`, for example *deployments.apps* or *nodes*.
 
 ## OrderBy
-> It only supports operators: `=`, `==`, `in`.
+> Supported Operators: `=`, `==`, `in`.
 
 |Role| search label key|url query|
 | -- | --------------- | ------- |
 |Order by fields|`search.clusterpedia.io/orderby`|`orderby`|
 
 ## Paging
-> It only supports operators: `=`, `==`.
+> Supported Operators: `=`, `==`.
 
 |Role| search label key|url query|
 | -- | --------------- | ------- |

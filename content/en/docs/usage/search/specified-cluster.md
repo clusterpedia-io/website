@@ -1,5 +1,5 @@
 ---
-title: "Search in a Specified Cluster"
+title: "Specified a Cluster"
 weight: 11
 ---
 
@@ -45,10 +45,13 @@ It is more convenient for searching by Owner in a specified cluster. In addition
 ## Search by Parent or Ancestor Owner
 To query by Owner, you shall specify a single cluster. You can use [Search Label](../#search-by-metadata) or [URL Query](../#search-by-metadata) to specify, or specify the cluster name in the URL Path.
 
-**Resource search based on ancestors Owner can be completed through `Owenr UID` and `Owenr Senirority`.**
-> Currently only supports query by `Owner UID`
+**Searching for resources based on ancestor owners can be done with `Owner UID` or `Owner Name`, and with `Owner Seniority` for Owner seniority advancement.**
+> For the specific query parameters, you can refer to [Search by Owner](../#search-by-owner)
 
-For example, directly query the corresponding `Pods` by using `Deployment UID`, without querying which `ReplicaSet` belongs to the `Deployment`.  
+In this way, you can directly search for the `Pods` corresponding to a Deployment without having to query which `ReplicaSet` belong to that `Deployment`.
+
+### Use the Owner UID
+**`Owner Name` and `Owner Group Resource` will be ignored after `Owner UID` is specified.**
 
 Firstly use kubectl to get `Deployment` UID
 ```bash
@@ -69,23 +72,52 @@ Use `owner-uid` to specify Owner UID and use `owner-seniority` to promote the Ow
 
 ```
 kubectl --cluster cluster-1 get pods -l \
-    "internalstorage.clusterpedia.io/owner-uid=151ae265-28fe-4734-850e-b641266cd5da,\
-     internalstorage.clusterpedia.io/owner-seniority=1"
+    "search.clusterpedia.io/owner-uid=151ae265-28fe-4734-850e-b641266cd5da,\
+     search.clusterpedia.io/owner-seniority=1"
 ```
 
 {{% /tab %}}
 
 {{% tab name="URL" %}}
-Search by Owner is an experimental feature and URL Query has not been provided yet
+```bash
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/api/v1/namespaces/default/pods?ownerUID=151ae265-28fe-4734-850e-b641266cd5da&ownerSeniority=1"
+```
 {{< /tab >}}
 
 {{< /tabs >}}
 
-> Search by Owner is an experimental feature, temporarily prefixed with *internalstorage.clusterpedia.io* as [Search Label](../#search-by-owner)
->
-> After you confirm the availability and usefulness of relevant features, move it under *search.clusterpedia.io*.
+## Use the Owner Name
+If the Owner UID is not known in advance, then using `Owner UID` is a more troublesome way.
 
-The search feature of combining `Owner Namespace` and `Owenr Name` into `Owner Key` is still in discussion, welcome to join [issue: Support for searching resources by owner](https://github.com/clusterpedia-io/clusterpedia/issues/49) and discuss together.
+We can specify the Owner by it's name, and we can also specify `Owner Group Resource` to restrict the Owner's Group Resource.
+
+Again, let's take the example of getting the corresponding Pods under Deployment.
+{{< tabs >}}
+
+{{% tab name="kubectl" %}}
+```bash
+kubectl --cluster cluster-1 get pods -l \
+    "search.clusterpedia.io/owner-name=deploy-1,\
+     search.clusterpedia.io/owner-seniority=1"
+```
+
+In addition, to avoid multiple types of owner resources in some cases, we can use the `Owner Group Resource` to restrict the type of owner.
+```bash
+kubectl --cluster cluster-1 get pods -l \
+    "search.clusterpedia.io/owner-name=deploy-1,\
+     search.clusterpedia.io/owner-gr=deployments.apps,\
+     search.clusterpedia.io/owner-seniority=1"
+```
+
+{{% /tab %}}
+
+{{% tab name="URL" %}}
+```bash
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/api/v1/namespaces/default/pods?ownerName=deploy-1&ownerSeniority=1"
+```
+{{< /tab >}}
+
+{{< /tabs >}}
 
 ## Get a single resource
 When we want to use the resource name to get (Get) a resource, we must pass the cluster name in the URL Path, just like namespace.
@@ -151,10 +183,10 @@ status:
 The URL to get a specified resource can be divided into three parts:
 * Prefix to search for resource: */apis/clusterpedia.io/v1beta1/resources*
 * Specified cluster name: */clusters/< cluster name >*
-* Resource name for Kubernetes API: Path */apis/apps/v1/deployments/namespaces/<namespace>/<resource name>*
+* Resource name for Kubernetes API: Path */apis/apps/v1/namespaces/< namespace >/deployments/< resource name >*
 
 ```bash
-kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy"
+kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/namespaces/default/deployments/fake-deploy"
 ```
 {{< /tab >}}
 

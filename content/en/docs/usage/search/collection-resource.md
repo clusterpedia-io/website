@@ -1,5 +1,5 @@
 ---
-title: "Search for Collection Resource"
+title: "Collection Resource"
 weight: 12
 ---
 
