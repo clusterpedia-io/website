@@ -69,7 +69,7 @@ Search Labels： …">
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.51b5d88e16c5d83d8394fa4ff0dbe644.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.917e446c7a321ff2018d5c10a4c685f1.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -79,7 +79,7 @@ Search Labels： …">
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.51b5d88e16c5d83d8394fa4ff0dbe644.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.917e446c7a321ff2018d5c10a4c685f1.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -164,6 +164,8 @@ Search Labels： …">
 <div class=td-toc><nav id=TableOfContents>
 <ul>
 <li><a href=#元信息检索>元信息检索</a></li>
+<li><a href=#模糊搜索>模糊搜索</a></li>
+<li><a href=#创建时间区间检索>创建时间区间检索</a></li>
 <li><a href=#owner-检索>Owner 检索</a></li>
 <li><a href=#排序>排序</a></li>
 <li><a href=#分页>分页</a></li>
@@ -189,7 +191,7 @@ Search Labels： …">
 <div class=td-content>
 <h1>资源检索</h1>
 <header class=article-meta>
-<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 少于1分钟 &nbsp;</p>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 2 分钟阅读 &nbsp;</p>
 </header>
 <p>Clusterpedia 支持对 <a href=multi-cluster>多个集群内资源</a>，<a href=specified-cluster>指定集群的资源</a> 以及<a href=collection-resource>聚合资源</a> 的复杂检索，</p>
 <p>并且这些复杂检索的条件可以通过两种方式传递给 <code>Clusterpedia APIServer</code>：</p>
@@ -207,7 +209,7 @@ Search Labels： …">
 ，满足我们通过 <code>metadata.annotation</code> 或者 <code>status.*</code> 等字段的过滤需求。</p>
 <h2 id=元信息检索>元信息检索</h2>
 <blockquote>
-<p>支持和 Label Selector 相同的操作符：<code>exist</code>，<code>not exist</code>，<code>==</code>，<code>=</code>，<code>!=</code>，<code>in</code>，<code>notin</code>。</p>
+<p>支持的操作符：<code>==</code>，<code>=</code>，<code>in</code>。</p>
 </blockquote>
 <table>
 <thead>
@@ -235,6 +237,66 @@ Search Labels： …">
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>暂时不支持例如 <code>!=</code>，<code>notin</code> 操作符，如果有这些需求或者场景，可以在 issue 中讨论</p>
+</blockquote>
+<h2 id=模糊搜索>模糊搜索</h2>
+<blockquote>
+<p>支持的操作符：<code>==</code>，<code>=</code>，<code>in</code>。</p>
+</blockquote>
+<p>该功能暂时为试验性功能，暂时只提供 search label</p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模糊搜索资源名称</td>
+<td>internalstorage.clusterpedia.io/fuzzy-name</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id=创建时间区间检索>创建时间区间检索</h2>
+<blockquote>
+<p>支持的操作符：<code>==</code>，<code>=</code>。</p>
+</blockquote>
+<p>基于资源的创建时间区间进行检索，采用的是左闭右开的区间</p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指定 Since</td>
+<td>search.clusterpedia.io/since</td>
+<td>since</td>
+</tr>
+<tr>
+<td>指定 Before</td>
+<td>search.clusterpedia.io/before</td>
+<td>before</td>
+</tr>
+</tbody>
+</table>
+<p>创建时间的格式有四种：</p>
+<ol>
+<li><code>Unix 时间戳格式</code> 为了方便使用会根据时间戳的长度来区分单位为 s 还是 ms。
+10 位时间戳单位为秒，13 位时间戳单位为毫秒。</li>
+<li><code>RFC3339</code> <em>2006-01-02T15:04:05Z</em> or <em>2006-01-02T15:04:05+08:00</em></li>
+<li><code>UTC Date</code> <em>2006-01-02</em></li>
+<li><code>UTC Datetime</code> <em>2006-01-02 15:04:05</em></li>
+</ol>
+<p>由于 kube label selector 的限制，search label 只支持 <code>Unix 时间戳</code>，<code>UTC Date</code>.</p>
+<p>使用 url query 的方式可以所有的格式</p>
 <h2 id=owner-检索>Owner 检索</h2>
 <blockquote>
 <p>只支持操作符：<code>==</code>，<code>=</code>。</p>
@@ -250,13 +312,18 @@ Search Labels： …">
 <tbody>
 <tr>
 <td>指定 Owner UID</td>
-<td>internalstorage.clusterpedia.io/owner-uid</td>
-<td>ownerID</td>
+<td>search.clusterpedia.io/owner-uid</td>
+<td>ownerUID</td>
 </tr>
 <tr>
-<td>指定 Owner Key</td>
-<td>internalstorage.clusterpedia.io/owner-key</td>
-<td>ownerKey</td>
+<td>指定 Owner Name</td>
+<td>search.clusterpedia.io/owner-name</td>
+<td>ownerName</td>
+</tr>
+<tr>
+<td>指定 Owner Group Resource</td>
+<td>search.clusterpedia.io/owner-gr</td>
+<td>ownerGR</td>
 </tr>
 <tr>
 <td>指定 Owner 辈分</td>
@@ -265,6 +332,8 @@ Search Labels： …">
 </tr>
 </tbody>
 </table>
+<p>需要注意指定 <code>Owner UID</code> 时，<code>Owner Name</code> 和 <code>Owner Group Resource</code> 会被忽略</p>
+<p>Owner Group 的格式为 <code>resource.group</code>，例如 <em>deployments.apps</em> 或者 <em>nodes</em></p>
 <h2 id=排序>排序</h2>
 <blockquote>
 <p>只支持操作符：<code>=</code>，<code>==</code>，<code>in</code>。</p>
