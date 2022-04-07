@@ -66,7 +66,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.e064a0d69f9c0b5c97b818e7b5ae3c5f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.51b5d88e16c5d83d8394fa4ff0dbe644.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -85,9 +85,9 @@ This is the multi-page printable view of this section.
 </div>
 <h1 class=title>Search</h1>
 <ul>
-<li>1: <a href=#pg-ec8e2360424d04fb82dc27fbc4824983>Search in Multiple Clusters</a></li>
-<li>2: <a href=#pg-d30ab8cb55be590100ae14cd7d8c1d47>Search in a Specified Cluster</a></li>
-<li>3: <a href=#pg-83e3a820b19f3a40c674f197775a60c8>Search for Collection Resource</a></li>
+<li>1: <a href=#pg-ec8e2360424d04fb82dc27fbc4824983>Multiple Clusters</a></li>
+<li>2: <a href=#pg-d30ab8cb55be590100ae14cd7d8c1d47>Specified a Cluster</a></li>
+<li>3: <a href=#pg-83e3a820b19f3a40c674f197775a60c8>Collection Resource</a></li>
 </ul>
 <div class=content>
 <p>Clusterpedia supports complex search for <a href=multi-cluster>multi-cluster resources</a>, <a href=specified-cluster>specified cluster resoruces</a>, and <a href=collection-resource>Collection Resources</a>.</p>
@@ -105,7 +105,7 @@ This is the multi-page printable view of this section.
 <p>In addition to conditional retrieval, Clusterpedia also enhances <a href=#field-selector><code>Field Selector</code></a> to meet the filtering requirements by fields such as <code>metadata.annotation</code> or <code>status.*</code>.</p>
 <h2 id=search-by-metadata>Search by metadata</h2>
 <blockquote>
-<p>It supports same operators as Label Selector: <code>exist</code>, <code>not exist</code>, <code>==</code>, <code>=</code>, <code>!=</code>, <code>in</code>, <code>notin</code>.</p>
+<p>Supported Operators: <code>==</code>, <code>=</code>, <code>in</code>.</p>
 </blockquote>
 <table>
 <thead>
@@ -133,9 +133,70 @@ This is the multi-page printable view of this section.
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>Current, we don&rsquo;t support operators such as <code>!=</code>, <code>notin</code> operators,
+if you have these needs or scenarios, you can discuss them in the issue.</p>
+</blockquote>
+<h2 id=fuzzy-search>Fuzzy Search</h2>
+<blockquote>
+<p>Supported Operators: <code>==</code>, <code>=</code>, <code>in</code>.</p>
+</blockquote>
+<p>This feature is expermental and only search label are available for now</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fuzzy Search for resource name</td>
+<td>internalstorage.clusterpedia.io/fuzzy-name</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id=search-by-creation-time-interval>Search by creation time interval</h2>
+<blockquote>
+<p>Supported Operators: <code>==</code>, <code>=</code>.</p>
+</blockquote>
+<p>The search is based on the creation time interval of the resource,
+using a left-closed, right-open internval.</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Search</td>
+<td>search.clusterpedia.io/since</td>
+<td>since</td>
+</tr>
+<tr>
+<td>Before</td>
+<td>search.clusterpedia.io/before</td>
+<td>before</td>
+</tr>
+</tbody>
+</table>
+<p>There are four formats for creation time:</p>
+<ol>
+<li><code>Unix Timestamp</code> for ease of use will distinguish between units of <code>s</code> or <code>ms</code> based on the length of the timestamp. The 10-bit timestamp is in seconds, the 13-bit timestamp is in milliseconds.</li>
+<li><code>RFC3339</code> <em>2006-01-02T15:04:05Z</em> or <em>2006-01-02T15:04:05+08:00</em></li>
+<li><code>UTC Date</code> <em>2006-01-02</em></li>
+<li><code>UTC Datetime</code> <em>2006-01-02 15:04:05</em></li>
+</ol>
+<p>Because of the limitation of the kube label selector, the search label only supports <code>Unix Timestamp</code> and <code>UTC Date</code>.</p>
+<p>All formats are available using the url query method.</p>
 <h2 id=search-by-owner>Search by Owner</h2>
 <blockquote>
-<p>It only supports operators: <code>==</code>, <code>=</code>.</p>
+<p>Supported Operators: <code>==</code>, <code>=</code>.</p>
 </blockquote>
 <table>
 <thead>
@@ -148,13 +209,18 @@ This is the multi-page printable view of this section.
 <tbody>
 <tr>
 <td>Specified Owner UID</td>
-<td><code>internalstorage.clusterpedia.io/owner-uid</code></td>
-<td><code>ownerID</code></td>
+<td>search.clusterpedia.io/owner-uid</td>
+<td>ownerUID</td>
 </tr>
 <tr>
 <td>Specified Owner Name</td>
-<td><code>internalstorage.clusterpedia.io/owner-name</code></td>
-<td><code>ownerName</code></td>
+<td>search.clusterpedia.io/owner-name</td>
+<td>ownerName</td>
+</tr>
+<tr>
+<td>SPecified Owner Group Resource</td>
+<td>search.clusterpedia.io/owner-gr</td>
+<td>ownerGR</td>
 </tr>
 <tr>
 <td>Specified Owner Seniority</td>
@@ -163,10 +229,11 @@ This is the multi-page printable view of this section.
 </tr>
 </tbody>
 </table>
-<p>Search by <code>owner name</code> is still under development. Join the <a href=https://github.com/clusterpedia-io/clusterpedia/issues/49>discussion</a></p>
+<p>Note that when specifying <code>Owner UID</code>, <code>Owner Name</code> and <code>Owner Group Resource</code> will be ignored.</p>
+<p>The format of the <code>Owner Group Resource</code> is <code>resource.group</code>, for example <em>deployments.apps</em> or <em>nodes</em>.</p>
 <h2 id=orderby>OrderBy</h2>
 <blockquote>
-<p>It only supports operators: <code>=</code>, <code>==</code>, <code>in</code>.</p>
+<p>Supported Operators: <code>=</code>, <code>==</code>, <code>in</code>.</p>
 </blockquote>
 <table>
 <thead>
@@ -186,7 +253,7 @@ This is the multi-page printable view of this section.
 </table>
 <h2 id=paging>Paging</h2>
 <blockquote>
-<p>It only supports operators: <code>=</code>, <code>==</code>.</p>
+<p>Supported Operators: <code>=</code>, <code>==</code>.</p>
 </blockquote>
 <table>
 <thead>
@@ -270,7 +337,7 @@ This is the multi-page printable view of this section.
 </div>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-ec8e2360424d04fb82dc27fbc4824983>1 - Search in Multiple Clusters</h1>
+<h1 id=pg-ec8e2360424d04fb82dc27fbc4824983>1 - Multiple Clusters</h1>
 <p>Multi-cluster resource search allows us to <strong>filter resources in multiple clusters at once based on query criteria, and provides the ability to paginate and sort these resources</strong>.</p>
 <p>When using <code>kubectl</code>, we can see what resources are currently available for search</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia api-resources
@@ -368,9 +435,6 @@ default       cluster-2   dd-airflow-web            0/1     1            0      
 </p>
 <h3 id=specify-resource-names>Specify Resource Names</h3>
 <p>Users can filter resources by a group of resource names</p>
-<blockquote>
-<p>Fuzzy search is not supported at the moment.</p>
-</blockquote>
 <ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-4 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-4-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-4-0 aria-selected=true>kubectl</a></li>
 <li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-4-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-4-1>URL</a></li></ul>
 <div class=tab-content id=tabset-docsusagesearchmulti-cluster-4><div id=tabset-docsusagesearchmulti-cluster-4-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-4-0>
@@ -393,6 +457,27 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 </code></pre></div><p>When searching from multiple clusters, the data returned is actually encapsulated in a structure similar to <code>DeploymentList</code>.</p>
 <p>If we want to get a single <code>Deployment</code> then we need to specify the cluster name in the URL path, refer to <a href>Get Single Resource</a></p>
 </div></div>
+<h3 id=creation-time-interval>Creation Time Interval</h3>
+<p>The creation time interval used for the search is left closed and right open, <strong>since &lt;= creation time &lt; before</strong>.</p>
+<p>For more details on the time interval parameters, see <a href=../#search-by-creation-time-interval>Search by Creation Time Interval</a></p>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-5 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-5-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-5-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-5-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-5-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-5><div id=tabset-docsusagesearchmulti-cluster-5-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-5-0>
+<p><p>Use Search Label - <code>search.clusterpedia.io/since</code> and <code>search.clusterpedia.io/before</code> to specify the time interval respectively.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -A -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/since=2022-03-24, \
+</span><span style=color:#4e9a06>    search.clusterpedia.io/before=2022-04-10&#34;</span>
+</code></pre></div></div>
+<div id=tabset-docsusagesearchmulti-cluster-5-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-5-1>
+<p><p>When using URLs, you can use Query - <code>since</code> and <code>before</code> to specify the time interval respectively.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?since=2022-03-24&amp;before=2022-04-10&#34;</span>
+</code></pre></div></div></div>
+<h2 id=fuzzy-search>Fuzzy Search</h2>
+<p>Currently supports fuzzy search based on resource names.</p>
+<p>Since fuzzy search needs to be discussed further, it is temporarily provided as an experimental feature.</p>
+<p>Only the Search Label method is supported, URL Query isn&rsquo;t supported.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deployments -A -l <span style=color:#4e9a06>&#34;internalstorage.clusterpedia.io/fuzzy-name=test&#34;</span>
+</code></pre></div><p>Filters out deployments whose names contain the <em>test</em> string.</p>
+<p>You can use the <code>in</code> operator to pass multiple fuzzy arguments, so that you can filter out resources that have all strings in their names.</p>
 <h2 id=field-selector>Field Selector</h2>
 <p>Native Kubernetes currently only supports field filtering on <code>metadata.name</code> and <code>metadata.namespace</code>, and the operators only support <code>=, </code>!=<code>, </code>==`, which is very limited.</p>
 <p><strong>Clusterpedia provides more powerful features based on the compatibility with existing Field Selector features, and supports the same operators as <code>Label Selector</code>.</strong></p>
@@ -434,9 +519,9 @@ and Clusterpedia also supports <strong>the seniority advancement of Owner to sea
 <p>Multiple fields can be specified for sorting, and the support for sorting fields is determined by the Storage Layer.</p>
 <p>The current <code>Default Storage Layer</code> supports sorting <code>cluster</code>，<code>namespace</code>，<code>name</code>，<code>created_at</code>，<code>resource_version</code> in both asc and desc,
 and the fields are also supported in any combination
-<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-5 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-5-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-5-0 aria-selected=true>kubectl</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-5-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-5-1>URL</a></li></ul>
-<div class=tab-content id=tabset-docsusagesearchmulti-cluster-5><div id=tabset-docsusagesearchmulti-cluster-5-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-5-0>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-6 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-6-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-6-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-6-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-6-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-6><div id=tabset-docsusagesearchmulti-cluster-6-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-6-0>
 <p><p>Sorting using multiple fields</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods -l <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/orderby in (cluster, name)&#34;</span>
@@ -444,7 +529,7 @@ and the fields are also supported in any combination
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods -l <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/orderby in (namespace_desc, cluster, name)&#34;</span>
 </code></pre></div></div>
-<div id=tabset-docsusagesearchmulti-cluster-5-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-5-1>
+<div id=tabset-docsusagesearchmulti-cluster-6-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-6-1>
 <p><p>Use <a href=../#orderby>URL Query</a> to specify sorting fields</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?orderby=namespace,cluster&#34;</span>
 </code></pre></div><p>When specifying a field in order by desc, add <strong>desc</strong> to the end of the field, separated by spaces</p>
@@ -454,9 +539,9 @@ and the fields are also supported in any combination
 <h3 id=paging>Paging</h3>
 <p>Native Kubernetes actually supports paging, and fields for paging queries already exist in <a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListOptions>ListOptions</a>.</p>
 <p>Clusterpedia reuses the <code>ListOptions.Limit</code> and <code>ListOptions.Continue</code> fields as the <code>size</code> and <code>offset</code> for paging.</p>
-<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-6 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-6-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-6-0 aria-selected=true>kubectl</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-6-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-6-1>URL</a></li></ul>
-<div class=tab-content id=tabset-docsusagesearchmulti-cluster-6><div id=tabset-docsusagesearchmulti-cluster-6-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-6-0>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-7 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-7-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-7-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-7-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-7-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-7><div id=tabset-docsusagesearchmulti-cluster-7-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-7-0>
 <p><p><code>kubectl --chunk-size</code> is actually used for paging pulls by setting <code>ListOptions.Limit</code>.</p>
 <p>The native Kubernetes APIServer carries the <code>continue</code> for the next list in the returned response,
 and performs the next list based on <code>--chunk-size</code> and <code>conintue</code> until the <code>conintue</code> is empty in the response data.</p>
@@ -472,7 +557,7 @@ which means that <code>search.clusterpedia.io/size</code> does not actually take
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get pods --chunk-size <span style=color:#0000cf;font-weight:700>10</span> -l <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/offset=10&#34;</span>
 </code></pre></div></div>
-<div id=tabset-docsusagesearchmulti-cluster-6-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-6-1>
+<div id=tabset-docsusagesearchmulti-cluster-7-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-7-1>
 <p><p>To paginate resources, just set the <code>limit</code> and <code>continue</code> in the URL.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?limit=10&amp;continue=5&#34;</span>
 </code></pre></div></div></div>
@@ -480,9 +565,9 @@ which means that <code>search.clusterpedia.io/size</code> does not actually take
 <p><a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta>ListMeta.Continue</a> can be used in <a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListOptions>ListOptions.Continue</a> as the offset for the next request.</p>
 <p>As mentioned in the paging feature, Clusterepdia does not have <code>continue</code> in the response to prevent kubectl from pulling the full amount of data in pieces.</p>
 <p>However, if the user requires it, he can request that the response include <code>continue</code>.
-<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-7 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-7-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-7-0 aria-selected=true>URL</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-7-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-7-1>kubectl</a></li></ul>
-<div class=tab-content id=tabset-docsusagesearchmulti-cluster-7><div id=tabset-docsusagesearchmulti-cluster-7-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-7-0>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-8 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-8-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-8-0 aria-selected=true>URL</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-8-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-8-1>kubectl</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-8><div id=tabset-docsusagesearchmulti-cluster-8-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-8-0>
 <p><p>When accessing Clusterepdia using a URL, the response' <code>continue</code> can be used as the offset for the next request.</p>
 <blockquote>
 <p>Use with paging</p>
@@ -499,7 +584,7 @@ which means that <code>search.clusterpedia.io/size</code> does not actually take
   <span style=color:#000;font-weight:700>]</span>
 <span style=color:#000;font-weight:700>}</span>
 </code></pre></div></div>
-<div id=tabset-docsusagesearchmulti-cluster-7-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-7-1>
+<div id=tabset-docsusagesearchmulti-cluster-8-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-8-1>
 <p><p><strong>Setting <code>search.clusterpedia.io/with-continue</code> in kubectl will result in pulling the full amount of resources as a paged pull.</strong></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster clusterpedia get deploy -l <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/with-continue=true&#34;</span>
@@ -509,10 +594,13 @@ which means that <code>search.clusterpedia.io/size</code> does not actually take
 <p><strong>In some UI cases, it is often necessary to get the total number of resources in the current search condition.</strong></p>
 <p>The <code>RemainingItemCount</code> field exists in the <a href=https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta>ListMeta</a> of the Kubernetes List response.</p>
 <p>By reusing this field, the total number of resources can be returned in a Kubernetes OpenAPI-compatible manner:</p>
-<p><strong><code>offset + len(list.items) + list.metadata.remainingItemCount</code></strong>
-<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-8 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-8-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-8-0 aria-selected=true>URL</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-8-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-8-1>kubectl</a></li></ul>
-<div class=tab-content id=tabset-docsusagesearchmulti-cluster-8><div id=tabset-docsusagesearchmulti-cluster-8-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-8-0>
+<p><strong><code>offset + len(list.items) + list.metadata.remainingItemCount</code></strong></p>
+<blockquote>
+<p><strong>When offset is too large, <code>remainingItemCount</code> may be negative, ensuring that the total number of resources can always be calculated.</strong></p>
+</blockquote>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchmulti-cluster-9 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchmulti-cluster-9-0 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-9-0 aria-selected=true>URL</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchmulti-cluster-9-1 role=tab aria-controls=tabset-docsusagesearchmulti-cluster-9-1>kubectl</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchmulti-cluster-9><div id=tabset-docsusagesearchmulti-cluster-9-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-9-0>
 <p><p>Set <code>withRemainingCount</code> in the <a href=../#paging>URL Query</a> to request that the response include the number of remaining resources.</p>
 <blockquote>
 <p>Use with paging</p>
@@ -529,13 +617,12 @@ which means that <code>search.clusterpedia.io/size</code> does not actually take
   <span style=color:#000;font-weight:700>]</span>
 <span style=color:#000;font-weight:700>}</span>
 </code></pre></div></div>
-<div id=tabset-docsusagesearchmulti-cluster-8-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-8-1>
+<div id=tabset-docsusagesearchmulti-cluster-9-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchmulti-cluster-9-1>
 <p><p>Need to use this feature as a URL</p>
 </div></div>
-</p>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-d30ab8cb55be590100ae14cd7d8c1d47>2 - Search in a Specified Cluster</h1>
+<h1 id=pg-d30ab8cb55be590100ae14cd7d8c1d47>2 - Specified a Cluster</h1>
 <p>In addition to searching in multiple clusters, Clusterpedia can also search for resources in a specified cluster.</p>
 <blockquote>
 <p>Using <a href=../#search-by-metadata><code>Search Label</code></a> or <a href=../#search-by-metadata><code>URL Query</code></a> to specify a single cluster is not different from specifying a cluster in URL Path in terms of performance</p>
@@ -560,11 +647,13 @@ kube-system   cluster-1   coredns                   2/2     2            2      
 <p>It is more convenient for searching by Owner in a specified cluster. In addition, when <strong>getting a single resource, you can only use the specified cluster in the URL Path</strong>.</p>
 <h2 id=search-by-parent-or-ancestor-owner>Search by Parent or Ancestor Owner</h2>
 <p>To query by Owner, you shall specify a single cluster. You can use <a href=../#search-by-metadata>Search Label</a> or <a href=../#search-by-metadata>URL Query</a> to specify, or specify the cluster name in the URL Path.</p>
-<p><strong>Resource search based on ancestors Owner can be completed through <code>Owenr UID</code> and <code>Owenr Senirority</code>.</strong></p>
+<p><strong>Searching for resources based on ancestor owners can be done with <code>Owner UID</code> or <code>Owner Name</code>, and with <code>Owner Seniority</code> for Owner seniority advancement.</strong></p>
 <blockquote>
-<p>Currently only supports query by <code>Owner UID</code></p>
+<p>For the specific query parameters, you can refer to <a href=../#search-by-owner>Search by Owner</a></p>
 </blockquote>
-<p>For example, directly query the corresponding <code>Pods</code> by using <code>Deployment UID</code>, without querying which <code>ReplicaSet</code> belongs to the <code>Deployment</code>.</p>
+<p>In this way, you can directly search for the <code>Pods</code> corresponding to a Deployment without having to query which <code>ReplicaSet</code> belong to that <code>Deployment</code>.</p>
+<h3 id=use-the-owner-uid>Use the Owner UID</h3>
+<p><strong><code>Owner Name</code> and <code>Owner Group Resource</code> will be ignored after <code>Owner UID</code> is specified.</strong></p>
 <p>Firstly use kubectl to get <code>Deployment</code> UID</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get deploy fake-deploy -o <span style=color:#000>jsonpath</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;{.metadata.uid}&#34;</span>
 </code></pre></div><pre tabindex=0><code>#Output:
@@ -580,22 +669,37 @@ kube-system   cluster-1   coredns                   2/2     2            2      
 <p><em><code>owner-seniority</code> is 0 by default, which represents Owner is parent. If you set it to 1, Owenr can be promoted to grandfather</em></p>
 </blockquote>
 <pre tabindex=0><code>kubectl --cluster cluster-1 get pods -l \
-    &quot;internalstorage.clusterpedia.io/owner-uid=151ae265-28fe-4734-850e-b641266cd5da,\
-     internalstorage.clusterpedia.io/owner-seniority=1&quot;
+    &quot;search.clusterpedia.io/owner-uid=151ae265-28fe-4734-850e-b641266cd5da,\
+     search.clusterpedia.io/owner-seniority=1&quot;
 </code></pre></div>
 <div id=tabset-docsusagesearchspecified-cluster-2-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-2-1>
-<p><p>Search by Owner is an experimental feature and URL Query has not been provided yet</p>
-</div></div>
-<blockquote>
-<p>Search by Owner is an experimental feature, temporarily prefixed with <em>internalstorage.clusterpedia.io</em> as <a href=../#search-by-owner>Search Label</a></p>
-<p>After you confirm the availability and usefulness of relevant features, move it under <em>search.clusterpedia.io</em>.</p>
-</blockquote>
-<p>The search feature of combining <code>Owner Namespace</code> and <code>Owenr Name</code> into <code>Owner Key</code> is still in discussion, welcome to join <a href=https://github.com/clusterpedia-io/clusterpedia/issues/49>issue: Support for searching resources by owner</a> and discuss together.</p>
-<h2 id=get-a-single-resource>Get a single resource</h2>
-<p>When we want to use the resource name to get (Get) a resource, we must pass the cluster name in the URL Path, just like namespace.</p>
+<p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/api/v1/namespaces/default/pods?ownerUID=151ae265-28fe-4734-850e-b641266cd5da&amp;ownerSeniority=1&#34;</span>
+</code></pre></div></div></div>
+<h2 id=use-the-owner-name>Use the Owner Name</h2>
+<p>If the Owner UID is not known in advance, then using <code>Owner UID</code> is a more troublesome way.</p>
+<p>We can specify the Owner by it&rsquo;s name, and we can also specify <code>Owner Group Resource</code> to restrict the Owner&rsquo;s Group Resource.</p>
+<p>Again, let&rsquo;s take the example of getting the corresponding Pods under Deployment.
 <ul class="nav nav-tabs" id=tabset-docsusagesearchspecified-cluster-3 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchspecified-cluster-3-0 role=tab aria-controls=tabset-docsusagesearchspecified-cluster-3-0 aria-selected=true>kubectl</a></li>
 <li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchspecified-cluster-3-1 role=tab aria-controls=tabset-docsusagesearchspecified-cluster-3-1>URL</a></li></ul>
 <div class=tab-content id=tabset-docsusagesearchspecified-cluster-3><div id=tabset-docsusagesearchspecified-cluster-3-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-3-0>
+<p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get pods -l <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/owner-name=deploy-1,\
+</span><span style=color:#4e9a06>     search.clusterpedia.io/owner-seniority=1&#34;</span>
+</code></pre></div><p>In addition, to avoid multiple types of owner resources in some cases, we can use the <code>Owner Group Resource</code> to restrict the type of owner.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get pods -l <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/owner-name=deploy-1,\
+</span><span style=color:#4e9a06>     search.clusterpedia.io/owner-gr=deployments.apps,\
+</span><span style=color:#4e9a06>     search.clusterpedia.io/owner-seniority=1&#34;</span>
+</code></pre></div></div>
+<div id=tabset-docsusagesearchspecified-cluster-3-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-3-1>
+<p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/api/v1/namespaces/default/pods?ownerName=deploy-1&amp;ownerSeniority=1&#34;</span>
+</code></pre></div></div></div>
+</p>
+<h2 id=get-a-single-resource>Get a single resource</h2>
+<p>When we want to use the resource name to get (Get) a resource, we must pass the cluster name in the URL Path, just like namespace.</p>
+<ul class="nav nav-tabs" id=tabset-docsusagesearchspecified-cluster-4 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchspecified-cluster-4-0 role=tab aria-controls=tabset-docsusagesearchspecified-cluster-4-0 aria-selected=true>kubectl</a></li>
+<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsusagesearchspecified-cluster-4-1 role=tab aria-controls=tabset-docsusagesearchspecified-cluster-4-1>URL</a></li></ul>
+<div class=tab-content id=tabset-docsusagesearchspecified-cluster-4><div id=tabset-docsusagesearchspecified-cluster-4-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-4-0>
 <p><p>If a resource name is passed in a multi-cluster mode, an error will be reported</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl --cluster cluster-1 get deploy fake-deploy 
 </code></pre></div><pre tabindex=0><code># Output:
@@ -635,18 +739,18 @@ kubectl --cluster clusterpedia get deploy -l
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>status</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div></div>
-<div id=tabset-docsusagesearchspecified-cluster-3-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-3-1>
+<div id=tabset-docsusagesearchspecified-cluster-4-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsusagesearchspecified-cluster-4-1>
 <p><p>The URL to get a specified resource can be divided into three parts:</p>
 <ul>
 <li>Prefix to search for resource: <em>/apis/clusterpedia.io/v1beta1/resources</em></li>
 <li>Specified cluster name: <em>/clusters/&lt; cluster name ></em></li>
-<li>Resource name for Kubernetes API: Path <em>/apis/apps/v1/deployments/namespaces/<namespace>/<resource name></em></li>
+<li>Resource name for Kubernetes API: Path <em>/apis/apps/v1/namespaces/&lt; namespace >/deployments/&lt; resource name ></em></li>
 </ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1alpha1/deployments/namespaces/default/fake-deploy&#34;</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/apis/apps/v1/namespaces/default/deployments/fake-deploy&#34;</span>
 </code></pre></div></div></div>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-83e3a820b19f3a40c674f197775a60c8>3 - Search for Collection Resource</h1>
+<h1 id=pg-83e3a820b19f3a40c674f197775a60c8>3 - Collection Resource</h1>
 <p>For collection resource, refer to <a href=../../../concepts/collection-resource>What is Collection Resource</a></p>
 <p>Due to the limitation of kubectl, we cannot pass search conditions through <code>Label Selector</code> or other methods, so <strong>it is recommended to search for <code>Collection Resource</code></strong> by using a URL.</p>
 <ul class="nav nav-tabs" id=tabset-docsusagesearchcollection-resource-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsusagesearchcollection-resource-1-0 role=tab aria-controls=tabset-docsusagesearchcollection-resource-1-0 aria-selected=true>URL</a></li>

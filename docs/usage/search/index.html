@@ -66,7 +66,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.e064a0d69f9c0b5c97b818e7b5ae3c5f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.51b5d88e16c5d83d8394fa4ff0dbe644.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -76,7 +76,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.e064a0d69f9c0b5c97b818e7b5ae3c5f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.51b5d88e16c5d83d8394fa4ff0dbe644.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -131,11 +131,11 @@ English
 <a href=/docs/usage/search/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id=m-docsusagesearch><span class=td-sidebar-nav-active-item>Search</span></a>
 <ul class="ul-3 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchmulti-cluster-li>
-<a href=/docs/usage/search/multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchmulti-cluster><span>Search in Multiple Clusters</span></a>
+<a href=/docs/usage/search/multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchmulti-cluster><span>Multiple Clusters</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchspecified-cluster-li>
-<a href=/docs/usage/search/specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchspecified-cluster><span>Search in a Specified Cluster</span></a>
+<a href=/docs/usage/search/specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchspecified-cluster><span>Specified a Cluster</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchcollection-resource-li>
-<a href=/docs/usage/search/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchcollection-resource><span>Search for Collection Resource</span></a>
+<a href=/docs/usage/search/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchcollection-resource><span>Collection Resource</span></a>
 </li>
 </ul>
 </li>
@@ -161,6 +161,8 @@ English
 <div class=td-toc><nav id=TableOfContents>
 <ul>
 <li><a href=#search-by-metadata>Search by metadata</a></li>
+<li><a href=#fuzzy-search>Fuzzy Search</a></li>
+<li><a href=#search-by-creation-time-interval>Search by creation time interval</a></li>
 <li><a href=#search-by-owner>Search by Owner</a></li>
 <li><a href=#orderby>OrderBy</a></li>
 <li><a href=#paging>Paging</a></li>
@@ -186,7 +188,7 @@ English
 <div class=td-content>
 <h1>Search</h1>
 <header class=article-meta>
-<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 2 minute read &nbsp;</p>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 3 minute read &nbsp;</p>
 </header>
 <p>Clusterpedia supports complex search for <a href=multi-cluster>multi-cluster resources</a>, <a href=specified-cluster>specified cluster resoruces</a>, and <a href=collection-resource>Collection Resources</a>.</p>
 <p>And these complex search conditions can be passed to <code>Clusterpedia APIServer</code> in two ways:</p>
@@ -203,7 +205,7 @@ English
 <p>In addition to conditional retrieval, Clusterpedia also enhances <a href=#field-selector><code>Field Selector</code></a> to meet the filtering requirements by fields such as <code>metadata.annotation</code> or <code>status.*</code>.</p>
 <h2 id=search-by-metadata>Search by metadata</h2>
 <blockquote>
-<p>It supports same operators as Label Selector: <code>exist</code>, <code>not exist</code>, <code>==</code>, <code>=</code>, <code>!=</code>, <code>in</code>, <code>notin</code>.</p>
+<p>Supported Operators: <code>==</code>, <code>=</code>, <code>in</code>.</p>
 </blockquote>
 <table>
 <thead>
@@ -231,9 +233,70 @@ English
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>Current, we don&rsquo;t support operators such as <code>!=</code>, <code>notin</code> operators,
+if you have these needs or scenarios, you can discuss them in the issue.</p>
+</blockquote>
+<h2 id=fuzzy-search>Fuzzy Search</h2>
+<blockquote>
+<p>Supported Operators: <code>==</code>, <code>=</code>, <code>in</code>.</p>
+</blockquote>
+<p>This feature is expermental and only search label are available for now</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fuzzy Search for resource name</td>
+<td>internalstorage.clusterpedia.io/fuzzy-name</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id=search-by-creation-time-interval>Search by creation time interval</h2>
+<blockquote>
+<p>Supported Operators: <code>==</code>, <code>=</code>.</p>
+</blockquote>
+<p>The search is based on the creation time interval of the resource,
+using a left-closed, right-open internval.</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Search</td>
+<td>search.clusterpedia.io/since</td>
+<td>since</td>
+</tr>
+<tr>
+<td>Before</td>
+<td>search.clusterpedia.io/before</td>
+<td>before</td>
+</tr>
+</tbody>
+</table>
+<p>There are four formats for creation time:</p>
+<ol>
+<li><code>Unix Timestamp</code> for ease of use will distinguish between units of <code>s</code> or <code>ms</code> based on the length of the timestamp. The 10-bit timestamp is in seconds, the 13-bit timestamp is in milliseconds.</li>
+<li><code>RFC3339</code> <em>2006-01-02T15:04:05Z</em> or <em>2006-01-02T15:04:05+08:00</em></li>
+<li><code>UTC Date</code> <em>2006-01-02</em></li>
+<li><code>UTC Datetime</code> <em>2006-01-02 15:04:05</em></li>
+</ol>
+<p>Because of the limitation of the kube label selector, the search label only supports <code>Unix Timestamp</code> and <code>UTC Date</code>.</p>
+<p>All formats are available using the url query method.</p>
 <h2 id=search-by-owner>Search by Owner</h2>
 <blockquote>
-<p>It only supports operators: <code>==</code>, <code>=</code>.</p>
+<p>Supported Operators: <code>==</code>, <code>=</code>.</p>
 </blockquote>
 <table>
 <thead>
@@ -246,13 +309,18 @@ English
 <tbody>
 <tr>
 <td>Specified Owner UID</td>
-<td><code>internalstorage.clusterpedia.io/owner-uid</code></td>
-<td><code>ownerID</code></td>
+<td>search.clusterpedia.io/owner-uid</td>
+<td>ownerUID</td>
 </tr>
 <tr>
 <td>Specified Owner Name</td>
-<td><code>internalstorage.clusterpedia.io/owner-name</code></td>
-<td><code>ownerName</code></td>
+<td>search.clusterpedia.io/owner-name</td>
+<td>ownerName</td>
+</tr>
+<tr>
+<td>SPecified Owner Group Resource</td>
+<td>search.clusterpedia.io/owner-gr</td>
+<td>ownerGR</td>
 </tr>
 <tr>
 <td>Specified Owner Seniority</td>
@@ -261,10 +329,11 @@ English
 </tr>
 </tbody>
 </table>
-<p>Search by <code>owner name</code> is still under development. Join the <a href=https://github.com/clusterpedia-io/clusterpedia/issues/49>discussion</a></p>
+<p>Note that when specifying <code>Owner UID</code>, <code>Owner Name</code> and <code>Owner Group Resource</code> will be ignored.</p>
+<p>The format of the <code>Owner Group Resource</code> is <code>resource.group</code>, for example <em>deployments.apps</em> or <em>nodes</em>.</p>
 <h2 id=orderby>OrderBy</h2>
 <blockquote>
-<p>It only supports operators: <code>=</code>, <code>==</code>, <code>in</code>.</p>
+<p>Supported Operators: <code>=</code>, <code>==</code>, <code>in</code>.</p>
 </blockquote>
 <table>
 <thead>
@@ -284,7 +353,7 @@ English
 </table>
 <h2 id=paging>Paging</h2>
 <blockquote>
-<p>It only supports operators: <code>=</code>, <code>==</code>.</p>
+<p>Supported Operators: <code>=</code>, <code>==</code>.</p>
 </blockquote>
 <table>
 <thead>
@@ -369,19 +438,19 @@ English
 <hr class=panel-line>
 <div class=entry>
 <h5>
-<a href=/docs/usage/search/multi-cluster/>Search in Multiple Clusters</a>
+<a href=/docs/usage/search/multi-cluster/>Multiple Clusters</a>
 </h5>
 <p></p>
 </div>
 <div class=entry>
 <h5>
-<a href=/docs/usage/search/specified-cluster/>Search in a Specified Cluster</a>
+<a href=/docs/usage/search/specified-cluster/>Specified a Cluster</a>
 </h5>
 <p></p>
 </div>
 <div class=entry>
 <h5>
-<a href=/docs/usage/search/collection-resource/>Search for Collection Resource</a>
+<a href=/docs/usage/search/collection-resource/>Collection Resource</a>
 </h5>
 <p></p>
 </div>
