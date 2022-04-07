@@ -65,7 +65,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.5d91a1d0bafdc7dd5fd03613c2a9044d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.cf618fe064a6d8f29e3c21ea600cfbbc.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -96,6 +96,7 @@ This is the multi-page printable view of this section.
 </div>
 <div class=td-content>
 <h1 id=pg-9c8311e1b4822b2005012bd9c3815fa7>1 - kubectl apply</h1>
+<h2 id=install>Install</h2>
 <p>The installation of Clusterpedia is divided into several parts:</p>
 <ul>
 <li><a href=#install-storage-component>Install storage component</a></li>
@@ -109,7 +110,7 @@ This is the multi-page printable view of this section.
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
 <span style=color:#204a87>cd</span> clusterpedia
 git checkout v0.1.0
-</code></pre></div><h2 id=install-storage-component>Install storage component</h2>
+</code></pre></div><h3 id=install-storage-component>Install storage component</h3>
 <p>Clusterpedia installation provides two storage components (<strong>MySQL 8.0</strong> and <strong>PostgreSQL 12</strong>) to choose.</p>
 <blockquote>
 <p>If you use existing storage components (MySQL or PostgreSQL), directly <a href=#install-clusterpedia>skip</a> this step</p>
@@ -135,7 +136,7 @@ sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000
 
 <span style=color:#8f5902;font-style:italic># Go back to Clusterpedia root directory</span>
 <span style=color:#204a87>cd</span> ../../../
-</code></pre></div><h2 id=install-clusterpedia>Install Clusterpedia</h2>
+</code></pre></div><h3 id=install-clusterpedia>Install Clusterpedia</h3>
 <p>Once the storage component are successfully deployed, you can install the Clusterpedia.</p>
 <p><strong>If you uses existing storage component, refer to <a href=../configuration/configure-internalstorage>Configure Storage Layer</a> to set the storage component into <code>Default Storage Layer</code></strong></p>
 <blockquote>
@@ -146,9 +147,32 @@ kubectl apply -f ./deploy/crds
 
 <span style=color:#8f5902;font-style:italic># Deploy Clusterpedia components</span>
 kubectl apply -f ./deploy
-</code></pre></div><h2 id=final-check>Final check</h2>
+</code></pre></div><h3 id=final-check>Final check</h3>
 <p>Check if the component Pods are running properly</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n clusterpedia-system get pods
+</code></pre></div><h2 id=uninstall>Uninstall</h2>
+<h3 id=clean-up-pediacluster>Clean up PediaCluster</h3>
+<p>Before uninstalling Clusterpedia, you need to check if PediaCluster resources still exist in your environment, and clean up those resources.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
+</code></pre></div><h3 id=uninstall-clusterpedia>Uninstall Clusterpedia</h3>
+<p>After the PediaCluster resource cleanup is complete, uninstall the Clusterpedia components.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/clusterpedia_apiserver_apiservice.yaml
+kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
+kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
+kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
+kubectl delete -f ./deploy/crds
+</code></pre></div><h3 id=uninstall-storage-component>Uninstall Storage Component</h3>
+<p>Remove related resources depending on the type of storage component selected.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/internalstorage/&lt;storage type&gt;
+</code></pre></div><h4 id=remove-local-pv-and-clean-up-data>remove Local PV and clean up data</h4>
+<p>After the storage component is uninstalled, the Local PV and corresponding data will still be left in the node and we need to clean it manually.</p>
+<p>View the mounted nodes via Local PV resource details.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pv clusterpedia-internalstorage-&lt;storage type&gt;
+</code></pre></div><p>Once you know the node where the data is stored, you can delete the Local PV.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete pv clusterpedia-internalstorage-&lt;storage type&gt;
+</code></pre></div><p>Log in to the node where the data is located and clean up the data</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># In the node where the legacy data is located</span>
+rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </code></pre></div>
 </div>
 <div class=td-content style=page-break-before:always>

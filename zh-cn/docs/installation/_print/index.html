@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.5d91a1d0bafdc7dd5fd03613c2a9044d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.cf618fe064a6d8f29e3c21ea600cfbbc.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -96,6 +96,7 @@
 </div>
 <div class=td-content>
 <h1 id=pg-9c8311e1b4822b2005012bd9c3815fa7>1 - 使用 kubectl apply</h1>
+<h2 id=安装>安装</h2>
 <p>Clusterpedia 的安装分为两个部分：</p>
 <ul>
 <li><a href=#%E5%AE%89%E8%A3%85%E5%AD%98%E5%82%A8%E7%BB%84%E4%BB%B6>安装存储组件</a></li>
@@ -108,7 +109,7 @@
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
 <span style=color:#204a87>cd</span> clusterpedia
 git checkout v0.1.0
-</code></pre></div><h2 id=安装存储组件>安装存储组件</h2>
+</code></pre></div><h3 id=安装存储组件>安装存储组件</h3>
 <p>Clusterpedia 安装时提供了 <strong>MySQL 8.0</strong> 和 <strong>PostgreSQL 12</strong> 两种存储组件以供选择</p>
 <blockquote>
 <p>用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接<a href=#%E5%AE%89%E8%A3%85-clusterpedia>跳过</a>存储组件安装</p>
@@ -134,7 +135,7 @@ sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000
 
 <span style=color:#8f5902;font-style:italic># 跳回 Clusterpedia 项目根目录</span>
 <span style=color:#204a87>cd</span> ../../
-</code></pre></div><h2 id=安装-clusterpedia>安装 Clusterpedia</h2>
+</code></pre></div><h3 id=安装-clusterpedia>安装 Clusterpedia</h3>
 <p>存储组件部署完成后，便可安装 Clusterpedia。</p>
 <p><strong>如果选择使用已存在的存储组件，则需要参考 <a href=../configurate/configurate-internalstorage>配置存储层</a> 来将存储组件对接到<code>默认存储层</code>中</strong></p>
 <blockquote>
@@ -145,9 +146,32 @@ kubectl apply -f ./deploy/crds
 
 <span style=color:#8f5902;font-style:italic># 部署 Clusterpedia 组件</span>
 kubectl apply -f ./deploy
-</code></pre></div><h2 id=安装完成>安装完成</h2>
+</code></pre></div><h3 id=安装完成>安装完成</h3>
 <p>检查组件 Pods 运行是否正常</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n clusterpedia-system get pods
+</code></pre></div><h2 id=卸载>卸载</h2>
+<h3 id=清理-pediacluster>清理 PediaCluster</h3>
+<p>在卸载 Clusterpedia 前，需要查看环境中是否还存在 PediaCluster 资源，如果存在那么需要删除这些资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
+</code></pre></div><h3 id=卸载-clusterpedia>卸载 Clusterpedia</h3>
+<p>PediaCluster 资源清理完成后，卸载 Clusterpedia 相关组件。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/clusterpedia_apiserver_apiservice.yaml
+kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
+kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
+kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
+kubectl delete -f ./deploy/crds
+</code></pre></div><h3 id=卸载存储组件>卸载存储组件</h3>
+<p>根据选择的存储组件类型，来移除相关的资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/internalstorage/&lt;storage type&gt;
+</code></pre></div><h4 id=清理-local-pv-以及数据>清理 Local PV 以及数据</h4>
+<p>存储组件卸载后，PV 和相应的数据会依然遗留在节点中，我们需要手动清理</p>
+<p>通过 Local PV 资源详情，来查看挂载的节点</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pv clusterpedia-internalstorage-&lt;storage type&gt;
+</code></pre></div><p>得知数据保存的节点后，删除 Local PV</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete pv clusterpedia-internalstorage-&lt;storage type&gt;
+</code></pre></div><p>登录数据所在节点，清理数据</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 遗留数据所在节点</span>
+rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </code></pre></div>
 </div>
 <div class=td-content style=page-break-before:always>
