@@ -14,7 +14,7 @@ Pull clusterpedia project:
 ```bash
 git clone https://github.com/clusterpedia-io/clusterpedia.git
 cd clusterpedia
-git checkout v0.1.0
+git checkout v0.2.0
 ```
 
 ### Install storage component
@@ -62,7 +62,7 @@ Once the storage component are successfully deployed, you can install the Cluste
 > Run the following cmd in the clusterpedia root directory
 ```bash
 # Deploy crds
-kubectl apply -f ./deploy/crds
+kubectl apply -f ./charts/_crds
 
 # Deploy Clusterpedia components
 kubectl apply -f ./deploy
@@ -90,7 +90,7 @@ kubectl delete -f ./deploy/clusterpedia_apiserver_apiservice.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
-kubectl delete -f ./deploy/crds
+kubectl delete -f ./charts/_crds
 ```
 
 ### Uninstall Storage Component
