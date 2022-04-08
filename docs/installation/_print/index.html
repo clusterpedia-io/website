@@ -65,7 +65,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.cf618fe064a6d8f29e3c21ea600cfbbc.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.163216f9d0eb6da486393f7e0783bbfa.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -109,7 +109,7 @@ This is the multi-page printable view of this section.
 <p>Pull clusterpedia project:</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
 <span style=color:#204a87>cd</span> clusterpedia
-git checkout v0.1.0
+git checkout v0.2.0
 </code></pre></div><h3 id=install-storage-component>Install storage component</h3>
 <p>Clusterpedia installation provides two storage components (<strong>MySQL 8.0</strong> and <strong>PostgreSQL 12</strong>) to choose.</p>
 <blockquote>
@@ -143,7 +143,7 @@ sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000
 <p>Run the following cmd in the clusterpedia root directory</p>
 </blockquote>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Deploy crds</span>
-kubectl apply -f ./deploy/crds
+kubectl apply -f ./charts/_crds
 
 <span style=color:#8f5902;font-style:italic># Deploy Clusterpedia components</span>
 kubectl apply -f ./deploy
@@ -160,7 +160,7 @@ kubectl apply -f ./deploy
 kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
-kubectl delete -f ./deploy/crds
+kubectl delete -f ./charts/_crds
 </code></pre></div><h3 id=uninstall-storage-component>Uninstall Storage Component</h3>
 <p>Remove related resources depending on the type of storage component selected.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/internalstorage/&lt;storage type&gt;

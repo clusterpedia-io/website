@@ -27,7 +27,7 @@ If you use …">
 <meta property="og:description" content="Install The installation of Clusterpedia is divided into several parts:
  Install storage component Install Clusterpedia Final check   If you use existing storage component (MySQL or PostgreSQL), directly skip the step of installing the storage component.
  Pull clusterpedia project:
-git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.1.0 Install storage component Clusterpedia installation provides two storage components (MySQL 8.0 and PostgreSQL 12) to choose.
+git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.2.0 Install storage component Clusterpedia installation provides two storage components (MySQL 8.0 and PostgreSQL 12) to choose.
  If you use existing storage components (MySQL or PostgreSQL), directly skip this step">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/installation/kubectl-apply/"><meta property="article:section" content="docs">
@@ -36,7 +36,7 @@ git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia gi
 <meta itemprop=description content="Install The installation of Clusterpedia is divided into several parts:
  Install storage component Install Clusterpedia Final check   If you use existing storage component (MySQL or PostgreSQL), directly skip the step of installing the storage component.
  Pull clusterpedia project:
-git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.1.0 Install storage component Clusterpedia installation provides two storage components (MySQL 8.0 and PostgreSQL 12) to choose.
+git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.2.0 Install storage component Clusterpedia installation provides two storage components (MySQL 8.0 and PostgreSQL 12) to choose.
  If you use existing storage components (MySQL or PostgreSQL), directly skip this step">
 <meta itemprop=wordCount content="408">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
@@ -44,7 +44,7 @@ git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia gi
 <meta name=twitter:description content="Install The installation of Clusterpedia is divided into several parts:
  Install storage component Install Clusterpedia Final check   If you use existing storage component (MySQL or PostgreSQL), directly skip the step of installing the storage component.
  Pull clusterpedia project:
-git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.1.0 Install storage component Clusterpedia installation provides two storage components (MySQL 8.0 and PostgreSQL 12) to choose.
+git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.2.0 Install storage component Clusterpedia installation provides two storage components (MySQL 8.0 and PostgreSQL 12) to choose.
  If you use existing storage components (MySQL or PostgreSQL), directly skip this step">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
@@ -87,7 +87,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.cf618fe064a6d8f29e3c21ea600cfbbc.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.163216f9d0eb6da486393f7e0783bbfa.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -97,7 +97,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.cf618fe064a6d8f29e3c21ea600cfbbc.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.163216f9d0eb6da486393f7e0783bbfa.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -230,7 +230,7 @@ English
 <p>Pull clusterpedia project:</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
 <span style=color:#204a87>cd</span> clusterpedia
-git checkout v0.1.0
+git checkout v0.2.0
 </code></pre></div><h3 id=install-storage-component>Install storage component</h3>
 <p>Clusterpedia installation provides two storage components (<strong>MySQL 8.0</strong> and <strong>PostgreSQL 12</strong>) to choose.</p>
 <blockquote>
@@ -264,7 +264,7 @@ sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000
 <p>Run the following cmd in the clusterpedia root directory</p>
 </blockquote>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Deploy crds</span>
-kubectl apply -f ./deploy/crds
+kubectl apply -f ./charts/_crds
 
 <span style=color:#8f5902;font-style:italic># Deploy Clusterpedia components</span>
 kubectl apply -f ./deploy
@@ -281,7 +281,7 @@ kubectl apply -f ./deploy
 kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
-kubectl delete -f ./deploy/crds
+kubectl delete -f ./charts/_crds
 </code></pre></div><h3 id=uninstall-storage-component>Uninstall Storage Component</h3>
 <p>Remove related resources depending on the type of storage component selected.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/internalstorage/&lt;storage type&gt;
