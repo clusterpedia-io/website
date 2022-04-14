@@ -52,7 +52,7 @@ kubectl get --raw="/apis/clusterpedia.io/v1beta1/resources/clusters/cluster-1/ve
 
 Clusterpedia 提供了一个简单的脚本来帮助生成 `cluster kube config`
 ```bash
-curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.1.0/hack/gen-clusterconfigs.sh | sh -
+curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.2.0/hack/gen-clusterconfigs.sh | sh -
 ```
 ```
 # 输出：
