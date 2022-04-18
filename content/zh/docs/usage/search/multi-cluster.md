@@ -47,7 +47,7 @@ kube-system   cluster-2   coredns                   2/2     2            2      
 kubectl --cluster clusterpedia get deployments -l "search.clusterpedia.io/clusters=cluster-1"
 
 # 指定集群也可以使用 --cluster <cluster name> 来指定
-kubectl --cluster cluster-1 get deployments"
+kubectl --cluster cluster-1 get deployments
 ```
 {{% /tab %}}
 
