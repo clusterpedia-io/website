@@ -30,7 +30,7 @@ spec:
 这些验证字段都需要 base64 编码，如果这些字段的值是直接从 ConfigMap 或者 Secret 中获取的话，那么就已经 base64 过。
 
 ## 使用 kube config 来接入集群
-使用 kube config 来连接和验证集群时最简单的一种方式。
+使用 kube config 来连接和验证集群是最简单的一种方式。
 
 首先需要将接入集群的 kube config base64 编码。
 ```bash
@@ -66,7 +66,7 @@ kubectl apply -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/
 SYNCHRO_CA=$(kubectl get secret $(kubectl get serviceaccount clusterpedia-synchro -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.ca\.crt}')
 SYNCHRO_TOKEN=$(kubectl get secret $(kubectl get serviceaccount clusterpedia-synchro -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}')
 ```
-将 `$SYNCHRO_CA` 和 `SYNCHRO_TOKEN` 分别填写到 PediaCluster 资源的 `spec.caData` 和 `spec.tokenData` 字段中
+将 `$SYNCHRO_CA` 和 `$SYNCHRO_TOKEN` 分别填写到 PediaCluster 资源的 `spec.caData` 和 `spec.tokenData` 字段中
 
 ## 创建 PediaCluster
 完善集群的验证信息后，就可以获得一个完整的 `PediaCluster` 资源了。直接使用 `kubectl apply -f` 直接创建即可
