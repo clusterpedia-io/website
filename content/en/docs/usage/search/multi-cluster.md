@@ -48,7 +48,7 @@ For specifying a single cluster search, we can also use Search Label to set it u
 kubectl --cluster clusterpedia get deployments -l "search.clusterpedia.io/clusters=cluster-1"
 
 # specifying a cluster can also be done with --cluster <cluster name>
-kubectl --cluster cluster-1 get deployments"
+kubectl --cluster cluster-1 get deployments
 ```
 {{% /tab %}}
 
