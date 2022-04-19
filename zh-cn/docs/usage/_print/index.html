@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.98e349a14c43d87f7dd05630a8254997.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.cfa84fb188dcf49e3097f9cd37249dc9.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -775,8 +775,8 @@ kube-system   cluster-2   coredns                   2/2     2            2      
 kubectl --cluster clusterpedia get deployments -l <span style=color:#4e9a06>&#34;search.clusterpedia.io/clusters=cluster-1&#34;</span>
 
 <span style=color:#8f5902;font-style:italic># 指定集群也可以使用 --cluster &lt;cluster name&gt; 来指定</span>
-kubectl --cluster cluster-1 get deployments<span style=color:#4e9a06>&#34;
-</span></code></pre></div></div>
+kubectl --cluster cluster-1 get deployments
+</code></pre></div></div>
 <div id=tabset-zh-cndocsusagesearchmulti-cluster-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-zh-cndocsusagesearchmulti-cluster-1-1>
 <p><p>使用 URL 时，使用 <code>clusters</code> 作为 <a href=../#%E5%85%83%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2>URL Query</a> 来传递</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?clusters=cluster-1&#34;</span>
