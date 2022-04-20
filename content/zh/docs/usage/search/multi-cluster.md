@@ -217,7 +217,7 @@ kubectl --cluster clusterpedia get deployments -A -l "internalstorage.clusterped
 ## 字段过滤
 原生 Kubernetes 当前只支持对 `metadata.name` 和 `metadata.namespace` 的字段过滤，而且操作符只支持 `=`，`!=`，`==`，能力非常有限。
 
-**Clusterpedia 在兼容已有的 Field Selector 功能的基础上，提供了更加墙大的功能，支持和 `Label Selector` 相同的操作符。**
+**Clusterpedia 在兼容已有的 Field Selector 功能的基础上，提供了更加强大的功能，支持和 `Label Selector` 相同的操作符。**
 
 Field Selector 的 key 当前支持三种格式：
 * **使用 `.` 分隔字段**
