@@ -65,10 +65,8 @@ You can also choose to create a ServiceAccount in the **Imported Cluster** and c
 kubectl apply -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/examples/clusterpedia_synchro_rbac.yaml
 
 # Get CA and Token for Service Account
-SYNCHRO_CA= $( kubectl -n default get secret $( kubectl -n default get serviceaccount clusterpedia-synchro -o jsonpath= ' {.secrets[0].name} ' ) -o jsonpath= ' {.data.ca\.crt } ' )
+SYNCHRO_CA=$(kubectl -n default get secret $(kubectl -n default get serviceaccount clusterpedia-synchro -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.ca\.crt}')
 SYNCHRO_TOKEN=$(kubectl -n default get secret $(kubectl -n default get serviceaccount clusterpedia-synchro -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}')
-# Note1：namespace is default and can be left out
-# Note2：The namespace filled in when obtaining SYNCHRO_CA and SYNCHRO_TOKEN is modified according to the namespace field in the kubeconfig of the cluster being accessed
 ```
 Fill `$SYNCHRO_CA` and `SYNCHRO_TOKEN` into `spec.caData` and `spec.tokenData` fields for the PediaCluster resource.
 
