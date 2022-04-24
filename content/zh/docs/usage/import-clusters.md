@@ -63,8 +63,8 @@ cluster-1                          v1.22.2    Healthy
 kubectl apply -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/examples/clusterpedia_synchro_rbac.yaml
 
 # 获取 Service Account 对应 CA 和 Token
-SYNCHRO_CA=$(kubectl get secret $(kubectl get serviceaccount clusterpedia-synchro -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.ca\.crt}')
-SYNCHRO_TOKEN=$(kubectl get secret $(kubectl get serviceaccount clusterpedia-synchro -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}')
+SYNCHRO_CA=$(kubectl -n default get secret $(kubectl -n default get serviceaccount clusterpedia-synchro -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.ca\.crt}')
+SYNCHRO_TOKEN=$(kubectl -n default get secret $(kubectl -n default get serviceaccount clusterpedia-synchro -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}')
 ```
 将 `$SYNCHRO_CA` 和 `$SYNCHRO_TOKEN` 分别填写到 PediaCluster 资源的 `spec.caData` 和 `spec.tokenData` 字段中
 
