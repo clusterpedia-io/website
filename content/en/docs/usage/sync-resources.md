@@ -22,7 +22,7 @@ spec:
   - group: ""
     resources:
      - pods
-     - configmsp
+     - configmaps
   - group: cert-manager.io
     versions:
       - v1
