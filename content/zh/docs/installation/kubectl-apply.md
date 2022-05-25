@@ -50,7 +50,7 @@ sed "s|__NODE_NAME__|$STORAGE_NODE_NAME|g" `grep __NODE_NAME__ -rl ./templates` 
 kubectl create -f .
 
 # 跳回 Clusterpedia 项目根目录
-cd ../../
+cd ../../../
 ```
 
 ### 安装 Clusterpedia
