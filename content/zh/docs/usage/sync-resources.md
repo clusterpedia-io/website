@@ -147,7 +147,7 @@ syncResources:
 spec:
   syncAllCustomResources: true
 ```
-但是需要注意，使用该功能需要在 `clustersynchro-manager` 中开启相应的 Feature Gate，具体操作可以参考 [同步所有自定义资源](../../features/sync_all_custom_resources)
+但是需要注意，使用该功能需要在 `clustersynchro-manager` 中开启相应的 Feature Gate，具体操作可以参考 [同步所有自定义资源](../../features/sync-all-custom-resources)
 
 ## 使用通配符来同步资源
 ### 使用通配符，收集指定组下的所有类型资源
@@ -171,7 +171,7 @@ spec:
 ```
 通过`全资源通配符` 可以同步集群中的内置资源，自定义资源以及聚合式 API 资源。
 
-使用该功能会创建大量的长连接，所以需要谨慎使用，并且在 `clustersynchro-manager` 中开启相应的 Feature Gate, 具体操作可以参考 [同步所有资源](../../features/sync_all_resources)
+使用该功能会创建大量的长连接，所以需要谨慎使用，并且在 `clustersynchro-manager` 中开启相应的 Feature Gate, 具体操作可以参考 [同步所有资源](../../features/sync-all-resources)
 
 ## 查看资源同步状态
 我们可以通过 `PediaCluster` 资源的 `Status` 来查看资源的信息，同步的资源版本和状态以及存储版本

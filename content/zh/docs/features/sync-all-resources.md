@@ -14,9 +14,9 @@ spec:
 
 **请谨慎使用该功能，该功能会创建大量的长连接，未来 Clusterpedia 添加 Agent 功能后，可以避免长连接的创建**
 
-建议指定具体的资源类型，如果需要对自定义资源进行动态同步，可以使用 [同步所有的自定义资源](./sync_all_custom_resources)
+建议指定具体的资源类型，如果需要对自定义资源进行动态同步，可以使用 [同步所有的自定义资源](../sync-all-custom-resources)
 
 使用`全资源通配符` 需要在 `clustersynchro manager` 中开启 Feature Gate
 |作用|feature gate|默认值|
 |---|------------|-----|
-|允许同步所有的自定义资源|`AllowSyncAllCustomResources`|true|
+|允许同步所有的资源|`AllowSyncAllCustomResources`|true|
