@@ -109,3 +109,13 @@ For details refer to:
 * [search for resources by filtering fields](./multi-cluster#field-selector)
 * [support field selector](https://github.com/clusterpedia-io/clusterpedia/pull/36) 
 * [issue: support list field filtering](https://github.com/clusterpedia-io/clusterpedia/issues/48)
+
+## Advanced Search(Custom Conditional Search)
+Custom search is a feature provided by the `default storage layer` to meet more flexible and variable search needs of users.
+|Feature| search label key |url query|
+| -- | ---------------- | ------- |
+|custom SQL used for filter|-|whereSQL|
+
+Custom search is not supported by *search label*, only *url query* can be used to pass custom search SQL.
+
+In addition, this feature is still in alpha stage, you need to open the corresponding Feature Gate in `clusterpedia apiserver`, for details, please refer to [Raw SQL Query](../../features/raw-sql-query)

@@ -143,6 +143,39 @@ If cluster-1 only synchronizes `v1beta1` resources when you are searching for mu
 
 You are required to learn and handle the different versions in multiple clusters for custom resources.
 
+### Sync all custom resources
+The custom resource types and versions change with the CRD, so when a CRD is created and we don't want to modify `spec.syncResources` to sync resources as the same time,
+we can set `spec.syncAllCustomResources` to sync all custom resources.
+```yaml
+spec:
+  syncAllCustomResources: true
+```
+However, it should be noted that to use this feature, you need to enabled the corresponding Feature Gate in `clustersynchro-manager`, which can be found in [Sync All Custom Resource](../../features/sync-all-custom-resources)
+
+## Using wildcards to sync resources
+### Group Wildcard
+```yaml
+spec:
+  syncResources:
+  - group: "apps"
+    resources:
+    - "*"
+```
+Use `Group Wildcard` to sync all types of resources under the specified group.
+
+In the above example, all resources under `apps` will be synced.
+### All-resources Wildcard
+```yaml
+spec:
+  syncResources:
+  - group: "*"
+    resources:
+    - "*"
+```
+The `All-resources Wildcard` allows we to sync built-in resources, custom resources and aggregated API resources in the imported cluster.
+
+This feature creates a large number of long connections, so use it with caution and enable the corresponding Feature Gate in the `clustersynchro-manager`, as described in [Sync All Resources](../../features/sync-all-resources)
+
 ## View synchronized resources
 You can view resources, sync versions, and storage versions by using `Status` of the `PediaCluster` resource.  
 
