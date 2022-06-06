@@ -13,7 +13,7 @@ Clusterpedia 的安装分为两个部分：
 ```bash
 git clone https://github.com/clusterpedia-io/clusterpedia.git
 cd clusterpedia
-git checkout v0.2.0
+git checkout v0.3.0
 ```
 
 ### 安装存储组件
@@ -60,10 +60,7 @@ cd ../../../
 
 > 在 clusterpedia 项目根目录下进行操作
 ```bash
-# 部署 crds
-kubectl apply -f ./charts/_crds
-
-# 部署 Clusterpedia 组件
+# 部署 Clusterpedia CRD 与组件
 kubectl apply -f ./deploy
 ```
 
@@ -88,7 +85,7 @@ kubectl delete -f ./deploy/clusterpedia_apiserver_apiservice.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
-kubectl delete -f ./charts/_crds
+kubectl delete -f ./deploy/cluster.clusterpedia.io_pediaclusers.yaml
 ```
 
 ### 卸载存储组件
