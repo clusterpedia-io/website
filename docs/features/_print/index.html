@@ -1,0 +1,352 @@
+<!doctype html><html lang=en class=no-js>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=generator content="Hugo 0.91.2">
+<link rel=canonical type=text/html href=/docs/features/>
+<meta name=robots content="noindex, nofollow">
+<link rel="shortcut icon" href=/favicons/favicon.ico>
+<link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16>
+<link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32>
+<link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36>
+<link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48>
+<link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72>
+<link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
+<link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
+<link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
+<title>Features | Clusterpedia.io</title>
+<meta name=description content="When using feature functionality, users need to enabled the corresponding feature gates.
+For example, enable SyncAllResources of clustersynchro …">
+<meta property="og:title" content="Features">
+<meta property="og:description" content="Clusterpedia.io website">
+<meta property="og:type" content="website">
+<meta property="og:url" content="/docs/features/"><meta property="og:site_name" content="Clusterpedia.io">
+<meta itemprop=name content="Features">
+<meta itemprop=description content="Clusterpedia.io website"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Features">
+<meta name=twitter:description content="Clusterpedia.io website">
+<link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
+<link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
+<script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
+<script src=https://unpkg.com/lunr@2.3.9/lunr.min.js integrity=sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli crossorigin=anonymous></script>
+<link href=https://cdn.bootcdn.net/ajax/libs/asciinema-player/2.6.1/asciinema-player.min.css rel=stylesheet>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZQPMJ4HH3"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NZQPMJ4HH3',{anonymize_ip:!1})}</script>
+</head>
+<body class=td-section>
+<header>
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+<a class=navbar-brand href=/>
+<span class=navbar-logo><svg id="Graph" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g id="Cpedia_-_Graph_-_Color_Dark" data-name="Cpedia - Graph - Color Dark"><rect id="Frame" width="512" height="512" fill="none"/><path id="Secondary" d="M476 221.051A274.908 274.908.0 00428.269 256 282.438 282.438.0 01395.7 220.752a322.971 322.971.0 0156.3-41.27zM362.4 256a334.139 334.139.0 00-53.2 92.145A329.953 329.953.0 00295.32 394.6a322.932 322.932.0 00-7.587 69.4h48a274.957 274.957.0 016.4-58.813 282.32 282.32.0 0114.238-45.835 285.94 285.94.0 0139.323-68.1A330.2 330.2.0 01362.4 256zM169.865 405.189a274.9 274.9.0 016.4 58.811h48a322.893 322.893.0 00-7.589-69.4 282.46 282.46.0 00-46.811 10.589zM179.94 300.03A333.961 333.961.0 00149.6 256a330 330 0 00-33.291-35.248A322.915 322.915.0 0060 179.482L36 221.051A274.964 274.964.0 0183.733 256a282.3 282.3.0 0132.576 35.248 286.331 286.331.0 0122.054 32.768 286.3 286.3.0 0117.264 35.339A330.144 330.144.0 01202.8 348.148 334.156 334.156.0 00179.94 300.03zM169.865 106.811a274.966 274.966.0 01-54.132-23.862l-24 41.569a322.934 322.934.0 0063.894 28.127 282.241 282.241.0 0014.238-45.834zm186.507 45.836a322.994 322.994.0 0063.895-28.129l-24-41.569a275.02 275.02.0 01-54.133 23.864A282.293 282.293.0 01295.32 117.4a286.278 286.278.0 01-39.307 2.716h-.1a286.366 286.366.0 01-39.237-2.718 330.245 330.245.0 01-13.88 46.455 334.129 334.129.0 0053.1 4.263h.115a333.931 333.931.0 0053.187-4.261 329.92 329.92.0 0047.174-11.208z" fill="#1b1c1d"/><path id="Primary" d="M211.993 256l22-38.1h44l22 38.1-22 38.105h-44zM342.134 106.813A274.957 274.957.0 01335.733 48h-48a322.932 322.932.0 007.587 69.4 282.293 282.293.0 0046.814-10.587zM428.269 256A282.438 282.438.0 01395.7 220.752a285.92 285.92.0 01-39.323-68.105A329.92 329.92.0 01309.2 163.854 334.125 334.125.0 00362.4 256a330.2 330.2.0 0033.3 35.248 322.971 322.971.0 0056.3 41.27l24-41.569A274.908 274.908.0 01428.269 256zM149.6 256a333.961 333.961.0 0030.34-44.03 334.156 334.156.0 0022.86-48.118 330.245 330.245.0 0013.88-46.455A322.893 322.893.0 00224.267 48h-48a274.9 274.9.0 01-6.4 58.811 282.241 282.241.0 01-14.238 45.834 286.3 286.3.0 01-17.264 35.339 286.331 286.331.0 01-22.054 32.768A330 330 0 01149.6 256zm-65.867.0A274.964 274.964.0 0136 290.949l24 41.569a322.915 322.915.0 0056.309-41.27A282.3 282.3.0 0083.733 256zM255.9 343.885a334.129 334.129.0 00-53.1 4.263 330.144 330.144.0 00-47.171 11.207 322.934 322.934.0 00-63.894 28.127l24 41.569a274.966 274.966.0 0154.132-23.862A282.46 282.46.0 01216.678 394.6a286.366 286.366.0 0139.237-2.718h.1A286.278 286.278.0 01295.32 394.6a329.953 329.953.0 0113.88-46.456 334.028 334.028.0 00-53.187-4.26zm86.236 61.3a275.027 275.027.0 0154.133 23.864l24-41.569a322.991 322.991.0 00-63.895-28.13 282.32 282.32.0 00-14.24 45.837z" fill="#33de72"/></g></svg></span><span class=font-weight-bold>Clusterpedia.io</span>
+</a>
+<div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar>
+<ul class="navbar-nav mt-2 mt-lg-0">
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/about/><span>About</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/blog/><i class="fas fa-blog"></i><span>Blog</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class="nav-link active" href=/docs/><i class="fas fa-book"></i><span class=active>Documentation</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=https://github.com/clusterpedia-io/clusterpedia target=_blank><i class="fab fa-github"></i><span>GitHub</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=https://join.slack.com/t/clusterpedia/shared_invite/zt-11smmdntu-Im1YjOahqvHhJFqNzLELOA target=_blank><i class="fab fa-slack"></i><span>Slack</span></a>
+</li>
+<li class="nav-item dropdown mr-4 d-none d-lg-block">
+<a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
+English
+</a>
+<div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
+<a class=dropdown-item href=/zh-cn/docs/features/>中文 Chinese</a>
+</div>
+</li>
+</ul>
+</div>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.31e99c91fa6517c59590c2cc91a66e99.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+</div>
+</nav>
+</header>
+<div class="container-fluid td-outer">
+<div class=td-main>
+<div class="row flex-xl-nowrap">
+<main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
+<div class=td-content>
+<div class="pageinfo pageinfo-primary d-print-none">
+<p>
+This is the multi-page printable view of this section.
+<a href=# onclick="return print(),!1">Click here to print</a>.
+</p><p>
+<a href=/docs/features/>Return to the regular view of this page</a>.
+</p>
+</div>
+<h1 class=title>Features</h1>
+<ul>
+<li>1: <a href=#pg-95ce10af379e7ffb7ad12d9d7acb553b>Return RemainingItemCount</a></li>
+<li>2: <a href=#pg-e22aa1b93a45ad065cfcba03e6c25c76>Raw SQL Query</a></li>
+<li>3: <a href=#pg-13a0f1b8db8e55183af8d01c55d9e128>Resource Field Pruning</a></li>
+<li>4: <a href=#pg-3c4a7ba07443cd53a3dd0494f5a0ac77>Sync All Custom Resources</a></li>
+<li>5: <a href=#pg-9dba7c100e86bba867d7df2e6a4ae266>Sync All Resources</a></li>
+</ul>
+<div class=content>
+<p>When using feature functionality, users need to enabled the corresponding feature gates.</p>
+<p>For example, enable <code>SyncAllResources</code> of clustersynchro manager to allow the user of <code>All-resources Wildcard</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># ignore other flags</span>
+./bin/clustersynchro-manager --feature-gates<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#000>SyncAllResources</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87>true</span>
+</code></pre></div><p>Clusterpedia APIServer and Clusterpedia ClusterSynchro Manager have different feature gates.</p>
+<h2 id=apiserver>APIServer</h2>
+<table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gate</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=./remaining-item-count>Set the default to return the number of resources remaining</a></td>
+<td><code>RemainingItemCount</code></td>
+<td>false</td>
+</tr>
+<tr>
+<td><a href=./raw-sql-query>Raw SQl Query</a></td>
+<td><code>AllowRawSQLQuery</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h2 id=clustersynchro-manager>ClusterSynchro Manager</h2>
+<table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gate</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prune <code>metadata.managedFields</code></td>
+<td><code>PruneManagedFields</code></td>
+<td>true</td>
+</tr>
+<tr>
+<td>Prune <code>metadata.annotations['lastAppliedConfiguration']</code></td>
+<td><code>PruneLastAppliedConfiguration</code></td>
+<td>true</td>
+</tr>
+<tr>
+<td>Allows synchronization of all types of custom resources</td>
+<td><code>AllowSyncCustomResources</code></td>
+<td>false</td>
+</tr>
+<tr>
+<td>Allows synchronization of all types of resources</td>
+<td><code>AllowSyncAllResources</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-95ce10af379e7ffb7ad12d9d7acb553b>1 - Return RemainingItemCount</h1>
+<p>We can require the number of remaining resources to be included in the response by search label or url query when querying.</p>
+<table>
+<thead>
+<tr>
+<th>search label</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>search.clusterpedia.io/with-remaining-count</td>
+<td>withRemainingCount</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Detailed use can be referred to <a href=../../usage/search/multi-cluster/#response-with-remaining-count>Response With Remaining Count</a></p>
+</blockquote>
+<p>You can set the number of remaining resources to be returned by default via Feature Gates &ndash; <code>RemainingItemCount</code>,
+so that the user does not need to use a search label or url query to display the request at each request.</p>
+<p>When the remaining item count is returned by default,
+you can still request that the remaining item count not be returned via search label or url query.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?withRemainingCount=false&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><p><strong>Feature Gate dedicated to <code>clusterpedia apiserver</code></strong></p>
+<table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gate</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Set whether to return the number of remaining resources by default</td>
+<td><code>RemainingItemCount</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>This feature is turned off by default because it may have an impact on the behavior or performance of the storage layer.</p>
+<blockquote>
+<p>For the default storage tier, returning the number of remaining resources results in an additional COUNT query</p>
+</blockquote>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-e22aa1b93a45ad065cfcba03e6c25c76>2 - Raw SQL Query</h1>
+<p>Different users may have different needs, and although clusterpedia provides many easy search options, such as specifying a set of namespaces or clusters, or specifying an owner for a query,
+users may still have more complex queries.</p>
+<p>In this case, you can use the <code>Raw SQL Query</code> provided by the <code>default storage layer</code> to pass more complex search conditions.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#000>URL</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments&#34;</span>
+kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;</span><span style=color:#000>$URL</span><span style=color:#4e9a06>?whereSQL=(cluster=&#39;global&#39;) OR (namespace IN (&#39;kube-system&#39;,&#39;default&#39;))&#34;</span>
+</code></pre></div><p>In the example, we pass a SQL statement for a <em>WHERE</em> query —— <strong>(cluster=&lsquo;global&rsquo;) OR (namespace IN (&lsquo;kube-system&rsquo;,&lsquo;default&rsquo;))</strong>,</p>
+<p>This statement will retrieve <code>deployments</code> under all namespaces in the <em>global</em> cluster and under the <em>kube-system</em> and <em>default</em> namespaces in other clusters.</p>
+<p><strong>The sql statement needs to conform to the SQL syntax of the specific storage component(MySQL, PostgreSQL).</strong></p>
+<p>This feature gate is exclusive to the <code>clusterpedia apiserver</code></p>
+<table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gates</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allow search conditions to be set using raw SQL</td>
+<td><code>AllowRawSQLQuery</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>Raw SQL queries are currently in alpha and are not well protected against SQL injection, so you need to enable this feature via Feature Gate.</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-13a0f1b8db8e55183af8d01c55d9e128>3 - Resource Field Pruning</h1>
+<p>There are some fields in the resource&rsquo;s metadata that are usually not very useful in the actual search, so we prune these fields by default when syncing.</p>
+<p>We use feature gates to separately control whether thess fields are prunned during resource synchronization, <strong>these feature gates are exclusive to the <code>clustersynchro manager</code> component</strong></p>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>feature gates</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>metadata.managedFields</em></td>
+<td><code>PruneManagedFields</code></td>
+<td>true</td>
+</tr>
+<tr>
+<td><em>metadata.annotations[&lsquo;lastAppliedConfiguration&rsquo;]</em></td>
+<td><code>PruneLastAppliedConfiguration</code></td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-3c4a7ba07443cd53a3dd0494f5a0ac77>4 - Sync All Custom Resources</h1>
+<p>The custom resources differ from kube&rsquo;s built-in resources in that kube&rsquo;s built-in resources do not usually change on a regular basis (there are still two cases where the native resource type can change).</p>
+<p>The custom resource types can be created and deleted dynamically.</p>
+<p>If you want to automatically adjust the synchronized resource types based on changes in the CRD of the imported cluster, you specify in <strong>PediaCluster</strong> to synchronize all custom resources.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncAllCustomResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>This feature may cause a lot of long connections, so you need to enable Feature Gate in the <code>clustersynchro manager</code>.</p>
+<table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gate</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allow synchronization of all custom resources</td>
+<td><code>AllowSyncAllCustomResources</code></td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-9dba7c100e86bba867d7df2e6a4ae266>5 - Sync All Resources</h1>
+<p>You can synchronize all types of resources with the <code>All-resource Wildcard</code>, and any resource type change in the imported cluster (e.g. kube version upgrade, group/version disabled, CRD or APIService change) will cause the synchronized resource type to be modified.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p><strong>Please use this feature with caution, it will create a lot of long connections, in the future Clusterpedia will add the Agent feature to avoid the creation of long connections</strong></p>
+<p>It is recommended to specify specific resource types, if you need to dynamically synchronize custom resources, you can use <a href=../sync-all-custom-resources>Sync all custom resources</a>.</p>
+<p>To use <code>All-resources Wildcard</code> you need to enable Feature Gate in <code>clustersynchro manager</code>.</p>
+<table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gate</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allow synchronization of all resources</td>
+<td><code>AllowSyncAllCustomResources</code></td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</main>
+</div>
+</div>
+<footer class="bg-dark py-5 row d-print-none">
+<div class="container-fluid mx-sm-5">
+<div class=row>
+<div class="col-6 col-sm-4 text-xs-center order-sm-2">
+</div>
+<div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+<ul class="list-inline mb-0">
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub>
+<a class=text-white target=_blank rel=noopener href=https://github.com/clusterpedia-io aria-label=GitHub>
+<i class="fab fa-github"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=Slack aria-label=Slack>
+<a class=text-white target=_blank rel=noopener href=https://clusterpedia.slack.com aria-label=Slack>
+<i class="fab fa-slack"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="Developer mailing list" aria-label="Developer mailing list">
+<a class=text-white target=_blank rel=noopener href=mailto:clusterpedia@googlegroups.com aria-label="Developer mailing list">
+<i class="fa fa-envelope"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+<small class=text-white>&copy; 2022 The Clusterpedia Authors All Rights Reserved</small>
+<p class=mt-2><a href=/about/>About Clusterpedia</a></p>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
+<script src=/js/tabpane-persist.js></script>
+<script src=/js/main.min.8ab8f81ff7e1454d30024cd6f956d4d341c3a97e2a673f988065f2ee4e147922.js integrity="sha256-irj4H/fhRU0wAkzW+VbU00HDqX4qZz+YgGXy7k4UeSI=" crossorigin=anonymous></script>
+<script src=https://cdn.bootcdn.net/ajax/libs/asciinema-player/2.6.1/asciinema-player.min.js></script>
+</body>
+</html>

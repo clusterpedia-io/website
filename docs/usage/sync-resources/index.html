@@ -27,7 +27,7 @@ Clusterpedia uses the PediaCluster resource to specify which resources in the cl
 <meta itemprop=description content="The main function of Clusterpedia is to provide complex search for resources in multiple clusters.
 Clusterpedia uses the PediaCluster resource to specify which resources in the cluster need to support complex search, and synchronizes these resources onto the Storage Component via Storage Layer in real time.
 # exampleapiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:cluster-examplespec:apiserver:&#34;https://10.30.43.43:6443&#34;syncResources:- group:appsresources:- deployments- group:&#34;&#34;resources:- pods- configmaps- group:cert-manager.ioversions:- v1resources:- certificatesSynchronize built-in resources In order to manage and view these synchronized resources through PediaCluster, you need to configure resources in groups">
-<meta itemprop=wordCount content="552">
+<meta itemprop=wordCount content="709">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Synchronize Cluster Resources">
 <meta name=twitter:description content="The main function of Clusterpedia is to provide complex search for resources in multiple clusters.
@@ -74,7 +74,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.31e99c91fa6517c59590c2cc91a66e99.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -84,7 +84,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.31e99c91fa6517c59590c2cc91a66e99.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -148,6 +148,21 @@ English
 </ul>
 </li>
 </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsfeatures-li>
+<a href=/docs/features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsfeatures><span>Features</span></a>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesremaining-item-count-li>
+<a href=/docs/features/remaining-item-count/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesremaining-item-count><span>Return RemainingItemCount</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesraw-sql-query-li>
+<a href=/docs/features/raw-sql-query/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesraw-sql-query><span>Raw SQL Query</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesprune-fields-li>
+<a href=/docs/features/prune-fields/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesprune-fields><span>Resource Field Pruning</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturessync-all-custom-resources-li>
+<a href=/docs/features/sync-all-custom-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturessync-all-custom-resources><span>Sync All Custom Resources</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturessync-all-resources-li>
+<a href=/docs/features/sync-all-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturessync-all-resources><span>Sync All Resources</span></a>
+</li>
+</ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsrelease-notes-li>
 <a href=https://github.com/clusterpedia-io/clusterpedia/releases class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsrelease-notes><span>Release notes</span></a>
 </li>
@@ -173,6 +188,13 @@ English
 <ul>
 <li><a href=#specify-a-sync-version-for-custom-resources>Specify a sync version for custom resources</a></li>
 <li><a href=#usage-notes>Usage notes</a></li>
+<li><a href=#sync-all-custom-resources>Sync all custom resources</a></li>
+</ul>
+</li>
+<li><a href=#using-wildcards-to-sync-resources>Using wildcards to sync resources</a>
+<ul>
+<li><a href=#group-wildcard>Group Wildcard</a></li>
+<li><a href=#all-resources-wildcard>All-resources Wildcard</a></li>
 </ul>
 </li>
 <li><a href=#view-synchronized-resources>View synchronized resources</a></li>
@@ -197,7 +219,7 @@ English
 <div class=td-content>
 <h1>Synchronize Cluster Resources</h1>
 <header class=article-meta>
-<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 3 minute read &nbsp;</p>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 4 minute read &nbsp;</p>
 </header>
 <p>The main function of Clusterpedia is to provide complex search for resources in multiple clusters.</p>
 <p>Clusterpedia uses the <code>PediaCluster</code> resource to specify which resources in the cluster need to support complex search,
@@ -311,6 +333,29 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 <p>The custom resource synchronization does not support version conversion currently. The versions are fixed after synchronization.</p>
 <p>If cluster-1 only synchronizes <code>v1beta1</code> resources when you are searching for multi-cluster resources, the request to search for version v1 will ignore the version <code>v1beta1</code>.</p>
 <p>You are required to learn and handle the different versions in multiple clusters for custom resources.</p>
+<h3 id=sync-all-custom-resources>Sync all custom resources</h3>
+<p>The custom resource types and versions change with the CRD, so when a CRD is created and we don&rsquo;t want to modify <code>spec.syncResources</code> to sync resources as the same time,
+we can set <code>spec.syncAllCustomResources</code> to sync all custom resources.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncAllCustomResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>However, it should be noted that to use this feature, you need to enabled the corresponding Feature Gate in <code>clustersynchro-manager</code>, which can be found in <a href=../../features/sync-all-custom-resources>Sync All Custom Resource</a></p>
+<h2 id=using-wildcards-to-sync-resources>Using wildcards to sync resources</h2>
+<h3 id=group-wildcard>Group Wildcard</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>Use <code>Group Wildcard</code> to sync all types of resources under the specified group.</p>
+<p>In the above example, all resources under <code>apps</code> will be synced.</p>
+<h3 id=all-resources-wildcard>All-resources Wildcard</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>The <code>All-resources Wildcard</code> allows we to sync built-in resources, custom resources and aggregated API resources in the imported cluster.</p>
+<p>This feature creates a large number of long connections, so use it with caution and enable the corresponding Feature Gate in the <code>clustersynchro-manager</code>, as described in <a href=../../features/sync-all-resources>Sync All Resources</a></p>
 <h2 id=view-synchronized-resources>View synchronized resources</h2>
 <p>You can view resources, sync versions, and storage versions by using <code>Status</code> of the <code>PediaCluster</code> resource.</p>
 <p>For <code>Status</code>, a resource may have <strong>Sync Version</strong> and <strong>Storage Version</strong>:</p>

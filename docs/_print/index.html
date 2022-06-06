@@ -65,7 +65,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.31e99c91fa6517c59590c2cc91a66e99.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -110,7 +110,15 @@ This is the multi-page printable view of this section.
 <li>3.4.3: <a href=#pg-83e3a820b19f3a40c674f197775a60c8>Collection Resource</a></li>
 </ul>
 </ul>
-<li>4: <a href=#pg-c9da5865a77748e4db7d4db31200b34f>Release notes</a></li>
+<li>4: <a href=#pg-56dc2b1c45b2c6b0983526530ba75d01>Features</a></li>
+<ul>
+<li>4.1: <a href=#pg-95ce10af379e7ffb7ad12d9d7acb553b>Return RemainingItemCount</a></li>
+<li>4.2: <a href=#pg-e22aa1b93a45ad065cfcba03e6c25c76>Raw SQL Query</a></li>
+<li>4.3: <a href=#pg-13a0f1b8db8e55183af8d01c55d9e128>Resource Field Pruning</a></li>
+<li>4.4: <a href=#pg-3c4a7ba07443cd53a3dd0494f5a0ac77>Sync All Custom Resources</a></li>
+<li>4.5: <a href=#pg-9dba7c100e86bba867d7df2e6a4ae266>Sync All Resources</a></li>
+</ul>
+<li>5: <a href=#pg-c9da5865a77748e4db7d4db31200b34f>Release notes</a></li>
 <ul>
 </ul>
 </ul>
@@ -135,7 +143,7 @@ This is the multi-page printable view of this section.
 <p>Pull clusterpedia project:</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
 <span style=color:#204a87>cd</span> clusterpedia
-git checkout v0.2.0
+git checkout v0.3.0
 </code></pre></div><h3 id=install-storage-component>Install storage component</h3>
 <p>Clusterpedia installation provides two storage components (<strong>MySQL 8.0</strong> and <strong>PostgreSQL 12</strong>) to choose.</p>
 <blockquote>
@@ -168,10 +176,7 @@ sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000
 <blockquote>
 <p>Run the following cmd in the clusterpedia root directory</p>
 </blockquote>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Deploy crds</span>
-kubectl apply -f ./charts/_crds
-
-<span style=color:#8f5902;font-style:italic># Deploy Clusterpedia components</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Deploy Clusterpedia CRD and components</span>
 kubectl apply -f ./deploy
 </code></pre></div><h3 id=final-check>Final check</h3>
 <p>Check if the component Pods are running properly</p>
@@ -186,7 +191,7 @@ kubectl apply -f ./deploy
 kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
-kubectl delete -f ./charts/_crds
+kubectl delete -f ./deploy/cluster.clusterpedia.io_pediaclusers.yaml
 </code></pre></div><h3 id=uninstall-storage-component>Uninstall Storage Component</h3>
 <p>Remove related resources depending on the type of storage component selected.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/internalstorage/&lt;storage type&gt;
@@ -227,8 +232,15 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </span><span style=color:#8f5902;font-style:italic>    port: 3306
 </span><span style=color:#8f5902;font-style:italic>    user: root
 </span><span style=color:#8f5902;font-style:italic>    database: &#34;clusterpedia&#34;
+</span><span style=color:#8f5902;font-style:italic>    connPool:
+</span><span style=color:#8f5902;font-style:italic>      maxIdleConns: 10
+</span><span style=color:#8f5902;font-style:italic>      maxOpenConns: 100
+</span><span style=color:#8f5902;font-style:italic>      connMaxLifetime: 1h
 </span><span style=color:#8f5902;font-style:italic>    log:
-</span><span style=color:#8f5902;font-style:italic>      slowThreshold: &#34;100ms&#34;</span><span style=color:#f8f8f8;text-decoration:underline>    
+</span><span style=color:#8f5902;font-style:italic>      slowThreshold: &#34;100ms&#34;
+</span><span style=color:#8f5902;font-style:italic>      logger:
+</span><span style=color:#8f5902;font-style:italic>        filename: /var/log/clusterpedia/internalstorage.log
+</span><span style=color:#8f5902;font-style:italic>        maxbackups: 3</span><span style=color:#f8f8f8;text-decoration:underline>    
 </span></code></pre></div><p><code>Default Storage Layer</code> config supports the following fields:</p>
 <table>
 <thead>
@@ -265,6 +277,34 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </tbody>
 </table>
 <p><strong>It is a good choice to store the access password to Secret. For details see <a href=#configure-secret>Configure Secret of storage component</a></strong></p>
+<h3 id=connection-pool>Connection Pool</h3>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>description</th>
+<th>default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>connPool.maxIdleConns</code></td>
+<td>the maximum number of connections in the idle connection pool.</td>
+<td>10</td>
+</tr>
+<tr>
+<td><code>connPool.maxOpenConns</code></td>
+<td>the maximum number of open connections to the database.</td>
+<td>100</td>
+</tr>
+<tr>
+<td><code>connPool.connMaxLifetime</code></td>
+<td>the maximum amount of time a connection may be reused.</td>
+<td>1h</td>
+</tr>
+</tbody>
+</table>
+<p>Set up the database connection pool according to the user&rsquo;s current environment.</p>
 <h3 id=configure-log>Configure log</h3>
 <p>Clusterpedia supports to configure logs for storage layer, enabling the log to record <code>slow SQL queries</code> and <code>errors</code> via the <code>log</code> field.</p>
 <table>
@@ -291,9 +331,49 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 <td><code>log.level</code></td>
 <td>Set the severity level such as Slient, Error, Warn, Info</td>
 </tr>
+<tr>
+<td><code>log.logger</code></td>
+<td>configure rolling logger</td>
+</tr>
 </tbody>
 </table>
 <p>After enabling log, if <code>log.stdout</code> is not set to true, the log will be output to <em>/var/log/clusterpedia/internalstorage.log</em></p>
+<h4 id=rolling-logger>Rolling logger</h4>
+<p>Write storage lay logs to file, and configure log file rotation</p>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>log.logger.filename</code></td>
+<td>the file to write logs to, backup log files will be retained in the same directory, default is <em>/var/log/clusterpedia/internalstorage.log</em></td>
+</tr>
+<tr>
+<td><code>log.logger.maxsize</code></td>
+<td>the maximum size in megabytes of the log file before it gets rotated. default is 100 MB.</td>
+</tr>
+<tr>
+<td><code>log.logger.maxage</code></td>
+<td>the maximum number of days to retain old log files based on the timestamp encoded in their filename.</td>
+</tr>
+<tr>
+<td><code>log.logger.maxbackups</code></td>
+<td>the maximum number of old log files to retain.</td>
+</tr>
+<tr>
+<td><code>log.logger.localtime</code></td>
+<td>whether it is local time, default is to use UTC time</td>
+</tr>
+<tr>
+<td><code>log.logger.compress</code></td>
+<td>compress determines if the rotated log files should be compressed using gzip.</td>
+</tr>
+</tbody>
+</table>
 <h4 id=disable-log>Disable log</h4>
 <p>If the <code>log</code> field is not filled in the internalstorage config, log will be ignored, for example:</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;mysql&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -302,7 +382,7 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>user</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>root</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>database</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;clusterpedia&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><h3 id=more-configuration>More configuration</h3>
-<p>The default storage layer also provides more configurations. Refer to <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go>internalstorage/config.go</a>.</p>
+<p>The default storage layer also provides more configurations about MySQL and PostgreSQL. Refer to <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go>internalstorage/config.go</a>.</p>
 <h2 id=configure-secret>Configure Secret</h2>
 <p>The yaml file that is used to install Clusterpedia may get the password from <code>internalstroage-password</code> Secret.</p>
 <p>Configure the storage component password to Secret</p>
@@ -317,12 +397,14 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 <h1 id=pg-40243a331b263af5e1b61fd771638878>2.1 - Collection Resource</h1>
 <p>In order to query multiple types of resources at once, Clusterpedia provides a new resource: <code>Collection Resource</code>.</p>
 <p><code>Collection Resource</code> is composed of different types of resources, and these resources can be retrieved and paged in a uniform way through the <code>Collection Resource</code>.</p>
-<p><strong>What Collection Resources are supported by the Clusterpedia depends on the <code>Storage Layer</code>.</strong> For example, the <code>Default Storage Layer</code> temporarily only supports the <code>workloads</code>, which is used to represent workloads.</p>
+<p><strong>What Collection Resources are supported by the Clusterpedia depends on the <code>Storage Layer</code>.</strong> For example, the <code>Default Storage Layer</code> temporarily supports the <code>workloads</code> and <code>kuberesources</code>.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources
 </code></pre></div><pre tabindex=0><code># Output:
-NAME        RESOURCES
-workloads   deployments.apps,daemonsets.apps,statefulsets.apps
-</code></pre><p>View the supported <code>Collection Resource</code> in a yaml file</p>
+NAME            RESOURCES
+workloads       deployments.apps,daemonsets.apps,statefulsets.apps
+kuberesources   *,*.admission.k8s.io,*.admissionregistration.k8s.io,*.apiextensions.k8s.io,*.apps,*.authentication.k8s.io,*.authorization.k8s.io,*.autoscaling,*.batch,*.certificates.k8s.io,*.coordination.k8s.io,*.discovery.k8s.io,*.events.k8s.io,*.extensions,*.flowcontrol.apiserver.k8s.io,*.imagepolicy.k8s.io,*.internal.apiserver.k8s.io,*.networking.k8s.io,*.node.k8s.io,*.policy,*.rbac.authorization.k8s.io,*.scheduling.k8s.io,*.storage.k8s.io
+</code></pre><p><code>kuberesources</code> contains all of kube&rsquo;s built-in resources, and we can use <code>kuberesources</code> to filter and search all of theme in a uniform api.</p>
+<p>View the supported <code>Collection Resource</code> in a yaml file</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources -o yaml
 </code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># Output:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -342,11 +424,41 @@ workloads   deployments.apps,daemonsets.apps,statefulsets.apps
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>statefulsets</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>version</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia.io/v1beta1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>CollectionResource</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>creationTimestamp</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>null</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>kuberesources</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resourceTypes</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>admission.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>admissionregistration.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apiextensions.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>authentication.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>authorization.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>autoscaling</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>batch</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>certificates.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>coordination.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>discovery.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>events.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>extensions</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>flowcontrol.apiserver.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>imagepolicy.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>internal.apiserver.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>networking.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>node.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>policy</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>rbac.authorization.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>scheduling.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>storage.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>List</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resourceVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>selfLink</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><p>It is found that <code>workloads</code> includes three resources: <code>deployments</code>, <code>daemonsets</code>, and <code>statefulsets</code>.</p>
+<p>And <code>kuberesources</code> contains all of kube&rsquo;s built-in resources.</p>
 <p>For details about <code>Collection Resource</code>, see <a href=../../usage/search/collection-resource>Search for Collection Resource</a></p>
 <h2 id=custom-collection-resource>Custom Collection Resource</h2>
 <p><code>Default Storage Layer</code> will support <code>Custom Collection Resource</code> in future to enable users to combine any resource types freely.</p>
@@ -549,6 +661,29 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 <p>The custom resource synchronization does not support version conversion currently. The versions are fixed after synchronization.</p>
 <p>If cluster-1 only synchronizes <code>v1beta1</code> resources when you are searching for multi-cluster resources, the request to search for version v1 will ignore the version <code>v1beta1</code>.</p>
 <p>You are required to learn and handle the different versions in multiple clusters for custom resources.</p>
+<h3 id=sync-all-custom-resources>Sync all custom resources</h3>
+<p>The custom resource types and versions change with the CRD, so when a CRD is created and we don&rsquo;t want to modify <code>spec.syncResources</code> to sync resources as the same time,
+we can set <code>spec.syncAllCustomResources</code> to sync all custom resources.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncAllCustomResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>However, it should be noted that to use this feature, you need to enabled the corresponding Feature Gate in <code>clustersynchro-manager</code>, which can be found in <a href=../../features/sync-all-custom-resources>Sync All Custom Resource</a></p>
+<h2 id=using-wildcards-to-sync-resources>Using wildcards to sync resources</h2>
+<h3 id=group-wildcard>Group Wildcard</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>Use <code>Group Wildcard</code> to sync all types of resources under the specified group.</p>
+<p>In the above example, all resources under <code>apps</code> will be synced.</p>
+<h3 id=all-resources-wildcard>All-resources Wildcard</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>The <code>All-resources Wildcard</code> allows we to sync built-in resources, custom resources and aggregated API resources in the imported cluster.</p>
+<p>This feature creates a large number of long connections, so use it with caution and enable the corresponding Feature Gate in the <code>clustersynchro-manager</code>, as described in <a href=../../features/sync-all-resources>Sync All Resources</a></p>
 <h2 id=view-synchronized-resources>View synchronized resources</h2>
 <p>You can view resources, sync versions, and storage versions by using <code>Status</code> of the <code>PediaCluster</code> resource.</p>
 <p>For <code>Status</code>, a resource may have <strong>Sync Version</strong> and <strong>Storage Version</strong>:</p>
@@ -622,7 +757,7 @@ resources                          clusterpedia.io/v1beta1    false        Resou
 <h3 id=configure-the-cluster-shortcut-for-kubectl>Configure the cluster shortcut for kubectl</h3>
 <p>Although we can use URLs to access Clusterpedia resources, if we want to use kubectl to query more conveniently, we need to configure the kubeconfig cluster.</p>
 <p>Clusterpedia provides a simple script to generate <code>cluster config</code> in the kubeconfig.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.2.0/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.3.0/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
 </code></pre></div><pre tabindex=0><code># Output:
 Current Context: kubernetes-admin@kubernetes
 Current Cluster: kubernetes
@@ -1001,6 +1136,26 @@ using a left-closed, right-open internval.</p>
 <li><a href=https://github.com/clusterpedia-io/clusterpedia/pull/36>support field selector</a></li>
 <li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/48>issue: support list field filtering</a></li>
 </ul>
+<h2 id=advanced-searchcustom-conditional-search>Advanced Search(Custom Conditional Search)</h2>
+<p>Custom search is a feature provided by the <code>default storage layer</code> to meet more flexible and variable search needs of users.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>custom SQL used for filter</td>
+<td>-</td>
+<td>whereSQL</td>
+</tr>
+</tbody>
+</table>
+<p>Custom search is not supported by <em>search label</em>, only <em>url query</em> can be used to pass custom search SQL.</p>
+<p>In addition, this feature is still in alpha stage, you need to open the corresponding Feature Gate in <code>clusterpedia apiserver</code>, for details, please refer to <a href=../../features/raw-sql-query>Raw SQL Query</a></p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-ec8e2360424d04fb82dc27fbc4824983>3.4.1 - Multiple Clusters</h1>
@@ -1482,7 +1637,224 @@ cluster-2   apps    v1        Deployment   kube-system                   coredns
 </div></div>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-c9da5865a77748e4db7d4db31200b34f>4 - Release notes</h1>
+<h1 id=pg-56dc2b1c45b2c6b0983526530ba75d01>4 - Features</h1>
+<p>When using feature functionality, users need to enabled the corresponding feature gates.</p>
+<p>For example, enable <code>SyncAllResources</code> of clustersynchro manager to allow the user of <code>All-resources Wildcard</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># ignore other flags</span>
+./bin/clustersynchro-manager --feature-gates<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#000>SyncAllResources</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87>true</span>
+</code></pre></div><p>Clusterpedia APIServer and Clusterpedia ClusterSynchro Manager have different feature gates.</p>
+<h2 id=apiserver>APIServer</h2>
+<table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gate</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=./remaining-item-count>Set the default to return the number of resources remaining</a></td>
+<td><code>RemainingItemCount</code></td>
+<td>false</td>
+</tr>
+<tr>
+<td><a href=./raw-sql-query>Raw SQl Query</a></td>
+<td><code>AllowRawSQLQuery</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h2 id=clustersynchro-manager>ClusterSynchro Manager</h2>
+<table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gate</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prune <code>metadata.managedFields</code></td>
+<td><code>PruneManagedFields</code></td>
+<td>true</td>
+</tr>
+<tr>
+<td>Prune <code>metadata.annotations['lastAppliedConfiguration']</code></td>
+<td><code>PruneLastAppliedConfiguration</code></td>
+<td>true</td>
+</tr>
+<tr>
+<td>Allows synchronization of all types of custom resources</td>
+<td><code>AllowSyncCustomResources</code></td>
+<td>false</td>
+</tr>
+<tr>
+<td>Allows synchronization of all types of resources</td>
+<td><code>AllowSyncAllResources</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-95ce10af379e7ffb7ad12d9d7acb553b>4.1 - Return RemainingItemCount</h1>
+<p>We can require the number of remaining resources to be included in the response by search label or url query when querying.</p>
+<table>
+<thead>
+<tr>
+<th>search label</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>search.clusterpedia.io/with-remaining-count</td>
+<td>withRemainingCount</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Detailed use can be referred to <a href=../../usage/search/multi-cluster/#response-with-remaining-count>Response With Remaining Count</a></p>
+</blockquote>
+<p>You can set the number of remaining resources to be returned by default via Feature Gates &ndash; <code>RemainingItemCount</code>,
+so that the user does not need to use a search label or url query to display the request at each request.</p>
+<p>When the remaining item count is returned by default,
+you can still request that the remaining item count not be returned via search label or url query.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?withRemainingCount=false&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><p><strong>Feature Gate dedicated to <code>clusterpedia apiserver</code></strong></p>
+<table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gate</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Set whether to return the number of remaining resources by default</td>
+<td><code>RemainingItemCount</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>This feature is turned off by default because it may have an impact on the behavior or performance of the storage layer.</p>
+<blockquote>
+<p>For the default storage tier, returning the number of remaining resources results in an additional COUNT query</p>
+</blockquote>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-e22aa1b93a45ad065cfcba03e6c25c76>4.2 - Raw SQL Query</h1>
+<p>Different users may have different needs, and although clusterpedia provides many easy search options, such as specifying a set of namespaces or clusters, or specifying an owner for a query,
+users may still have more complex queries.</p>
+<p>In this case, you can use the <code>Raw SQL Query</code> provided by the <code>default storage layer</code> to pass more complex search conditions.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#000>URL</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments&#34;</span>
+kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;</span><span style=color:#000>$URL</span><span style=color:#4e9a06>?whereSQL=(cluster=&#39;global&#39;) OR (namespace IN (&#39;kube-system&#39;,&#39;default&#39;))&#34;</span>
+</code></pre></div><p>In the example, we pass a SQL statement for a <em>WHERE</em> query —— <strong>(cluster=&lsquo;global&rsquo;) OR (namespace IN (&lsquo;kube-system&rsquo;,&lsquo;default&rsquo;))</strong>,</p>
+<p>This statement will retrieve <code>deployments</code> under all namespaces in the <em>global</em> cluster and under the <em>kube-system</em> and <em>default</em> namespaces in other clusters.</p>
+<p><strong>The sql statement needs to conform to the SQL syntax of the specific storage component(MySQL, PostgreSQL).</strong></p>
+<p>This feature gate is exclusive to the <code>clusterpedia apiserver</code></p>
+<table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gates</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allow search conditions to be set using raw SQL</td>
+<td><code>AllowRawSQLQuery</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>Raw SQL queries are currently in alpha and are not well protected against SQL injection, so you need to enable this feature via Feature Gate.</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-13a0f1b8db8e55183af8d01c55d9e128>4.3 - Resource Field Pruning</h1>
+<p>There are some fields in the resource&rsquo;s metadata that are usually not very useful in the actual search, so we prune these fields by default when syncing.</p>
+<p>We use feature gates to separately control whether thess fields are prunned during resource synchronization, <strong>these feature gates are exclusive to the <code>clustersynchro manager</code> component</strong></p>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>feature gates</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>metadata.managedFields</em></td>
+<td><code>PruneManagedFields</code></td>
+<td>true</td>
+</tr>
+<tr>
+<td><em>metadata.annotations[&lsquo;lastAppliedConfiguration&rsquo;]</em></td>
+<td><code>PruneLastAppliedConfiguration</code></td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-3c4a7ba07443cd53a3dd0494f5a0ac77>4.4 - Sync All Custom Resources</h1>
+<p>The custom resources differ from kube&rsquo;s built-in resources in that kube&rsquo;s built-in resources do not usually change on a regular basis (there are still two cases where the native resource type can change).</p>
+<p>The custom resource types can be created and deleted dynamically.</p>
+<p>If you want to automatically adjust the synchronized resource types based on changes in the CRD of the imported cluster, you specify in <strong>PediaCluster</strong> to synchronize all custom resources.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncAllCustomResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>This feature may cause a lot of long connections, so you need to enable Feature Gate in the <code>clustersynchro manager</code>.</p>
+<table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gate</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allow synchronization of all custom resources</td>
+<td><code>AllowSyncAllCustomResources</code></td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-9dba7c100e86bba867d7df2e6a4ae266>4.5 - Sync All Resources</h1>
+<p>You can synchronize all types of resources with the <code>All-resource Wildcard</code>, and any resource type change in the imported cluster (e.g. kube version upgrade, group/version disabled, CRD or APIService change) will cause the synchronized resource type to be modified.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p><strong>Please use this feature with caution, it will create a lot of long connections, in the future Clusterpedia will add the Agent feature to avoid the creation of long connections</strong></p>
+<p>It is recommended to specify specific resource types, if you need to dynamically synchronize custom resources, you can use <a href=../sync-all-custom-resources>Sync all custom resources</a>.</p>
+<p>To use <code>All-resources Wildcard</code> you need to enable Feature Gate in <code>clustersynchro manager</code>.</p>
+<table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gate</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allow synchronization of all resources</td>
+<td><code>AllowSyncAllCustomResources</code></td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-c9da5865a77748e4db7d4db31200b34f>5 - Release notes</h1>
 </div>
 </main>
 </div>

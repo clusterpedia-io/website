@@ -66,7 +66,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.31e99c91fa6517c59590c2cc91a66e99.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -334,6 +334,26 @@ using a left-closed, right-open internval.</p>
 <li><a href=https://github.com/clusterpedia-io/clusterpedia/pull/36>support field selector</a></li>
 <li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/48>issue: support list field filtering</a></li>
 </ul>
+<h2 id=advanced-searchcustom-conditional-search>Advanced Search(Custom Conditional Search)</h2>
+<p>Custom search is a feature provided by the <code>default storage layer</code> to meet more flexible and variable search needs of users.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>custom SQL used for filter</td>
+<td>-</td>
+<td>whereSQL</td>
+</tr>
+</tbody>
+</table>
+<p>Custom search is not supported by <em>search label</em>, only <em>url query</em> can be used to pass custom search SQL.</p>
+<p>In addition, this feature is still in alpha stage, you need to open the corresponding Feature Gate in <code>clusterpedia apiserver</code>, for details, please refer to <a href=../../features/raw-sql-query>Raw SQL Query</a></p>
 </div>
 </div>
 <div class=td-content style=page-break-before:always>
