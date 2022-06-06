@@ -110,3 +110,13 @@ Owner Group 的格式为 `resource.group`，例如 *deployments.apps* 或者 *no
 * [使用字段过滤来检索资源](./multi-cluster#字段过滤)
 * [support field selector](https://github.com/clusterpedia-io/clusterpedia/pull/36) 
 * [issue: support list field filtering](https://github.com/clusterpedia-io/clusterpedia/issues/48)
+
+## 高级检索(自定义条件检索)
+自定义检索为 `默认存储层` 提供的功能，目的是为了满足用户更加灵活多变的检索需求
+|作用| search label key |url query|
+| -- | ---------------- | ------- |
+|自定义检索语句|-|whereSQL|
+
+自定义检索并不支持通过 search lable，只能使用 url query 来传递自定义搜素的语句。
+
+另外该功能暂时还是处于 alpha 阶段，需要用户在 `clusterpedia apiserver` 中开启相应的 Feature Gate，详细可以参考 [自定义条件检索](../../features/raw_sql_query)
