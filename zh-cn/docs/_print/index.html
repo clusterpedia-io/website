@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b234e4318fb60f3cacbe5da28a36c1ee.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -110,7 +110,15 @@
 <li>3.4.3: <a href=#pg-83e3a820b19f3a40c674f197775a60c8>聚合资源检索</a></li>
 </ul>
 </ul>
-<li>4: <a href=#pg-c9da5865a77748e4db7d4db31200b34f>版本日志</a></li>
+<li>4: <a href=#pg-56dc2b1c45b2c6b0983526530ba75d01>特性功能</a></li>
+<ul>
+<li>4.1: <a href=#pg-77ad0674ed532abc83abd92a7a6fd837>返回剩余资源数量</a></li>
+<li>4.2: <a href=#pg-3767c3b17cac3d98fad9fe95ff564787>原生 SQL 查询</a></li>
+<li>4.3: <a href=#pg-a51f4831356bba0114928fabdedd7051>资源字段裁剪</a></li>
+<li>4.4: <a href=#pg-653a7191205b4ee8aa58ac587be07566>同步所有的自定义资源</a></li>
+<li>4.5: <a href=#pg-55f2eed846cc66d89ab31e3eecc84a84>同步所有的资源</a></li>
+</ul>
+<li>5: <a href=#pg-c9da5865a77748e4db7d4db31200b34f>版本日志</a></li>
 <ul>
 </ul>
 </ul>
@@ -134,7 +142,7 @@
 <p>拉取项目：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
 <span style=color:#204a87>cd</span> clusterpedia
-git checkout v0.2.0
+git checkout v0.3.0
 </code></pre></div><h3 id=安装存储组件>安装存储组件</h3>
 <p>Clusterpedia 安装时提供了 <strong>MySQL 8.0</strong> 和 <strong>PostgreSQL 12</strong> 两种存储组件以供选择</p>
 <blockquote>
@@ -167,10 +175,7 @@ sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000
 <blockquote>
 <p>在 clusterpedia 项目根目录下进行操作</p>
 </blockquote>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 部署 crds</span>
-kubectl apply -f ./charts/_crds
-
-<span style=color:#8f5902;font-style:italic># 部署 Clusterpedia 组件</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 部署 Clusterpedia CRD 与组件</span>
 kubectl apply -f ./deploy
 </code></pre></div><h3 id=安装完成>安装完成</h3>
 <p>检查组件 Pods 运行是否正常</p>
@@ -185,7 +190,7 @@ kubectl apply -f ./deploy
 kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
-kubectl delete -f ./charts/_crds
+kubectl delete -f ./deploy/cluster.clusterpedia.io_pediaclusers.yaml
 </code></pre></div><h3 id=卸载存储组件>卸载存储组件</h3>
 <p>根据选择的存储组件类型，来移除相关的资源</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/internalstorage/&lt;storage type&gt;
@@ -227,8 +232,15 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </span><span style=color:#8f5902;font-style:italic>    port: 3306
 </span><span style=color:#8f5902;font-style:italic>    user: root
 </span><span style=color:#8f5902;font-style:italic>    database: &#34;clusterpedia&#34;
+</span><span style=color:#8f5902;font-style:italic>    connPool:
+</span><span style=color:#8f5902;font-style:italic>      maxIdleConns: 10
+</span><span style=color:#8f5902;font-style:italic>      maxOpenConns: 100
+</span><span style=color:#8f5902;font-style:italic>      connMaxLifetime: 1h
 </span><span style=color:#8f5902;font-style:italic>    log:
-</span><span style=color:#8f5902;font-style:italic>      slowThreshold: &#34;100ms&#34;</span><span style=color:#f8f8f8;text-decoration:underline>    
+</span><span style=color:#8f5902;font-style:italic>      slowThreshold: &#34;100ms&#34;
+</span><span style=color:#8f5902;font-style:italic>      logger:
+</span><span style=color:#8f5902;font-style:italic>        filename: /var/log/clusterpedia/internalstorage.log
+</span><span style=color:#8f5902;font-style:italic>        maxbackups: 3</span><span style=color:#f8f8f8;text-decoration:underline>    
 </span></code></pre></div><p>internalstorage config 支持以下基本字段:</p>
 <table>
 <thead>
@@ -265,6 +277,30 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </tbody>
 </table>
 <p><strong>存储组件的访问密码，最好存放在 Secret，参考 <a href=#%E9%85%8D%E7%BD%AE%E5%AD%98%E5%82%A8%E7%BB%84%E4%BB%B6%E5%AF%86%E7%A0%81-secret>配置存储组件密码 Secret</a></strong></p>
+<h3 id=数据库连接池配置>数据库连接池配置</h3>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>connPool.maxIdleConns</code></td>
+<td>空闲连接池中的最大数量，默认为 10</td>
+</tr>
+<tr>
+<td><code>connPool.maxOpenConns</code></td>
+<td>打开的数据库连接的最大数量，默认为 100</td>
+</tr>
+<tr>
+<td><code>connPool.connMaxLifetime</code></td>
+<td>连接可以复用的最大时间，默认为 1h</td>
+</tr>
+</tbody>
+</table>
+<p>根据用户的当前环境，合理设置数据库连接池</p>
 <h3 id=日志配置>日志配置</h3>
 <p>支持配置存储层日志，通过 <code>log</code> 字段来开启日志打印慢 SQL 和错误</p>
 <table>
@@ -291,9 +327,49 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 <td><code>log.level</code></td>
 <td>设置日志级别，支持 Slient, Error, Warn, Info</td>
 </tr>
+<tr>
+<td><code>log.logger</code></td>
+<td>日志轮滚配置</td>
+</tr>
 </tbody>
 </table>
 <p>开启日志打印后，如果 <code>log.stdout</code> 不为 true，则将日志输出到 <em>/var/log/clusterpedia/internalstorage.log</em> 文件中</p>
+<h4 id=日志轮滚配置>日志轮滚配置</h4>
+<p>将存储层的日志保存到文件中，并且可以配置日志文件的轮滚</p>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>log.logger.filename</code></td>
+<td>日志文件路径, 默认为 <em>/var/log/clusterpedia/internalstorage.log</em></td>
+</tr>
+<tr>
+<td><code>log.logger.maxsize</code></td>
+<td>触发日志轮滚的最大文件大小，单位为 MB</td>
+</tr>
+<tr>
+<td><code>log.logger.maxage</code></td>
+<td>轮滚的旧日志的最大存活时间</td>
+</tr>
+<tr>
+<td><code>log.logger.maxbackups</code></td>
+<td>轮滚的旧日志的最大数量</td>
+</tr>
+<tr>
+<td><code>log.logger.localtime</code></td>
+<td>是否为本地时间，默认为 UTC</td>
+</tr>
+<tr>
+<td><code>log.logger.compress</code></td>
+<td>是否将轮滚的日志文件进行压缩，默认不进行压缩</td>
+</tr>
+</tbody>
+</table>
 <h4 id=关闭日志打印>关闭日志打印</h4>
 <p>在 internalstorage config 不填写 <code>log</code> 字段，便会忽略日志打印，例如：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;mysql&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -302,7 +378,7 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>user</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>root</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>database</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;clusterpedia&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><h3 id=更多配置>更多配置</h3>
-<p>默认存储层还提供了更多的配置，可以参考 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go>internalstorage/config.go</a></p>
+<p>默认存储层还提供了有关 MySQL 和 PostgreSQL 的更多配置，可以参考 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go>internalstorage/config.go</a></p>
 <h2 id=配置存储组件密码-secret>配置存储组件密码 Secret</h2>
 <p>Clusterpedia 的安装 yaml 会从 <code>internalstroage-password</code> 的 Secret 中获取密码。</p>
 <p>将存储组件的密码配置到 Secret 中</p>
@@ -317,12 +393,14 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 <h1 id=pg-40243a331b263af5e1b61fd771638878>2.1 - 聚合资源(Collection Resource)</h1>
 <p>Clusterpedia 为了能够一次性获取多个类型的资源，在单个资源类型的基础上提供了一种新的资源 —— <code>聚合资源（Collection Resource）</code>。</p>
 <p><code>聚合资源</code>是由不同的资源类型组合而成，可以对这些资源类型进行统一的检索和分页。</p>
-<p><strong>具体支持哪些聚合资源是由<code>存储层</code>来决定的</strong>，例如 <code>内置存储层</code> 暂时只支持 <code>workloads</code> 这一种聚合资源，用来表示工作负载。</p>
+<p><strong>具体支持哪些聚合资源是由<code>存储层</code>来决定的</strong>，例如 <code>默认存储层</code> 支持 <code>workloads</code> 和 <code>kuberesources</code> 两种聚合资源。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources
 </code></pre></div><pre tabindex=0><code># 输出:
-NAME        RESOURCES
-workloads   deployments.apps,daemonsets.apps,statefulsets.apps
-</code></pre><p>以 yaml 形式查看支持的<code>聚合资源</code></p>
+NAME            RESOURCES
+workloads       deployments.apps,daemonsets.apps,statefulsets.apps
+kuberesources   *,*.admission.k8s.io,*.admissionregistration.k8s.io,*.apiextensions.k8s.io,*.apps,*.authentication.k8s.io,*.authorization.k8s.io,*.autoscaling,*.batch,*.certificates.k8s.io,*.coordination.k8s.io,*.discovery.k8s.io,*.events.k8s.io,*.extensions,*.flowcontrol.apiserver.k8s.io,*.imagepolicy.k8s.io,*.internal.apiserver.k8s.io,*.networking.k8s.io,*.node.k8s.io,*.policy,*.rbac.authorization.k8s.io,*.scheduling.k8s.io,*.storage.k8s.io
+</code></pre><p><code>kuberesources</code> 包含了所有 kube 的内置资源，我们可以通过 <code>kuberesources</code> 来对所有的内置资源进行统一的过滤和检索。</p>
+<p><strong>以 yaml 形式查看支持的<code>聚合资源</code></strong></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources -o yaml
 </code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># 输出：</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -342,11 +420,41 @@ workloads   deployments.apps,daemonsets.apps,statefulsets.apps
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>statefulsets</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>version</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia.io/v1beta1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>CollectionResource</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>creationTimestamp</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>null</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>kuberesources</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resourceTypes</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>admission.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>admissionregistration.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apiextensions.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>authentication.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>authorization.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>autoscaling</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>batch</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>certificates.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>coordination.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>discovery.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>events.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>extensions</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>flowcontrol.apiserver.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>imagepolicy.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>internal.apiserver.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>networking.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>node.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>policy</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>rbac.authorization.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>scheduling.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>storage.k8s.io</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>List</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resourceVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>selfLink</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><p>可以看到 <code>workloads</code> 包含了 <code>deployments</code>，<code>daemonsets</code>， <code>statefulsets</code> 三种资源。</p>
+<p>而 <code>kuberesources</code> 则包含了 kube 内置的所有资源。</p>
 <p>更多关于<code>聚合资源</code>的操作可以查看 <a href=../../usage/search/collection-resource>聚合资源检索</a></p>
 <h2 id=自定义聚合资源>自定义聚合资源</h2>
 <p><code>内置存储层</code>未来会支持<code>自定义聚合资源</code>，允许用户随意组合任意的资源类型。</p>
@@ -546,6 +654,28 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 <p>自定义资源收集暂时不支持版本转换，收集了哪些版本，那么就只支持哪些资源版本的收集。</p>
 <p>这时在检索多集群资源时，如果 cluster-1 只收集了 <code>v1beta1</code> 版本的资源，而检索请求 v1 版本的资源便会忽略 cluster-1 所收集的 <code>v1beta1</code> 版本</p>
 <p>需要用户去协调处理自定义资源在多个集群内的版本情况</p>
+<h3 id=同步所有的自定义资源>同步所有的自定义资源</h3>
+<p>自定义资源类型和版本会随着 CRD 进行变动，当一个 CRD 被创建时，我们不想同时修改 <code>spec.syncResources</code> 来同步资源，这时我们就可以设置 <code>spec.syncAllCustomResources</code> 来同步所有的自定义资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncAllCustomResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>但是需要注意，使用该功能需要在 <code>clustersynchro-manager</code> 中开启相应的 Feature Gate，具体操作可以参考 <a href=../../features/sync_all_custom_resources>同步所有自定义资源</a></p>
+<h2 id=使用通配符来同步资源>使用通配符来同步资源</h2>
+<h3 id=使用通配符收集指定组下的所有类型资源>使用通配符，收集指定组下的所有类型资源</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>通过<code>组通配符</code>可以收集指定的 Group 下的所有类型的资源。</p>
+<p>例如上例中，便会同步 <code>apps</code> 下的所有资源</p>
+<h3 id=使用通配符收集所有类型的资源>使用通配符，收集所有类型的资源</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>通过<code>全资源通配符</code> 可以同步集群中的内置资源，自定义资源以及聚合式 API 资源。</p>
+<p>使用该功能会创建大量的长连接，所以需要谨慎使用，并且在 <code>clustersynchro-manager</code> 中开启相应的 Feature Gate, 具体操作可以参考 <a href=../../features/sync_all_resources>同步所有资源</a></p>
 <h2 id=查看资源同步状态>查看资源同步状态</h2>
 <p>我们可以通过 <code>PediaCluster</code> 资源的 <code>Status</code> 来查看资源的信息，同步的资源版本和状态以及存储版本</p>
 <p>在 <code>Status</code> 中，资源会有<strong>同步版本</strong>和<strong>存储版本</strong>：</p>
@@ -1000,6 +1130,26 @@ issuers                    cert-manager.io/v1   true         Issuer
 <li><a href=https://github.com/clusterpedia-io/clusterpedia/pull/36>support field selector</a></li>
 <li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/48>issue: support list field filtering</a></li>
 </ul>
+<h2 id=高级检索自定义条件检索>高级检索(自定义条件检索)</h2>
+<p>自定义检索为 <code>默认存储层</code> 提供的功能，目的是为了满足用户更加灵活多变的检索需求</p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自定义检索语句</td>
+<td>-</td>
+<td>whereSQL</td>
+</tr>
+</tbody>
+</table>
+<p>自定义检索并不支持通过 search lable，只能使用 url query 来传递自定义搜素的语句。</p>
+<p>另外该功能暂时还是处于 alpha 阶段，需要用户在 <code>clusterpedia apiserver</code> 中开启相应的 Feature Gate，详细可以参考 <a href=../../features/raw_sql_query>自定义条件检索</a></p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-ec8e2360424d04fb82dc27fbc4824983>3.4.1 - 多集群检索</h1>
@@ -1475,7 +1625,221 @@ cluster-2   apps    v1        Deployment   kube-system                   coredns
 </div></div>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-c9da5865a77748e4db7d4db31200b34f>4 - 版本日志</h1>
+<h1 id=pg-56dc2b1c45b2c6b0983526530ba75d01>4 - 特性功能</h1>
+<p>用户在使用特性功能时，需要开启相应的特性门控。
+例如开启 clustersynchro manager 的 <code>SyncAllResources</code> 来允许使用 <code>全资源通配符</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 忽略其他参数</span>
+./bin/clustersynchro-manager --feature-gates<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#000>SyncAllResources</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87>true</span>
+</code></pre></div><p>Clusterpedia APIServer 和 Clusterpedia ClusterSynchro Manager 分别具有不同的特性门控</p>
+<h2 id=apiserver>APIServer</h2>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>feature gate</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=./remaining_item_count>设置默认返回剩余的资源数量</a></td>
+<td><code>RemainingItemCount</code></td>
+<td>false</td>
+</tr>
+<tr>
+<td><a href=./allow_raw_sql_query>原生 SQL 查询</a></td>
+<td><code>AllowRawSQLQuery</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h2 id=clustersynchro-manager>ClusterSynchro Manager</h2>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>feature gate</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>裁剪 <code>metadata.managedFields</code> 字段</td>
+<td><code>PruneManagedFields</code></td>
+<td>true</td>
+</tr>
+<tr>
+<td>裁剪 <code>metadata.annotations['lastAppliedConfiguration']</code> 字段</td>
+<td><code>PruneLastAppliedConfiguration</code></td>
+<td>true</td>
+</tr>
+<tr>
+<td>允许同步所有类型的自定义资源</td>
+<td><code>AllowSyncCustomResources</code></td>
+<td>false</td>
+</tr>
+<tr>
+<td>允许同步所有类型的资源</td>
+<td><code>AllowSyncAllResources</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-77ad0674ed532abc83abd92a7a6fd837>4.1 - 返回剩余资源数量</h1>
+<p>我们在查询时，可以通过 search label 或者 url query，要求在响应中携带剩余的资源数量。</p>
+<table>
+<thead>
+<tr>
+<th>search label</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>search.clusterpedia.io/with-continue</td>
+<td>withContinue</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>详细使用可以参考 <a href=../search/multi-cluster/#%E5%93%8D%E5%BA%94%E6%90%BA%E5%B8%A6%E5%89%A9%E4%BD%99%E8%B5%84%E6%BA%90%E6%95%B0%E9%87%8F%E4%BF%A1%E6%81%AF>响应携带剩余资源数量信息</a></p>
+</blockquote>
+<p>可以通过 Feature Gates —— <code>RemainingItemCount</code> 来设置默认返回剩余的资源数量，这样用户就不需要在每次请求时使用 search label 或者 url query 来显示要求了。</p>
+<p>在默认返回剩余资源数量时，用于依然可以通过 search label 或者 url quera 来不返回剩余的资源数量</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?withRemainingCount=false&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><p><strong>专属于 <code>clusterpedia apiserver</code> 的 Feature Gate</strong></p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>feature gate</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设置是否默认返回剩余的资源数量</td>
+<td><code>RemainingItemCount</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>由于该功能可能会对存储层的行为或者性能有影响，所以默认关闭</p>
+<blockquote>
+<p>对于默认存储层，返回剩余资源数量会导致额外的 COUNT 查询</p>
+</blockquote>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-3767c3b17cac3d98fad9fe95ff564787>4.2 - 原生 SQL 查询</h1>
+<p>不同的用户的需求可能是不同的，尽管 clusterpedia 提供了很多简便的检索条件，例如指定一组命名空间或者资源名称，也可以指定 owner 进行查询，但是用户依然可能会有更加复杂的查询。</p>
+<p>这时，用户可以使用默认存储层提供的 <code>原生 SQL 条件查询</code> 来传递更加复杂的检索条件</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#000>URL</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments&#34;</span>
+kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;</span><span style=color:#000>$URL</span><span style=color:#4e9a06>?whereSQL=(cluster=&#39;global&#39;) OR (namespace IN (&#39;kube-system&#39;,&#39;default&#39;))&#34;</span>
+</code></pre></div><p>示例中，我们传递一个用于 <em>WHERE</em> 查询的 SQL 语句 —— <strong>(cluster=&lsquo;global&rsquo;) OR (namespace IN (&lsquo;kube-system&rsquo;,&lsquo;default&rsquo;))</strong>,</p>
+<p>这个语句会检索 <em>global</em> 集群内所有命名空间下以及其他集群中 <em>kube-system</em> 和 <em>default</em> 命名空间下的 <code>deployments</code>。</p>
+<p><strong>sql 语句需要符合具体的存储组件的 SQL 语法</strong></p>
+<p>该特性门控专属于 <code>clusterpedia apiserver</code></p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>feature gates</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>允许使用原生 SQL 设置检索条件</td>
+<td><code>AllowRawSQLQuery</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>原生 SQL 查询当前还在 alpha 阶段，并且对 SQL 注入没有很好的防范，所以需要用户通过 Feature Gates 来开启该功能</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-a51f4831356bba0114928fabdedd7051>4.3 - 资源字段裁剪</h1>
+<p>资源的 metadata 中有一些字段在实际搜索中通常没有太大用处，所以在同步时我们会默认裁剪这些字段。</p>
+<p>我们使用特性门控来分别控制这些字段是否在资源同步时被裁剪，<strong>这些特性门控专属于 <code>clustersynchro manager</code> 组件</strong></p>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>feature gates</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>metadata.managedFields</em></td>
+<td><code>PruneManagedFields</code></td>
+<td>true</td>
+</tr>
+<tr>
+<td><em>metadata.annotations[&lsquo;lastAppliedConfiguration&rsquo;]</em></td>
+<td><code>PruneLastAppliedConfiguration</code></td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-653a7191205b4ee8aa58ac587be07566>4.4 - 同步所有的自定义资源</h1>
+<p>自定义资源不同于 kube 的内置资源，kube 的内置资源通常不会经常性变动(依然有两种情况会导致原生资源类型资源改变)，
+而自定义资源的类型可能会被动态的创建和删除</p>
+<p>用户如果想要根据被纳管集群中的 CRD 的变动来自动调节同步的资源类型,那么用户在 PediaCluster 中指定同步所有自定义资源。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncAllCustomResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>该功能可能会导致大量的长连接，所以需要在 <code>clustersynchro manager</code> 中开启 Feature Gate</p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>feature gate</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>允许同步所有的自定义资源</td>
+<td><code>AllowSyncAllCustomResources</code></td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-55f2eed846cc66d89ab31e3eecc84a84>4.5 - 同步所有的资源</h1>
+<p>用户可以通过 <code>全资源通配符</code> 来同步所有类型的资源，当被纳管集群中发生任意的资源类型变动(例如 kube 版本升级，group/version 被禁用，CRD 或者 APIService 变动)都会导致同步的资源类型发生修改。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p><strong>请谨慎使用该功能，该功能会创建大量的长连接，未来 Clusterpedia 添加 Agent 功能后，可以避免长连接的创建</strong></p>
+<p>建议指定具体的资源类型，如果需要对自定义资源进行动态同步，可以使用 <a href=./sync_all_custom_resources>同步所有的自定义资源</a></p>
+<p>使用<code>全资源通配符</code> 需要在 <code>clustersynchro manager</code> 中开启 Feature Gate</p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>feature gate</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>允许同步所有的自定义资源</td>
+<td><code>AllowSyncAllCustomResources</code></td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-c9da5865a77748e4db7d4db31200b34f>5 - 版本日志</h1>
 </div>
 </main>
 </div>

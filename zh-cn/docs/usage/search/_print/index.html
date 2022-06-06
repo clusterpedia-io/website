@@ -69,7 +69,7 @@ Search Labels： …">
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b234e4318fb60f3cacbe5da28a36c1ee.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -337,6 +337,26 @@ Search Labels： …">
 <li><a href=https://github.com/clusterpedia-io/clusterpedia/pull/36>support field selector</a></li>
 <li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/48>issue: support list field filtering</a></li>
 </ul>
+<h2 id=高级检索自定义条件检索>高级检索(自定义条件检索)</h2>
+<p>自定义检索为 <code>默认存储层</code> 提供的功能，目的是为了满足用户更加灵活多变的检索需求</p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自定义检索语句</td>
+<td>-</td>
+<td>whereSQL</td>
+</tr>
+</tbody>
+</table>
+<p>自定义检索并不支持通过 search lable，只能使用 url query 来传递自定义搜素的语句。</p>
+<p>另外该功能暂时还是处于 alpha 阶段，需要用户在 <code>clusterpedia apiserver</code> 中开启相应的 Feature Gate，详细可以参考 <a href=../../features/raw_sql_query>自定义条件检索</a></p>
 </div>
 </div>
 <div class=td-content style=page-break-before:always>

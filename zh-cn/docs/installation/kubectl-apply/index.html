@@ -29,7 +29,7 @@ git clone …">
 <meta property="og:description" content="安装 Clusterpedia 的安装分为两个部分：
  安装存储组件 安装 Clusterpedia   用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过安装存储组件
  拉取项目：
-git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.2.0 安装存储组件 Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择
+git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.3.0 安装存储组件 Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择
  用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过存储组件安装
  PostgreSQL MySQL 进入所选存储组件的安装目录
 cd ./deploy/internalstorage/postgres  进入所选存储组件的安装目录
@@ -44,7 +44,7 @@ kubectl create -f .">
 <meta itemprop=description content="安装 Clusterpedia 的安装分为两个部分：
  安装存储组件 安装 Clusterpedia   用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过安装存储组件
  拉取项目：
-git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.2.0 安装存储组件 Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择
+git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.3.0 安装存储组件 Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择
  用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过存储组件安装
  PostgreSQL MySQL 进入所选存储组件的安装目录
 cd ./deploy/internalstorage/postgres  进入所选存储组件的安装目录
@@ -52,13 +52,13 @@ cd ./deploy/internalstorage/mysql  存储组件使用 Local PV 的方式存储�
  用户可以选择自己提供 PV
  export STORAGE_NODE_NAME=<节点名称> sed &#34;s|__NODE_NAME__|$STORAGE_NODE_NAME|g&#34; `grep __NODE_NAME__ -rl ./templates` > clusterpedia_internalstorage_pv.yaml 部署存储组件
 kubectl create -f .">
-<meta itemprop=wordCount content="175">
+<meta itemprop=wordCount content="169">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="使用 kubectl apply">
 <meta name=twitter:description content="安装 Clusterpedia 的安装分为两个部分：
  安装存储组件 安装 Clusterpedia   用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过安装存储组件
  拉取项目：
-git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.2.0 安装存储组件 Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择
+git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.3.0 安装存储组件 Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择
  用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过存储组件安装
  PostgreSQL MySQL 进入所选存储组件的安装目录
 cd ./deploy/internalstorage/postgres  进入所选存储组件的安装目录
@@ -107,7 +107,7 @@ kubectl create -f .">
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b234e4318fb60f3cacbe5da28a36c1ee.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -117,7 +117,7 @@ kubectl create -f .">
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b234e4318fb60f3cacbe5da28a36c1ee.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -179,6 +179,21 @@ kubectl create -f .">
 <a href=/zh-cn/docs/usage/search/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchcollection-resource><span>聚合资源检索</span></a>
 </li>
 </ul>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsfeatures-li>
+<a href=/zh-cn/docs/features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsfeatures><span>特性功能</span></a>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesremaining_item_count-li>
+<a href=/zh-cn/docs/features/remaining_item_count/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesremaining_item_count><span>返回剩余资源数量</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesraw_sql_query-li>
+<a href=/zh-cn/docs/features/raw_sql_query/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesraw_sql_query><span>原生 SQL 查询</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesprune_fields-li>
+<a href=/zh-cn/docs/features/prune_fields/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesprune_fields><span>资源字段裁剪</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync_all_custom_resources-li>
+<a href=/zh-cn/docs/features/sync_all_custom_resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync_all_custom_resources><span>同步所有的自定义资源</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync_all_resources-li>
+<a href=/zh-cn/docs/features/sync_all_resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync_all_resources><span>同步所有的资源</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsrelease-notes-li>
@@ -249,7 +264,7 @@ kubectl create -f .">
 <p>拉取项目：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
 <span style=color:#204a87>cd</span> clusterpedia
-git checkout v0.2.0
+git checkout v0.3.0
 </code></pre></div><h3 id=安装存储组件>安装存储组件</h3>
 <p>Clusterpedia 安装时提供了 <strong>MySQL 8.0</strong> 和 <strong>PostgreSQL 12</strong> 两种存储组件以供选择</p>
 <blockquote>
@@ -282,10 +297,7 @@ sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000
 <blockquote>
 <p>在 clusterpedia 项目根目录下进行操作</p>
 </blockquote>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 部署 crds</span>
-kubectl apply -f ./charts/_crds
-
-<span style=color:#8f5902;font-style:italic># 部署 Clusterpedia 组件</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 部署 Clusterpedia CRD 与组件</span>
 kubectl apply -f ./deploy
 </code></pre></div><h3 id=安装完成>安装完成</h3>
 <p>检查组件 Pods 运行是否正常</p>
@@ -300,7 +312,7 @@ kubectl apply -f ./deploy
 kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
-kubectl delete -f ./charts/_crds
+kubectl delete -f ./deploy/cluster.clusterpedia.io_pediaclusers.yaml
 </code></pre></div><h3 id=卸载存储组件>卸载存储组件</h3>
 <p>根据选择的存储组件类型，来移除相关的资源</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/internalstorage/&lt;storage type&gt;

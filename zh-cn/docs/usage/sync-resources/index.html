@@ -35,7 +35,7 @@ kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps&#34; | 
 syncResources:- group:appsversions:[]resources:- deployments- daemonsets对于内置资源，不需要填写 versions 字段。
 Clusterpedia 会根据该集群内所支持的资源版本自动选择合适的版本来收集， 并且用户无需担心版本转换的问题， Clusterpedia 会开放出该内置资源的所有版本接口。
 kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps&#34; | jq { &#34;kind&#34;: &#34;APIGroup&#34;, &#34;apiVersion&#34;: &#34;v1&#34;, &#34;name&#34;: &#34;apps&#34;, &#34;versions&#34;: [ { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta2&#34;, &#34;version&#34;: &#34;v1beta2&#34; }, { &#34;groupVersion&#34;: &#34;apps/v1beta1&#34;, &#34;version&#34;: &#34;v1beta1&#34; } ], &#34;preferredVersion&#34;: { &#34;groupVersion&#34;: &#34;apps/v1&#34;, &#34;version&#34;: &#34;v1&#34; } } 可以看到 Clusterpedia 支持 v1，v1beta2，v1beta1 三个版本的 Deployment">
-<meta itemprop=wordCount content="232">
+<meta itemprop=wordCount content="272">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="同步集群资源">
 <meta name=twitter:description content="Clusterpedia 的主要功能，便是提供对多集群内的资源进行复杂检索。
@@ -85,7 +85,7 @@ kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps&#34; | 
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b234e4318fb60f3cacbe5da28a36c1ee.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -95,7 +95,7 @@ kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps&#34; | 
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b234e4318fb60f3cacbe5da28a36c1ee.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -159,6 +159,21 @@ kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps&#34; | 
 </ul>
 </li>
 </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsfeatures-li>
+<a href=/zh-cn/docs/features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsfeatures><span>特性功能</span></a>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesremaining_item_count-li>
+<a href=/zh-cn/docs/features/remaining_item_count/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesremaining_item_count><span>返回剩余资源数量</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesraw_sql_query-li>
+<a href=/zh-cn/docs/features/raw_sql_query/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesraw_sql_query><span>原生 SQL 查询</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesprune_fields-li>
+<a href=/zh-cn/docs/features/prune_fields/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesprune_fields><span>资源字段裁剪</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync_all_custom_resources-li>
+<a href=/zh-cn/docs/features/sync_all_custom_resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync_all_custom_resources><span>同步所有的自定义资源</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync_all_resources-li>
+<a href=/zh-cn/docs/features/sync_all_resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync_all_resources><span>同步所有的资源</span></a>
+</li>
+</ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsrelease-notes-li>
 <a href=https://github.com/clusterpedia-io/clusterpedia/releases class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsrelease-notes><span>版本日志</span></a>
 </li>
@@ -184,6 +199,13 @@ kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps&#34; | 
 <ul>
 <li><a href=#指定自定义资源的同步版本>指定自定义资源的同步版本</a></li>
 <li><a href=#使用注意>使用注意</a></li>
+<li><a href=#同步所有的自定义资源>同步所有的自定义资源</a></li>
+</ul>
+</li>
+<li><a href=#使用通配符来同步资源>使用通配符来同步资源</a>
+<ul>
+<li><a href=#使用通配符收集指定组下的所有类型资源>使用通配符，收集指定组下的所有类型资源</a></li>
+<li><a href=#使用通配符收集所有类型的资源>使用通配符，收集所有类型的资源</a></li>
 </ul>
 </li>
 <li><a href=#查看资源同步状态>查看资源同步状态</a></li>
@@ -321,6 +343,28 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 <p>自定义资源收集暂时不支持版本转换，收集了哪些版本，那么就只支持哪些资源版本的收集。</p>
 <p>这时在检索多集群资源时，如果 cluster-1 只收集了 <code>v1beta1</code> 版本的资源，而检索请求 v1 版本的资源便会忽略 cluster-1 所收集的 <code>v1beta1</code> 版本</p>
 <p>需要用户去协调处理自定义资源在多个集群内的版本情况</p>
+<h3 id=同步所有的自定义资源>同步所有的自定义资源</h3>
+<p>自定义资源类型和版本会随着 CRD 进行变动，当一个 CRD 被创建时，我们不想同时修改 <code>spec.syncResources</code> 来同步资源，这时我们就可以设置 <code>spec.syncAllCustomResources</code> 来同步所有的自定义资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncAllCustomResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>但是需要注意，使用该功能需要在 <code>clustersynchro-manager</code> 中开启相应的 Feature Gate，具体操作可以参考 <a href=../../features/sync_all_custom_resources>同步所有自定义资源</a></p>
+<h2 id=使用通配符来同步资源>使用通配符来同步资源</h2>
+<h3 id=使用通配符收集指定组下的所有类型资源>使用通配符，收集指定组下的所有类型资源</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>通过<code>组通配符</code>可以收集指定的 Group 下的所有类型的资源。</p>
+<p>例如上例中，便会同步 <code>apps</code> 下的所有资源</p>
+<h3 id=使用通配符收集所有类型的资源>使用通配符，收集所有类型的资源</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>通过<code>全资源通配符</code> 可以同步集群中的内置资源，自定义资源以及聚合式 API 资源。</p>
+<p>使用该功能会创建大量的长连接，所以需要谨慎使用，并且在 <code>clustersynchro-manager</code> 中开启相应的 Feature Gate, 具体操作可以参考 <a href=../../features/sync_all_resources>同步所有资源</a></p>
 <h2 id=查看资源同步状态>查看资源同步状态</h2>
 <p>我们可以通过 <code>PediaCluster</code> 资源的 <code>Status</code> 来查看资源的信息，同步的资源版本和状态以及存储版本</p>
 <p>在 <code>Status</code> 中，资源会有<strong>同步版本</strong>和<strong>存储版本</strong>：</p>

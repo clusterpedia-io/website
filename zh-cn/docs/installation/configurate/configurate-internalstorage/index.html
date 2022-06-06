@@ -21,7 +21,7 @@
 <meta property="og:description" content="Clusterpedia 的默认存储层支持 MySQL 和 PostgreSQL 两种存储组件。
 用户在安装 Clusterpedia 时，可以使用已存在的存储组件， 不过需要创建相应的默认存储层配置（ConfigMap）和存储组件密码 Secret。
 默认存储层配置 用户需要在 clusterpedia-system 命名空间下创建 clusterpedia-internalstorage ConfigMap。
-# internalstorage configmap exampleapiVersion:v1kind:ConfigMapmetadata:name:clusterpedia-internalstoragenamespace:clusterpedia-systemdata:internalstorage-config.yaml:|type: &#34;mysql&#34; host: &#34;clusterpedia-internalstorage-mysql&#34; port: 3306 user: root database: &#34;clusterpedia&#34; log: slowThreshold: &#34;100ms&#34;internalstorage config 支持以下基本字段:
+# internalstorage configmap exampleapiVersion:v1kind:ConfigMapmetadata:name:clusterpedia-internalstoragenamespace:clusterpedia-systemdata:internalstorage-config.yaml:|type: &#34;mysql&#34; host: &#34;clusterpedia-internalstorage-mysql&#34; port: 3306 user: root database: &#34;clusterpedia&#34; connPool: maxIdleConns: 10 maxOpenConns: 100 connMaxLifetime: 1h log: slowThreshold: &#34;100ms&#34; logger: filename: /var/log/clusterpedia/internalstorage.log maxbackups: 3internalstorage config 支持以下基本字段:
    field description     type 存储组件的类型，支持 &ldquo;postgres&rdquo; 和 &ldquo;mysql&rdquo;   host 存储组件地址，可以使用 IP 或者 Service Name   port 存储组件端口   user 存储组件用户   password 存储组件密码   database Clusterpedia 所使用的 database    存储组件的访问密码，最好存放在 Secret，参考 配置存储组件密码 Secret">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/zh-cn/docs/installation/configurate/configurate-internalstorage/"><meta property="article:section" content="docs">
@@ -30,15 +30,15 @@
 <meta itemprop=description content="Clusterpedia 的默认存储层支持 MySQL 和 PostgreSQL 两种存储组件。
 用户在安装 Clusterpedia 时，可以使用已存在的存储组件， 不过需要创建相应的默认存储层配置（ConfigMap）和存储组件密码 Secret。
 默认存储层配置 用户需要在 clusterpedia-system 命名空间下创建 clusterpedia-internalstorage ConfigMap。
-# internalstorage configmap exampleapiVersion:v1kind:ConfigMapmetadata:name:clusterpedia-internalstoragenamespace:clusterpedia-systemdata:internalstorage-config.yaml:|type: &#34;mysql&#34; host: &#34;clusterpedia-internalstorage-mysql&#34; port: 3306 user: root database: &#34;clusterpedia&#34; log: slowThreshold: &#34;100ms&#34;internalstorage config 支持以下基本字段:
+# internalstorage configmap exampleapiVersion:v1kind:ConfigMapmetadata:name:clusterpedia-internalstoragenamespace:clusterpedia-systemdata:internalstorage-config.yaml:|type: &#34;mysql&#34; host: &#34;clusterpedia-internalstorage-mysql&#34; port: 3306 user: root database: &#34;clusterpedia&#34; connPool: maxIdleConns: 10 maxOpenConns: 100 connMaxLifetime: 1h log: slowThreshold: &#34;100ms&#34; logger: filename: /var/log/clusterpedia/internalstorage.log maxbackups: 3internalstorage config 支持以下基本字段:
    field description     type 存储组件的类型，支持 &ldquo;postgres&rdquo; 和 &ldquo;mysql&rdquo;   host 存储组件地址，可以使用 IP 或者 Service Name   port 存储组件端口   user 存储组件用户   password 存储组件密码   database Clusterpedia 所使用的 database    存储组件的访问密码，最好存放在 Secret，参考 配置存储组件密码 Secret">
-<meta itemprop=wordCount content="123">
+<meta itemprop=wordCount content="174">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="配置存储层">
 <meta name=twitter:description content="Clusterpedia 的默认存储层支持 MySQL 和 PostgreSQL 两种存储组件。
 用户在安装 Clusterpedia 时，可以使用已存在的存储组件， 不过需要创建相应的默认存储层配置（ConfigMap）和存储组件密码 Secret。
 默认存储层配置 用户需要在 clusterpedia-system 命名空间下创建 clusterpedia-internalstorage ConfigMap。
-# internalstorage configmap exampleapiVersion:v1kind:ConfigMapmetadata:name:clusterpedia-internalstoragenamespace:clusterpedia-systemdata:internalstorage-config.yaml:|type: &#34;mysql&#34; host: &#34;clusterpedia-internalstorage-mysql&#34; port: 3306 user: root database: &#34;clusterpedia&#34; log: slowThreshold: &#34;100ms&#34;internalstorage config 支持以下基本字段:
+# internalstorage configmap exampleapiVersion:v1kind:ConfigMapmetadata:name:clusterpedia-internalstoragenamespace:clusterpedia-systemdata:internalstorage-config.yaml:|type: &#34;mysql&#34; host: &#34;clusterpedia-internalstorage-mysql&#34; port: 3306 user: root database: &#34;clusterpedia&#34; connPool: maxIdleConns: 10 maxOpenConns: 100 connMaxLifetime: 1h log: slowThreshold: &#34;100ms&#34; logger: filename: /var/log/clusterpedia/internalstorage.log maxbackups: 3internalstorage config 支持以下基本字段:
    field description     type 存储组件的类型，支持 &ldquo;postgres&rdquo; 和 &ldquo;mysql&rdquo;   host 存储组件地址，可以使用 IP 或者 Service Name   port 存储组件端口   user 存储组件用户   password 存储组件密码   database Clusterpedia 所使用的 database    存储组件的访问密码，最好存放在 Secret，参考 配置存储组件密码 Secret">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
@@ -81,7 +81,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b234e4318fb60f3cacbe5da28a36c1ee.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -91,7 +91,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b234e4318fb60f3cacbe5da28a36c1ee.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -155,6 +155,21 @@
 </ul>
 </li>
 </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsfeatures-li>
+<a href=/zh-cn/docs/features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsfeatures><span>特性功能</span></a>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesremaining_item_count-li>
+<a href=/zh-cn/docs/features/remaining_item_count/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesremaining_item_count><span>返回剩余资源数量</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesraw_sql_query-li>
+<a href=/zh-cn/docs/features/raw_sql_query/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesraw_sql_query><span>原生 SQL 查询</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesprune_fields-li>
+<a href=/zh-cn/docs/features/prune_fields/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesprune_fields><span>资源字段裁剪</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync_all_custom_resources-li>
+<a href=/zh-cn/docs/features/sync_all_custom_resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync_all_custom_resources><span>同步所有的自定义资源</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync_all_resources-li>
+<a href=/zh-cn/docs/features/sync_all_resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync_all_resources><span>同步所有的资源</span></a>
+</li>
+</ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsrelease-notes-li>
 <a href=https://github.com/clusterpedia-io/clusterpedia/releases class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsrelease-notes><span>版本日志</span></a>
 </li>
@@ -177,6 +192,7 @@
 <ul>
 <li><a href=#默认存储层配置>默认存储层配置</a>
 <ul>
+<li><a href=#数据库连接池配置>数据库连接池配置</a></li>
 <li><a href=#日志配置>日志配置</a></li>
 <li><a href=#更多配置>更多配置</a></li>
 </ul>
@@ -225,8 +241,15 @@
 </span><span style=color:#8f5902;font-style:italic>    port: 3306
 </span><span style=color:#8f5902;font-style:italic>    user: root
 </span><span style=color:#8f5902;font-style:italic>    database: &#34;clusterpedia&#34;
+</span><span style=color:#8f5902;font-style:italic>    connPool:
+</span><span style=color:#8f5902;font-style:italic>      maxIdleConns: 10
+</span><span style=color:#8f5902;font-style:italic>      maxOpenConns: 100
+</span><span style=color:#8f5902;font-style:italic>      connMaxLifetime: 1h
 </span><span style=color:#8f5902;font-style:italic>    log:
-</span><span style=color:#8f5902;font-style:italic>      slowThreshold: &#34;100ms&#34;</span><span style=color:#f8f8f8;text-decoration:underline>    
+</span><span style=color:#8f5902;font-style:italic>      slowThreshold: &#34;100ms&#34;
+</span><span style=color:#8f5902;font-style:italic>      logger:
+</span><span style=color:#8f5902;font-style:italic>        filename: /var/log/clusterpedia/internalstorage.log
+</span><span style=color:#8f5902;font-style:italic>        maxbackups: 3</span><span style=color:#f8f8f8;text-decoration:underline>    
 </span></code></pre></div><p>internalstorage config 支持以下基本字段:</p>
 <table>
 <thead>
@@ -263,6 +286,30 @@
 </tbody>
 </table>
 <p><strong>存储组件的访问密码，最好存放在 Secret，参考 <a href=#%E9%85%8D%E7%BD%AE%E5%AD%98%E5%82%A8%E7%BB%84%E4%BB%B6%E5%AF%86%E7%A0%81-secret>配置存储组件密码 Secret</a></strong></p>
+<h3 id=数据库连接池配置>数据库连接池配置</h3>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>connPool.maxIdleConns</code></td>
+<td>空闲连接池中的最大数量，默认为 10</td>
+</tr>
+<tr>
+<td><code>connPool.maxOpenConns</code></td>
+<td>打开的数据库连接的最大数量，默认为 100</td>
+</tr>
+<tr>
+<td><code>connPool.connMaxLifetime</code></td>
+<td>连接可以复用的最大时间，默认为 1h</td>
+</tr>
+</tbody>
+</table>
+<p>根据用户的当前环境，合理设置数据库连接池</p>
 <h3 id=日志配置>日志配置</h3>
 <p>支持配置存储层日志，通过 <code>log</code> 字段来开启日志打印慢 SQL 和错误</p>
 <table>
@@ -289,9 +336,49 @@
 <td><code>log.level</code></td>
 <td>设置日志级别，支持 Slient, Error, Warn, Info</td>
 </tr>
+<tr>
+<td><code>log.logger</code></td>
+<td>日志轮滚配置</td>
+</tr>
 </tbody>
 </table>
 <p>开启日志打印后，如果 <code>log.stdout</code> 不为 true，则将日志输出到 <em>/var/log/clusterpedia/internalstorage.log</em> 文件中</p>
+<h4 id=日志轮滚配置>日志轮滚配置</h4>
+<p>将存储层的日志保存到文件中，并且可以配置日志文件的轮滚</p>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>log.logger.filename</code></td>
+<td>日志文件路径, 默认为 <em>/var/log/clusterpedia/internalstorage.log</em></td>
+</tr>
+<tr>
+<td><code>log.logger.maxsize</code></td>
+<td>触发日志轮滚的最大文件大小，单位为 MB</td>
+</tr>
+<tr>
+<td><code>log.logger.maxage</code></td>
+<td>轮滚的旧日志的最大存活时间</td>
+</tr>
+<tr>
+<td><code>log.logger.maxbackups</code></td>
+<td>轮滚的旧日志的最大数量</td>
+</tr>
+<tr>
+<td><code>log.logger.localtime</code></td>
+<td>是否为本地时间，默认为 UTC</td>
+</tr>
+<tr>
+<td><code>log.logger.compress</code></td>
+<td>是否将轮滚的日志文件进行压缩，默认不进行压缩</td>
+</tr>
+</tbody>
+</table>
 <h4 id=关闭日志打印>关闭日志打印</h4>
 <p>在 internalstorage config 不填写 <code>log</code> 字段，便会忽略日志打印，例如：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;mysql&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -300,7 +387,7 @@
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>user</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>root</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>database</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;clusterpedia&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><h3 id=更多配置>更多配置</h3>
-<p>默认存储层还提供了更多的配置，可以参考 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go>internalstorage/config.go</a></p>
+<p>默认存储层还提供了有关 MySQL 和 PostgreSQL 的更多配置，可以参考 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go>internalstorage/config.go</a></p>
 <h2 id=配置存储组件密码-secret>配置存储组件密码 Secret</h2>
 <p>Clusterpedia 的安装 yaml 会从 <code>internalstroage-password</code> 的 Secret 中获取密码。</p>
 <p>将存储组件的密码配置到 Secret 中</p>

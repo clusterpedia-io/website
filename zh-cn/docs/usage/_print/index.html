@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b234e4318fb60f3cacbe5da28a36c1ee.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -286,6 +286,28 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 <p>自定义资源收集暂时不支持版本转换，收集了哪些版本，那么就只支持哪些资源版本的收集。</p>
 <p>这时在检索多集群资源时，如果 cluster-1 只收集了 <code>v1beta1</code> 版本的资源，而检索请求 v1 版本的资源便会忽略 cluster-1 所收集的 <code>v1beta1</code> 版本</p>
 <p>需要用户去协调处理自定义资源在多个集群内的版本情况</p>
+<h3 id=同步所有的自定义资源>同步所有的自定义资源</h3>
+<p>自定义资源类型和版本会随着 CRD 进行变动，当一个 CRD 被创建时，我们不想同时修改 <code>spec.syncResources</code> 来同步资源，这时我们就可以设置 <code>spec.syncAllCustomResources</code> 来同步所有的自定义资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncAllCustomResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>但是需要注意，使用该功能需要在 <code>clustersynchro-manager</code> 中开启相应的 Feature Gate，具体操作可以参考 <a href=../../features/sync_all_custom_resources>同步所有自定义资源</a></p>
+<h2 id=使用通配符来同步资源>使用通配符来同步资源</h2>
+<h3 id=使用通配符收集指定组下的所有类型资源>使用通配符，收集指定组下的所有类型资源</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>通过<code>组通配符</code>可以收集指定的 Group 下的所有类型的资源。</p>
+<p>例如上例中，便会同步 <code>apps</code> 下的所有资源</p>
+<h3 id=使用通配符收集所有类型的资源>使用通配符，收集所有类型的资源</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>通过<code>全资源通配符</code> 可以同步集群中的内置资源，自定义资源以及聚合式 API 资源。</p>
+<p>使用该功能会创建大量的长连接，所以需要谨慎使用，并且在 <code>clustersynchro-manager</code> 中开启相应的 Feature Gate, 具体操作可以参考 <a href=../../features/sync_all_resources>同步所有资源</a></p>
 <h2 id=查看资源同步状态>查看资源同步状态</h2>
 <p>我们可以通过 <code>PediaCluster</code> 资源的 <code>Status</code> 来查看资源的信息，同步的资源版本和状态以及存储版本</p>
 <p>在 <code>Status</code> 中，资源会有<strong>同步版本</strong>和<strong>存储版本</strong>：</p>
@@ -740,6 +762,26 @@ issuers                    cert-manager.io/v1   true         Issuer
 <li><a href=https://github.com/clusterpedia-io/clusterpedia/pull/36>support field selector</a></li>
 <li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/48>issue: support list field filtering</a></li>
 </ul>
+<h2 id=高级检索自定义条件检索>高级检索(自定义条件检索)</h2>
+<p>自定义检索为 <code>默认存储层</code> 提供的功能，目的是为了满足用户更加灵活多变的检索需求</p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>search label key</th>
+<th>url query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自定义检索语句</td>
+<td>-</td>
+<td>whereSQL</td>
+</tr>
+</tbody>
+</table>
+<p>自定义检索并不支持通过 search lable，只能使用 url query 来传递自定义搜素的语句。</p>
+<p>另外该功能暂时还是处于 alpha 阶段，需要用户在 <code>clusterpedia apiserver</code> 中开启相应的 Feature Gate，详细可以参考 <a href=../../features/raw_sql_query>自定义条件检索</a></p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-ec8e2360424d04fb82dc27fbc4824983>4.1 - 多集群检索</h1>

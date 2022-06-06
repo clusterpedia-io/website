@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b234e4318fb60f3cacbe5da28a36c1ee.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3a283f15902d50118ac440235b58b113.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -108,7 +108,7 @@
 <p>拉取项目：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
 <span style=color:#204a87>cd</span> clusterpedia
-git checkout v0.2.0
+git checkout v0.3.0
 </code></pre></div><h3 id=安装存储组件>安装存储组件</h3>
 <p>Clusterpedia 安装时提供了 <strong>MySQL 8.0</strong> 和 <strong>PostgreSQL 12</strong> 两种存储组件以供选择</p>
 <blockquote>
@@ -141,10 +141,7 @@ sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000
 <blockquote>
 <p>在 clusterpedia 项目根目录下进行操作</p>
 </blockquote>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 部署 crds</span>
-kubectl apply -f ./charts/_crds
-
-<span style=color:#8f5902;font-style:italic># 部署 Clusterpedia 组件</span>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 部署 Clusterpedia CRD 与组件</span>
 kubectl apply -f ./deploy
 </code></pre></div><h3 id=安装完成>安装完成</h3>
 <p>检查组件 Pods 运行是否正常</p>
@@ -159,7 +156,7 @@ kubectl apply -f ./deploy
 kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
-kubectl delete -f ./charts/_crds
+kubectl delete -f ./deploy/cluster.clusterpedia.io_pediaclusers.yaml
 </code></pre></div><h3 id=卸载存储组件>卸载存储组件</h3>
 <p>根据选择的存储组件类型，来移除相关的资源</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/internalstorage/&lt;storage type&gt;
@@ -201,8 +198,15 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </span><span style=color:#8f5902;font-style:italic>    port: 3306
 </span><span style=color:#8f5902;font-style:italic>    user: root
 </span><span style=color:#8f5902;font-style:italic>    database: &#34;clusterpedia&#34;
+</span><span style=color:#8f5902;font-style:italic>    connPool:
+</span><span style=color:#8f5902;font-style:italic>      maxIdleConns: 10
+</span><span style=color:#8f5902;font-style:italic>      maxOpenConns: 100
+</span><span style=color:#8f5902;font-style:italic>      connMaxLifetime: 1h
 </span><span style=color:#8f5902;font-style:italic>    log:
-</span><span style=color:#8f5902;font-style:italic>      slowThreshold: &#34;100ms&#34;</span><span style=color:#f8f8f8;text-decoration:underline>    
+</span><span style=color:#8f5902;font-style:italic>      slowThreshold: &#34;100ms&#34;
+</span><span style=color:#8f5902;font-style:italic>      logger:
+</span><span style=color:#8f5902;font-style:italic>        filename: /var/log/clusterpedia/internalstorage.log
+</span><span style=color:#8f5902;font-style:italic>        maxbackups: 3</span><span style=color:#f8f8f8;text-decoration:underline>    
 </span></code></pre></div><p>internalstorage config 支持以下基本字段:</p>
 <table>
 <thead>
@@ -239,6 +243,30 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </tbody>
 </table>
 <p><strong>存储组件的访问密码，最好存放在 Secret，参考 <a href=#%E9%85%8D%E7%BD%AE%E5%AD%98%E5%82%A8%E7%BB%84%E4%BB%B6%E5%AF%86%E7%A0%81-secret>配置存储组件密码 Secret</a></strong></p>
+<h3 id=数据库连接池配置>数据库连接池配置</h3>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>connPool.maxIdleConns</code></td>
+<td>空闲连接池中的最大数量，默认为 10</td>
+</tr>
+<tr>
+<td><code>connPool.maxOpenConns</code></td>
+<td>打开的数据库连接的最大数量，默认为 100</td>
+</tr>
+<tr>
+<td><code>connPool.connMaxLifetime</code></td>
+<td>连接可以复用的最大时间，默认为 1h</td>
+</tr>
+</tbody>
+</table>
+<p>根据用户的当前环境，合理设置数据库连接池</p>
 <h3 id=日志配置>日志配置</h3>
 <p>支持配置存储层日志，通过 <code>log</code> 字段来开启日志打印慢 SQL 和错误</p>
 <table>
@@ -265,9 +293,49 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 <td><code>log.level</code></td>
 <td>设置日志级别，支持 Slient, Error, Warn, Info</td>
 </tr>
+<tr>
+<td><code>log.logger</code></td>
+<td>日志轮滚配置</td>
+</tr>
 </tbody>
 </table>
 <p>开启日志打印后，如果 <code>log.stdout</code> 不为 true，则将日志输出到 <em>/var/log/clusterpedia/internalstorage.log</em> 文件中</p>
+<h4 id=日志轮滚配置>日志轮滚配置</h4>
+<p>将存储层的日志保存到文件中，并且可以配置日志文件的轮滚</p>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>log.logger.filename</code></td>
+<td>日志文件路径, 默认为 <em>/var/log/clusterpedia/internalstorage.log</em></td>
+</tr>
+<tr>
+<td><code>log.logger.maxsize</code></td>
+<td>触发日志轮滚的最大文件大小，单位为 MB</td>
+</tr>
+<tr>
+<td><code>log.logger.maxage</code></td>
+<td>轮滚的旧日志的最大存活时间</td>
+</tr>
+<tr>
+<td><code>log.logger.maxbackups</code></td>
+<td>轮滚的旧日志的最大数量</td>
+</tr>
+<tr>
+<td><code>log.logger.localtime</code></td>
+<td>是否为本地时间，默认为 UTC</td>
+</tr>
+<tr>
+<td><code>log.logger.compress</code></td>
+<td>是否将轮滚的日志文件进行压缩，默认不进行压缩</td>
+</tr>
+</tbody>
+</table>
 <h4 id=关闭日志打印>关闭日志打印</h4>
 <p>在 internalstorage config 不填写 <code>log</code> 字段，便会忽略日志打印，例如：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;mysql&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -276,7 +344,7 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>user</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>root</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>database</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;clusterpedia&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><h3 id=更多配置>更多配置</h3>
-<p>默认存储层还提供了更多的配置，可以参考 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go>internalstorage/config.go</a></p>
+<p>默认存储层还提供了有关 MySQL 和 PostgreSQL 的更多配置，可以参考 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go>internalstorage/config.go</a></p>
 <h2 id=配置存储组件密码-secret>配置存储组件密码 Secret</h2>
 <p>Clusterpedia 的安装 yaml 会从 <code>internalstroage-password</code> 的 Secret 中获取密码。</p>
 <p>将存储组件的密码配置到 Secret 中</p>
