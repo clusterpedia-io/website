@@ -15,8 +15,8 @@ Clusterpedia APIServer 和 Clusterpedia ClusterSynchro Manager 分别具有不�
 ## APIServer
 |作用|feature gate|默认值|
 |---|--------|----|
-|[设置默认返回剩余的资源数量](./remaining_item_count)|`RemainingItemCount`|false|
-|[原生 SQL 查询](./allow_raw_sql_query)|`AllowRawSQLQuery`|false|
+|[设置默认返回剩余的资源数量](./remaining-item-count)|`RemainingItemCount`|false|
+|[原生 SQL 查询](./raw-sql-query)|`AllowRawSQLQuery`|false|
 
 ## ClusterSynchro Manager
 |作用|feature gate|默认值|
