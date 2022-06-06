@@ -13,31 +13,39 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>资源字段裁剪 | Clusterpedia.io</title>
-<meta name=description content="资源的 metadata 中有一些字段在实际搜索中通常没有太大用处，所以在同步时我们会默认裁剪这些字段。
-我们使用特性门控来分别控制这些字段是否在资源同步时被裁剪，这些特性门控专属于 clustersynchro manager 组件
-
-
-
-field
-feature gates …">
-<meta property="og:title" content="资源字段裁剪">
-<meta property="og:description" content="资源的 metadata 中有一些字段在实际搜索中通常没有太大用处，所以在同步时我们会默认裁剪这些字段。
-我们使用特性门控来分别控制这些字段是否在资源同步时被裁剪，这些特性门控专属于 clustersynchro manager 组件
-   field feature gates 默认值     metadata.managedFields PruneManagedFields true   metadata.annotations[&lsquo;lastAppliedConfiguration&rsquo;] PruneLastAppliedConfiguration true    ">
+<title>原生 SQL 查询 | Clusterpedia.io</title>
+<meta name=description content="不同的用户的需求可能是不同的，尽管 clusterpedia 提供了很多简便的检索条件，例如指定一组命名空间或者资源名称，也可以指定 owner 进行查询，但是用户依然可能会有更加复杂的查询。
+这时，用户可以使用默认存储层提供的 原生 SQL 条件查询 来传递更加复杂的检索条件
+URL= …">
+<meta property="og:title" content="原生 SQL 查询">
+<meta property="og:description" content="不同的用户的需求可能是不同的，尽管 clusterpedia 提供了很多简便的检索条件，例如指定一组命名空间或者资源名称，也可以指定 owner 进行查询，但是用户依然可能会有更加复杂的查询。
+这时，用户可以使用默认存储层提供的 原生 SQL 条件查询 来传递更加复杂的检索条件
+URL=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments&#34; kubectl get --raw=&#34;$URL?whereSQL=(cluster='global') OR (namespace IN ('kube-system','default'))&#34; 示例中，我们传递一个用于 WHERE 查询的 SQL 语句 —— (cluster=&lsquo;global&rsquo;) OR (namespace IN (&lsquo;kube-system&rsquo;,&lsquo;default&rsquo;)),
+这个语句会检索 global 集群内所有命名空间下以及其他集群中 kube-system 和 default 命名空间下的 deployments。
+sql 语句需要符合具体的存储组件的 SQL 语法
+该特性门控专属于 clusterpedia apiserver
+   作用 feature gates 默认值     允许使用原生 SQL 设置检索条件 AllowRawSQLQuery false    原生 SQL 查询当前还在 alpha 阶段，并且对 SQL 注入没有很好的防范，所以需要用户通过 Feature Gates 来开启该功能">
 <meta property="og:type" content="article">
-<meta property="og:url" content="/zh-cn/docs/features/prune_fields/"><meta property="article:section" content="docs">
+<meta property="og:url" content="/zh-cn/docs/features/raw-sql-query/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
-<meta itemprop=name content="资源字段裁剪">
-<meta itemprop=description content="资源的 metadata 中有一些字段在实际搜索中通常没有太大用处，所以在同步时我们会默认裁剪这些字段。
-我们使用特性门控来分别控制这些字段是否在资源同步时被裁剪，这些特性门控专属于 clustersynchro manager 组件
-   field feature gates 默认值     metadata.managedFields PruneManagedFields true   metadata.annotations[&lsquo;lastAppliedConfiguration&rsquo;] PruneLastAppliedConfiguration true    ">
-<meta itemprop=wordCount content="17">
+<meta itemprop=name content="原生 SQL 查询">
+<meta itemprop=description content="不同的用户的需求可能是不同的，尽管 clusterpedia 提供了很多简便的检索条件，例如指定一组命名空间或者资源名称，也可以指定 owner 进行查询，但是用户依然可能会有更加复杂的查询。
+这时，用户可以使用默认存储层提供的 原生 SQL 条件查询 来传递更加复杂的检索条件
+URL=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments&#34; kubectl get --raw=&#34;$URL?whereSQL=(cluster='global') OR (namespace IN ('kube-system','default'))&#34; 示例中，我们传递一个用于 WHERE 查询的 SQL 语句 —— (cluster=&lsquo;global&rsquo;) OR (namespace IN (&lsquo;kube-system&rsquo;,&lsquo;default&rsquo;)),
+这个语句会检索 global 集群内所有命名空间下以及其他集群中 kube-system 和 default 命名空间下的 deployments。
+sql 语句需要符合具体的存储组件的 SQL 语法
+该特性门控专属于 clusterpedia apiserver
+   作用 feature gates 默认值     允许使用原生 SQL 设置检索条件 AllowRawSQLQuery false    原生 SQL 查询当前还在 alpha 阶段，并且对 SQL 注入没有很好的防范，所以需要用户通过 Feature Gates 来开启该功能">
+<meta itemprop=wordCount content="63">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="资源字段裁剪">
-<meta name=twitter:description content="资源的 metadata 中有一些字段在实际搜索中通常没有太大用处，所以在同步时我们会默认裁剪这些字段。
-我们使用特性门控来分别控制这些字段是否在资源同步时被裁剪，这些特性门控专属于 clustersynchro manager 组件
-   field feature gates 默认值     metadata.managedFields PruneManagedFields true   metadata.annotations[&lsquo;lastAppliedConfiguration&rsquo;] PruneLastAppliedConfiguration true    ">
+<meta name=twitter:title content="原生 SQL 查询">
+<meta name=twitter:description content="不同的用户的需求可能是不同的，尽管 clusterpedia 提供了很多简便的检索条件，例如指定一组命名空间或者资源名称，也可以指定 owner 进行查询，但是用户依然可能会有更加复杂的查询。
+这时，用户可以使用默认存储层提供的 原生 SQL 条件查询 来传递更加复杂的检索条件
+URL=&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments&#34; kubectl get --raw=&#34;$URL?whereSQL=(cluster='global') OR (namespace IN ('kube-system','default'))&#34; 示例中，我们传递一个用于 WHERE 查询的 SQL 语句 —— (cluster=&lsquo;global&rsquo;) OR (namespace IN (&lsquo;kube-system&rsquo;,&lsquo;default&rsquo;)),
+这个语句会检索 global 集群内所有命名空间下以及其他集群中 kube-system 和 default 命名空间下的 deployments。
+sql 语句需要符合具体的存储组件的 SQL 语法
+该特性门控专属于 clusterpedia apiserver
+   作用 feature gates 默认值     允许使用原生 SQL 设置检索条件 AllowRawSQLQuery false    原生 SQL 查询当前还在 alpha 阶段，并且对 SQL 注入没有很好的防范，所以需要用户通过 Feature Gates 来开启该功能">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -74,12 +82,12 @@ feature gates …">
 中文 Chinese
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/>English</a>
+<a class=dropdown-item href=/docs/features/raw-sql-query/>English</a>
 </div>
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.31e99c91fa6517c59590c2cc91a66e99.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a1c2ee92c63737572a574afd40448537.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -89,7 +97,7 @@ feature gates …">
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.31e99c91fa6517c59590c2cc91a66e99.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a1c2ee92c63737572a574afd40448537.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -99,7 +107,7 @@ feature gates …">
 中文 Chinese
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/>English</a>
+<a class=dropdown-item href=/docs/features/raw-sql-query/>English</a>
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
@@ -156,16 +164,16 @@ feature gates …">
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zh-cndocsfeatures-li>
 <a href=/zh-cn/docs/features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsfeatures><span>特性功能</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesremaining_item_count-li>
-<a href=/zh-cn/docs/features/remaining_item_count/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesremaining_item_count><span>返回剩余资源数量</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesraw_sql_query-li>
-<a href=/zh-cn/docs/features/raw_sql_query/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesraw_sql_query><span>原生 SQL 查询</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zh-cndocsfeaturesprune_fields-li>
-<a href=/zh-cn/docs/features/prune_fields/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesprune_fields><span class=td-sidebar-nav-active-item>资源字段裁剪</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync_all_custom_resources-li>
-<a href=/zh-cn/docs/features/sync_all_custom_resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync_all_custom_resources><span>同步所有的自定义资源</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync_all_resources-li>
-<a href=/zh-cn/docs/features/sync_all_resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync_all_resources><span>同步所有的资源</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesremaining-item-count-li>
+<a href=/zh-cn/docs/features/remaining-item-count/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesremaining-item-count><span>返回剩余资源数量</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zh-cndocsfeaturesraw-sql-query-li>
+<a href=/zh-cn/docs/features/raw-sql-query/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesraw-sql-query><span class=td-sidebar-nav-active-item>原生 SQL 查询</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesprune-fields-li>
+<a href=/zh-cn/docs/features/prune-fields/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesprune-fields><span>资源字段裁剪</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync-all-custom-resources-li>
+<a href=/zh-cn/docs/features/sync-all-custom-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync-all-custom-resources><span>同步所有的自定义资源</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync-all-resources-li>
+<a href=/zh-cn/docs/features/sync-all-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync-all-resources><span>同步所有的资源</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsrelease-notes-li>
@@ -179,10 +187,10 @@ feature gates …">
 </aside>
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href=https://github.com/clusterpedia-io/website/tree/main/content/zh-cn/docs/features/prune_fields.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> 查看页面源码</a>
-<a href=https://github.com/clusterpedia-io/website/edit/main/content/zh-cn/docs/features/prune_fields.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-<a href="https://github.com/clusterpedia-io/website/new/main/content/zh-cn/docs/features/prune_fields.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-<a href="https://github.com/clusterpedia-io/website/issues/new?title=%e8%b5%84%e6%ba%90%e5%ad%97%e6%ae%b5%e8%a3%81%e5%89%aa" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+<a href=https://github.com/clusterpedia-io/website/tree/main/content/zh-cn/docs/features/raw-sql-query.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> 查看页面源码</a>
+<a href=https://github.com/clusterpedia-io/website/edit/main/content/zh-cn/docs/features/raw-sql-query.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+<a href="https://github.com/clusterpedia-io/website/new/main/content/zh-cn/docs/features/raw-sql-query.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+<a href="https://github.com/clusterpedia-io/website/issues/new?title=%e5%8e%9f%e7%94%9f%20SQL%20%e6%9f%a5%e8%af%a2" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
 <a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
 <a id=print href=/zh-cn/docs/features/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
 </div>
@@ -197,38 +205,40 @@ feature gates …">
 <a href=/zh-cn/docs/features/>特性功能</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=/zh-cn/docs/features/prune_fields/>资源字段裁剪</a>
+<a href=/zh-cn/docs/features/raw-sql-query/>原生 SQL 查询</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>资源字段裁剪</h1>
+<h1>原生 SQL 查询</h1>
 <header class=article-meta>
 <p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 少于1分钟 &nbsp;</p>
 </header>
-<p>资源的 metadata 中有一些字段在实际搜索中通常没有太大用处，所以在同步时我们会默认裁剪这些字段。</p>
-<p>我们使用特性门控来分别控制这些字段是否在资源同步时被裁剪，<strong>这些特性门控专属于 <code>clustersynchro manager</code> 组件</strong></p>
+<p>不同的用户的需求可能是不同的，尽管 clusterpedia 提供了很多简便的检索条件，例如指定一组命名空间或者资源名称，也可以指定 owner 进行查询，但是用户依然可能会有更加复杂的查询。</p>
+<p>这时，用户可以使用默认存储层提供的 <code>原生 SQL 条件查询</code> 来传递更加复杂的检索条件</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#000>URL</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments&#34;</span>
+kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;</span><span style=color:#000>$URL</span><span style=color:#4e9a06>?whereSQL=(cluster=&#39;global&#39;) OR (namespace IN (&#39;kube-system&#39;,&#39;default&#39;))&#34;</span>
+</code></pre></div><p>示例中，我们传递一个用于 <em>WHERE</em> 查询的 SQL 语句 —— <strong>(cluster=&lsquo;global&rsquo;) OR (namespace IN (&lsquo;kube-system&rsquo;,&lsquo;default&rsquo;))</strong>,</p>
+<p>这个语句会检索 <em>global</em> 集群内所有命名空间下以及其他集群中 <em>kube-system</em> 和 <em>default</em> 命名空间下的 <code>deployments</code>。</p>
+<p><strong>sql 语句需要符合具体的存储组件的 SQL 语法</strong></p>
+<p>该特性门控专属于 <code>clusterpedia apiserver</code></p>
 <table>
 <thead>
 <tr>
-<th>field</th>
+<th>作用</th>
 <th>feature gates</th>
 <th>默认值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><em>metadata.managedFields</em></td>
-<td><code>PruneManagedFields</code></td>
-<td>true</td>
-</tr>
-<tr>
-<td><em>metadata.annotations[&lsquo;lastAppliedConfiguration&rsquo;]</em></td>
-<td><code>PruneLastAppliedConfiguration</code></td>
-<td>true</td>
+<td>允许使用原生 SQL 设置检索条件</td>
+<td><code>AllowRawSQLQuery</code></td>
+<td>false</td>
 </tr>
 </tbody>
 </table>
+<p>原生 SQL 查询当前还在 alpha 阶段，并且对 SQL 注入没有很好的防范，所以需要用户通过 Feature Gates 来开启该功能</p>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
 <h2 class=feedback--title>Feedback</h2>

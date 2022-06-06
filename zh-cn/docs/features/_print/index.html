@@ -68,7 +68,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.31e99c91fa6517c59590c2cc91a66e99.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a1c2ee92c63737572a574afd40448537.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -87,11 +87,11 @@
 </div>
 <h1 class=title>特性功能</h1>
 <ul>
-<li>1: <a href=#pg-77ad0674ed532abc83abd92a7a6fd837>返回剩余资源数量</a></li>
-<li>2: <a href=#pg-3767c3b17cac3d98fad9fe95ff564787>原生 SQL 查询</a></li>
-<li>3: <a href=#pg-a51f4831356bba0114928fabdedd7051>资源字段裁剪</a></li>
-<li>4: <a href=#pg-653a7191205b4ee8aa58ac587be07566>同步所有的自定义资源</a></li>
-<li>5: <a href=#pg-55f2eed846cc66d89ab31e3eecc84a84>同步所有的资源</a></li>
+<li>1: <a href=#pg-95ce10af379e7ffb7ad12d9d7acb553b>返回剩余资源数量</a></li>
+<li>2: <a href=#pg-e22aa1b93a45ad065cfcba03e6c25c76>原生 SQL 查询</a></li>
+<li>3: <a href=#pg-13a0f1b8db8e55183af8d01c55d9e128>资源字段裁剪</a></li>
+<li>4: <a href=#pg-3c4a7ba07443cd53a3dd0494f5a0ac77>同步所有的自定义资源</a></li>
+<li>5: <a href=#pg-9dba7c100e86bba867d7df2e6a4ae266>同步所有的资源</a></li>
 </ul>
 <div class=content>
 <p>用户在使用特性功能时，需要开启相应的特性门控。
@@ -110,12 +110,12 @@
 </thead>
 <tbody>
 <tr>
-<td><a href=./remaining_item_count>设置默认返回剩余的资源数量</a></td>
+<td><a href=./remaining-item-count>设置默认返回剩余的资源数量</a></td>
 <td><code>RemainingItemCount</code></td>
 <td>false</td>
 </tr>
 <tr>
-<td><a href=./allow_raw_sql_query>原生 SQL 查询</a></td>
+<td><a href=./raw-sql-query>原生 SQL 查询</a></td>
 <td><code>AllowRawSQLQuery</code></td>
 <td>false</td>
 </tr>
@@ -156,7 +156,7 @@
 </div>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-77ad0674ed532abc83abd92a7a6fd837>1 - 返回剩余资源数量</h1>
+<h1 id=pg-95ce10af379e7ffb7ad12d9d7acb553b>1 - 返回剩余资源数量</h1>
 <p>我们在查询时，可以通过 search label 或者 url query，要求在响应中携带剩余的资源数量。</p>
 <table>
 <thead>
@@ -201,7 +201,7 @@
 </blockquote>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-3767c3b17cac3d98fad9fe95ff564787>2 - 原生 SQL 查询</h1>
+<h1 id=pg-e22aa1b93a45ad065cfcba03e6c25c76>2 - 原生 SQL 查询</h1>
 <p>不同的用户的需求可能是不同的，尽管 clusterpedia 提供了很多简便的检索条件，例如指定一组命名空间或者资源名称，也可以指定 owner 进行查询，但是用户依然可能会有更加复杂的查询。</p>
 <p>这时，用户可以使用默认存储层提供的 <code>原生 SQL 条件查询</code> 来传递更加复杂的检索条件</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#000>URL</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments&#34;</span>
@@ -229,7 +229,7 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 <p>原生 SQL 查询当前还在 alpha 阶段，并且对 SQL 注入没有很好的防范，所以需要用户通过 Feature Gates 来开启该功能</p>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-a51f4831356bba0114928fabdedd7051>3 - 资源字段裁剪</h1>
+<h1 id=pg-13a0f1b8db8e55183af8d01c55d9e128>3 - 资源字段裁剪</h1>
 <p>资源的 metadata 中有一些字段在实际搜索中通常没有太大用处，所以在同步时我们会默认裁剪这些字段。</p>
 <p>我们使用特性门控来分别控制这些字段是否在资源同步时被裁剪，<strong>这些特性门控专属于 <code>clustersynchro manager</code> 组件</strong></p>
 <table>
@@ -255,7 +255,7 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 </table>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-653a7191205b4ee8aa58ac587be07566>4 - 同步所有的自定义资源</h1>
+<h1 id=pg-3c4a7ba07443cd53a3dd0494f5a0ac77>4 - 同步所有的自定义资源</h1>
 <p>自定义资源不同于 kube 的内置资源，kube 的内置资源通常不会经常性变动(依然有两种情况会导致原生资源类型资源改变)，
 而自定义资源的类型可能会被动态的创建和删除</p>
 <p>用户如果想要根据被纳管集群中的 CRD 的变动来自动调节同步的资源类型,那么用户在 PediaCluster 中指定同步所有自定义资源。</p>
@@ -280,7 +280,7 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 </table>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-55f2eed846cc66d89ab31e3eecc84a84>5 - 同步所有的资源</h1>
+<h1 id=pg-9dba7c100e86bba867d7df2e6a4ae266>5 - 同步所有的资源</h1>
 <p>用户可以通过 <code>全资源通配符</code> 来同步所有类型的资源，当被纳管集群中发生任意的资源类型变动(例如 kube 版本升级，group/version 被禁用，CRD 或者 APIService 变动)都会导致同步的资源类型发生修改。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -288,7 +288,7 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><p><strong>请谨慎使用该功能，该功能会创建大量的长连接，未来 Clusterpedia 添加 Agent 功能后，可以避免长连接的创建</strong></p>
-<p>建议指定具体的资源类型，如果需要对自定义资源进行动态同步，可以使用 <a href=./sync_all_custom_resources>同步所有的自定义资源</a></p>
+<p>建议指定具体的资源类型，如果需要对自定义资源进行动态同步，可以使用 <a href=../sync-all-custom-resources>同步所有的自定义资源</a></p>
 <p>使用<code>全资源通配符</code> 需要在 <code>clustersynchro manager</code> 中开启 Feature Gate</p>
 <table>
 <thead>
@@ -300,7 +300,7 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 </thead>
 <tbody>
 <tr>
-<td>允许同步所有的自定义资源</td>
+<td>允许同步所有的资源</td>
 <td><code>AllowSyncAllCustomResources</code></td>
 <td>true</td>
 </tr>
