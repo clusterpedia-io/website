@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a1c2ee92c63737572a574afd40448537.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1d0f222d4afc156a3fe75fbe9ff2dc14.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -75,7 +75,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a1c2ee92c63737572a574afd40448537.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1d0f222d4afc156a3fe75fbe9ff2dc14.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -94,6 +94,8 @@
 <ul class=ul-1>
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cnblog20220215e58d87e7baa7e588b0-clusterpedia-010-li>
 <a href=/zh-cn/blog/2022/02/15/%E5%8D%87%E7%BA%A7%E5%88%B0-clusterpedia-0.1.0/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cnblog20220215e58d87e7baa7e588b0-clusterpedia-010><span>升级到 Clusterpedia 0.1.0</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cnblog20211203clusterpedia-e58aa0e68c81-kubectle6a380e7b4a2e5a49ae99b86e7bea4e8b584e6ba90-li>
+<a href=/zh-cn/blog/2021/12/03/clusterpedia-%E5%8A%A0%E6%8C%81-kubectl%E6%A3%80%E7%B4%A2%E5%A4%9A%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cnblog20211203clusterpedia-e58aa0e68c81-kubectle6a380e7b4a2e5a49ae99b86e7bea4e8b584e6ba90><span>Clusterpedia 加持 kubectl，检索多集群资源</span></a>
 </li>
 </ul>
 </li>
@@ -127,6 +129,24 @@
 旧版本资源清理 由于资源检索的路径发生了修改(#73)，所以需要使用 0.0.9-alpha 的 clean-clusterconfigs.sh 来清理 .kube/config 中的 Clusterpedia 集群访问配置
 curl -sfL …</p>
 <p class=pt-0><a href=/zh-cn/blog/2022/02/15/%E5%8D%87%E7%BA%A7%E5%88%B0-clusterpedia-0.1.0/ aria-label="更多 - 升级到 Clusterpedia 0.1.0">更多</a></p>
+</div>
+</li>
+</ul>
+<h2>Posts in 2021</h2>
+<ul class="list-unstyled mt-4">
+<li class="media mb-4">
+<div class=media-body>
+<h5 class="mt-0 mb-1"><a href=/zh-cn/blog/2021/12/03/clusterpedia-%E5%8A%A0%E6%8C%81-kubectl%E6%A3%80%E7%B4%A2%E5%A4%9A%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90/>Clusterpedia 加持 kubectl，检索多集群资源</a></h5>
+<p class="mb-2 mb-md-3"><small class=text-muted>2021.12.03 in 博客</small></p>
+<header class=article-meta>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 6 分钟阅读 &nbsp;</p>
+</header>
+<p class="pt-0 mt-0">在多集群时代，我们可以通过 cluster-api 来批量创建管理集群，使用 Karmada/Clusternet 来分发部署应用。
+不过我们貌似还是缺少了什么功能，我们要如何去统一的查看多个集群中的资源呢？
+对于单个集群的资源，我们可以使用 kubectl 来查看搜索资源，但是在想要检索多集群的资源时，貌似没有什么趁手的产品可以使用。
+不过从今天开始，这个问题不会再困扰你，因为在 Clusterpedia 的加持下，你手上的 kubectl 已经可以用来检索多集群资源啦。
+例如， …</p>
+<p class=pt-0><a href=/zh-cn/blog/2021/12/03/clusterpedia-%E5%8A%A0%E6%8C%81-kubectl%E6%A3%80%E7%B4%A2%E5%A4%9A%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90/ aria-label="更多 - Clusterpedia 加持 kubectl，检索多集群资源">更多</a></p>
 </div>
 </li>
 </ul>

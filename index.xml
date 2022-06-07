@@ -69,4 +69,341 @@ it it necessary to recreate &lt;code>PediaCluster&lt;/code> based on the backed 
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl get pediacluster
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Configure the cluster shortcut for kubectl&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.1.0/hack/gen-clusterconfigs.sh &lt;span style="color:#000;font-weight:bold">|&lt;/span> sh -
-&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Blog: Clusterpedia with kubectl support to retrieve multicluster resources</title><link>/blog/2021/12/03/clusterpedia-with-kubectl-support-to-retrieve-multicluster-resources/</link><pubDate>Fri, 03 Dec 2021 00:00:00 +0000</pubDate><guid>/blog/2021/12/03/clusterpedia-with-kubectl-support-to-retrieve-multicluster-resources/</guid><description>
+&lt;p>This name Clusterpedia is inspired by Wikipedia. It is an encyclopedia of multi-cluster to synchronize, search for, and simply control multi-cluster resources. Clusterpedia can synchronize resources with multiple clusters and provide more powerful search features on the basis of compatibility with Kubernetes OpenAPI to help you effectively get any multi-cluster resource that you are looking for in a quick and easy way.&lt;/p>
+&lt;blockquote>
+&lt;p>The capability of Clusterpedia is not only to search for and view but also simply control resources in the future, just like Wikipedia that supports for editing entries.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="architecture-span-iddesignspan">Architecture &lt;span id="design">&lt;/span>&lt;/h2>
+&lt;p>The architecture diagram of Clusterpedia is as follows:&lt;/p>
+&lt;div align="center">&lt;img src="https://github.com/clusterpedia-io/clusterpedia/blob/main/docs/images/arch.png?raw=true" style="width:900px;" />&lt;/div>
+The architecture consists of four parts:
+&lt;ul>
+&lt;li>&lt;strong>Clusterpedia APIServer&lt;/strong>: Register to Kube APIServer by the means of Aggregated API and provide services through a unified entrance&lt;/li>
+&lt;li>&lt;strong>ClusterSynchro Manager&lt;/strong>: Manage the Cluster Synchro that is used to synchronize cluster resources&lt;/li>
+&lt;li>&lt;strong>Storage Layer&lt;/strong>: Connect with a specific storage component and then register to Clusterpedia APIServer and ClusterSynchro Manager via a storage interface&lt;/li>
+&lt;li>&lt;strong>Storage component&lt;/strong>: A specific storage facility such as MySQL, postgres, redis or other graph databases&lt;/li>
+&lt;/ul>
+&lt;p>In addition, Clusterpedia will use the custom resource &lt;em>PediaCluster&lt;/em> to implement cluster authentication and synchronize the resource configuration.&lt;/p>
+&lt;p>Clusterpedia also provides a default storage layer that can connect with MySQL and postgres.&lt;/p>
+&lt;blockquote>
+&lt;p>Clusterpedia does not care about the specific storage settings used by users,
+you can choose or implement the storage layer according to your own needs and then register the storage layer in Clusterpedia as a plug-in&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="featuresspan-idfeaturesspan">Features&lt;span id="features">&lt;/span>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> Support for complex search, filters, sorting, paging, and more&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> Support for requesting relevant resources when you query resources&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> Unify the search entry for master clusters and multi-cluster resources&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> Compatible with kubernetes OpenAPI, where you can directly use kubectl for multi-cluster search without any third-party plug-ins or tools&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> Compatible with synchronizing different versions of cluster resources, not restricted by the version of master cluster&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> High performance and low memory consumption for resource synchronization&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> Automatically start/stop resource synchronization according to the current health status of the cluster
+-&lt;input disabled="" type="checkbox"> Support for plug-in storage layer. You can use other storage components to customize the storage layer according to your needs.&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> High availability&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>The above unimplemented features are already in the &lt;a href="#roadmap">Roadmap&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="deploymentspan-iddeploymentspan">Deployment&lt;span id="deployment">&lt;/span>&lt;/h2>
+&lt;p>For details on the deployment process, see &lt;a href="/docs/installation">Instaling Clusterpedia&lt;/a>, which highlights how to use clusterpedia.&lt;/p>
+&lt;h2 id="synchronize-cluster-resourcesspan-idgetspan">Synchronize cluster resources&lt;span id="get">&lt;/span>&lt;/h2>
+&lt;p>After deploying clusterpedia crds, you can use kubectl to operate &lt;em>PediaCluster&lt;/em> resources.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ kubectl get pediaclusters
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the examples directory, you can check examples of &lt;em>PediaCluster&lt;/em>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">clusters.clusterpedia.io/v1alpha1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">kind&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">PediaCluster&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">metadata&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">cluster-example&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">spec&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">apiserverURL&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;https://10.30.43.43:6443&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">caData&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">tokenData&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">certData&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">keyData&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">resources&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">group&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">apps&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">resources&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">deployments&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">group&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">resources&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">pods&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The configuration of &lt;em>PediaCluster&lt;/em> can be divided into two parts:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Cluster authentication&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Synchronize a specific resource &lt;code>.spec.resources&lt;/code>&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h3 id="cluster-authentication">Cluster authentication&lt;/h3>
+&lt;p>The fields of &lt;code>caData&lt;/code>, &lt;code>tokenData&lt;/code>, &lt;code>certData&lt;/code>, and &lt;code>keyData&lt;/code> can be used for cluster verification.&lt;/p>
+&lt;blockquote>
+&lt;p>Currently it does not support for getting the relevant verification information from ConfigMap or Secret.
+However, the information is already in the &lt;a href="#roadmap">Roadmap&lt;/a>.&lt;/p>
+&lt;/blockquote>
+&lt;p>When setting the verification field, you shall use the strings encoded by base64.&lt;/p>
+&lt;p>The &lt;code>. /examples&lt;/code> directory provides the rbac yaml &lt;code>clusterpedia_synchro_rbac.yaml&lt;/code>, which can be used to easily obtain the permission token for a subcluster.&lt;/p>
+&lt;p>Deploy the yaml in the subcluster and get the proper token and CA certificate.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ &lt;span style="color:#8f5902;font-style:italic"># Switch to the sub-cluster to create rbac related resources&lt;/span>
+$ kubectl apply -f examples/clusterpedia_synchro_rbac.yaml
+$ &lt;span style="color:#000">SYNCHRO_TOKEN&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">$(&lt;/span>kubectl get secret &lt;span style="color:#204a87;font-weight:bold">$(&lt;/span>kubectl get serviceaccount clusterpedia-synchro -o &lt;span style="color:#000">jsonpath&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;{.secrets[0].name}&amp;#39;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">)&lt;/span> -o &lt;span style="color:#000">jsonpath&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;{.data.token}&amp;#39;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">)&lt;/span>
+$ &lt;span style="color:#000">SYNCHRO_CA&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">$(&lt;/span>kubectl get secret &lt;span style="color:#204a87;font-weight:bold">$(&lt;/span>kubectl get serviceaccount clusterpedia-synchro -o &lt;span style="color:#000">jsonpath&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;{.secrets[0].name}&amp;#39;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">)&lt;/span> -o &lt;span style="color:#000">jsonpath&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;{.data.ca\.crt}&amp;#39;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Copy &lt;em>./examples/pediacluster.yaml&lt;/em>, modify &lt;code>.spec.apiserverURL&lt;/code> and &lt;code>.metadata.name&lt;/code> fields, and fill &lt;code>$SYNCHRO_TOKEN&lt;/code> and &lt;code>$SYNCHRO_CA&lt;/code> into &lt;code>tokenData&lt;/code> and &lt;code>caData&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ kubectl apply -f cluster-1.yaml
+pediacluster.clusters.clusterpedia.io/cluster-1 created
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="synchronize-resources">Synchronize resources&lt;/h3>
+&lt;p>You can specify the synchronized resources by setting &lt;code>group&lt;/code> in the &lt;code>spec.resources&lt;/code> field and the &lt;code>resources&lt;/code> section under &lt;code>group&lt;/code>.&lt;/p>
+&lt;p>You can also view the resource synchronization status in the &lt;code>status&lt;/code> section:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">status:
+conditions:
+- lastTransitionTime: &lt;span style="color:#4e9a06">&amp;#34;2021-12-02T04:00:45Z&amp;#34;&lt;/span>
+message: &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>
+reason: Healthy
+status: &lt;span style="color:#4e9a06">&amp;#34;True&amp;#34;&lt;/span>
+type: Ready
+resources:
+- group: &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>
+resources:
+- kind: Pod
+namespaced: &lt;span style="color:#204a87">true&lt;/span>
+resource: pods
+syncConditions:
+- lastTransitionTime: &lt;span style="color:#4e9a06">&amp;#34;2021-12-02T04:00:45Z&amp;#34;&lt;/span>
+status: Syncing
+storageVersion: v1
+version: v1
+- group: apps
+resources:
+- kind: Deployment
+namespaced: &lt;span style="color:#204a87">true&lt;/span>
+resource: deployments
+syncConditions:
+- lastTransitionTime: &lt;span style="color:#4e9a06">&amp;#34;2021-12-02T04:00:45Z&amp;#34;&lt;/span>
+status: Syncing
+storageVersion: v1
+version: v1
+version: v1.22.2
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="search-for-resourcesspan-idviewspan">Search for resources&lt;span id="view">&lt;/span>&lt;/h2>
+&lt;p>After configuring the resources to be synchronized, you can search for the cluster resources. Clusterpedia supports two types of resource search:&lt;/p>
+&lt;ul>
+&lt;li>Search for resources that are compatible with Kubernetes OpenAPI&lt;/li>
+&lt;li>Search for &lt;code>Collection Resource&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ kubectl api-resources &lt;span style="color:#000;font-weight:bold">|&lt;/span> grep pedia.clusterpedia.io
+collectionresources pedia.clusterpedia.io/v1alpha1 &lt;span style="color:#204a87">false&lt;/span> CollectionResource
+resources pedia.clusterpedia.io/v1alpha1 &lt;span style="color:#204a87">false&lt;/span> Resources
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>In order to facilitate and well use kubectl for searching, you&amp;rsquo;d better create a &amp;lsquo;shortcut&amp;rsquo; for searching the sub-cluster through &lt;code>make gen-clusterconfig&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ make gen-clusterconfigs
+./hack/gen-clusterconfigs.sh
+Current Context: kubernetes-admin@kubernetes
+Current Cluster: kubernetes
+Server: https://10.6.11.11:6443
+TLS Server Name:
+Insecure Skip TLS Verify:
+Certificate Authority:
+Certificate Authority Data: ***
+Cluster &lt;span style="color:#4e9a06">&amp;#34;clusterpedia&amp;#34;&lt;/span> set.
+Cluster &lt;span style="color:#4e9a06">&amp;#34;cluster-1&amp;#34;&lt;/span> set.
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Use the &lt;code>kubectl config get-clusters&lt;/code> command to view the currently supported clusters.&lt;/p>
+&lt;p>In this case, Clusterpedia is a special cluster used to search for multi-clusters by using &lt;code>kubectl --cluster clusterpedia&lt;/code>.&lt;/p>
+&lt;h3 id="multi-cluster-resource-search">Multi-cluster resource search&lt;/h3>
+&lt;p>First check which resources are synchronized. You cannot find a resource until it is properly synchronized:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ kubectl --cluster clusterpedia api-resources
+NAME SHORTNAMES APIVERSION NAMESPACED KIND
+pods po v1 &lt;span style="color:#204a87">true&lt;/span> Pod
+deployments deploy apps/v1 &lt;span style="color:#204a87">true&lt;/span> Deployment
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can check the currently synchronized resources including pods and deployments.apps.&lt;/p>
+&lt;p>&lt;strong>Get deployments in the &lt;code>kube-system&lt;/code> namespace of all clusters:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ kubectl --cluster clusterpedia get deployments -n kube-system
+CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE
+cluster-1 coredns 2/2 &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> 68d
+cluster-2 calico-kube-controllers 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 64d
+cluster-2 coredns 2/2 &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> 64d
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Get deployments in the two namespaces &lt;code>kube-system&lt;/code> and &lt;code>default&lt;/code> of all clusters:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ kubectl --cluster clusterpedia get deployments -A -l &lt;span style="color:#4e9a06">&amp;#34;search.clusterpedia.io/namespaces in (kube-system, default)&amp;#34;&lt;/span>
+NAMESPACE CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE
+kube-system cluster-1 coredns 2/2 &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> 68d
+kube-system cluster-2 calico-kube-controllers 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 64d
+kube-system cluster-2 coredns 2/2 &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> 64d
+default cluster-2 dd-airflow-scheduler 0/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 54d
+default cluster-2 dd-airflow-web 0/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 54d
+default cluster-2 hello-world-server 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 27d
+default cluster-2 keycloak 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 52d
+default cluster-2 keycloak-02 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 41d
+default cluster-2 my-nginx 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 40d
+default cluster-2 nginx-dev 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 15d
+default cluster-2 openldap 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 41d
+default cluster-2 phpldapadmin 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 41d
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Get deployments in the &lt;code>kube-system&lt;/code> and &lt;code>default&lt;/code> namespaces in cluster-1 and cluster-2:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ kubectl --cluster clusterpedia get deployments -A -l &lt;span style="color:#4e9a06">&amp;#34;search.clusterpedia.io/clusters in (cluster-1, cluster-2),\
+&lt;/span>&lt;span style="color:#4e9a06">search.clusterpedia.io/namespaces in (kube-system,default)&amp;#34;&lt;/span>
+NAMESPACE CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE
+kube-system cluster-1 coredns 2/2 &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> 68d
+kube-system cluster-2 calico-kube-controllers 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 64d
+kube-system cluster-2 coredns 2/2 &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> 64d
+default cluster-2 dd-airflow-scheduler 0/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 54d
+default cluster-2 dd-airflow-web 0/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 54d
+default cluster-2 hello-world-server 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 27d
+default cluster-2 keycloak 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 52d
+default cluster-2 keycloak-02 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 41d
+default cluster-2 my-nginx 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 40d
+default cluster-2 nginx-dev 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 15d
+default cluster-2 openldap 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 41d
+default cluster-2 phpldapadmin 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 41d
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Get deployments in the &lt;code>kube-system&lt;/code> and &lt;code>default&lt;/code> namespaces in cluster-1 and cluster-2:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ kubectl --cluster clusterpedia get deployments -A -l &lt;span style="color:#4e9a06">&amp;#34;search.clusterpedia.io/clusters in (cluster-1, cluster-2),\
+&lt;/span>&lt;span style="color:#4e9a06">search.clusterpedia.io/namespaces in (kube-system,default),\
+&lt;/span>&lt;span style="color:#4e9a06">search.clusterpedia.io/orderby=name&amp;#34;&lt;/span>
+NAMESPACE CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE
+kube-system cluster-2 calico-kube-controllers 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 64d
+kube-system cluster-1 coredns 2/2 &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> 68d
+kube-system cluster-2 coredns 2/2 &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> 64d
+default cluster-2 dao-2048-2048 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 21d
+default cluster-2 dd-airflow-scheduler 0/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 54d
+default cluster-2 dd-airflow-web 0/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 54d
+default cluster-2 hello-world-server 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 27d
+default cluster-2 keycloak 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 52d
+default cluster-2 keycloak-02 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 41d
+default cluster-2 my-nginx 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 40d
+default cluster-2 nginx-dev 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 15d
+default cluster-2 openldap 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 41d
+default cluster-2 phpldapadmin 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 41d
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="search-a-specific-cluster">Search a specific cluster&lt;/h3>
+&lt;p>&lt;strong>If you want to search a specific cluster for any resource therein, you can add &amp;ndash;cluster to specify the cluster name:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ kubectl --cluster cluster-1 get deployments -A
+NAMESPACE CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE
+calico-apiserver cluster-1 calico-apiserver 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 68d
+calico-system cluster-1 calico-kube-controllers 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 68d
+calico-system cluster-1 calico-typha 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 68d
+capi-system cluster-1 capi-controller-manager 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 42d
+capi-kubeadm-bootstrap-system cluster-1 capi-kubeadm-bootstrap-controller-manager 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 42d
+capi-kubeadm-control-plane-system cluster-1 capi-kubeadm-control-plane-controller-manager 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 42d
+capv-system cluster-1 capv-controller-manager 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 42d
+cert-manager cluster-1 cert-manager 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 42d
+cert-manager cluster-1 cert-manager-cainjector 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 42d
+cert-manager cluster-1 cert-manager-webhook 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 42d
+clusterpedia-system cluster-1 clusterpedia-apiserver 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 27m
+clusterpedia-system cluster-1 clusterpedia-clustersynchro-manager 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 27m
+clusterpedia-system cluster-1 clusterpedia-internalstorage-mysql 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 29m
+kube-system cluster-1 coredns 2/2 &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> 68d
+tigera-operator cluster-1 tigera-operator 1/1 &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 68d
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Except for &lt;code>search.clusterpedia.io/clusters&lt;/code>, the support for other complex queries is same as that for multi-cluster search.&lt;/p>
+&lt;p>If you want to learn about the details of a resource, you need to specify which cluster it is:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ kubectl --cluster cluster-1 -n kube-system get deployments coredns -o wide
+CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE CONTAINERS IMAGES SELECTOR
+cluster-1 coredns 2/2 &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> 68d coredns registry.aliyuncs.com/google_containers/coredns:v1.8.4 k8s-app&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>kube-dns
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="complex-search">Complex search&lt;/h3>
+&lt;p>Clusterpedia supports for the following complex search:&lt;/p>
+&lt;ul>
+&lt;li>Specify one or more &lt;code>cluster names&lt;/code>&lt;/li>
+&lt;li>Specify one or more &lt;code>namespaces&lt;/code>&lt;/li>
+&lt;li>Specify one or more &lt;code>resource names&lt;/code>&lt;/li>
+&lt;li>Specify how to &lt;code>sort&lt;/code> multiple fields&lt;/li>
+&lt;li>&lt;code>Paging&lt;/code> function, by which you can specify its size and offset&lt;/li>
+&lt;li>&lt;code>filter by labels&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>The actual effect of field sorting depends on the storage layer. By default, the storage layer supports for sorting according to &lt;code>cluster&lt;/code>, &lt;code>name&lt;/code>, &lt;code>namespace&lt;/code>, &lt;code>created_at&lt;/code>, and &lt;code>resource_version&lt;/code> in a normal or reverse order.&lt;/p>
+&lt;h3 id="how-search-conditions-are-applied">How search conditions are applied&lt;/h3>
+&lt;p>The above example demonstrates how you can use kubectl to search for resources. Where, complex search conditions are applied via a &lt;code>label&lt;/code>. Clusterpedia also supports for using these search conditions directly through &lt;code>url query&lt;/code>.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>role&lt;/th>
+&lt;th>label key&lt;/th>
+&lt;th>url query&lt;/th>
+&lt;th>example&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Specified resource name&lt;/td>
+&lt;td>search.clusterpedia.io/names&lt;/td>
+&lt;td>names&lt;/td>
+&lt;td>&lt;code>?names=pod-1,pod-2&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Specified namespace&lt;/td>
+&lt;td>search.clusterpedia.io/namespaces&lt;/td>
+&lt;td>namespaces&lt;/td>
+&lt;td>&lt;code>?namespaces=kube-system,default&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Specified cluster name&lt;/td>
+&lt;td>search.clusterpedia.io/clusters&lt;/td>
+&lt;td>clusters&lt;/td>
+&lt;td>&lt;code>?clusters=cluster-1,cluster-2&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Sort by specified fileds&lt;/td>
+&lt;td>search.clusterpedia.io/orderby&lt;/td>
+&lt;td>orderby&lt;/td>
+&lt;td>&lt;code>?orderby=name desc,namespace&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Specified size&lt;/td>
+&lt;td>search.clusterpedia.io/size&lt;/td>
+&lt;td>size&lt;/td>
+&lt;td>&lt;code>?size=100&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Specified offset&lt;/td>
+&lt;td>search.clsuterpedia.io/offset&lt;/td>
+&lt;td>offset&lt;/td>
+&lt;td>&lt;code>?offset=10&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>The operators of &lt;code>label key&lt;/code> include ==, =, !=, in, not in. For the &lt;code>size&lt;/code> condition, kubectl can specify a size by &lt;code>--chunk-size&lt;/code> instead of the &lt;code>label key&lt;/code>.&lt;/p>
+&lt;h3 id="collection-resource">Collection Resource&lt;/h3>
+&lt;p>Clusterpedia can also perform more advanced aggregation of resources. For example, you can use &lt;code>Collection Resource&lt;/code> to get a set of different resources at once.&lt;/p>
+&lt;p>Let&amp;rsquo;s first check which &lt;code>Collection Resource&lt;/code> currently Clusterpedia supports:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ kubectl get collectionresources
+NAME RESOURCES
+workloads deployments.apps,daemonsets.apps,statefulsets.apps
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>By getting workloads, you can get a set of resources aggregated by deployment, daemonset, and statefulset, and &lt;code>Collection Resource&lt;/code> also supports for all complex queries.&lt;/p>
+&lt;p>&lt;strong>&lt;code>kubectl get collectionresources workloads&lt;/code> will get the corresponding resources of all namespaces in all clusters by default:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ kubectl get collectionresources workloads
+CLUSTER GROUP VERSION KIND NAMESPACE NAME AGE
+cluster-1 apps v1 DaemonSet kube-system vsphere-cloud-controller-manager 63d
+cluster-2 apps v1 Deployment kube-system calico-kube-controllers 109d
+cluster-2 apps v1 Deployment kube-system coredns-coredns 109d
+&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Add the collection of Daemonset in cluster-1 and some of the above output is cut out&lt;/p>
+&lt;/blockquote>
+&lt;p>Due to the limitation of kubectl, you cannot use complex queries in kubectl and can only be queried by &lt;code>url query&lt;/code>.&lt;/p>
+&lt;h2 id="proposal">Proposal&lt;/h2>
+&lt;h3 id="perform-more-complex-control-over-resourcesspan-idcomplicatedspan">Perform more complex control over resources&lt;span id="complicated">&lt;/span>&lt;/h3>
+&lt;p>In addition to resource search, similar to Wikipedia, Clusterpedia should also have simple capability of resource control, such as watch, create, delete, update, and more.&lt;/p>
+&lt;p>In fact, a write action is implemented by double write + response.&lt;/p>
+&lt;p>&lt;strong>We will discuss this feature and decide whether we should implement it according to the community needs&lt;/strong>&lt;/p>
+&lt;h3 id="automatic-discovery-and-resource-synchronizationspan-iddiscoveryspan">Automatic discovery and resource synchronization&lt;span id="discovery">&lt;/span>&lt;/h3>
+&lt;p>The resource used to represent the cluster in Clusterpedia is called &lt;em>PediaCluster&lt;/em>, not a simple Cluster.&lt;/p>
+&lt;p>**This is because Clusterpedia was originally designed to build on the existing multi-cluster management platform. **&lt;/p>
+&lt;p>In order to keep the original intention, the first issue is that Clusterpedia should not conflict with the resources in the existing multi-cluster platform. Cluster is a very common resource name that represents a cluster.&lt;/p>
+&lt;p>In addition, in order to better connect with the existing multi-cluster platform and enable the connected clusters automatically complete resource synchronization, we need a new mechanism to discover clusters. This discovery mechanism needs to solve the following issues:&lt;/p>
+&lt;ul>
+&lt;li>Get the authentication info to access the cluster&lt;/li>
+&lt;li>Configure conditions that trigger the lifecycle of PediaCluster&lt;/li>
+&lt;li>Set the default policy and prefix name for resource synchronization&lt;/li>
+&lt;/ul>
+&lt;p>This feature will be discussed and implemented in detail in Q1 or Q2 2022.&lt;/p>
+&lt;h2 id="roadmapspan-idroadmapspan">Roadmap&lt;span id="roadmap">&lt;/span>&lt;/h2>
+&lt;p>Currently, it is only a tentative roadmap and the specific schedule depends on the community needs.&lt;/p>
+&lt;p>&lt;strong>About some features not added to Roadmap, you can discuss in &lt;a href="https://github.com/clusterpedia-io/clusterpedia/issues">issues&lt;/a>.&lt;/strong>&lt;/p>
+&lt;h3 id="q4-2021">Q4 2021&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/clusterpedia-io/clusterpedia/issues/4">Support for cropping field&lt;/a>&lt;/li>
+&lt;li>Synchronize custom resources&lt;/li>
+&lt;/ul>
+&lt;h3 id="q1-2022">Q1 2022&lt;/h3>
+&lt;ul>
+&lt;li>Support for the plug-in storage layer&lt;/li>
+&lt;li>Implement &lt;a href="#discovery">automatic discovery and resource synchronization&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="q2-2022">Q2 2022&lt;/h3>
+&lt;ul>
+&lt;li>Support for &lt;a href="#complicated">more control over cluster resources&lt;/a>, such as watch/create/update/delete operations&lt;/li>
+&lt;li>The storage layer supports for custom Collection Resource by default&lt;/li>
+&lt;li>Support for requests with relevant resources&lt;/li>
+&lt;/ul>
+&lt;h2 id="remarks">Remarks&lt;/h2>
+&lt;h3 id="multi-cluster-network-connectivity">Multi-cluster network connectivity&lt;/h3>
+&lt;p>Clusterpedia does not actually solve the problem of network connectivity in a multi-cluster environment. You can use tools such as &lt;a href="https://github.com/kubesphere/tower">tower&lt;/a> to connect and access sub-clusters, or use &lt;a href="https://github.com/submariner-io/submariner">submariner&lt;/a> or &lt;a href="https://github.com/skupperproject/skupper">skupper&lt;/a> to solve cross-cluster network problems.&lt;/p></description></item></channel></rss>

@@ -3,8 +3,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=generator content="Hugo 0.91.2">
-<link rel=canonical type=text/html href=/blog/>
-<meta name=robots content="noindex, nofollow">
+<meta name=robots content="index, follow">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16>
 <link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32>
@@ -14,16 +13,24 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>Blog | Clusterpedia.io</title>
-<meta name=description content>
-<meta property="og:title" content="Blog">
-<meta property="og:description" content="Clusterpedia.io website">
-<meta property="og:type" content="website">
-<meta property="og:url" content="/blog/"><meta property="og:site_name" content="Clusterpedia.io">
-<meta itemprop=name content="Blog">
-<meta itemprop=description content="Clusterpedia.io website"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Blog">
-<meta name=twitter:description content="Clusterpedia.io website">
+<title>Clusterpedia with kubectl support to retrieve multicluster resources | Clusterpedia.io</title>
+<meta name=description content="This name Clusterpedia is inspired by Wikipedia. It is an encyclopedia of multi-cluster to synchronize, search for, and simply control multi-cluster …">
+<meta property="og:title" content="Clusterpedia with kubectl support to retrieve multicluster resources">
+<meta property="og:description" content="This name Clusterpedia is inspired by Wikipedia. It is an encyclopedia of multi-cluster to synchronize, search for, and simply control multi-cluster resources. Clusterpedia can synchronize resources with multiple clusters and provide more powerful search features on the basis of compatibility with Kubernetes OpenAPI to help you effectively get any multi-cluster resource that you are looking for in a quick and easy way.
+ The capability of Clusterpedia is not only to search for and view but also simply control resources in the future, just like Wikipedia that supports for editing entries.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/blog/2021/12/03/clusterpedia-with-kubectl-support-to-retrieve-multicluster-resources/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2021-12-03T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-12-03T00:00:00+00:00"><meta property="og:site_name" content="Clusterpedia.io">
+<meta itemprop=name content="Clusterpedia with kubectl support to retrieve multicluster resources">
+<meta itemprop=description content="This name Clusterpedia is inspired by Wikipedia. It is an encyclopedia of multi-cluster to synchronize, search for, and simply control multi-cluster resources. Clusterpedia can synchronize resources with multiple clusters and provide more powerful search features on the basis of compatibility with Kubernetes OpenAPI to help you effectively get any multi-cluster resource that you are looking for in a quick and easy way.
+ The capability of Clusterpedia is not only to search for and view but also simply control resources in the future, just like Wikipedia that supports for editing entries."><meta itemprop=datePublished content="2021-12-03T00:00:00+00:00">
+<meta itemprop=dateModified content="2021-12-03T00:00:00+00:00">
+<meta itemprop=wordCount content="2133">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Clusterpedia with kubectl support to retrieve multicluster resources">
+<meta name=twitter:description content="This name Clusterpedia is inspired by Wikipedia. It is an encyclopedia of multi-cluster to synchronize, search for, and simply control multi-cluster resources. Clusterpedia can synchronize resources with multiple clusters and provide more powerful search features on the basis of compatibility with Kubernetes OpenAPI to help you effectively get any multi-cluster resource that you are looking for in a quick and easy way.
+ The capability of Clusterpedia is not only to search for and view but also simply control resources in the future, just like Wikipedia that supports for editing entries.">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -32,7 +39,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZQPMJ4HH3"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NZQPMJ4HH3',{anonymize_ip:!1})}</script>
 </head>
-<body class="td-section td-blog">
+<body class="td-page td-blog">
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=/>
@@ -60,7 +67,7 @@
 English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/zh-cn/blog/>中文 Chinese</a>
+<a class=dropdown-item href=/zh-cn/blog/2021/12/03/clusterpedia-%E5%8A%A0%E6%8C%81-kubectl%E6%A3%80%E7%B4%A2%E5%A4%9A%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90/>中文 Chinese</a>
 </div>
 </li>
 </ul>
@@ -72,112 +79,99 @@ English
 <div class="container-fluid td-outer">
 <div class=td-main>
 <div class="row flex-xl-nowrap">
-<div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+<aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+<div id=td-sidebar-menu class=td-sidebar__inner>
+<form class="td-sidebar__search d-flex align-items-center">
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.1d0f222d4afc156a3fe75fbe9ff2dc14.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
+</button>
+</form>
+<nav class="collapse td-sidebar-nav" id=td-section-nav>
+<div class="nav-item dropdown d-block d-lg-none">
+<a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
+English
+</a>
+<div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
+<a class=dropdown-item href=/zh-cn/blog/2021/12/03/clusterpedia-%E5%8A%A0%E6%8C%81-kubectl%E6%A3%80%E7%B4%A2%E5%A4%9A%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90/>中文 Chinese</a>
 </div>
-<div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
 </div>
+<ul class="td-sidebar-nav__section pr-md-3 ul-0">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-blog-li>
+<a href=/blog/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-blog><span>Blog</span></a>
+<ul class=ul-1>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20220215upgrade-to-clusterpedia-010-li>
+<a href=/blog/2022/02/15/upgrade-to-clusterpedia-0.1.0/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-blog20220215upgrade-to-clusterpedia-010><span>Upgrade to Clusterpedia 0.1.0</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-blog20211203clusterpedia-with-kubectl-support-to-retrieve-multicluster-resources-li>
+<a href=/blog/2021/12/03/clusterpedia-with-kubectl-support-to-retrieve-multicluster-resources/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-blog20211203clusterpedia-with-kubectl-support-to-retrieve-multicluster-resources><span class=td-sidebar-nav-active-item>Clusterpedia with kubectl support to retrieve multicluster resources</span></a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+<aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+<a href=https://github.com/clusterpedia-io/website/tree/main/content/en/blog/clusterpedia-with-kubectl.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> View page source</a>
+<a href=https://github.com/clusterpedia-io/website/edit/main/content/en/blog/clusterpedia-with-kubectl.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/clusterpedia-io/website/new/main/content/en/blog/clusterpedia-with-kubectl.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Create child page</a>
+<a href="https://github.com/clusterpedia-io/website/issues/new?title=Clusterpedia%20with%20kubectl%20support%20to%20retrieve%20multicluster%20resources" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+<a id=print href=/blog/_print/><i class="fa fa-print fa-fw"></i> Print entire section</a>
+</div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#architecture-span-iddesignspan>Architecture <span id=design></span></a>
+<ul>
+<li><a href=#featuresspan-idfeaturesspan>Features<span id=features></span></a></li>
+</ul>
+</li>
+<li><a href=#deploymentspan-iddeploymentspan>Deployment<span id=deployment></span></a></li>
+<li><a href=#synchronize-cluster-resourcesspan-idgetspan>Synchronize cluster resources<span id=get></span></a>
+<ul>
+<li><a href=#cluster-authentication>Cluster authentication</a></li>
+<li><a href=#synchronize-resources>Synchronize resources</a></li>
+</ul>
+</li>
+<li><a href=#search-for-resourcesspan-idviewspan>Search for resources<span id=view></span></a>
+<ul>
+<li><a href=#multi-cluster-resource-search>Multi-cluster resource search</a></li>
+<li><a href=#search-a-specific-cluster>Search a specific cluster</a></li>
+<li><a href=#complex-search>Complex search</a></li>
+<li><a href=#how-search-conditions-are-applied>How search conditions are applied</a></li>
+<li><a href=#collection-resource>Collection Resource</a></li>
+</ul>
+</li>
+<li><a href=#proposal>Proposal</a>
+<ul>
+<li><a href=#perform-more-complex-control-over-resourcesspan-idcomplicatedspan>Perform more complex control over resources<span id=complicated></span></a></li>
+<li><a href=#automatic-discovery-and-resource-synchronizationspan-iddiscoveryspan>Automatic discovery and resource synchronization<span id=discovery></span></a></li>
+</ul>
+</li>
+<li><a href=#roadmapspan-idroadmapspan>Roadmap<span id=roadmap></span></a>
+<ul>
+<li><a href=#q4-2021>Q4 2021</a></li>
+<li><a href=#q1-2022>Q1 2022</a></li>
+<li><a href=#q2-2022>Q2 2022</a></li>
+</ul>
+</li>
+<li><a href=#remarks>Remarks</a>
+<ul>
+<li><a href=#multi-cluster-network-connectivity>Multi-cluster network connectivity</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role=main>
 <div class=td-content>
-<div class="pageinfo pageinfo-primary d-print-none">
-<p>
-This is the multi-page printable view of this section.
-<a href=# onclick="return print(),!1">Click here to print</a>.
-</p><p>
-<a href=/blog/>Return to the regular view of this page</a>.
-</p>
-</div>
-<h1 class=title>Blog</h1>
-<ul>
-<li><a href=#pg-a32dbb6812755843c6db353189298112>Upgrade to Clusterpedia 0.1.0</a></li>
-<li><a href=#pg-5a9086c52772fbac4aea92a7ce0b36db>Clusterpedia with kubectl support to retrieve multicluster resources</a></li>
-</ul>
-<div class=content>
-</div>
-</div>
-<div class=td-content>
-<h1 id=pg-a32dbb6812755843c6db353189298112>Upgrade to Clusterpedia 0.1.0</h1>
-<div class="td-byline mb-4">
-<time datetime=2022-02-15 class=text-muted>Tuesday, February 15, 2022</time>
-</div>
-<p>With the release of Clusterpedia 0.1.0, we can now update the earlier 0.0.9-alpha or 0.0.8 to 0.1.0</p>
-<h2 id=clean-resources>Clean Resources</h2>
-<p>Since the url path to search resources has been modified(<a href=https://github.com/clusterpedia-io/clusterpedia/pull/73>#73</a>), we need to use <a href=https://github.com/clusterpedia-io/clusterpedia/blob/v0.0.9-alpha/hack/clean-clusterconfigs.sh>cealn-clusterconfigs.sh</a> in 0.0.9-alpha to clean up the cluster shortcut in the <em>.kube/config</em></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.0.9-alpha/hack/clean-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
-</code></pre></div><p>Backup and delete the <code>PediaCluster</code> resources.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster -o yaml &gt; clusters.yaml.bak
-
-kubectl delete pediacluster --all
-</code></pre></div><p>After all <code>PediaCluster</code> resources have been deleted, remove the <code>PediaCluster CRD</code></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete crd pediaclusters.clusters.clusterpedia.io
-</code></pre></div><p>Remove the <code>APIServices</code> used to register the Aggregated API</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete apiservices v1alpha1.pedia.clusterpedia.io
-</code></pre></div><h2 id=upgrade-clusterpedia>Upgrade Clusterpedia</h2>
-<p>Create <code>PediaCluster CRD</code>, and upgrade <code>Clusterpedia APIServer</code> and <code>Clustersynchro Manager</code>.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#000>DEPLOY_YAML_PATH</span><span style=color:#ce5c00;font-weight:700>=</span>https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.1.0/deploy
-<span style=color:#000>CRD_YAML_PATH</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#000>$DEPLOY_YAML_PATH</span>/crds
-
-kubectl apply -f <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>    <span style=color:#000>$CRD_YAML_PATH</span>/cluster.clusterpedia.io_pediaclusters.yaml,<span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>    <span style=color:#000>$DEPLOY_YAML_PATH</span>/clusterpedia_clustersynchro_manager_deployment.yaml,<span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>    <span style=color:#000>$DEPLOY_YAML_PATH</span>/clusterpedia_apiserver_deployment.yaml,<span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>    <span style=color:#000>$DEPLOY_YAML_PATH</span>/clusterpedia_apiserver_apiservice.yaml
-</code></pre></div><p>We can also download the YAML locally, or pull the <a href=https://github.com/clusterpedia-io/clusterpedia>clusterpedia</a> locally and go to <em>./deploy</em> directory and run <code>kubectl apply</code></p>
-<h2 id=re-import-the-clusters>Re-import the clusters</h2>
-<p>Since the APIVersion and schema of <code>PediaCluster</code> have been optimized for incompatibility,
-it it necessary to recreate <code>PediaCluster</code> based on the backed up <em>clusters.yaml.bak</em>.</p>
-<p>The current example of <code>PediaCluster</code>:</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-example</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserver</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;https://10.30.43.43:6443&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>caData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>tokenData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>certData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>keyData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>     </span>- <span style=color:#000>pods</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>There are three main changes compared to 0.0.9-alpha:</p>
-<ul>
-<li><code>apiVersion</code>: <em>clusters.clusterpedia.io/v1alpha1</em> -> <em>cluster.clusterpedia.io/v1alpha2</em></li>
-<li><code>spec.apiserverURL</code> -> <code>spec.apiserver</code></li>
-<li><code>spec.resources</code> -> <code>spec.syncResources</code></li>
-</ul>
-<blockquote>
-<p>The specific changes can be viewed: <a href=https://github.com/clusterpedia-io/clusterpedia/pull/70>#70</a>
-<a href=https://github.com/clusterpedia-io/clusterpedia/pull/67>#67</a>
-<a href=https://github.com/clusterpedia-io/clusterpedia/pull/76>#76</a>
-<a href=https://github.com/clusterpedia-io/clusterpedia/pull/77>#77</a></p>
-</blockquote>
-<p>Create new pediaclusters based on the old pediaclusters in <em>clusters.yaml.bak</em></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-1</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span>{}<span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000>---</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster-2</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span>{}<span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>View clusters status</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
-</code></pre></div><p>Configure the cluster shortcut for kubectl</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.1.0/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
-</code></pre></div>
-</div>
-<div class=td-content style=page-break-before:always>
-<h1 id=pg-5a9086c52772fbac4aea92a7ce0b36db>Clusterpedia with kubectl support to retrieve multicluster resources</h1>
+<h1>Clusterpedia with kubectl support to retrieve multicluster resources</h1>
 <div class="td-byline mb-4">
 <time datetime=2021-12-03 class=text-muted>Friday, December 03, 2021</time>
 </div>
+<header class=article-meta>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 11 minute read &nbsp;</p>
+</header>
 <p>This name Clusterpedia is inspired by Wikipedia. It is an encyclopedia of multi-cluster to synchronize, search for, and simply control multi-cluster resources. Clusterpedia can synchronize resources with multiple clusters and provide more powerful search features on the basis of compatibility with Kubernetes OpenAPI to help you effectively get any multi-cluster resource that you are looking for in a quick and easy way.</p>
 <blockquote>
 <p>The capability of Clusterpedia is not only to search for and view but also simply control resources in the future, just like Wikipedia that supports for editing entries.</p>
@@ -515,6 +509,13 @@ cluster-2   apps    v1        Deployment   kube-system                   coredns
 <h2 id=remarks>Remarks</h2>
 <h3 id=multi-cluster-network-connectivity>Multi-cluster network connectivity</h3>
 <p>Clusterpedia does not actually solve the problem of network connectivity in a multi-cluster environment. You can use tools such as <a href=https://github.com/kubesphere/tower>tower</a> to connect and access sub-clusters, or use <a href=https://github.com/submariner-io/submariner>submariner</a> or <a href=https://github.com/skupperproject/skupper>skupper</a> to solve cross-cluster network problems.</p>
+<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
+<li>
+<a class="btn btn-primary disabled"><span class=mr-1>←</span>Previous</a>
+</li>
+<a href=/blog/2022/02/15/upgrade-to-clusterpedia-0.1.0/ aria-label="Next - Upgrade to Clusterpedia 0.1.0" class="btn btn-primary">Next<span class=ml-1>→</span></a>
+</li>
+</ul>
 </div>
 </main>
 </div>
