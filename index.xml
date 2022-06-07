@@ -1,4 +1,16 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Clusterpedia.io – Clusterpedia</title><link>/</link><description>Recent content in Clusterpedia on Clusterpedia.io</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Tue, 12 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Clusterpedia v0.2.0 Release</title><link>/blog/2022/04/12/clusterpedia-v0.2.0-release/</link><pubDate>Tue, 12 Apr 2022 00:00:00 +0000</pubDate><guid>/blog/2022/04/12/clusterpedia-v0.2.0-release/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Clusterpedia.io – Clusterpedia</title><link>/</link><description>Recent content in Clusterpedia on Clusterpedia.io</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Fri, 29 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Clusterpedia is Listed in the CNCF Cloud Native Landscape</title><link>/blog/2022/04/29/clusterpedia-is-listed-in-the-cncf-cloud-native-landscape/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>/blog/2022/04/29/clusterpedia-is-listed-in-the-cncf-cloud-native-landscape/</guid><description>
+&lt;!--
+在 CNCF 最新发布的云原生全景图 (Cloud Native Landscape) 中，Clusterpedia入选Orchestration &amp; Management (编排与管理) 层的 Scheduling &amp; Orchestration (调度与编排) 象限，成为 CNCF 推荐的云原生多集群复杂检索工具。
+-->
+&lt;p>In the updated CNCF Cloud Native Landscape, Clusterpedia was listed into the Scheduling &amp;amp; Orchestration quadrant of the Orchestration &amp;amp; Management layer, becoming a cloud-native multi-cluster complex retrieval tool recommended by CNCF.&lt;/p>
+&lt;p>&lt;a href="https://landscape.cncf.io/card-mode?category=scheduling-orchestration&amp;grouping=category&amp;selected=clusterpedia">&lt;img class="aligncenter wp-image-7957 size-full" src="https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/3871965400044875af28b263a790504c" alt="" width="800" height="500" data-tag="bdshare">&lt;/a>&lt;/p>
+&lt;hr>
+&lt;!--
+CNCF 全称 Cloud Native Computing Foundation (云原生计算基金会)，隶属于 Linux 基金会，成立于 2015 年 12 月，是非营利性组织，致力于培育和维护一个厂商中立的开源生态系统，来推广云原生技术，普及云原生应用。
+云原生全景图由 CNCF 从 2016 年 12 月开始维护，汇总了社区成熟和使用范围较广、具有最佳实践的产品和方案，并加以分类，为企业构建云原生体系提供参考，在云生态研发、运维领域具有广泛影响力。
+-->
+&lt;p>Cloud Native Computing Foundation (CNCF) belongs to the Linux Foundation and was established in December 2015. It is a non-profit organization dedicated to fostering and maintaining a vendor-neutral open source ecosystem to promote cloud native technologies and make cloud native universal and sustainable.&lt;/p>
+&lt;p>The Cloud Native Landscape has been maintained by CNCF since December 2016. It is intended as a map to list popular projects with best practices in the community, and categorizes them in the cloud native space to provide reference for enterprises to build a cloud native ecosystem. It has extensive influence on the development, operation, and maintenance of cloud native technologies.&lt;/p></description></item><item><title>Blog: Clusterpedia v0.2.0 Release</title><link>/blog/2022/04/12/clusterpedia-v0.2.0-release/</link><pubDate>Tue, 12 Apr 2022 00:00:00 +0000</pubDate><guid>/blog/2022/04/12/clusterpedia-v0.2.0-release/</guid><description>
 &lt;h2 id="use-helm-to-install">Use helm to install&lt;/h2>
 &lt;p>Users can already use Helm to install Clusterpedia:&lt;/p>
 &lt;pre>&lt;code>$ helm install clusterpedia . \
@@ -185,7 +197,163 @@ cluster-example fake-pod 3/3 3 3 113d
 &lt;ul>
 &lt;li>&lt;code>golangci-lint&lt;/code> is used as a static checking tool (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/86">#86&lt;/a>, &lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/88">#88&lt;/a>, @Iceber)&lt;/li>
 &lt;li>Added CI Workloads such as static checking and unit testing for code &lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/87">#87&lt;/a>, @Iceber)&lt;/li>
-&lt;/ul></description></item><item><title>Blog: Clusterpedia v0.1.0 Release — four important functions</title><link>/blog/2022/02/16/clusterpedia-v0.1.0-release-four-important-functions/</link><pubDate>Wed, 16 Feb 2022 00:00:00 +0000</pubDate><guid>/blog/2022/02/16/clusterpedia-v0.1.0-release-four-important-functions/</guid><description>
+&lt;/ul></description></item><item><title>Blog: Quickly Deploy Clusterpedia with Helm</title><link>/blog/2022/04/11/quickly-deploy-clusterpedia-with-helm/</link><pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate><guid>/blog/2022/04/11/quickly-deploy-clusterpedia-with-helm/</guid><description>
+&lt;!--当前 Clusterpedia 已经支持通过 Helm 来快速部署。-->
+&lt;p>Currently Clusterpedia has supported a rapid deployment with Helm.&lt;/p>
+&lt;!--首先需要保证当前环境已经安装 helm v3。-->
+&lt;p>All of first, you need to check if helm v3 is installed in your current environment.&lt;/p>
+&lt;!--
+## 准备阶段
+拉取 Clusterpedia 仓库代码。
+> 当前暂时还未将 chart 上传至 charts 公共仓库。
+-->
+&lt;h2 id="preparation">Preparation&lt;/h2>
+&lt;p>Pull the Clusterpedia repository.&lt;/p>
+&lt;blockquote>
+&lt;p>Currently, the chart has not been uploaded to the public charts repository.&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">git clone https://github.com/clusterpedia-io/clusterpedia.git
+&lt;span style="color:#204a87">cd&lt;/span> clusterpedia/charts
+&lt;/code>&lt;/pre>&lt;/div>&lt;!--
+由于 clusterpedia 使用 `bitnami/postgresql` 和 `bitnami/mysql` 作为存储组件子 chart，
+所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖。
+-->
+&lt;p>Since Clusterpedia uses &lt;code>bitnami/postgresql&lt;/code> and &lt;code>bitnami/mysql&lt;/code> as subcharts of storage components, it is necessary to add the bitnami repository and update the dependencies of the clusterpedia chart.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">helm repo add bitnami https://charts.bitnami.com/bitnami
+helm dependency build
+&lt;/code>&lt;/pre>&lt;/div>&lt;!--
+### 选择存储组件
+Clusterpedia Chart 通过子 chart 的方式，提供了 `bitnami/postgresql` 和 `bitnami/mysql` 两款存储组件可供选择。
+`postgresql` 为默认的存储组件，如果想要使用 MySQL，那么在后续安装命令中添加 `--set postgresql.enabled=false --set mysql.enabled=true`
+更多关于存储组件的配置，可以参考 [bitnami/postgresql](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) 和 [bitnami/mysql](https://github.com/bitnami/charts/tree/master/bitnami/mysql)。
+**用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml**
+-->
+&lt;h3 id="choose-storage-components">Choose storage components&lt;/h3>
+&lt;p>The Clusterpedia chart provides two storage components such as &lt;code>bitnami/postgresql&lt;/code> and &lt;code>bitnami/mysql&lt;/code> to choose from as sub-charts.&lt;/p>
+&lt;p>&lt;code>postgresql&lt;/code> is the default storage component. IF you want to use MySQL, you can add &lt;code>--set postgresql.enabled=false --set mysql.enabled=true&lt;/code> in the subsequent installation command.&lt;/p>
+&lt;p>For specific configuration about storage components, see &lt;a href="https://github.com/bitnami/charts/tree/master/bitnami/postgresql">bitnami/postgresql&lt;/a> and &lt;a href="https://github.com/bitnami/charts/tree/master/bitnami/mysql">bitnami/mysql&lt;/a>.&lt;/p>
+&lt;p>&lt;strong>You can also choose not to install any storage component, but use external components. For related settings, see charts/values.yaml&lt;/strong>&lt;/p>
+&lt;!--
+### 选择 CRD 的安装/管理方式
+clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。
+#### 手动管理
+-->
+&lt;h3 id="choose-a-installation-or-management-mode-for-crds">Choose a installation or management mode for CRDs&lt;/h3>
+&lt;p>Clusterpedia requires proper CRD resources to be created in the retrieval environment. You can choose to manually deploy CRDs by using YAML, or you can manage it with Helm.&lt;/p>
+&lt;h4 id="manage-manually">Manage manually&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl apply -f ./_crds
+&lt;/code>&lt;/pre>&lt;/div>&lt;!--
+#### 使用 Helm 管理
+在后续安装命令中需要手动添加 `--set installCRDs=true` 即可。
+### 决定是否需要创建 Local PV
+Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。
+**用户在安装时需要通过 `--set persistenceMatchNode=&lt;selected node name>` 来指定 Local PV 所在节点。**
+如果用户不需要创建 Local PV，那么需要使用 `--set persistenceMatchNode=None` 显式声明。
+## 安装 Clusterpedia
+经过上述决策后，用户可以进行安装：
+-->
+&lt;h4 id="manage-with-helm">Manage with Helm&lt;/h4>
+&lt;p>Manually add &lt;code>--set installCRDs=true&lt;/code> in the subsequent installation command.&lt;/p>
+&lt;h3 id="check-if-you-need-to-create-a-local-pv">Check if you need to create a local PV&lt;/h3>
+&lt;p>Through the Clusterpedia chart, you can create storage components to use a local PV.&lt;/p>
+&lt;p>&lt;strong>You need to specify the node where the local PV is located through &lt;code>--set persistenceMatchNode=&amp;lt;selected node name&amp;gt;&lt;/code> during installation.&lt;/strong>&lt;/p>
+&lt;p>If you need not to create the local PV, you can use &lt;code>--set persistenceMatchNode=None&lt;/code> to declare it explicitly.&lt;/p>
+&lt;h2 id="install-clusterpedia">Install Clusterpedia&lt;/h2>
+&lt;p>After the above procedure is completed, you can run the following command to install Clusterpedia:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">helm install clusterpedia . &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span>--namespace clusterpedia-system &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span>--create-namespace &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span>--set &lt;span style="color:#000">persistenceMatchNode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">={{&lt;/span> LOCAL_PV_NODE &lt;span style="color:#ce5c00;font-weight:bold">}}&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span>--set &lt;span style="color:#000">installCRDs&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;!--
+## 卸载 Clusterpedia
+在卸载 Clusterpedia 前需要手动清理所有 `PediaCluster` 资源。
+-->
+&lt;h2 id="uninstall-clusterpedia">Uninstall Clusterpedia&lt;/h2>
+&lt;p>Before uninstallation, you shall manually clear all &lt;code>PediaCluster&lt;/code> resources.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl get pediacluster
+&lt;/code>&lt;/pre>&lt;/div>&lt;!--`PediaCluster` 清理完成后就可以执行卸载命令。-->
+&lt;p>You can run the command to uninstall it after the &lt;code>PediaCluster&lt;/code> resources are cleared.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">helm -n clusterpedia-system uninstall clusterpedia
+&lt;/code>&lt;/pre>&lt;/div>&lt;!--如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD。-->
+&lt;p>If you use any CRD resource that is manually created, you also need to manually clear the CRDs.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl delete -f ./_crds
+&lt;/code>&lt;/pre>&lt;/div>&lt;!--
+**注意 PVC 和 PV 并不会删除，用户需要手动删除。**
+如果创建了 Local PV，那么还需要进入相应节点，清理 Local PV 的遗留数据。
+-->
+&lt;p>&lt;strong>Note that PVC and PV will not be deleted. You need to manually delete them.&lt;/strong>&lt;/p>
+&lt;p>If you created a local PV, you need log in to the node and remove all remained data about the local PV.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#8f5902;font-style:italic"># Log in to the node with Local PV&lt;/span>
+rm /var/local/clusterpedia/internalstorage/&amp;lt;storage type&amp;gt;
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Blog: Clusterpedia Awarded | One of IT Technology Influcence Stars Selected by CSDN</title><link>/blog/2022/04/01/clusterpedia-awarded-one-of-it-technology-influcence-stars-selected-by-csdn/</link><pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate><guid>/blog/2022/04/01/clusterpedia-awarded-one-of-it-technology-influcence-stars-selected-by-csdn/</guid><description>
+&lt;div align="center">&lt;img src="http://blog.daocloud.io/wp-content/uploads/d807bc86a68e6e3bd67c041e86e611e0.jpg" style="width:900px;" />&lt;/div>
+&lt;hr>
+&lt;!--
+3 月 30 日，CSDN 正式公布 IT 技术影响力之星评选结果，Clusterpedia 入选「2021 年度云原生技术产品」。
+-->
+&lt;p>On March 30, CSDN officially announced the selection list of IT technology influence stars, and Clusterpedia was selected as a &amp;ldquo;Cloud Native Technology Product in 2021&amp;rdquo;.&lt;/p>
+&lt;!--
+在多云时代，多集群内部资源管理和检索越来越复杂，成为多云管理的一大难题。
+-->
+&lt;p>In the multi-cloud era, it is more and more complex and becomes a problem for resource management and retrieval in a multi-cluster environment.&lt;/p>
+&lt;!--
+在单集群中，我们通常使用 kubectl 来查看资源，或者直接访问 Kubernetes 的 OpenAPI，在代码中也可以借助 client-go 来对资源进行检索。
+-->
+&lt;p>In a single cluster, we usually use kubectl to view resources, directly access Kubernetes OpenAPI, or use client-go to retrieve resources in the code.&lt;/p>
+&lt;!--
+而在多集群环境下，Clusterpedia 通过兼容 Kubernetes OpenAPI ，用户可以依然使用单集群的方式，来对多集群资源进行复杂检索，无需从每个集群中拉取数据到本地进行过滤。
+-->
+&lt;p>Now, in a multi-cluster environment, Clusterpedia provides compatibility with Kubernetes OpenAPI, so you can still perform complex retrieval or search for multi-cluster resources like a single cluster without pulling data from each cluster to the local for filtering.&lt;/p>
+&lt;div align="center">&lt;img src="https://p3.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/ad3f106d991a45acbbdfe067425def26" style="width:300px;" />&lt;/div></description></item><item><title>Blog: Demo Video ｜Clusterpedia - Complex Retrieval of Resources in a Multi-Cloud Environment</title><link>/blog/2022/03/01/demo-video-clusterpedia-complex-retrieval-of-resources-in-a-multi-cloud-environment/</link><pubDate>Tue, 01 Mar 2022 00:00:00 +0000</pubDate><guid>/blog/2022/03/01/demo-video-clusterpedia-complex-retrieval-of-resources-in-a-multi-cloud-environment/</guid><description>
+&lt;!--
+Clusterpedia 的发起人 --「Daocloud 道客」的云原生研发工程师蔡威，为大家详细介绍 Clusterpedia 在资源检索上提供的功能，让大家可以直观的了解到使用 Clusterepdia 可以解决哪些问题。
+-->
+&lt;p>Iceber, the sponsor of Clusterpedia and a cloud native senior engineer of Daocloud, introduced the functions provided by Clusterpedia about resource retrieval in detail. This video step-by-step demonstrated what issues can be solved by using Clusterepdia.&lt;/p>
+&lt;div align="center">&lt;a href="https://www.bilibili.com/video/BV1qi4y117Vq">&lt;img class="aligncenter wp-image-7957 size-full" src="http://blog.daocloud.io/wp-content/uploads/clusterpedia.png" alt="" width="800" height="500" data-tag="bdshare">&lt;/a>&lt;/div>
+&lt;!--
+## Clusterpedia 多集群资源检索神器
+随着云原生技术的发展、承载业务量的增加以及集群规模的不断扩大，单个 Kubernetes 集群已经无法满足很多企业的需求，我们在逐渐的步入多云时代，多集群内部资源管理和检索变得越发复杂和困难。
+由此，社区不断出现了很多优秀的的开源项目，例如用于集群生命周期管理的 cluster api，以及多云应用管理的 karmada， clusternet 等。而 Clusterpedia 便是建立在这些云管平台之上，为用户提供多集群资源的复杂检索。
+在单集群中，我们通常使用 kubectl 来查看资源，或者直接访问 Kubernetes 的 OpenAPI，在代码中也可以借助 client-go 来对资源进行检索。
+而在多集群环境下，Clusterpedia 通过兼容 Kubernetes OpenAPI ，用户可以依然使用单集群的方式，来对多集群资源进行复杂检索，无需从每个集群中拉取数据到本地进行过滤。
+当然 Clusterpedia 的能力并不仅仅只是检索查看，未来还会支持对资源的简单控制，就像 wiki 同样支持编辑词条一样。Clusterpedia 具有许多特性和功能：
+-->
+&lt;h2 id="clusterpedia-is-an-artifact-for-multi-cluster-resource-retrieval">Clusterpedia is an artifact for multi-cluster resource retrieval&lt;/h2>
+&lt;p>With the increase of services you provide and the continuous expansion of the cluster scale, a single Kubernetes cluster may no longer meet the needs of many enterprises. As the cloud-native technologies develop, a multi-cloud era is coming. It is more complex and difficult to manage and retrieve resources in multiple clusters.&lt;/p>
+&lt;p>As a result, many excellent open source projects have emerged in the community, such as cluster api for cluster lifecycle management, karmada and clusternet for multi-cloud application management. Clusterpedia is built on these cloud management platforms to provide you with complex search for multi-cluster resources.&lt;/p>
+&lt;p>In a single cluster, we often use kubectl to view resources, directly access Kubernetes OpenAPI, or use client-go to retrieve resources in the code.&lt;/p>
+&lt;p>Now, in a multi-cluster environment, Clusterpedia provides compatibility with Kubernetes OpenAPI, so you can still perform complex retrieval or search for multi-cluster resources like a single cluster without pulling data from each cluster to the local for filtering.&lt;/p>
+&lt;p>In addition, the capabilities of Clusterpedia are not only for searching and viewing. It also supports simple control of resources in the future, just like wiki that also supports to edit entries. Clusterpedia provides the following features now:&lt;/p>
+&lt;!--
+* 支持复杂的检索条件，过滤条件，排序，分页等等
+* 支持查询资源时请求附带关系资源
+* 统一主集群和多集群资源检索入口
+* 兼容 kubernetes OpenAPI, 可以直接使用 kubectl 进行多集群检索, 而无需第三方插件或者工具
+* 兼容收集不同版本的集群资源，不受主集群版本约束，
+* 资源收集高性能，低内存
+* 根据集群当前的健康状态，自动启停资源收集
+* 插件化存储层，用户可以根据自己需求使用其他存储组件来自定义存储层
+* 高可用
+-->
+&lt;ul>
+&lt;li>Support for search with complex conditions, filters, sorting, and paging&lt;/li>
+&lt;li>Support for requesting attached resources when querying resources&lt;/li>
+&lt;li>Use a unified retrieval portal for master cluster and multi-cluster resources&lt;/li>
+&lt;li>Compatible with kubernetes OpenAPI, through which you can directly use kubectl for multi-cluster retrieval and need not any third-party plugins or tools&lt;/li>
+&lt;li>Compatible with collecting different versions of cluster resources and not constrained by the version of master cluster&lt;/li>
+&lt;li>High performance and low memory consumption in the process of resource collection&lt;/li>
+&lt;li>Automatically start and stop resource collection based on to the health status of clusters&lt;/li>
+&lt;li>Support for the pluggable storage layer that indicates you can use other storage components to customize the storage layer&lt;/li>
+&lt;li>High availability&lt;/li>
+&lt;/ul>
+&lt;h2 id="whats-next">What&amp;rsquo;s Next&lt;/h2>
+&lt;!--
+除了支持多集群的复杂检索，Clusterpedia 还有很多其他优点，例如通过聚合式 API 来统一主集群和多集群资源的访问入口，在实时同步子集群资源时的低内存占用以及弱网优化，另外还有通过插件化存储层来解耦对存储组件的依赖。
+下一期将为大家介绍具体设计和实现原理，详细解读 Clusterpedia 的优点，敬请期待。
+-->
+&lt;p>In addition to supporting complex retrieval of multiple clusters, Clusterpedia can provide more benefits, such as a unified portal to the master cluster and multi-cluster resources through an aggregated API, low memory usage and weak network optimization when synchronizing sub-cluster resources in real time. It can also provide a pluggable storage layer to decouple the dependencies of storage components.&lt;/p>
+&lt;p>In the next topic, we will introduce the specific design and implementation principles, and explain more benefits offered by Clusterpedia, so stay tuned.&lt;/p></description></item><item><title>Blog: Clusterpedia v0.1.0 Release — four important functions</title><link>/blog/2022/02/16/clusterpedia-v0.1.0-release-four-important-functions/</link><pubDate>Wed, 16 Feb 2022 00:00:00 +0000</pubDate><guid>/blog/2022/02/16/clusterpedia-v0.1.0-release-four-important-functions/</guid><description>
 &lt;p>&lt;strong>This is the first release of&lt;/strong> &lt;a href="https://clusterpedia.io">&lt;strong>Clusterpedia&lt;/strong>&lt;/a> &lt;strong>🥳🥳🥳, and it also means that it is officially in the iteration phase.&lt;/strong>&lt;/p>
 &lt;p>Compared to the initial &lt;a href="https://github.com/clusterpedia-io/clusterpedia/tree/v0.0.8">v0.0.8&lt;/a> and &lt;a href="https://github.com/clusterpedia-io/clusterpedia/tree/v0.0.9-alpha">v0.0.9-alpha&lt;/a>, v0.1.0 add a lot of features and makes some incompatible updates.&lt;/p>
 &lt;blockquote>

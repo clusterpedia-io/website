@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e1fb36dc483f2dd439766958402a5281.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.6242c67d9be8d4b5cd9cdbe90fdb23c5.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -305,188 +305,50 @@ cluster-example   fake-pod   3/3     <span style=color:#0000cf;font-weight:700>3
 <div class="td-byline mb-4">
 <time datetime=2022-04-11 class=text-muted>2022.04.11</time>
 </div>
-<p>当前 Clusterpedia 已经支持通过 Helm 来快速的部署</p>
-<p>首先需要保证当前环境已经安装 helm v3</p>
+<p>当前 Clusterpedia 已经支持通过 Helm 来快速部署。</p>
+<p>首先需要保证当前环境已经安装 helm v3。</p>
 <h2 id=准备阶段>准备阶段</h2>
-<p>拉取仓库代码</p>
+<p>拉取 Clusterpedia 仓库代码。</p>
 <blockquote>
-<p>当前暂时还未将 chart 上传至 charts 公共仓库</p>
+<p>当前暂时还未将 chart 上传至 charts 公共仓库。</p>
 </blockquote>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git clone https://github.com/clusterpedia-io/clusterpedia.git
 $ <span style=color:#204a87>cd</span> clusterpedia/charts
 </code></pre></div><p>由于 clusterpedia 使用 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 作为存储组件子 chart，
-所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖</p>
+所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm repo add bitnami https://charts.bitnami.com/bitnami
 $ helm dependency build
 </code></pre></div><h3 id=选择存储组件>选择存储组件</h3>
 <p>Clusterpedia Chart 通过子 chart 的方式，提供了 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 两款存储组件可供选择。</p>
-<p><code>postgresql</code> 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 <code>--set postgresql.enabled=false --set mysql.enabled=true</code></p>
-<p>更多关于存储组件的配置，可以参考 <a href=https://github.com/bitnami/charts/tree/master/bitnami/postgresql>bitnami/postgresql</a> 和 <a href=https://github.com/bitnami/charts/tree/master/bitnami/mysql>bitnami/mysql</a>.</p>
+<p><code>postgresql</code> 为默认的存储组件，如果想要使用 MySQL，那么在后续安装命令中添加 <code>--set postgresql.enabled=false --set mysql.enabled=true</code></p>
+<p>更多关于存储组件的配置，可以参考 <a href=https://github.com/bitnami/charts/tree/master/bitnami/postgresql>bitnami/postgresql</a> 和 <a href=https://github.com/bitnami/charts/tree/master/bitnami/mysql>bitnami/mysql</a>。</p>
 <p><strong>用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml</strong></p>
 <h3 id=选择-crd-的安装管理方式>选择 CRD 的安装/管理方式</h3>
 <p>clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。</p>
 <h4 id=手动管理>手动管理</h4>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl apply -f ./_crds
 </code></pre></div><h4 id=使用-helm-管理>使用 Helm 管理</h4>
-<p>在后续安装命令中需要手动添加 <code>--set installCRDs=true</code> 即可</p>
+<p>在后续安装命令中需要手动添加 <code>--set installCRDs=true</code> 即可。</p>
 <h3 id=决定是否需要创建-local-pv>决定是否需要创建 Local PV</h3>
 <p>Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。</p>
 <p><strong>用户在安装时需要通过 <code>--set persistenceMatchNode=&lt;selected node name></code> 来指定 Local PV 所在节点。</strong></p>
 <p>如果用户不需要创建 Local PV，那么需要使用 <code>--set persistenceMatchNode=None</code> 显式声明。</p>
 <h2 id=安装-clusterpedia>安装 Clusterpedia</h2>
-<p>经过上述决策后，用户可以进行安装</p>
+<p>经过上述决策后，用户可以进行安装：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm install clusterpedia . <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>  --namespace clusterpedia-system <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>  --create-namespace <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>  --set <span style=color:#000>persistenceMatchNode</span><span style=color:#ce5c00;font-weight:700>={{</span> LOCAL_PV_NODE <span style=color:#ce5c00;font-weight:700>}}</span> <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>  <span style=color:#8f5902;font-style:italic># --set installCRDs=true</span>
 </code></pre></div><h2 id=卸载-clusterpedia>卸载 Clusterpedia</h2>
-<p>在卸载 Clusterpedia 前需要手动清理所有 <code>PediaCluster</code> 资源</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
-</code></pre></div><p><code>PediaCluster</code> 清理完成后就可以执行卸载命令</p>
+<p>在卸载 Clusterpedia 前需要手动清理所有 <code>PediaCluster</code> 资源。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get pediacluster
+</code></pre></div><p><code>PediaCluster</code> 清理完成后就可以执行卸载命令。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm -n clusterpedia-system uninstall clusterpedia
-</code></pre></div><p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD</p>
+</code></pre></div><p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl delete -f ./_crds
-</code></pre></div><p><strong>注意 PVC 和 PV 并不会删除，用户需要手动删除</strong></p>
-<p>如果创建了 Local PV 那么还需要进入相应节点，清理 Local PV 的遗留数据</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 登录 Local PV 绑定的节点</span>
-$ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
-</code></pre></div><p>当前 Clusterpedia 已经支持通过 Helm 来快速的部署</p>
-<p>首先需要保证当前环境已经安装 helm v3</p>
-<h2 id=准备阶段-1>准备阶段</h2>
-<p>拉取仓库代码</p>
-<blockquote>
-<p>当前暂时还未将 chart 上传至 charts 公共仓库</p>
-</blockquote>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git clone https://github.com/clusterpedia-io/clusterpedia.git
-$ <span style=color:#204a87>cd</span> clusterpedia/charts
-</code></pre></div><p>由于 clusterpedia 使用 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 作为存储组件子 chart，
-所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm repo add bitnami https://charts.bitnami.com/bitnami
-$ helm dependency build
-</code></pre></div><h3 id=选择存储组件-1>选择存储组件</h3>
-<p>Clusterpedia Chart 通过子 chart 的方式，提供了 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 两款存储组件可供选择。</p>
-<p><code>postgresql</code> 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 <code>--set postgresql.enabled=false --set mysql.enabled=true</code></p>
-<p>更多关于存储组件的配置，可以参考 <a href=https://github.com/bitnami/charts/tree/master/bitnami/postgresql>bitnami/postgresql</a> 和 <a href=https://github.com/bitnami/charts/tree/master/bitnami/mysql>bitnami/mysql</a>.</p>
-<p><strong>用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml</strong></p>
-<h3 id=选择-crd-的安装管理方式-1>选择 CRD 的安装/管理方式</h3>
-<p>clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。</p>
-<h4 id=手动管理-1>手动管理</h4>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl apply -f ./_crds
-</code></pre></div><h4 id=使用-helm-管理-1>使用 Helm 管理</h4>
-<p>在后续安装命令中需要手动添加 <code>--set installCRDs=true</code> 即可</p>
-<h3 id=决定是否需要创建-local-pv-1>决定是否需要创建 Local PV</h3>
-<p>Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。</p>
-<p><strong>用户在安装时需要通过 <code>--set persistenceMatchNode=&lt;selected node name></code> 来指定 Local PV 所在节点。</strong></p>
-<p>如果用户不需要创建 Local PV，那么需要使用 <code>--set persistenceMatchNode=None</code> 显式声明。</p>
-<h2 id=安装-clusterpedia-1>安装 Clusterpedia</h2>
-<p>经过上述决策后，用户可以进行安装</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm install clusterpedia . <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>  --namespace clusterpedia-system <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>  --create-namespace <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>  --set <span style=color:#000>persistenceMatchNode</span><span style=color:#ce5c00;font-weight:700>={{</span> LOCAL_PV_NODE <span style=color:#ce5c00;font-weight:700>}}</span> <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>  <span style=color:#8f5902;font-style:italic># --set installCRDs=true</span>
-</code></pre></div><h2 id=卸载-clusterpedia-1>卸载 Clusterpedia</h2>
-<p>在卸载 Clusterpedia 前需要手动清理所有 <code>PediaCluster</code> 资源</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
-</code></pre></div><p><code>PediaCluster</code> 清理完成后就可以执行卸载命令</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm -n clusterpedia-system uninstall clusterpedia
-</code></pre></div><p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl delete -f ./_crds
-</code></pre></div><p><strong>注意 PVC 和 PV 并不会删除，用户需要手动删除</strong></p>
-<p>如果创建了 Local PV 那么还需要进入相应节点，清理 Local PV 的遗留数据</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 登录 Local PV 绑定的节点</span>
-$ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
-</code></pre></div><p>当前 Clusterpedia 已经支持通过 Helm 来快速的部署</p>
-<p>首先需要保证当前环境已经安装 helm v3</p>
-<h2 id=准备阶段-2>准备阶段</h2>
-<p>拉取仓库代码</p>
-<blockquote>
-<p>当前暂时还未将 chart 上传至 charts 公共仓库</p>
-</blockquote>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git clone https://github.com/clusterpedia-io/clusterpedia.git
-$ <span style=color:#204a87>cd</span> clusterpedia/charts
-</code></pre></div><p>由于 clusterpedia 使用 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 作为存储组件子 chart，
-所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm repo add bitnami https://charts.bitnami.com/bitnami
-$ helm dependency build
-</code></pre></div><h3 id=选择存储组件-2>选择存储组件</h3>
-<p>Clusterpedia Chart 通过子 chart 的方式，提供了 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 两款存储组件可供选择。</p>
-<p><code>postgresql</code> 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 <code>--set postgresql.enabled=false --set mysql.enabled=true</code></p>
-<p>更多关于存储组件的配置，可以参考 <a href=https://github.com/bitnami/charts/tree/master/bitnami/postgresql>bitnami/postgresql</a> 和 <a href=https://github.com/bitnami/charts/tree/master/bitnami/mysql>bitnami/mysql</a>.</p>
-<p><strong>用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml</strong></p>
-<h3 id=选择-crd-的安装管理方式-2>选择 CRD 的安装/管理方式</h3>
-<p>clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。</p>
-<h4 id=手动管理-2>手动管理</h4>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl apply -f ./_crds
-</code></pre></div><h4 id=使用-helm-管理-2>使用 Helm 管理</h4>
-<p>在后续安装命令中需要手动添加 <code>--set installCRDs=true</code> 即可</p>
-<h3 id=决定是否需要创建-local-pv-2>决定是否需要创建 Local PV</h3>
-<p>Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。</p>
-<p><strong>用户在安装时需要通过 <code>--set persistenceMatchNode=&lt;selected node name></code> 来指定 Local PV 所在节点。</strong></p>
-<p>如果用户不需要创建 Local PV，那么需要使用 <code>--set persistenceMatchNode=None</code> 显式声明。</p>
-<h2 id=安装-clusterpedia-2>安装 Clusterpedia</h2>
-<p>经过上述决策后，用户可以进行安装</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm install clusterpedia . <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>  --namespace clusterpedia-system <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>  --create-namespace <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>  --set <span style=color:#000>persistenceMatchNode</span><span style=color:#ce5c00;font-weight:700>={{</span> LOCAL_PV_NODE <span style=color:#ce5c00;font-weight:700>}}</span> <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>  <span style=color:#8f5902;font-style:italic># --set installCRDs=true</span>
-</code></pre></div><h2 id=卸载-clusterpedia-2>卸载 Clusterpedia</h2>
-<p>在卸载 Clusterpedia 前需要手动清理所有 <code>PediaCluster</code> 资源</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
-</code></pre></div><p><code>PediaCluster</code> 清理完成后就可以执行卸载命令</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm -n clusterpedia-system uninstall clusterpedia
-</code></pre></div><p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl delete -f ./_crds
-</code></pre></div><p><strong>注意 PVC 和 PV 并不会删除，用户需要手动删除</strong></p>
-<p>如果创建了 Local PV 那么还需要进入相应节点，清理 Local PV 的遗留数据</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 登录 Local PV 绑定的节点</span>
-$ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
-</code></pre></div><p>当前 Clusterpedia 已经支持通过 Helm 来快速的部署</p>
-<p>首先需要保证当前环境已经安装 helm v3</p>
-<h2 id=准备阶段-3>准备阶段</h2>
-<p>拉取仓库代码</p>
-<blockquote>
-<p>当前暂时还未将 chart 上传至 charts 公共仓库</p>
-</blockquote>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git clone https://github.com/clusterpedia-io/clusterpedia.git
-$ <span style=color:#204a87>cd</span> clusterpedia/charts
-</code></pre></div><p>由于 clusterpedia 使用 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 作为存储组件子 chart，
-所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm repo add bitnami https://charts.bitnami.com/bitnami
-$ helm dependency build
-</code></pre></div><h3 id=选择存储组件-3>选择存储组件</h3>
-<p>Clusterpedia Chart 通过子 chart 的方式，提供了 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 两款存储组件可供选择。</p>
-<p><code>postgresql</code> 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 <code>--set postgresql.enabled=false --set mysql.enabled=true</code></p>
-<p>更多关于存储组件的配置，可以参考 <a href=https://github.com/bitnami/charts/tree/master/bitnami/postgresql>bitnami/postgresql</a> 和 <a href=https://github.com/bitnami/charts/tree/master/bitnami/mysql>bitnami/mysql</a>.</p>
-<p><strong>用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml</strong></p>
-<h3 id=选择-crd-的安装管理方式-3>选择 CRD 的安装/管理方式</h3>
-<p>clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。</p>
-<h4 id=手动管理-3>手动管理</h4>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl apply -f ./_crds
-</code></pre></div><h4 id=使用-helm-管理-3>使用 Helm 管理</h4>
-<p>在后续安装命令中需要手动添加 <code>--set installCRDs=true</code> 即可</p>
-<h3 id=决定是否需要创建-local-pv-3>决定是否需要创建 Local PV</h3>
-<p>Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。</p>
-<p><strong>用户在安装时需要通过 <code>--set persistenceMatchNode=&lt;selected node name></code> 来指定 Local PV 所在节点。</strong></p>
-<p>如果用户不需要创建 Local PV，那么需要使用 <code>--set persistenceMatchNode=None</code> 显式声明。</p>
-<h2 id=安装-clusterpedia-3>安装 Clusterpedia</h2>
-<p>经过上述决策后，用户可以进行安装</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm install clusterpedia . <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>  --namespace clusterpedia-system <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>  --create-namespace <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>  --set <span style=color:#000>persistenceMatchNode</span><span style=color:#ce5c00;font-weight:700>={{</span> LOCAL_PV_NODE <span style=color:#ce5c00;font-weight:700>}}</span> <span style=color:#4e9a06>\
-</span><span style=color:#4e9a06></span>  <span style=color:#8f5902;font-style:italic># --set installCRDs=true</span>
-</code></pre></div><h2 id=卸载-clusterpedia-3>卸载 Clusterpedia</h2>
-<p>在卸载 Clusterpedia 前需要手动清理所有 <code>PediaCluster</code> 资源</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
-</code></pre></div><p><code>PediaCluster</code> 清理完成后就可以执行卸载命令</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm -n clusterpedia-system uninstall clusterpedia
-</code></pre></div><p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl delete -f ./_crds
-</code></pre></div><p><strong>注意 PVC 和 PV 并不会删除，用户需要手动删除</strong></p>
-<p>如果创建了 Local PV 那么还需要进入相应节点，清理 Local PV 的遗留数据</p>
+</code></pre></div><p><strong>注意 PVC 和 PV 并不会删除，用户需要手动删除。</strong></p>
+<p>如果创建了 Local PV，那么还需要进入相应节点，清理 Local PV 的遗留数据。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 登录 Local PV 绑定的节点</span>
 $ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </code></pre></div>

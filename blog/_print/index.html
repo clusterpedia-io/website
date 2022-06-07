@@ -65,7 +65,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.e1fb36dc483f2dd439766958402a5281.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.6242c67d9be8d4b5cd9cdbe90fdb23c5.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -88,7 +88,11 @@ This is the multi-page printable view of this section.
 </div>
 <h1 class=title>Blog</h1>
 <ul>
+<li><a href=#pg-7577e1f00c898d6b5b357ef97fca540f>Clusterpedia is Listed in the CNCF Cloud Native Landscape</a></li>
 <li><a href=#pg-570d9cd46f5853e421c710b83718495c>Clusterpedia v0.2.0 Release</a></li>
+<li><a href=#pg-5c2e1f7ae120a013634369fe0b07ac44>Quickly Deploy Clusterpedia with Helm</a></li>
+<li><a href=#pg-a573450d521123dfff28da4e584abd0a>Clusterpedia Awarded | One of IT Technology Influcence Stars Selected by CSDN</a></li>
+<li><a href=#pg-a515773982ea192aad88251c576747f1>Demo Video ｜Clusterpedia - Complex Retrieval of Resources in a Multi-Cloud Environment</a></li>
 <li><a href=#pg-67dca6481b949a69612c7865dea88885>Clusterpedia v0.1.0 Release — four important functions</a></li>
 <li><a href=#pg-a32dbb6812755843c6db353189298112>Upgrade to Clusterpedia 0.1.0</a></li>
 <li><a href=#pg-5a9086c52772fbac4aea92a7ce0b36db>Clusterpedia with kubectl support to retrieve multicluster resources</a></li>
@@ -97,6 +101,17 @@ This is the multi-page printable view of this section.
 </div>
 </div>
 <div class=td-content>
+<h1 id=pg-7577e1f00c898d6b5b357ef97fca540f>Clusterpedia is Listed in the CNCF Cloud Native Landscape</h1>
+<div class="td-byline mb-4">
+<time datetime=2022-04-29 class=text-muted>Friday, April 29, 2022</time>
+</div>
+<p>In the updated CNCF Cloud Native Landscape, Clusterpedia was listed into the Scheduling & Orchestration quadrant of the Orchestration & Management layer, becoming a cloud-native multi-cluster complex retrieval tool recommended by CNCF.</p>
+<p><a href="https://landscape.cncf.io/card-mode?category=scheduling-orchestration&grouping=category&selected=clusterpedia"><img class="aligncenter wp-image-7957 size-full" src=https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/3871965400044875af28b263a790504c alt width=800 height=500 data-tag=bdshare></a></p>
+<hr>
+<p>Cloud Native Computing Foundation (CNCF) belongs to the Linux Foundation and was established in December 2015. It is a non-profit organization dedicated to fostering and maintaining a vendor-neutral open source ecosystem to promote cloud native technologies and make cloud native universal and sustainable.</p>
+<p>The Cloud Native Landscape has been maintained by CNCF since December 2016. It is intended as a map to list popular projects with best practices in the community, and categorizes them in the cloud native space to provide reference for enterprises to build a cloud native ecosystem. It has extensive influence on the development, operation, and maintenance of cloud native technologies.</p>
+</div>
+<div class=td-content style=page-break-before:always>
 <h1 id=pg-570d9cd46f5853e421c710b83718495c>Clusterpedia v0.2.0 Release</h1>
 <div class="td-byline mb-4">
 <time datetime=2022-04-12 class=text-muted>Tuesday, April 12, 2022</time>
@@ -290,6 +305,106 @@ cluster-example   fake-pod   3/3     3            3           113d
 <li><code>golangci-lint</code> is used as a static checking tool (<a href=https://github.com/clusterpedia-io/clusterpedia/pull/86>#86</a>, <a href=https://github.com/clusterpedia-io/clusterpedia/pull/88>#88</a>, @Iceber)</li>
 <li>Added CI Workloads such as static checking and unit testing for code <a href=https://github.com/clusterpedia-io/clusterpedia/pull/87>#87</a>, @Iceber)</li>
 </ul>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-5c2e1f7ae120a013634369fe0b07ac44>Quickly Deploy Clusterpedia with Helm</h1>
+<div class="td-byline mb-4">
+<time datetime=2022-04-11 class=text-muted>Monday, April 11, 2022</time>
+</div>
+<p>Currently Clusterpedia has supported a rapid deployment with Helm.</p>
+<p>All of first, you need to check if helm v3 is installed in your current environment.</p>
+<h2 id=preparation>Preparation</h2>
+<p>Pull the Clusterpedia repository.</p>
+<blockquote>
+<p>Currently, the chart has not been uploaded to the public charts repository.</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
+<span style=color:#204a87>cd</span> clusterpedia/charts
+</code></pre></div>
+<p>Since Clusterpedia uses <code>bitnami/postgresql</code> and <code>bitnami/mysql</code> as subcharts of storage components, it is necessary to add the bitnami repository and update the dependencies of the clusterpedia chart.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>helm repo add bitnami https://charts.bitnami.com/bitnami
+helm dependency build
+</code></pre></div>
+<h3 id=choose-storage-components>Choose storage components</h3>
+<p>The Clusterpedia chart provides two storage components such as <code>bitnami/postgresql</code> and <code>bitnami/mysql</code> to choose from as sub-charts.</p>
+<p><code>postgresql</code> is the default storage component. IF you want to use MySQL, you can add <code>--set postgresql.enabled=false --set mysql.enabled=true</code> in the subsequent installation command.</p>
+<p>For specific configuration about storage components, see <a href=https://github.com/bitnami/charts/tree/master/bitnami/postgresql>bitnami/postgresql</a> and <a href=https://github.com/bitnami/charts/tree/master/bitnami/mysql>bitnami/mysql</a>.</p>
+<p><strong>You can also choose not to install any storage component, but use external components. For related settings, see charts/values.yaml</strong></p>
+<h3 id=choose-a-installation-or-management-mode-for-crds>Choose a installation or management mode for CRDs</h3>
+<p>Clusterpedia requires proper CRD resources to be created in the retrieval environment. You can choose to manually deploy CRDs by using YAML, or you can manage it with Helm.</p>
+<h4 id=manage-manually>Manage manually</h4>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl apply -f ./_crds
+</code></pre></div>
+<h4 id=manage-with-helm>Manage with Helm</h4>
+<p>Manually add <code>--set installCRDs=true</code> in the subsequent installation command.</p>
+<h3 id=check-if-you-need-to-create-a-local-pv>Check if you need to create a local PV</h3>
+<p>Through the Clusterpedia chart, you can create storage components to use a local PV.</p>
+<p><strong>You need to specify the node where the local PV is located through <code>--set persistenceMatchNode=&lt;selected node name></code> during installation.</strong></p>
+<p>If you need not to create the local PV, you can use <code>--set persistenceMatchNode=None</code> to declare it explicitly.</p>
+<h2 id=install-clusterpedia>Install Clusterpedia</h2>
+<p>After the above procedure is completed, you can run the following command to install Clusterpedia:</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>helm install clusterpedia . <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>--namespace clusterpedia-system <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>--create-namespace <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>--set <span style=color:#000>persistenceMatchNode</span><span style=color:#ce5c00;font-weight:700>={{</span> LOCAL_PV_NODE <span style=color:#ce5c00;font-weight:700>}}</span> <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>--set <span style=color:#000>installCRDs</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87>true</span>
+</code></pre></div>
+<h2 id=uninstall-clusterpedia>Uninstall Clusterpedia</h2>
+<p>Before uninstallation, you shall manually clear all <code>PediaCluster</code> resources.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
+</code></pre></div>
+<p>You can run the command to uninstall it after the <code>PediaCluster</code> resources are cleared.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>helm -n clusterpedia-system uninstall clusterpedia
+</code></pre></div>
+<p>If you use any CRD resource that is manually created, you also need to manually clear the CRDs.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./_crds
+</code></pre></div>
+<p><strong>Note that PVC and PV will not be deleted. You need to manually delete them.</strong></p>
+<p>If you created a local PV, you need log in to the node and remove all remained data about the local PV.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Log in to the node with Local PV</span>
+rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
+</code></pre></div>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-a573450d521123dfff28da4e584abd0a>Clusterpedia Awarded | One of IT Technology Influcence Stars Selected by CSDN</h1>
+<div class="td-byline mb-4">
+<time datetime=2022-04-01 class=text-muted>Friday, April 01, 2022</time>
+</div>
+<div align=center><img src=http://blog.daocloud.io/wp-content/uploads/d807bc86a68e6e3bd67c041e86e611e0.jpg style=width:900px></div>
+<hr>
+<p>On March 30, CSDN officially announced the selection list of IT technology influence stars, and Clusterpedia was selected as a &ldquo;Cloud Native Technology Product in 2021&rdquo;.</p>
+<p>In the multi-cloud era, it is more and more complex and becomes a problem for resource management and retrieval in a multi-cluster environment.</p>
+<p>In a single cluster, we usually use kubectl to view resources, directly access Kubernetes OpenAPI, or use client-go to retrieve resources in the code.</p>
+<p>Now, in a multi-cluster environment, Clusterpedia provides compatibility with Kubernetes OpenAPI, so you can still perform complex retrieval or search for multi-cluster resources like a single cluster without pulling data from each cluster to the local for filtering.</p>
+<div align=center><img src=https://p3.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/ad3f106d991a45acbbdfe067425def26 style=width:300px></div>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-a515773982ea192aad88251c576747f1>Demo Video ｜Clusterpedia - Complex Retrieval of Resources in a Multi-Cloud Environment</h1>
+<div class="td-byline mb-4">
+<time datetime=2022-03-01 class=text-muted>Tuesday, March 01, 2022</time>
+</div>
+<p>Iceber, the sponsor of Clusterpedia and a cloud native senior engineer of Daocloud, introduced the functions provided by Clusterpedia about resource retrieval in detail. This video step-by-step demonstrated what issues can be solved by using Clusterepdia.</p>
+<div align=center><a href=https://www.bilibili.com/video/BV1qi4y117Vq><img class="aligncenter wp-image-7957 size-full" src=http://blog.daocloud.io/wp-content/uploads/clusterpedia.png alt width=800 height=500 data-tag=bdshare></a></div>
+<h2 id=clusterpedia-is-an-artifact-for-multi-cluster-resource-retrieval>Clusterpedia is an artifact for multi-cluster resource retrieval</h2>
+<p>With the increase of services you provide and the continuous expansion of the cluster scale, a single Kubernetes cluster may no longer meet the needs of many enterprises. As the cloud-native technologies develop, a multi-cloud era is coming. It is more complex and difficult to manage and retrieve resources in multiple clusters.</p>
+<p>As a result, many excellent open source projects have emerged in the community, such as cluster api for cluster lifecycle management, karmada and clusternet for multi-cloud application management. Clusterpedia is built on these cloud management platforms to provide you with complex search for multi-cluster resources.</p>
+<p>In a single cluster, we often use kubectl to view resources, directly access Kubernetes OpenAPI, or use client-go to retrieve resources in the code.</p>
+<p>Now, in a multi-cluster environment, Clusterpedia provides compatibility with Kubernetes OpenAPI, so you can still perform complex retrieval or search for multi-cluster resources like a single cluster without pulling data from each cluster to the local for filtering.</p>
+<p>In addition, the capabilities of Clusterpedia are not only for searching and viewing. It also supports simple control of resources in the future, just like wiki that also supports to edit entries. Clusterpedia provides the following features now:</p>
+<ul>
+<li>Support for search with complex conditions, filters, sorting, and paging</li>
+<li>Support for requesting attached resources when querying resources</li>
+<li>Use a unified retrieval portal for master cluster and multi-cluster resources</li>
+<li>Compatible with kubernetes OpenAPI, through which you can directly use kubectl for multi-cluster retrieval and need not any third-party plugins or tools</li>
+<li>Compatible with collecting different versions of cluster resources and not constrained by the version of master cluster</li>
+<li>High performance and low memory consumption in the process of resource collection</li>
+<li>Automatically start and stop resource collection based on to the health status of clusters</li>
+<li>Support for the pluggable storage layer that indicates you can use other storage components to customize the storage layer</li>
+<li>High availability</li>
+</ul>
+<h2 id=whats-next>What&rsquo;s Next</h2>
+<p>In addition to supporting complex retrieval of multiple clusters, Clusterpedia can provide more benefits, such as a unified portal to the master cluster and multi-cluster resources through an aggregated API, low memory usage and weak network optimization when synchronizing sub-cluster resources in real time. It can also provide a pluggable storage layer to decouple the dependencies of storage components.</p>
+<p>In the next topic, we will introduce the specific design and implementation principles, and explain more benefits offered by Clusterpedia, so stay tuned.</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-67dca6481b949a69612c7865dea88885>Clusterpedia v0.1.0 Release — four important functions</h1>
