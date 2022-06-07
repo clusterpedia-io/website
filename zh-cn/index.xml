@@ -1,4 +1,489 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Clusterpedia.io – Clusterpedia</title><link>/zh-cn/</link><description>Recent content in Clusterpedia on Clusterpedia.io</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Tue, 15 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="/zh-cn/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 升级到 Clusterpedia 0.1.0</title><link>/zh-cn/blog/2022/02/15/%E5%8D%87%E7%BA%A7%E5%88%B0-clusterpedia-0.1.0/</link><pubDate>Tue, 15 Feb 2022 00:00:00 +0000</pubDate><guid>/zh-cn/blog/2022/02/15/%E5%8D%87%E7%BA%A7%E5%88%B0-clusterpedia-0.1.0/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Clusterpedia.io – Clusterpedia</title><link>/zh-cn/</link><description>Recent content in Clusterpedia on Clusterpedia.io</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Fri, 29 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="/zh-cn/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Clusterpedia 入选云原生全景图</title><link>/zh-cn/blog/2022/04/29/clusterpedia-%E5%85%A5%E9%80%89%E4%BA%91%E5%8E%9F%E7%94%9F%E5%85%A8%E6%99%AF%E5%9B%BE/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>/zh-cn/blog/2022/04/29/clusterpedia-%E5%85%A5%E9%80%89%E4%BA%91%E5%8E%9F%E7%94%9F%E5%85%A8%E6%99%AF%E5%9B%BE/</guid><description>
+&lt;p>在 CNCF 最新发布的云原生全景图 (Cloud Native Landscape) 中，Clusterpedia入选Orchestration &amp;amp; Management (编排与管理) 层的 Scheduling &amp;amp; Orchestration (调度与编排) 象限，成为 CNCF 推荐的云原生多集群复杂检索工具。&lt;/p>
+&lt;p>&lt;a href="https://landscape.cncf.io/card-mode?category=scheduling-orchestration&amp;grouping=category&amp;selected=clusterpedia">&lt;img class="aligncenter wp-image-7957 size-full" src="https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/3871965400044875af28b263a790504c" alt="" width="800" height="500" data-tag="bdshare">&lt;/a>&lt;/p>
+&lt;hr>
+&lt;p>CNCF 全称 Cloud Native Computing Foundation (云原生计算基金会)，隶属于 Linux 基金会，成立于 2015 年 12 月，是非营利性组织，致力于培育和维护一个厂商中立的开源生态系统，来推广云原生技术，普及云原生应用。&lt;/p>
+&lt;p>云原生全景图由 CNCF 从 2016 年 12 月开始维护，汇总了社区成熟和使用范围较广、具有最佳实践的产品和方案，并加以分类，为企业构建云原生体系提供参考，在云生态研发、运维领域具有广泛影响力。&lt;/p></description></item><item><title>Blog: Clusterpedia v0.2.0 发布</title><link>/zh-cn/blog/2022/04/12/clusterpedia-v0.2.0-%E5%8F%91%E5%B8%83/</link><pubDate>Tue, 12 Apr 2022 00:00:00 +0000</pubDate><guid>/zh-cn/blog/2022/04/12/clusterpedia-v0.2.0-%E5%8F%91%E5%B8%83/</guid><description>
+&lt;h2 id="使用-kube-config-来接入集群">使用 kube config 来接入集群&lt;/h2>
+&lt;p>v0.1.0 时，用户需要分别填写被接入集群的 apiserver 地址，以及访问集群时的认证信息&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">cluster.clusterpedia.io/v1alpha2&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">kind&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">PediaCluster&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">metadata&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">cluster-example&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">spec&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">apiserver&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;https://10.30.43.43:6443&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">caData&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">tokenData&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">certData&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">keyData&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">syncResources&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 v0.2.0 中 &lt;code>PediaCluster&lt;/code> 增加了 &lt;code>spec.kubeconfig&lt;/code> 字段，用户可以直接使用 kube config 来接入集群。&lt;/p>
+&lt;p>首先 base64 集群的 &lt;em>kube config&lt;/em>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ base64 ./kubeconfig.yaml
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后填充到 PediaCluster 的 &lt;code>spec.kubeconfig&lt;/code> 字段中&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">cluster.clusterpedia.io/v1alpha2&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">kind&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">PediaCluster&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">metadata&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">cluster-example&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">spec&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">kubeconfig&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic">**base64&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">kubeconfig**&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">syncResources&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在使用 &lt;em>kube config&lt;/em> 时，不需要填写 &lt;code>spec.apiserver&lt;/code> 以及其他认证字段。&lt;/p>
+&lt;p>需要注意，使用 &lt;code>kubectl get pediacluster&lt;/code> 查看接入的集群列表时，&lt;strong>APISERVER&lt;/strong> 不会显示集群地址&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl get pediacluster
+NAME APISERVER VERSION STATUS
+cluster-example v1.22.2 Healthy
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果需要显示，那么需要额外手动设置 &lt;code>spec.kubeconfig&lt;/code>，未来会添加 Mutating Admission Webhook 来解析 kubeconfig 并自动填充 &lt;code>spec.apiserver&lt;/code> 字段。&lt;/p>
+&lt;h2 id="新增的检索功能">新增的检索功能&lt;/h2>
+&lt;h3 id="通过资源的创建时间来过滤资源">通过资源的创建时间来过滤资源&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>作用&lt;/th>
+&lt;th>Search Label Key&lt;/th>
+&lt;th>URL Query&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Since&lt;/td>
+&lt;td>search.clusterpedia.io/since&lt;/td>
+&lt;td>since&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Before&lt;/td>
+&lt;td>search.clusterpedia.io/before&lt;/td>
+&lt;td>before&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>创建时间的区间采用左闭右开的规则，&lt;strong>since &amp;lt;= creation time &amp;lt; before&lt;/strong>。&lt;/p>
+&lt;p>时间格式支持 4 种：&lt;/p>
+&lt;ol>
+&lt;li>&lt;code>Unix 时间戳格式&lt;/code> 为了方便使用会根据时间戳的长度来区分单位为 s 还是 ms。 10 位时间戳单位为秒，13 位时间戳单位为毫秒。&lt;/li>
+&lt;li>&lt;code>RFC3339&lt;/code> 2006-01-02T15:04:05Z or 2006-01-02T15:04:05+08:00&lt;/li>
+&lt;li>&lt;code>UTC Date&lt;/code> 2006-01-02&lt;/li>
+&lt;li>&lt;code>UTC Datetime&lt;/code> 2006-01-02 15:04:05&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>由于 Kube Label Selector 的限制，Search Label 只支持使用 Unix 时间戳和 UTC Data 的格式
+URL Query 可以使用四种格式&lt;/p>
+&lt;/blockquote>
+&lt;p>首先查看一下当前都有哪些资源&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl --cluster clusterpedia get pods
+CLUSTER NAME READY STATUS RESTARTS AGE
+cluster-example quickstart-ingress-nginx-admission-create--1-kxlnn 0/1 Completed &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 171d
+cluster-example fake-pod-698dfbbd5b-wvtvw 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 8d
+cluster-example fake-pod-698dfbbd5b-74cjx 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 21d
+cluster-example fake-pod-698dfbbd5b-tmcw7 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 8d
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>我们使用创建时间来过滤资源&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl --cluster clusterpedia get pods -l &lt;span style="color:#4e9a06">&amp;#34;search.clusterpedia.io/since=2022-03-20&amp;#34;&lt;/span>
+CLUSTER NAME READY STATUS RESTARTS AGE
+cluster-example fake-pod-698dfbbd5b-wvtvw 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 8d
+cluster-example fake-pod-698dfbbd5b-tmcw7 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 8d
+$ kubectl --cluster clusterpedia get pods -l &lt;span style="color:#4e9a06">&amp;#34;search.clusterpedia.io/before=2022-03-20&amp;#34;&lt;/span>
+CLUSTER NAME READY STATUS RESTARTS AGE
+cluster-example quickstart-ingress-nginx-admission-create--1-kxlnn 0/1 Completed &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 171d
+cluster-example fake-pod-698dfbbd5b-74cjx 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 21d
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用-owner-name-检索">使用 Owner Name 检索&lt;/h3>
+&lt;p>在 v0.1.0 时，我们可以指定祖辈或者父辈 &lt;code>Owner UID&lt;/code> 来查询资源，不过 &lt;code>Owner UID&lt;/code> 使用起来并不方便，毕竟还需要提前得知 Owner 资源的 UID。&lt;/p>
+&lt;p>在 v0.2.0 版本中，支持直接使用 &lt;code>Owner Name&lt;/code> 来查询，并且 Owner 查询由实验性功能进入到正式功能，Search Label 的前缀也由 &lt;em>internalstorage.clusterpedia.io&lt;/em> 升级为 &lt;em>search.clusterpedia.io&lt;/em>，并且提供了 URL Query。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>作用&lt;/th>
+&lt;th>Search Label Key&lt;/th>
+&lt;th>URL Query&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>指定 Owner UID&lt;/td>
+&lt;td>search.clusterpedia.io/owner-uid&lt;/td>
+&lt;td>ownerUID&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>指定 Owner Name&lt;/td>
+&lt;td>search.clusterpedia.io/owner-name&lt;/td>
+&lt;td>ownerName&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>指定 Owner Group Resource&lt;/td>
+&lt;td>search.clusterpedia.io/owner-gr&lt;/td>
+&lt;td>ownerGR&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>指定 Owner 辈分&lt;/td>
+&lt;td>internalstorage.clusterpedia.io/owner-seniority&lt;/td>
+&lt;td>ownerSeniority&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>如果用户同时指定了 &lt;code>Owner UID&lt;/code> 和 &lt;code>Owner Name&lt;/code>，那么 &lt;code>Owner Name&lt;/code> 会被忽略。&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl --cluster cluster-example get pods -l &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;search.clusterpedia.io/owner-name=fake-pod, \
+&lt;/span>&lt;span style="color:#4e9a06"> search.clusterpedia.io/owner-seniority=1&amp;#34;&lt;/span>
+CLUSTER NAME READY STATUS RESTARTS AGE
+cluster-example fake-pod-698dfbbd5b-wvtvw 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 8d
+cluster-example fake-pod-698dfbbd5b-74cjx 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 21d
+cluster-example fake-pod-698dfbbd5b-tmcw7 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 8d
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>另外为了避免某些情况下，owner 资源存在多种类型，我们可以使用 &lt;code>Owner Group Resource&lt;/code> 来限制 Owner 的类型。&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl --cluster cluster-example get pods -l &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;search.clusterpedia.io/owner-name=fake-pod,\
+&lt;/span>&lt;span style="color:#4e9a06"> search.clusterpedia.io/owner-gr=deployments.apps,\
+&lt;/span>&lt;span style="color:#4e9a06"> search.clusterpedia.io/owner-seniority=1&amp;#34;&lt;/span>
+... some output
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="根据资源名称的模糊搜索">根据资源名称的模糊搜索&lt;/h3>
+&lt;p>模糊搜索是一个非常常用的功能，当前暂时只提供了资源名称上的模糊搜索，由于还需要更多功能上的讨论，暂时作为试验性功能&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>作用&lt;/th>
+&lt;th>Search Label Key&lt;/th>
+&lt;th>URL Query&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>根据资源名称进行模糊搜索&lt;/td>
+&lt;td>internalstorage.clusterpedia.io/fuzzy-name&lt;/td>
+&lt;td>-&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl --cluster clusterpedia get deployments -l &lt;span style="color:#4e9a06">&amp;#34;internalstorage.clusterpedia.io/fuzzy-name=fake&amp;#34;&lt;/span>
+CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE
+cluster-example fake-pod 3/3 &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span> 113d
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以使用 &lt;code>in&lt;/code> 操作符来指定多个参数，这样可以过滤出名字包含所有模糊字符串的资源。&lt;/p>
+&lt;h2 id="其他功能">其他功能&lt;/h2>
+&lt;p>在 v0.1.0 中，查询资源列表时，允许返回的剩余的资源数量，这样用户可以通过计算就能得知当前检索添加下的资源总量。&lt;/p>
+&lt;p>在 v0.2.0 中对该功能进行了强化， 当分页查询的 &lt;code>Offset&lt;/code> 参数过大时，&lt;code>ReaminingItemCount&lt;/code> 可以为负数，
+这样可以保证通过 &lt;strong>&lt;code>offset + len(list.items) + list.metadata.remainingItemCount&lt;/code>&lt;/strong> 总是可以计算出正确的资源总量。&lt;/p>
+&lt;h1 id="发布日志httpsgithubcomclusterpedia-ioclusterpediareleasestagv020">&lt;a href="https://github.com/clusterpedia-io/clusterpedia/releases/tag/v0.2.0">发布日志&lt;/a>&lt;/h1>
+&lt;h2 id="whats-new">What&amp;rsquo;s New&lt;/h2>
+&lt;ul>
+&lt;li>支持使用 Helm 部署 (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/53">#53&lt;/a>, &lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/125">#125&lt;/a>, @calvin0327, @wzshiming)&lt;/li>
+&lt;li>PediaCluster 支持使用 kube config 来接入集群 (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/115">#115&lt;/a>, @wzshiming)&lt;/li>
+&lt;/ul>
+&lt;h3 id="apiserver">APIServer&lt;/h3>
+&lt;ul>
+&lt;li>支持通过创建时间的区间来过滤资源 (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/113">#113&lt;/a>, @cleverhu)&lt;/li>
+&lt;li>支持根据 Owner 的名字来检索资源，并且 Owner 查询成为 clusterpedia 的正式功能，同时支持 Search Label 和 URL Query (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/91">#91&lt;/a>, @Iceber)&lt;/li>
+&lt;/ul>
+&lt;h3 id="default-storage-layer">Default Storage Layer&lt;/h3>
+&lt;ul>
+&lt;li>支持根据资源名称的模糊搜索 (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/117">#117&lt;/a>, @cleverhu)&lt;/li>
+&lt;li>RemainingItemCount 可以为负数，在 Offset 过大时依然可以使用 &lt;code>offset + len(items) + remainingItemCount&lt;/code> 来计算资源总量。(&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/123">#123&lt;/a>, @cleverhu)&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug-fixes">Bug Fixes&lt;/h4>
+&lt;ul>
+&lt;li>修复由于不必要的反序列化导致的 cpu 损耗，提升了查询时的性能 (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/89">#89&lt;/a>, &lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/92">#92&lt;/a>, @Iceber)&lt;/li>
+&lt;/ul>
+&lt;h4 id="deprecation">Deprecation&lt;/h4>
+&lt;ul>
+&lt;li>Owner 查询已移动到正式功能，用于 Owner 查询的试验性 Search Label —— &lt;code>internalstorage.clusterpedia.io/owner-name&lt;/code> 和 &lt;code>internalstorage.clusterpedia.io/owner-seniority&lt;/code> 会在下一个版本被移除 (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/91">#91&lt;/a>, @Iceber)&lt;/li>
+&lt;/ul></description></item><item><title>Blog: 使用 Helm 快速部署 Clusterpedia</title><link>/zh-cn/blog/2022/04/11/%E4%BD%BF%E7%94%A8-helm-%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2-clusterpedia/</link><pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate><guid>/zh-cn/blog/2022/04/11/%E4%BD%BF%E7%94%A8-helm-%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2-clusterpedia/</guid><description>
+&lt;p>当前 Clusterpedia 已经支持通过 Helm 来快速的部署&lt;/p>
+&lt;p>首先需要保证当前环境已经安装 helm v3&lt;/p>
+&lt;h2 id="准备阶段">准备阶段&lt;/h2>
+&lt;p>拉取仓库代码&lt;/p>
+&lt;blockquote>
+&lt;p>当前暂时还未将 chart 上传至 charts 公共仓库&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ git clone https://github.com/clusterpedia-io/clusterpedia.git
+$ &lt;span style="color:#204a87">cd&lt;/span> clusterpedia/charts
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 clusterpedia 使用 &lt;code>bitnami/postgresql&lt;/code> 和 &lt;code>bitnami/mysql&lt;/code> 作为存储组件子 chart，
+所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ helm repo add bitnami https://charts.bitnami.com/bitnami
+$ helm dependency build
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="选择存储组件">选择存储组件&lt;/h3>
+&lt;p>Clusterpedia Chart 通过子 chart 的方式，提供了 &lt;code>bitnami/postgresql&lt;/code> 和 &lt;code>bitnami/mysql&lt;/code> 两款存储组件可供选择。&lt;/p>
+&lt;p>&lt;code>postgresql&lt;/code> 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 &lt;code>--set postgresql.enabled=false --set mysql.enabled=true&lt;/code>&lt;/p>
+&lt;p>更多关于存储组件的配置，可以参考 &lt;a href="https://github.com/bitnami/charts/tree/master/bitnami/postgresql">bitnami/postgresql&lt;/a> 和 &lt;a href="https://github.com/bitnami/charts/tree/master/bitnami/mysql">bitnami/mysql&lt;/a>.&lt;/p>
+&lt;p>&lt;strong>用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml&lt;/strong>&lt;/p>
+&lt;h3 id="选择-crd-的安装管理方式">选择 CRD 的安装/管理方式&lt;/h3>
+&lt;p>clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。&lt;/p>
+&lt;h4 id="手动管理">手动管理&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl apply -f ./_crds
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="使用-helm-管理">使用 Helm 管理&lt;/h4>
+&lt;p>在后续安装命令中需要手动添加 &lt;code>--set installCRDs=true&lt;/code> 即可&lt;/p>
+&lt;h3 id="决定是否需要创建-local-pv">决定是否需要创建 Local PV&lt;/h3>
+&lt;p>Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。&lt;/p>
+&lt;p>&lt;strong>用户在安装时需要通过 &lt;code>--set persistenceMatchNode=&amp;lt;selected node name&amp;gt;&lt;/code> 来指定 Local PV 所在节点。&lt;/strong>&lt;/p>
+&lt;p>如果用户不需要创建 Local PV，那么需要使用 &lt;code>--set persistenceMatchNode=None&lt;/code> 显式声明。&lt;/p>
+&lt;h2 id="安装-clusterpedia">安装 Clusterpedia&lt;/h2>
+&lt;p>经过上述决策后，用户可以进行安装&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ helm install clusterpedia . &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> --namespace clusterpedia-system &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> --create-namespace &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> --set &lt;span style="color:#000">persistenceMatchNode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">={{&lt;/span> LOCAL_PV_NODE &lt;span style="color:#ce5c00;font-weight:bold">}}&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># --set installCRDs=true&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="卸载-clusterpedia">卸载 Clusterpedia&lt;/h2>
+&lt;p>在卸载 Clusterpedia 前需要手动清理所有 &lt;code>PediaCluster&lt;/code> 资源&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl get pediacluster
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>PediaCluster&lt;/code> 清理完成后就可以执行卸载命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ helm -n clusterpedia-system uninstall clusterpedia
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl delete -f ./_crds
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>注意 PVC 和 PV 并不会删除，用户需要手动删除&lt;/strong>&lt;/p>
+&lt;p>如果创建了 Local PV 那么还需要进入相应节点，清理 Local PV 的遗留数据&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#8f5902;font-style:italic"># 登录 Local PV 绑定的节点&lt;/span>
+$ rm /var/local/clusterpedia/internalstorage/&amp;lt;storage type&amp;gt;
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>当前 Clusterpedia 已经支持通过 Helm 来快速的部署&lt;/p>
+&lt;p>首先需要保证当前环境已经安装 helm v3&lt;/p>
+&lt;h2 id="准备阶段-1">准备阶段&lt;/h2>
+&lt;p>拉取仓库代码&lt;/p>
+&lt;blockquote>
+&lt;p>当前暂时还未将 chart 上传至 charts 公共仓库&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ git clone https://github.com/clusterpedia-io/clusterpedia.git
+$ &lt;span style="color:#204a87">cd&lt;/span> clusterpedia/charts
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 clusterpedia 使用 &lt;code>bitnami/postgresql&lt;/code> 和 &lt;code>bitnami/mysql&lt;/code> 作为存储组件子 chart，
+所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ helm repo add bitnami https://charts.bitnami.com/bitnami
+$ helm dependency build
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="选择存储组件-1">选择存储组件&lt;/h3>
+&lt;p>Clusterpedia Chart 通过子 chart 的方式，提供了 &lt;code>bitnami/postgresql&lt;/code> 和 &lt;code>bitnami/mysql&lt;/code> 两款存储组件可供选择。&lt;/p>
+&lt;p>&lt;code>postgresql&lt;/code> 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 &lt;code>--set postgresql.enabled=false --set mysql.enabled=true&lt;/code>&lt;/p>
+&lt;p>更多关于存储组件的配置，可以参考 &lt;a href="https://github.com/bitnami/charts/tree/master/bitnami/postgresql">bitnami/postgresql&lt;/a> 和 &lt;a href="https://github.com/bitnami/charts/tree/master/bitnami/mysql">bitnami/mysql&lt;/a>.&lt;/p>
+&lt;p>&lt;strong>用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml&lt;/strong>&lt;/p>
+&lt;h3 id="选择-crd-的安装管理方式-1">选择 CRD 的安装/管理方式&lt;/h3>
+&lt;p>clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。&lt;/p>
+&lt;h4 id="手动管理-1">手动管理&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl apply -f ./_crds
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="使用-helm-管理-1">使用 Helm 管理&lt;/h4>
+&lt;p>在后续安装命令中需要手动添加 &lt;code>--set installCRDs=true&lt;/code> 即可&lt;/p>
+&lt;h3 id="决定是否需要创建-local-pv-1">决定是否需要创建 Local PV&lt;/h3>
+&lt;p>Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。&lt;/p>
+&lt;p>&lt;strong>用户在安装时需要通过 &lt;code>--set persistenceMatchNode=&amp;lt;selected node name&amp;gt;&lt;/code> 来指定 Local PV 所在节点。&lt;/strong>&lt;/p>
+&lt;p>如果用户不需要创建 Local PV，那么需要使用 &lt;code>--set persistenceMatchNode=None&lt;/code> 显式声明。&lt;/p>
+&lt;h2 id="安装-clusterpedia-1">安装 Clusterpedia&lt;/h2>
+&lt;p>经过上述决策后，用户可以进行安装&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ helm install clusterpedia . &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> --namespace clusterpedia-system &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> --create-namespace &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> --set &lt;span style="color:#000">persistenceMatchNode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">={{&lt;/span> LOCAL_PV_NODE &lt;span style="color:#ce5c00;font-weight:bold">}}&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># --set installCRDs=true&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="卸载-clusterpedia-1">卸载 Clusterpedia&lt;/h2>
+&lt;p>在卸载 Clusterpedia 前需要手动清理所有 &lt;code>PediaCluster&lt;/code> 资源&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl get pediacluster
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>PediaCluster&lt;/code> 清理完成后就可以执行卸载命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ helm -n clusterpedia-system uninstall clusterpedia
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl delete -f ./_crds
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>注意 PVC 和 PV 并不会删除，用户需要手动删除&lt;/strong>&lt;/p>
+&lt;p>如果创建了 Local PV 那么还需要进入相应节点，清理 Local PV 的遗留数据&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#8f5902;font-style:italic"># 登录 Local PV 绑定的节点&lt;/span>
+$ rm /var/local/clusterpedia/internalstorage/&amp;lt;storage type&amp;gt;
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>当前 Clusterpedia 已经支持通过 Helm 来快速的部署&lt;/p>
+&lt;p>首先需要保证当前环境已经安装 helm v3&lt;/p>
+&lt;h2 id="准备阶段-2">准备阶段&lt;/h2>
+&lt;p>拉取仓库代码&lt;/p>
+&lt;blockquote>
+&lt;p>当前暂时还未将 chart 上传至 charts 公共仓库&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ git clone https://github.com/clusterpedia-io/clusterpedia.git
+$ &lt;span style="color:#204a87">cd&lt;/span> clusterpedia/charts
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 clusterpedia 使用 &lt;code>bitnami/postgresql&lt;/code> 和 &lt;code>bitnami/mysql&lt;/code> 作为存储组件子 chart，
+所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ helm repo add bitnami https://charts.bitnami.com/bitnami
+$ helm dependency build
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="选择存储组件-2">选择存储组件&lt;/h3>
+&lt;p>Clusterpedia Chart 通过子 chart 的方式，提供了 &lt;code>bitnami/postgresql&lt;/code> 和 &lt;code>bitnami/mysql&lt;/code> 两款存储组件可供选择。&lt;/p>
+&lt;p>&lt;code>postgresql&lt;/code> 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 &lt;code>--set postgresql.enabled=false --set mysql.enabled=true&lt;/code>&lt;/p>
+&lt;p>更多关于存储组件的配置，可以参考 &lt;a href="https://github.com/bitnami/charts/tree/master/bitnami/postgresql">bitnami/postgresql&lt;/a> 和 &lt;a href="https://github.com/bitnami/charts/tree/master/bitnami/mysql">bitnami/mysql&lt;/a>.&lt;/p>
+&lt;p>&lt;strong>用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml&lt;/strong>&lt;/p>
+&lt;h3 id="选择-crd-的安装管理方式-2">选择 CRD 的安装/管理方式&lt;/h3>
+&lt;p>clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。&lt;/p>
+&lt;h4 id="手动管理-2">手动管理&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl apply -f ./_crds
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="使用-helm-管理-2">使用 Helm 管理&lt;/h4>
+&lt;p>在后续安装命令中需要手动添加 &lt;code>--set installCRDs=true&lt;/code> 即可&lt;/p>
+&lt;h3 id="决定是否需要创建-local-pv-2">决定是否需要创建 Local PV&lt;/h3>
+&lt;p>Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。&lt;/p>
+&lt;p>&lt;strong>用户在安装时需要通过 &lt;code>--set persistenceMatchNode=&amp;lt;selected node name&amp;gt;&lt;/code> 来指定 Local PV 所在节点。&lt;/strong>&lt;/p>
+&lt;p>如果用户不需要创建 Local PV，那么需要使用 &lt;code>--set persistenceMatchNode=None&lt;/code> 显式声明。&lt;/p>
+&lt;h2 id="安装-clusterpedia-2">安装 Clusterpedia&lt;/h2>
+&lt;p>经过上述决策后，用户可以进行安装&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ helm install clusterpedia . &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> --namespace clusterpedia-system &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> --create-namespace &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> --set &lt;span style="color:#000">persistenceMatchNode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">={{&lt;/span> LOCAL_PV_NODE &lt;span style="color:#ce5c00;font-weight:bold">}}&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># --set installCRDs=true&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="卸载-clusterpedia-2">卸载 Clusterpedia&lt;/h2>
+&lt;p>在卸载 Clusterpedia 前需要手动清理所有 &lt;code>PediaCluster&lt;/code> 资源&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl get pediacluster
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>PediaCluster&lt;/code> 清理完成后就可以执行卸载命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ helm -n clusterpedia-system uninstall clusterpedia
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl delete -f ./_crds
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>注意 PVC 和 PV 并不会删除，用户需要手动删除&lt;/strong>&lt;/p>
+&lt;p>如果创建了 Local PV 那么还需要进入相应节点，清理 Local PV 的遗留数据&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#8f5902;font-style:italic"># 登录 Local PV 绑定的节点&lt;/span>
+$ rm /var/local/clusterpedia/internalstorage/&amp;lt;storage type&amp;gt;
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>当前 Clusterpedia 已经支持通过 Helm 来快速的部署&lt;/p>
+&lt;p>首先需要保证当前环境已经安装 helm v3&lt;/p>
+&lt;h2 id="准备阶段-3">准备阶段&lt;/h2>
+&lt;p>拉取仓库代码&lt;/p>
+&lt;blockquote>
+&lt;p>当前暂时还未将 chart 上传至 charts 公共仓库&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ git clone https://github.com/clusterpedia-io/clusterpedia.git
+$ &lt;span style="color:#204a87">cd&lt;/span> clusterpedia/charts
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 clusterpedia 使用 &lt;code>bitnami/postgresql&lt;/code> 和 &lt;code>bitnami/mysql&lt;/code> 作为存储组件子 chart，
+所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ helm repo add bitnami https://charts.bitnami.com/bitnami
+$ helm dependency build
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="选择存储组件-3">选择存储组件&lt;/h3>
+&lt;p>Clusterpedia Chart 通过子 chart 的方式，提供了 &lt;code>bitnami/postgresql&lt;/code> 和 &lt;code>bitnami/mysql&lt;/code> 两款存储组件可供选择。&lt;/p>
+&lt;p>&lt;code>postgresql&lt;/code> 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 &lt;code>--set postgresql.enabled=false --set mysql.enabled=true&lt;/code>&lt;/p>
+&lt;p>更多关于存储组件的配置，可以参考 &lt;a href="https://github.com/bitnami/charts/tree/master/bitnami/postgresql">bitnami/postgresql&lt;/a> 和 &lt;a href="https://github.com/bitnami/charts/tree/master/bitnami/mysql">bitnami/mysql&lt;/a>.&lt;/p>
+&lt;p>&lt;strong>用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml&lt;/strong>&lt;/p>
+&lt;h3 id="选择-crd-的安装管理方式-3">选择 CRD 的安装/管理方式&lt;/h3>
+&lt;p>clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。&lt;/p>
+&lt;h4 id="手动管理-3">手动管理&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl apply -f ./_crds
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="使用-helm-管理-3">使用 Helm 管理&lt;/h4>
+&lt;p>在后续安装命令中需要手动添加 &lt;code>--set installCRDs=true&lt;/code> 即可&lt;/p>
+&lt;h3 id="决定是否需要创建-local-pv-3">决定是否需要创建 Local PV&lt;/h3>
+&lt;p>Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。&lt;/p>
+&lt;p>&lt;strong>用户在安装时需要通过 &lt;code>--set persistenceMatchNode=&amp;lt;selected node name&amp;gt;&lt;/code> 来指定 Local PV 所在节点。&lt;/strong>&lt;/p>
+&lt;p>如果用户不需要创建 Local PV，那么需要使用 &lt;code>--set persistenceMatchNode=None&lt;/code> 显式声明。&lt;/p>
+&lt;h2 id="安装-clusterpedia-3">安装 Clusterpedia&lt;/h2>
+&lt;p>经过上述决策后，用户可以进行安装&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ helm install clusterpedia . &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> --namespace clusterpedia-system &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> --create-namespace &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> --set &lt;span style="color:#000">persistenceMatchNode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">={{&lt;/span> LOCAL_PV_NODE &lt;span style="color:#ce5c00;font-weight:bold">}}&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># --set installCRDs=true&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="卸载-clusterpedia-3">卸载 Clusterpedia&lt;/h2>
+&lt;p>在卸载 Clusterpedia 前需要手动清理所有 &lt;code>PediaCluster&lt;/code> 资源&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl get pediacluster
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>PediaCluster&lt;/code> 清理完成后就可以执行卸载命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ helm -n clusterpedia-system uninstall clusterpedia
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl delete -f ./_crds
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>注意 PVC 和 PV 并不会删除，用户需要手动删除&lt;/strong>&lt;/p>
+&lt;p>如果创建了 Local PV 那么还需要进入相应节点，清理 Local PV 的遗留数据&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#8f5902;font-style:italic"># 登录 Local PV 绑定的节点&lt;/span>
+$ rm /var/local/clusterpedia/internalstorage/&amp;lt;storage type&amp;gt;
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Blog: Clusterpedia 上榜| CSDN IT 技术影响力之星</title><link>/zh-cn/blog/2022/04/01/clusterpedia-%E4%B8%8A%E6%A6%9C-csdn-it-%E6%8A%80%E6%9C%AF%E5%BD%B1%E5%93%8D%E5%8A%9B%E4%B9%8B%E6%98%9F/</link><pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate><guid>/zh-cn/blog/2022/04/01/clusterpedia-%E4%B8%8A%E6%A6%9C-csdn-it-%E6%8A%80%E6%9C%AF%E5%BD%B1%E5%93%8D%E5%8A%9B%E4%B9%8B%E6%98%9F/</guid><description>
+&lt;div align="center">&lt;img src="http://blog.daocloud.io/wp-content/uploads/d807bc86a68e6e3bd67c041e86e611e0.jpg" style="width:900px;" />&lt;/div>
+&lt;hr>
+&lt;p>3 月 30 日，CSDN 正式公布 IT 技术影响力之星评选结果，Clusterpedia 入选「2021 年度云原生技术产品」。&lt;/p>
+&lt;p>在多云时代，多集群内部资源管理和检索越来越复杂，成为多云管理的一大难题。&lt;/p>
+&lt;p>在单集群中，我们通常使用 kubectl 来查看资源，或者直接访问 Kubernetes 的 OpenAPI，在代码中也可以借助 client-go 来对资源进行检索。&lt;/p>
+&lt;p>而在多集群环境下，Clusterpedia 通过兼容 Kubernetes OpenAPI ，用户可以依然使用单集群的方式，来对多集群资源进行复杂检索，无需从每个集群中拉取数据到本地进行过滤。&lt;/p>
+&lt;div align="center">&lt;img src="https://p3.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/ad3f106d991a45acbbdfe067425def26" style="width:300px;" />&lt;/div></description></item><item><title>Blog: 视频讲解｜Clusterpedia -- 多云环境下的资源复杂检索</title><link>/zh-cn/blog/2022/03/01/%E8%A7%86%E9%A2%91%E8%AE%B2%E8%A7%A3clusterpedia-%E5%A4%9A%E4%BA%91%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E8%B5%84%E6%BA%90%E5%A4%8D%E6%9D%82%E6%A3%80%E7%B4%A2/</link><pubDate>Tue, 01 Mar 2022 00:00:00 +0000</pubDate><guid>/zh-cn/blog/2022/03/01/%E8%A7%86%E9%A2%91%E8%AE%B2%E8%A7%A3clusterpedia-%E5%A4%9A%E4%BA%91%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E8%B5%84%E6%BA%90%E5%A4%8D%E6%9D%82%E6%A3%80%E7%B4%A2/</guid><description>
+&lt;p>Clusterpedia 的发起人 &amp;ndash;「Daocloud 道客」的云原生研发工程师蔡威，为大家详细介绍 Clusterpedia 在资源检索上提供的功能，让大家可以直观的了解到使用 Clusterepdia 可以解决哪些问题。&lt;/p>
+&lt;div align="center">&lt;a href="https://www.bilibili.com/video/BV1qi4y117Vq">&lt;img class="aligncenter wp-image-7957 size-full" src="http://blog.daocloud.io/wp-content/uploads/clusterpedia.png" alt="" width="800" height="500" data-tag="bdshare">&lt;/a>&lt;/div>
+&lt;h2 id="clusterpedia-多集群资源检索神器">Clusterpedia 多集群资源检索神器&lt;/h2>
+&lt;p>随着云原生技术的发展、承载业务量的增加以及集群规模的不断扩大，单个 Kubernetes 集群已经无法满足很多企业的需求，我们在逐渐的步入多云时代，多集群内部资源管理和检索变得越发复杂和困难。&lt;/p>
+&lt;p>由此，社区不断出现了很多优秀的的开源项目，例如用于集群生命周期管理的 cluster api，以及多云应用管理的 karmada， clusternet 等。而 Clusterpedia 便是建立在这些云管平台之上，为用户提供多集群资源的复杂检索。&lt;/p>
+&lt;p>在单集群中，我们通常使用 kubectl 来查看资源，或者直接访问 Kubernetes 的 OpenAPI，在代码中也可以借助 client-go 来对资源进行检索。&lt;/p>
+&lt;p>而在多集群环境下，Clusterpedia 通过兼容 Kubernetes OpenAPI ，用户可以依然使用单集群的方式，来对多集群资源进行复杂检索，无需从每个集群中拉取数据到本地进行过滤。&lt;/p>
+&lt;p>当然 Clusterpedia 的能力并不仅仅只是检索查看，未来还会支持对资源的简单控制，就像 wiki 同样支持编辑词条一样。Clusterpedia 具有许多特性和功能：&lt;/p>
+&lt;ul>
+&lt;li>支持复杂的检索条件，过滤条件，排序，分页等等&lt;/li>
+&lt;li>支持查询资源时请求附带关系资源&lt;/li>
+&lt;li>统一主集群和多集群资源检索入口&lt;/li>
+&lt;li>兼容 kubernetes OpenAPI, 可以直接使用 kubectl 进行多集群检索, 而无需第三方插件或者工具&lt;/li>
+&lt;li>兼容收集不同版本的集群资源，不受主集群版本约束，&lt;/li>
+&lt;li>资源收集高性能，低内存&lt;/li>
+&lt;li>根据集群当前的健康状态，自动启停资源收集&lt;/li>
+&lt;li>插件化存储层，用户可以根据自己需求使用其他存储组件来自定义存储层&lt;/li>
+&lt;li>高可用&lt;/li>
+&lt;/ul>
+&lt;h2 id="下期内容">下期内容&lt;/h2>
+&lt;p>除了支持多集群的复杂检索，Clusterpedia 还有很多其他优点，例如通过聚合式 API 来统一主集群和多集群资源的访问入口，在实时同步子集群资源时的低内存占用以及弱网优化，另外还有通过插件化存储层来解耦对存储组件的依赖。&lt;/p>
+&lt;p>下一期将为大家介绍具体设计和实现原理，详细解读 Clusterpedia 的优点，敬请期待。&lt;/p></description></item><item><title>Blog: 首发｜Clusterpedia 0.1.0 四大重要功能</title><link>/zh-cn/blog/2022/02/16/%E9%A6%96%E5%8F%91clusterpedia-0.1.0-%E5%9B%9B%E5%A4%A7%E9%87%8D%E8%A6%81%E5%8A%9F%E8%83%BD/</link><pubDate>Wed, 16 Feb 2022 00:00:00 +0000</pubDate><guid>/zh-cn/blog/2022/02/16/%E9%A6%96%E5%8F%91clusterpedia-0.1.0-%E5%9B%9B%E5%A4%A7%E9%87%8D%E8%A6%81%E5%8A%9F%E8%83%BD/</guid><description>
+&lt;p>&lt;strong>Clusterpedia 第一个版本 &amp;ndash; Clusterpedia 0.1.0 正式发布&lt;/strong>，即日起进入版本迭代阶段。相比于初期的 0.0.8 和 0.0.9-alpha，0.1.0 添加了很多功能，并且做了一些不兼容的更新。&lt;/p>
+&lt;p>如果由 0.0.9-alpha 升级的话，可以参考 &lt;a href="/blog/2022/02/15/upgrade-to-clusterpedia-0.1.0/">Upgrade to Clusterpedia 0.1.0&lt;/a>&lt;/p>
+&lt;h2 id="重要功能">重要功能&lt;/h2>
+&lt;p>我们先介绍一下在 0.1.0 中增加的四大重要的功能：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>对 Not Ready 的集群进行资源检索时，增加了 Warning 提醒&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>增强了原生 Field Selector 的能力&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>根据父辈或者祖辈的 Owner 来进行查询&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>响应数据携带 remaining item count&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a href="https://github.com/clusterpedia-io/clusterpedia/releases/tag/v0.1.0">v0.1.0 Release Notes&lt;/a>&lt;/p>
+&lt;h2 id="资源检索时的-warning-提醒">资源检索时的 Warning 提醒&lt;/h2>
+&lt;p>集群由于某些原因处于非 Ready 的状态时，资源通常也无法正常同步，在获取到该集群内的资源时，会通过 Warnning 提醒来告知用户集群异常，并且获取到的资源可能并不是实时准确的。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl get pediacluster
+NAME APISERVER VERSION STATUS
+cluster-1 https://10.6.100.10:6443 v1.22.2 ClusterSynchroStop
+$ kubectl --cluster cluster-1 get pods
+Warning: cluster-1 is not ready and the resources obtained may be inaccurate, reason: ClusterSynchroStop
+CLUSTER NAME READY STATUS RESTARTS AGE
+cluster-1 fake-pod-698dfbbd5b-64fsx 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 68d
+cluster-1 fake-pod-698dfbbd5b-9ftzh 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 39d
+cluster-1 fake-pod-698dfbbd5b-rk74p 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 39d
+cluster-1 quickstart-ingress-nginx-admission-create--1-kxlnn 0/1 Completed &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 126d
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="强化-field-selector">强化 Field Selector&lt;/h2>
+&lt;p>原生 kubernetes 对于 Field Selector 的支持非常有限，默认只支持 metadata.namespace 和 metadata.name 字段的过滤，尽管一些特定的资源会支持一些特殊的字段，但是使用起来还是比较局限，操作符只能支持 =, ==, !=。&lt;/p>
+&lt;p>Clusterpedia 在兼容原生 Field Selector 的基础上，不仅仅支持了更加灵活的字段过滤，还支持和 Label Selector 相同的操作符：!, =, !=, ==, in, notin。&lt;/p>
+&lt;p>例如我们可以像 label selector 一样，通过 annotations 过滤资源。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl get deploy --field-selector&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;metadata.annotations[&amp;#39;test.io&amp;#39;] in (value1, value2)&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="/docs/usage/search/multi-cluster/#field-selector">Lean More&lt;/a>&lt;/p>
+&lt;h2 id="根据父辈或者祖辈-owner-进行查询">根据父辈或者祖辈 Owner 进行查询&lt;/h2>
+&lt;p>Kubernetes 资源之间通常会存在一种 Owner 关系, 例如：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">v1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">kind&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Pod&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">metadata&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ownerReferences&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">apps/v1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">blockOwnerDeletion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">controller&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">kind&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">ReplicaSet&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">fake-pod-698dfbbd5b&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">uid&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">d5bf2bdd-47d2-4932-84fb-98bde486d244&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Clusterpedia 不仅支持根据 Owner 查询，还支持对 Owner 进行辈分提升来根据祖辈或者更高辈分的 Owner 来检索资源。&lt;/p>
+&lt;p>例如可以通过 Deployment 获取相应的所有 pods。&lt;/p>
+&lt;blockquote>
+&lt;p>当前暂时只支持通过Owner UID 来查询资源, 使用 Owner Name 来进行查询的功能尚在讨论中，可以在 issue: Support for searching resources by owner 参与讨论。
+v0.2.0 中已经支持通过 Owner name 进行查询&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ &lt;span style="color:#000">DEPLOY_UID&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">$(&lt;/span>kubectl --cluster cluster-1 get deploy fake-deploy -o &lt;span style="color:#000">jsonpath&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;{.metadata.uid}&amp;#34;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">)&lt;/span>
+$ kubectl --cluster cluster-1 get pods -l &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;span style="color:#4e9a06">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;internalstorage.clusterpedia.io/owner-uid=&lt;/span>&lt;span style="color:#000">$DEPLOY_UID&lt;/span>&lt;span style="color:#4e9a06">,\
+&lt;/span>&lt;span style="color:#4e9a06"> internalstorage.clusterpedia.io/owner-seniority=1&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="/docs/usage/search/multi-cluster/#search-by-parent-or-ancestor-owner">Lean More&lt;/a>&lt;/p>
+&lt;h2 id="响应数据内携带剩余资源数量">响应数据内携带剩余资源数量&lt;/h2>
+&lt;p>在一些 UI 场景下，往往需要获取当前检索条件下的资源总量。&lt;/p>
+&lt;p>Kubernetes 响应的 ListMeta 中 RemainingItemCount 字段表示剩余的资源数量。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#204a87;font-weight:bold">type&lt;/span> &lt;span style="color:#000">ListMeta&lt;/span> &lt;span style="color:#204a87;font-weight:bold">struct&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#ce5c00;font-weight:bold">...&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// remainingItemCount is the number of subsequent items in the list which are not included in this
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// list response. If the list request contained label or field selectors, then the number of
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// remaining items is unknown and the field will be left unset and omitted during serialization.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// If the list is complete (either because it is not chunking or because this is the last chunk),
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// then there are no more remaining items and this field will be left unset and omitted during
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// serialization.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Servers older than v1.15 do not set this field.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// The intended use of the remainingItemCount is *estimating* the size of a collection. Clients
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// should not rely on the remainingItemCount to be set or to be exact.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// +optional
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">RemainingItemCount&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int64&lt;/span> &lt;span style="color:#4e9a06">`json:&amp;#34;remainingItemCount,omitempty&amp;#34; protobuf:&amp;#34;bytes,4,opt,name=remainingItemCount&amp;#34;`&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>复用 ListMeta.RemainingItemCount，通过简单计算便可以获取当前检索条件下的资源总量: &lt;strong>total = offset + len(list.items) + list.metadata.remainingItemCount&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>该功能需要搭配分页功能一起使用&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl get --raw&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?withRemainingCount&amp;amp;limit=1&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> jq
+&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;kind&amp;#34;&lt;/span>: &lt;span style="color:#4e9a06">&amp;#34;DeploymentList&amp;#34;&lt;/span>,
+&lt;span style="color:#4e9a06">&amp;#34;apiVersion&amp;#34;&lt;/span>: &lt;span style="color:#4e9a06">&amp;#34;apps/v1&amp;#34;&lt;/span>,
+&lt;span style="color:#4e9a06">&amp;#34;metadata&amp;#34;&lt;/span>: &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;remainingItemCount&amp;#34;&lt;/span>: &lt;span style="color:#0000cf;font-weight:bold">24&lt;/span>
+&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>,
+&lt;span style="color:#4e9a06">&amp;#34;items&amp;#34;&lt;/span>: &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>
+...
+&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="/docs/usage/search/multi-cluster/#response-with-remaining-count">Lean More&lt;/a>&lt;/p></description></item><item><title>Blog: 升级到 Clusterpedia 0.1.0</title><link>/zh-cn/blog/2022/02/15/%E5%8D%87%E7%BA%A7%E5%88%B0-clusterpedia-0.1.0/</link><pubDate>Tue, 15 Feb 2022 00:00:00 +0000</pubDate><guid>/zh-cn/blog/2022/02/15/%E5%8D%87%E7%BA%A7%E5%88%B0-clusterpedia-0.1.0/</guid><description>
 &lt;p>随着 Clusterpedia 0.1.0 版本的发布，我们可以将早期的 0.0.9-alpha 或者 0.0.8 更新到 0.1.0 了。&lt;/p>
 &lt;h2 id="旧版本资源清理">旧版本资源清理&lt;/h2>
 &lt;p>由于资源检索的路径发生了修改(&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/73">#73&lt;/a>)，所以需要使用 0.0.9-alpha 的 &lt;a href="https://github.com/clusterpedia-io/clusterpedia/blob/v0.0.9-alpha/hack/clean-clusterconfigs.sh">clean-clusterconfigs.sh&lt;/a> 来清理 &lt;em>.kube/config&lt;/em> 中的 Clusterpedia 集群访问配置&lt;/p>

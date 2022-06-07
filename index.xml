@@ -1,4 +1,367 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Clusterpedia.io – Clusterpedia</title><link>/</link><description>Recent content in Clusterpedia on Clusterpedia.io</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Tue, 15 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Upgrade to Clusterpedia 0.1.0</title><link>/blog/2022/02/15/upgrade-to-clusterpedia-0.1.0/</link><pubDate>Tue, 15 Feb 2022 00:00:00 +0000</pubDate><guid>/blog/2022/02/15/upgrade-to-clusterpedia-0.1.0/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Clusterpedia.io – Clusterpedia</title><link>/</link><description>Recent content in Clusterpedia on Clusterpedia.io</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Tue, 12 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Clusterpedia v0.2.0 Release</title><link>/blog/2022/04/12/clusterpedia-v0.2.0-release/</link><pubDate>Tue, 12 Apr 2022 00:00:00 +0000</pubDate><guid>/blog/2022/04/12/clusterpedia-v0.2.0-release/</guid><description>
+&lt;h2 id="use-helm-to-install">Use helm to install&lt;/h2>
+&lt;p>Users can already use Helm to install Clusterpedia:&lt;/p>
+&lt;pre>&lt;code>$ helm install clusterpedia . \
+--namespace clusterpedia-system \
+--create-namespace \
+--set persistenceMatchNode={{ LOCAL_PV_NODE }} \
+# --set installCRDs=true
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a href="https://github.com/clusterpedia-io/clusterpedia/tree/main/charts">Lean More&lt;/a>&lt;/p>
+&lt;h2 id="use-the-kube-config-to-import-a-cluster">Use the Kube Config to import a cluster&lt;/h2>
+&lt;p>For v0.1.0, users need to Configure the address for the imported cluster and the authentication information.&lt;/p>
+&lt;pre>&lt;code>apiVersion: cluster.clusterpedia.io/v1alpha2
+kind: PediaCluster
+metadata:
+name: cluster-example
+spec:
+apiserver: &amp;quot;https://10.30.43.43:6443&amp;quot;
+caData:
+tokenData:
+certData:
+keyData:
+syncResources: []
+&lt;/code>&lt;/pre>
+&lt;p>In v0.2.0, the &lt;code>PediaCluster&lt;/code> added the &lt;code>spec.kubeconfig&lt;/code> field so that users can use &lt;code>kube config&lt;/code> to import the cluster directly.&lt;/p>
+&lt;p>First you need to base64 encode the kube config for the imported cluster.&lt;/p>
+&lt;pre>&lt;code>$ base64 ./kubeconfig.yaml
+&lt;/code>&lt;/pre>
+&lt;p>Set the content after the base64 to PediaCluster &lt;code>spec.kubeconfig&lt;/code>, in addition &lt;code>spec.apiserver&lt;/code> and other authentication fields don’t need to set.&lt;/p>
+&lt;pre>&lt;code>apiVersion: cluster.clusterpedia.io/v1alpha2
+kind: PediaCluster
+metadata:
+name: cluster-example
+spec:
+kubeconfig: **base64 kubeconfig**
+syncResources: []
+&lt;/code>&lt;/pre>
+&lt;p>However, since the cluster address is configured in kube config, the &lt;strong>APIServer&lt;/strong> is empty when you use kubectl get pediacluster.&lt;/p>
+&lt;pre>&lt;code>$ kubectl get pediacluster
+NAME APISERVER VERSION STATUS
+cluster-example v1.22.2 Healthy
+&lt;/code>&lt;/pre>
+&lt;p>Mutating addmission webhooks will be added in the future to automatically set &lt;code>spec.apiserver&lt;/code>, currently if you want to show the cluster apiserver address when &lt;code>kubectl get pediacluster&lt;/code>, then you need to manually configure the &lt;code>spec.apiserver&lt;/code> field additionally.&lt;/p>
+&lt;h2 id="new-search-feature">New Search Feature&lt;/h2>
+&lt;h3 id="search-by-creation-time-interval">Search by creation time interval&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:left">Description&lt;/th>
+&lt;th style="text-align:left">Search Label Key&lt;/th>
+&lt;th style="text-align:left">URL Query&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:left">Since&lt;/td>
+&lt;td style="text-align:left">search.clusterpedia.io/since&lt;/td>
+&lt;td style="text-align:left">since&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">Before&lt;/td>
+&lt;td style="text-align:left">search.clusterpedia.io/before&lt;/td>
+&lt;td style="text-align:left">before&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>The creation time interval used for the search is left closed and right open, &lt;strong>since &amp;lt;= creation time &amp;lt; before&lt;/strong>.&lt;/p>
+&lt;p>There are four formats for creation time:&lt;/p>
+&lt;ol>
+&lt;li>&lt;code>Unix Timestamp&lt;/code> for ease of use will distinguish between units of &lt;code>s&lt;/code> or &lt;code>ms&lt;/code> based on the length of the timestamp. The 10-bit timestamp is in seconds, the 13-bit timestamp is in milliseconds.&lt;/li>
+&lt;li>&lt;code>RFC3339&lt;/code> &lt;em>2006-01-02T15:04:05Z&lt;/em> or &lt;em>2006-01-02T15:04:05+08:00&lt;/em>&lt;/li>
+&lt;li>&lt;code>UTC Date&lt;/code> &lt;em>2006-01-02&lt;/em>&lt;/li>
+&lt;li>&lt;code>UTC Datetime&lt;/code> &lt;em>2006-01-02 15:04:05&lt;/em>&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>Because of the limitation of the kube label selector, the search label only supports &lt;code>Unix Timestamp&lt;/code> and &lt;code>UTC Date&lt;/code>.&lt;/p>
+&lt;p>All formats are available using the url query method.&lt;/p>
+&lt;/blockquote>
+&lt;p>Look at what resources are under the default namespace&lt;/p>
+&lt;pre>&lt;code>$ kubectl --cluster clusterpedia get pods
+CLUSTER NAME READY STATUS RESTARTS AGE
+cluster-example quickstart-ingress-nginx-admission-create--1-kxlnn 0/1 Completed 0 171d
+cluster-example fake-pod-698dfbbd5b-wvtvw 1/1 Running 0 8d
+cluster-example fake-pod-698dfbbd5b-74cjx 1/1 Running 0 21d
+cluster-example fake-pod-698dfbbd5b-tmcw7 1/1 Running 0 8d
+&lt;/code>&lt;/pre>
+&lt;p>We use the creation time to filter the resources.&lt;/p>
+&lt;pre>&lt;code>$ kubectl --cluster clusterpedia get pods -l &amp;quot;search.clusterpedia.io/since=2022-03-20&amp;quot;
+CLUSTER NAME READY STATUS RESTARTS AGE
+cluster-example fake-pod-698dfbbd5b-wvtvw 1/1 Running 0 8d
+cluster-example fake-pod-698dfbbd5b-tmcw7 1/1 Running 0 8d
+$ kubectl --cluster clusterpedia get pods -l &amp;quot;search.clusterpedia.io/before=2022-03-20&amp;quot;
+CLUSTER NAME READY STATUS RESTARTS AGE
+cluster-example quickstart-ingress-nginx-admission-create--1-kxlnn 0/1 Completed 0 171d
+cluster-example fake-pod-698dfbbd5b-74cjx 1/1 Running 0 21d
+&lt;/code>&lt;/pre>
+&lt;h3 id="search-by-owner-name">Search by Owner Name&lt;/h3>
+&lt;p>As of v0.1.0, we can specify ancestor or parent &lt;code>Owner UID&lt;/code> to query resources, but &lt;code>Owner UID&lt;/code> is not convenient to use, after all, you still need to know the UID of the Owner resource in advance.&lt;/p>
+&lt;p>In v0.2.0, we support querying directly with &lt;code>Owner Name&lt;/code>, and the Owner query has been moved from experimental to released functionality, the prefix of &lt;strong>Search Label&lt;/strong> has been upgraded from &lt;em>internalstorage.c lusterpedia.io&lt;/em> to *search.clusterpedia.io *, and URL Query is provided.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:left">Role&lt;/th>
+&lt;th style="text-align:left">search label key&lt;/th>
+&lt;th style="text-align:left">url query&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:left">Specified Owner UID&lt;/td>
+&lt;td style="text-align:left">search.clusterpedia.io/owner-uid&lt;/td>
+&lt;td style="text-align:left">ownerUID&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">Specified Owner Name&lt;/td>
+&lt;td style="text-align:left">search.clusterpedia.io/owner-name&lt;/td>
+&lt;td style="text-align:left">ownerName&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">SPecified Owner Group Resource&lt;/td>
+&lt;td style="text-align:left">search.clusterpedia.io/owner-gr&lt;/td>
+&lt;td style="text-align:left">ownerGR&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">Specified Owner Seniority&lt;/td>
+&lt;td style="text-align:left">&lt;code>internalstorage.clusterpedia.io/owner-seniority&lt;/code>&lt;/td>
+&lt;td style="text-align:left">&lt;code>ownerSeniority&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>Note that when specifying &lt;code>Owner UID&lt;/code>, &lt;code>Owner Name&lt;/code> and &lt;code>Owner Group Resource&lt;/code> will be ignored.&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>$ kubectl --cluster cluster-example get pods -l \
+&amp;quot;search.clusterpedia.io/owner-name=fake-pod, \
+search.clusterpedia.io/owner-seniority=1&amp;quot;
+CLUSTER NAME READY STATUS RESTARTS AGE
+cluster-example fake-pod-698dfbbd5b-wvtvw 1/1 Running 0 8d
+cluster-example fake-pod-698dfbbd5b-74cjx 1/1 Running 0 21d
+cluster-example fake-pod-698dfbbd5b-tmcw7 1/1 Running 0 8d
+&lt;/code>&lt;/pre>
+&lt;p>&lt;strong>In addition, to avoid multiple types of owner resources in some cases, we can use the&lt;/strong> &lt;code>Owner Group Resource&lt;/code> &lt;strong>to restrict the type of owner.&lt;/strong>&lt;/p>
+&lt;pre>&lt;code>$ kubectl --cluster cluster-example get pods -l \
+&amp;quot;search.clusterpedia.io/owner-name=fake-pod,\
+search.clusterpedia.io/owner-gr=deployments.apps,\
+search.clusterpedia.io/owner-seniority=1&amp;quot;
+... some output
+&lt;/code>&lt;/pre>
+&lt;h3 id="fuzzy-search-base-on-resource-names">Fuzzy Search base on resource names&lt;/h3>
+&lt;p>Since fuzzy search needs to be discussed further, it is temporarily provided as an experimental feature.&lt;/p>
+&lt;p>Only the Search Label method is supported, URL Query isn’t supported. |Role| search label key|url query| | &amp;ndash; | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | &amp;mdash;&amp;mdash;- | |Fuzzy Search for resource name|internalstorage.clusterpedia.io/fuzzy-name|-|&lt;/p>
+&lt;pre>&lt;code>$ kubectl --cluster clusterpedia get deployments -l &amp;quot;internalstorage.clusterpedia.io/fuzzy-name=fake&amp;quot;
+CLUSTER NAME READY UP-TO-DATE AVAILABLE AGE
+cluster-example fake-pod 3/3 3 3 113d
+&lt;/code>&lt;/pre>
+&lt;p>You can use the in operator to pass multiple fuzzy arguments, so that you can filter out resources that have all strings in their names.&lt;/p>
+&lt;h2 id="other-features">Other Features&lt;/h2>
+&lt;p>In v0.1.0, searching the resources allow the number of remaining resources to be returned so that the user can calculate the total number of resources.&lt;/p>
+&lt;p>This feature has been enhanced in v0.2.0. When offset is too large, &lt;code>remainingItemCount&lt;/code> may be negative, ensuring that the total number of resources can always be calculated.&lt;/p>
+&lt;p>&lt;a href="https://clusterpedia.io/docs/usage/search/multi-cluster/#response-with-remaining-count">Lean More&lt;/a>&lt;/p>
+&lt;h2 id="release-noteshttpsgithubcomclusterpedia-ioclusterpediareleases">&lt;a href="https://github.com/clusterpedia-io/clusterpedia/releases">Release Notes&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>Support of using Helm Charts for installation (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/53">#53&lt;/a>, &lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/125">#125&lt;/a>, @calvin0327, @wzshiming)&lt;/li>
+&lt;li>&lt;code>PediaCluster&lt;/code> supports for importing a cluster using the kubeconfig (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/115">#115&lt;/a>, @wzshiming)&lt;/li>
+&lt;/ul>
+&lt;h3 id="apiserver">APIServer&lt;/h3>
+&lt;ul>
+&lt;li>Support for filtering resources by a period of creation (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/113">#113&lt;/a>, @cleverhu)&lt;/li>
+&lt;li>Support for searching for resources by an Owner name. Now, the feature of &lt;code>Search by Owner&lt;/code> is officially released. (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/91">#91&lt;/a>, @Iceber)&lt;/li>
+&lt;/ul>
+&lt;h3 id="default-storage-layer">Default Storage Layer&lt;/h3>
+&lt;ul>
+&lt;li>Support for fuzzy search by a resource name (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/117">#117&lt;/a>, @cleverhu)&lt;/li>
+&lt;li>&lt;code>RemainingItemCount&lt;/code> can be a negative number. We can still use &lt;code>offset + len(items) + remainingItemCount&lt;/code> to calculate the total amount of resources if the &lt;code>Offset&lt;/code> is too large. (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/123">#123&lt;/a>, @cleverhu)&lt;/li>
+&lt;/ul>
+&lt;h3 id="bug-fixes">Bug Fixes&lt;/h3>
+&lt;ul>
+&lt;li>Fixed unnecessary &lt;code>json.Unmarshal&lt;/code> and improved performance when searching (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/89">#89&lt;/a>, &lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/92">#92&lt;/a>, @Iceber)&lt;/li>
+&lt;/ul>
+&lt;h3 id="deprecation">Deprecation&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>Search by Owner&lt;/code> has been released as an official feature. &lt;code>internalstorage.clusterpedia.io/owner-name&lt;/code> and &lt;code>internalstorage.clusterpedia.io/owner-seniority&lt;/code> will be removed in the next release. (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/91">#91&lt;/a>, @Iceber)&lt;/li>
+&lt;/ul>
+&lt;h3 id="other">Other&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>golangci-lint&lt;/code> is used as a static checking tool (&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/86">#86&lt;/a>, &lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/88">#88&lt;/a>, @Iceber)&lt;/li>
+&lt;li>Added CI Workloads such as static checking and unit testing for code &lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/87">#87&lt;/a>, @Iceber)&lt;/li>
+&lt;/ul></description></item><item><title>Blog: Clusterpedia v0.1.0 Release — four important functions</title><link>/blog/2022/02/16/clusterpedia-v0.1.0-release-four-important-functions/</link><pubDate>Wed, 16 Feb 2022 00:00:00 +0000</pubDate><guid>/blog/2022/02/16/clusterpedia-v0.1.0-release-four-important-functions/</guid><description>
+&lt;p>&lt;strong>This is the first release of&lt;/strong> &lt;a href="https://clusterpedia.io">&lt;strong>Clusterpedia&lt;/strong>&lt;/a> &lt;strong>🥳🥳🥳, and it also means that it is officially in the iteration phase.&lt;/strong>&lt;/p>
+&lt;p>Compared to the initial &lt;a href="https://github.com/clusterpedia-io/clusterpedia/tree/v0.0.8">v0.0.8&lt;/a> and &lt;a href="https://github.com/clusterpedia-io/clusterpedia/tree/v0.0.9-alpha">v0.0.9-alpha&lt;/a>, v0.1.0 add a lot of features and makes some incompatible updates.&lt;/p>
+&lt;blockquote>
+&lt;p>If upgrading from v0.0.9-alpha or v0.0.8, you can refer to &lt;a href="/blog/2022/02/15/upgrade-to-clusterpedia-0.1.0/">Upgrade to Clusterpedia 0.1.0&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="features-preview">Features Preview&lt;/h1>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:left">Role&lt;/th>
+&lt;th style="text-align:left">Search Label Key&lt;/th>
+&lt;th style="text-align:left">URL Query&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:left">Filter cluster names&lt;/td>
+&lt;td style="text-align:left">&lt;code>search.clusterpedia.io/clusters&lt;/code>&lt;/td>
+&lt;td style="text-align:left">&lt;code>clusters&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">Filter namespaces&lt;/td>
+&lt;td style="text-align:left">&lt;code>search.clusterpedia.io/namespaces&lt;/code>&lt;/td>
+&lt;td style="text-align:left">&lt;code>namespaces&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">Filter resource names&lt;/td>
+&lt;td style="text-align:left">&lt;code>search.clusterpedia.io/names&lt;/code>&lt;/td>
+&lt;td style="text-align:left">&lt;code>names&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">Specified Owner UID&lt;/td>
+&lt;td style="text-align:left">&lt;code>internalstorage.clusterpedia.io/owner-uid&lt;/code>&lt;/td>
+&lt;td style="text-align:left">-&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">Specified Owner Seniority&lt;/td>
+&lt;td style="text-align:left">&lt;code>internalstorage.clusterpedia.io/owner-seniority&lt;/code>&lt;/td>
+&lt;td style="text-align:left">&lt;code>ownerSeniority&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">Order by fields&lt;/td>
+&lt;td style="text-align:left">&lt;code>search.clusterpedia.io/orderby&lt;/code>&lt;/td>
+&lt;td style="text-align:left">&lt;code>orderby&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">Set page size&lt;/td>
+&lt;td style="text-align:left">&lt;code>search.clusterpedia.io/size&lt;/code>&lt;/td>
+&lt;td style="text-align:left">&lt;code>limit&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">Set page offset&lt;/td>
+&lt;td style="text-align:left">&lt;code>search.clusterpedia.io/offset&lt;/code>&lt;/td>
+&lt;td style="text-align:left">&lt;code>continue&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">Response include Continue&lt;/td>
+&lt;td style="text-align:left">&lt;code>search.clusterpedia.io/with-continue&lt;/code>&lt;/td>
+&lt;td style="text-align:left">&lt;code>withContinue&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">Response include remaining count&lt;/td>
+&lt;td style="text-align:left">&lt;code>search.clusterpedia.io/with-remaining-count&lt;/code>&lt;/td>
+&lt;td style="text-align:left">&lt;code>withRemainingCount&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Native &lt;code>Label Selector&lt;/code> and enhanced &lt;code>Field Selector&lt;/code> supported in addition to search label.&lt;/p>
+&lt;h1 id="important-features">Important Features&lt;/h1>
+&lt;p>Let&amp;rsquo;s start with the more important features that have been added in 0.1.0&lt;/p>
+&lt;ul>
+&lt;li>The number of remaining items carried in response data&lt;/li>
+&lt;li>Added warnning when searching for resources in a &lt;code>Not Ready&lt;/code> cluster&lt;/li>
+&lt;li>Enhancements to the native FieldSelector&lt;/li>
+&lt;li>Search by Parent or Ancestor Owner&lt;/li>
+&lt;/ul>
+&lt;h2 id="warnning-alert-on-resource-search">Warnning alert on resource search&lt;/h2>
+&lt;p>When a cluster is not ready for some reason, resources are often not synchronised properly either.&lt;/p>
+&lt;p>Warnning alerts are used to alert users of cluster exceptions when searching for resources within the cluster, and the resources searched may not be accurate in real time.&lt;/p>
+&lt;pre>&lt;code>$ kubectl get pediacluster
+NAME APISERVER VERSION STATUS
+cluster-1 https://10.6.100.10:6443 v1.22.2 ClusterSynchroStop
+$ kubectl --cluster cluster-1 get pods
+Warning: cluster-1 is not ready and the resources obtained may be inaccurate, reason: ClusterSynchroStop
+CLUSTER NAME READY STATUS RESTARTS AGE
+cluster-1 fake-pod-698dfbbd5b-64fsx 1/1 Running 0 68d
+cluster-1 fake-pod-698dfbbd5b-9ftzh 1/1 Running 0 39d
+cluster-1 fake-pod-698dfbbd5b-rk74p 1/1 Running 0 39d
+cluster-1 quickstart-ingress-nginx-admission-create--1-kxlnn 0/1 Completed 0 126d
+&lt;/code>&lt;/pre>
+&lt;h2 id="field-selector">Field Selector&lt;/h2>
+&lt;p>Native Kubernetes currently only supports field filtering on &lt;code>metadata.name&lt;/code> and &lt;code>metadata.namespace&lt;/code>, and the operators only support =, !=, ==`, which is very limited.&lt;/p>
+&lt;p>Although some specific resources will support some special fields, the use is still rather limited&lt;/p>
+&lt;pre>&lt;code># kubernetes/pkg
+$ grep AddFieldLabelConversionFunc . -r
+./apis/core/v1/conversion.go: err := scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;Pod&amp;quot;),
+./apis/core/v1/conversion.go: err = scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;Node&amp;quot;),
+./apis/core/v1/conversion.go: err = scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;ReplicationController&amp;quot;),
+./apis/core/v1/conversion.go: return scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;Event&amp;quot;),
+./apis/core/v1/conversion.go: return scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;Namespace&amp;quot;),
+./apis/core/v1/conversion.go: return scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;Secret&amp;quot;),
+./apis/certificates/v1/conversion.go: return scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;CertificateSigningRequest&amp;quot;),
+./apis/certificates/v1beta1/conversion.go: return scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;CertificateSigningRequest&amp;quot;),
+./apis/batch/v1/conversion.go: return scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;Job&amp;quot;),
+./apis/batch/v1beta1/conversion.go: err = scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(kind),
+./apis/events/v1/conversion.go: return scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;Event&amp;quot;),
+./apis/events/v1beta1/conversion.go: return scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;Event&amp;quot;),
+./apis/apps/v1beta2/conversion.go: if err := scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;StatefulSet&amp;quot;),
+./apis/apps/v1beta1/conversion.go: if err := scheme.AddFieldLabelConversionFunc(SchemeGroupVersion.WithKind(&amp;quot;StatefulSet&amp;quot;),
+&lt;/code>&lt;/pre>
+&lt;p>Clusterpedia provides more powerful features based on the compatibility with existing Field Selector features, and supports the same operators as Label Selector: &lt;code>!&lt;/code>, &lt;code>=&lt;/code>, &lt;code>!=&lt;/code>, &lt;code>==&lt;/code>, &lt;code>in&lt;/code>, &lt;code>notin&lt;/code>.&lt;/p>
+&lt;p>For example, we can filter by annotations, like label selector&lt;/p>
+&lt;pre>&lt;code>kubectl get deploy --field-selector=&amp;quot;metadata.annotations['test.io'] in (value1, value2)&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a href="https://clusterpedia.io/docs/usage/search/multi-cluster/#field-selector">Lean More&lt;/a>&lt;/p>
+&lt;h2 id="search-by-parent-or-ancestor-owner">Search by Parent or Ancestor Owner&lt;/h2>
+&lt;p>There will usually be an Owner relationship between Kubernetes resources.&lt;/p>
+&lt;pre>&lt;code>apiVersion: v1
+kind: Pod
+metadata:
+ownerReferences:
+- apiVersion: apps/v1
+blockOwnerDeletion: true
+controller: true
+kind: ReplicaSet
+name: fake-pod-698dfbbd5b
+uid: d5bf2bdd-47d2-4932-84fb-98bde486d244
+&lt;/code>&lt;/pre>
+&lt;p>Searching by Owner is a very useful search function, and Clusterpedia also supports the seniority advancement of Owner to search for grandparents and even higher seniority.&lt;/p>
+&lt;p>By searching by Owner, we can query all Pods under Deployment at once, without having to query ReplicaSet in between&lt;/p>
+&lt;blockquote>
+&lt;p>Currently only supports query by Owner UID. The feature of using Owner Name for queries is still under discussion, we can join the discussion in the &lt;a href="https://github.com/clusterpedia-io/clusterpedia/issues/49">issue: Support for searching resources by owner&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>$ DEPLOY_UID=$(kubectl --cluster cluster-1 get deploy fake-deploy -o jsonpath=&amp;quot;{.metadata.uid}&amp;quot;)
+$ kubectl --cluster cluster-1 get pods -l \
+&amp;quot;internalstorage.clusterpedia.io/owner-uid=$DEPLOY_UID,\
+internalstorage.clusterpedia.io/owner-seniority=1&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a href="https://clusterpedia.io/docs/usage/search/multi-cluster/#search-by-parent-or-ancestor-owner">Lean More&lt;/a>&lt;/p>
+&lt;h2 id="the-number-of-remaining-items-carried-in-response-data">The number of remaining items carried in response data&lt;/h2>
+&lt;p>&lt;strong>In some UI cases, it is often necessary to get the total number of resources in the current search condition.&lt;/strong>&lt;/p>
+&lt;p>The RemainingItemCount field exists in the &lt;a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ListMeta">ListMeta&lt;/a> of the Kubernetes List response.&lt;/p>
+&lt;pre>&lt;code>type ListMeta struct {
+...
+// remainingItemCount is the number of subsequent items in the list which are not included in this
+// list response. If the list request contained label or field selectors, then the number of
+// remaining items is unknown and the field will be left unset and omitted during serialization.
+// If the list is complete (either because it is not chunking or because this is the last chunk),
+// then there are no more remaining items and this field will be left unset and omitted during
+// serialization.
+// Servers older than v1.15 do not set this field.
+// The intended use of the remainingItemCount is *estimating* the size of a collection. Clients
+// should not rely on the remainingItemCount to be set or to be exact.
+// +optional
+RemainingItemCount *int64 `json:&amp;quot;remainingItemCount,omitempty&amp;quot; protobuf:&amp;quot;bytes,4,opt,name=remainingItemCount&amp;quot;`
+}
+&lt;/code>&lt;/pre>
+&lt;p>By reusing this field, the total number of resources can be returned in a Kubernetes OpenAPI-compatible manner:&lt;/p>
+&lt;p>&lt;strong>offset + len(list.items) + list.metadata.remainingItemCount&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>Use with Paging&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>$ kubectl get --raw=&amp;quot;/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments?withRemainingCount&amp;amp;limit=1&amp;quot; | jq
+{
+&amp;quot;kind&amp;quot;: &amp;quot;DeploymentList&amp;quot;,
+&amp;quot;apiVersion&amp;quot;: &amp;quot;apps/v1&amp;quot;,
+&amp;quot;metadata&amp;quot;: {
+&amp;quot;remainingItemCount&amp;quot;: 23
+},
+&amp;quot;items&amp;quot;: [
+...
+]
+}
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a href="https://clusterpedia.io/docs/usage/search/multi-cluster/#response-with-remaining-count">Lean More&lt;/a>&lt;/p>
+&lt;h1 id="realease-v010httpsgithubcomclusterpedia-ioclusterpediareleasestagv010">&lt;a href="https://github.com/clusterpedia-io/clusterpedia/releases/tag/v0.1.0">Realease v0.1.0&lt;/a>&lt;/h1></description></item><item><title>Blog: Upgrade to Clusterpedia 0.1.0</title><link>/blog/2022/02/15/upgrade-to-clusterpedia-0.1.0/</link><pubDate>Tue, 15 Feb 2022 00:00:00 +0000</pubDate><guid>/blog/2022/02/15/upgrade-to-clusterpedia-0.1.0/</guid><description>
 &lt;p>With the release of Clusterpedia 0.1.0, we can now update the earlier 0.0.9-alpha or 0.0.8 to 0.1.0&lt;/p>
 &lt;h2 id="clean-resources">Clean Resources&lt;/h2>
 &lt;p>Since the url path to search resources has been modified(&lt;a href="https://github.com/clusterpedia-io/clusterpedia/pull/73">#73&lt;/a>), we need to use &lt;a href="https://github.com/clusterpedia-io/clusterpedia/blob/v0.0.9-alpha/hack/clean-clusterconfigs.sh">cealn-clusterconfigs.sh&lt;/a> in 0.0.9-alpha to clean up the cluster shortcut in the &lt;em>.kube/config&lt;/em>&lt;/p>

@@ -1,0 +1,446 @@
+<!doctype html><html lang=zh-cn class=no-js>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=generator content="Hugo 0.91.2">
+<meta name=robots content="index, follow">
+<link rel="shortcut icon" href=/favicons/favicon.ico>
+<link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16>
+<link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32>
+<link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36>
+<link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48>
+<link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72>
+<link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
+<link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
+<link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
+<title>使用 Helm 快速部署 Clusterpedia | Clusterpedia.io</title>
+<meta name=description content="当前 Clusterpedia 已经支持通过 Helm 来快速的部署
+首先需要保证当前环境已经安装 helm v3
+准备阶段
+拉取仓库代码
+
+当前暂时还未将 chart 上传至 charts 公共仓库
+
+$ git clone …">
+<meta property="og:title" content="使用 Helm 快速部署 Clusterpedia">
+<meta property="og:description" content="当前 Clusterpedia 已经支持通过 Helm 来快速的部署
+首先需要保证当前环境已经安装 helm v3
+准备阶段 拉取仓库代码
+ 当前暂时还未将 chart 上传至 charts 公共仓库
+ $ git clone https://github.com/clusterpedia-io/clusterpedia.git $ cd clusterpedia/charts 由于 clusterpedia 使用 bitnami/postgresql 和 bitnami/mysql 作为存储组件子 chart， 所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖
+$ helm repo add bitnami https://charts.bitnami.com/bitnami $ helm dependency build 选择存储组件 Clusterpedia Chart 通过子 chart 的方式，提供了 bitnami/postgresql 和 bitnami/mysql 两款存储组件可供选择。
+postgresql 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 --set postgresql.enabled=false --set mysql.enabled=true
+更多关于存储组件的配置，可以参考 bitnami/postgresql 和 bitnami/mysql.
+用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/zh-cn/blog/2022/04/11/%E4%BD%BF%E7%94%A8-helm-%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2-clusterpedia/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2022-04-11T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-04-11T00:00:00+00:00"><meta property="og:site_name" content="Clusterpedia.io">
+<meta itemprop=name content="使用 Helm 快速部署 Clusterpedia">
+<meta itemprop=description content="当前 Clusterpedia 已经支持通过 Helm 来快速的部署
+首先需要保证当前环境已经安装 helm v3
+准备阶段 拉取仓库代码
+ 当前暂时还未将 chart 上传至 charts 公共仓库
+ $ git clone https://github.com/clusterpedia-io/clusterpedia.git $ cd clusterpedia/charts 由于 clusterpedia 使用 bitnami/postgresql 和 bitnami/mysql 作为存储组件子 chart， 所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖
+$ helm repo add bitnami https://charts.bitnami.com/bitnami $ helm dependency build 选择存储组件 Clusterpedia Chart 通过子 chart 的方式，提供了 bitnami/postgresql 和 bitnami/mysql 两款存储组件可供选择。
+postgresql 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 --set postgresql.enabled=false --set mysql.enabled=true
+更多关于存储组件的配置，可以参考 bitnami/postgresql 和 bitnami/mysql.
+用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values."><meta itemprop=datePublished content="2022-04-11T00:00:00+00:00">
+<meta itemprop=dateModified content="2022-04-11T00:00:00+00:00">
+<meta itemprop=wordCount content="744">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="使用 Helm 快速部署 Clusterpedia">
+<meta name=twitter:description content="当前 Clusterpedia 已经支持通过 Helm 来快速的部署
+首先需要保证当前环境已经安装 helm v3
+准备阶段 拉取仓库代码
+ 当前暂时还未将 chart 上传至 charts 公共仓库
+ $ git clone https://github.com/clusterpedia-io/clusterpedia.git $ cd clusterpedia/charts 由于 clusterpedia 使用 bitnami/postgresql 和 bitnami/mysql 作为存储组件子 chart， 所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖
+$ helm repo add bitnami https://charts.bitnami.com/bitnami $ helm dependency build 选择存储组件 Clusterpedia Chart 通过子 chart 的方式，提供了 bitnami/postgresql 和 bitnami/mysql 两款存储组件可供选择。
+postgresql 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 --set postgresql.enabled=false --set mysql.enabled=true
+更多关于存储组件的配置，可以参考 bitnami/postgresql 和 bitnami/mysql.
+用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.">
+<link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
+<link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
+<script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
+<script src=https://unpkg.com/lunr@2.3.9/lunr.min.js integrity=sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli crossorigin=anonymous></script>
+<link href=https://cdn.bootcdn.net/ajax/libs/asciinema-player/2.6.1/asciinema-player.min.css rel=stylesheet>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZQPMJ4HH3"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NZQPMJ4HH3',{anonymize_ip:!1})}</script>
+</head>
+<body class="td-page td-blog">
+<header>
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+<a class=navbar-brand href=/zh-cn/>
+<span class=navbar-logo><svg id="Graph" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g id="Cpedia_-_Graph_-_Color_Dark" data-name="Cpedia - Graph - Color Dark"><rect id="Frame" width="512" height="512" fill="none"/><path id="Secondary" d="M476 221.051A274.908 274.908.0 00428.269 256 282.438 282.438.0 01395.7 220.752a322.971 322.971.0 0156.3-41.27zM362.4 256a334.139 334.139.0 00-53.2 92.145A329.953 329.953.0 00295.32 394.6a322.932 322.932.0 00-7.587 69.4h48a274.957 274.957.0 016.4-58.813 282.32 282.32.0 0114.238-45.835 285.94 285.94.0 0139.323-68.1A330.2 330.2.0 01362.4 256zM169.865 405.189a274.9 274.9.0 016.4 58.811h48a322.893 322.893.0 00-7.589-69.4 282.46 282.46.0 00-46.811 10.589zM179.94 300.03A333.961 333.961.0 00149.6 256a330 330 0 00-33.291-35.248A322.915 322.915.0 0060 179.482L36 221.051A274.964 274.964.0 0183.733 256a282.3 282.3.0 0132.576 35.248 286.331 286.331.0 0122.054 32.768 286.3 286.3.0 0117.264 35.339A330.144 330.144.0 01202.8 348.148 334.156 334.156.0 00179.94 300.03zM169.865 106.811a274.966 274.966.0 01-54.132-23.862l-24 41.569a322.934 322.934.0 0063.894 28.127 282.241 282.241.0 0014.238-45.834zm186.507 45.836a322.994 322.994.0 0063.895-28.129l-24-41.569a275.02 275.02.0 01-54.133 23.864A282.293 282.293.0 01295.32 117.4a286.278 286.278.0 01-39.307 2.716h-.1a286.366 286.366.0 01-39.237-2.718 330.245 330.245.0 01-13.88 46.455 334.129 334.129.0 0053.1 4.263h.115a333.931 333.931.0 0053.187-4.261 329.92 329.92.0 0047.174-11.208z" fill="#1b1c1d"/><path id="Primary" d="M211.993 256l22-38.1h44l22 38.1-22 38.105h-44zM342.134 106.813A274.957 274.957.0 01335.733 48h-48a322.932 322.932.0 007.587 69.4 282.293 282.293.0 0046.814-10.587zM428.269 256A282.438 282.438.0 01395.7 220.752a285.92 285.92.0 01-39.323-68.105A329.92 329.92.0 01309.2 163.854 334.125 334.125.0 00362.4 256a330.2 330.2.0 0033.3 35.248 322.971 322.971.0 0056.3 41.27l24-41.569A274.908 274.908.0 01428.269 256zM149.6 256a333.961 333.961.0 0030.34-44.03 334.156 334.156.0 0022.86-48.118 330.245 330.245.0 0013.88-46.455A322.893 322.893.0 00224.267 48h-48a274.9 274.9.0 01-6.4 58.811 282.241 282.241.0 01-14.238 45.834 286.3 286.3.0 01-17.264 35.339 286.331 286.331.0 01-22.054 32.768A330 330 0 01149.6 256zm-65.867.0A274.964 274.964.0 0136 290.949l24 41.569a322.915 322.915.0 0056.309-41.27A282.3 282.3.0 0083.733 256zM255.9 343.885a334.129 334.129.0 00-53.1 4.263 330.144 330.144.0 00-47.171 11.207 322.934 322.934.0 00-63.894 28.127l24 41.569a274.966 274.966.0 0154.132-23.862A282.46 282.46.0 01216.678 394.6a286.366 286.366.0 0139.237-2.718h.1A286.278 286.278.0 01295.32 394.6a329.953 329.953.0 0113.88-46.456 334.028 334.028.0 00-53.187-4.26zm86.236 61.3a275.027 275.027.0 0154.133 23.864l24-41.569a322.991 322.991.0 00-63.895-28.13 282.32 282.32.0 00-14.24 45.837z" fill="#33de72"/></g></svg></span><span class=font-weight-bold>Clusterpedia.io</span>
+</a>
+<div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar>
+<ul class="navbar-nav mt-2 mt-lg-0">
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/zh-cn/about/><span>关于</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class="nav-link active" href=/zh-cn/blog/><i class="fas fa-blog"></i><span class=active>博客</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/zh-cn/docs/><i class="fas fa-book"></i><span>文档</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=https://github.com/clusterpedia-io/clusterpedia target=_blank><i class="fab fa-github"></i><span>GitHub</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=https://join.slack.com/t/clusterpedia/shared_invite/zt-11smmdntu-Im1YjOahqvHhJFqNzLELOA target=_blank><i class="fab fa-slack"></i><span>Slack</span></a>
+</li>
+<li class="nav-item dropdown mr-4 d-none d-lg-block">
+<a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
+中文 Chinese
+</a>
+<div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
+<a class=dropdown-item href=/>English</a>
+</div>
+</li>
+</ul>
+</div>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e1fb36dc483f2dd439766958402a5281.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+</div>
+</nav>
+</header>
+<div class="container-fluid td-outer">
+<div class=td-main>
+<div class="row flex-xl-nowrap">
+<aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+<div id=td-sidebar-menu class=td-sidebar__inner>
+<form class="td-sidebar__search d-flex align-items-center">
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e1fb36dc483f2dd439766958402a5281.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
+</button>
+</form>
+<nav class="collapse td-sidebar-nav" id=td-section-nav>
+<div class="nav-item dropdown d-block d-lg-none">
+<a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
+中文 Chinese
+</a>
+<div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
+<a class=dropdown-item href=/>English</a>
+</div>
+</div>
+<ul class="td-sidebar-nav__section pr-md-3 ul-0">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zh-cnblog-li>
+<a href=/zh-cn/blog/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-zh-cnblog><span>博客</span></a>
+<ul class=ul-1>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cnblog20220429clusterpedia-e585a5e98089e4ba91e58e9fe7949fe585a8e699afe59bbe-li>
+<a href=/zh-cn/blog/2022/04/29/clusterpedia-%E5%85%A5%E9%80%89%E4%BA%91%E5%8E%9F%E7%94%9F%E5%85%A8%E6%99%AF%E5%9B%BE/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cnblog20220429clusterpedia-e585a5e98089e4ba91e58e9fe7949fe585a8e699afe59bbe><span>Clusterpedia 入选云原生全景图</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cnblog20220412clusterpedia-v020-e58f91e5b883-li>
+<a href=/zh-cn/blog/2022/04/12/clusterpedia-v0.2.0-%E5%8F%91%E5%B8%83/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cnblog20220412clusterpedia-v020-e58f91e5b883><span>Clusterpedia v0.2.0 发布</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zh-cnblog20220411e4bdbfe794a8-helm-e5bfabe9809fe983a8e7bdb2-clusterpedia-li>
+<a href=/zh-cn/blog/2022/04/11/%E4%BD%BF%E7%94%A8-helm-%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2-clusterpedia/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zh-cnblog20220411e4bdbfe794a8-helm-e5bfabe9809fe983a8e7bdb2-clusterpedia><span class=td-sidebar-nav-active-item>使用 Helm 快速部署 Clusterpedia</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cnblog20220401clusterpedia-e4b88ae6a69c-csdn-it-e68a80e69cafe5bdb1e5938de58a9be4b98be6989f-li>
+<a href=/zh-cn/blog/2022/04/01/clusterpedia-%E4%B8%8A%E6%A6%9C-csdn-it-%E6%8A%80%E6%9C%AF%E5%BD%B1%E5%93%8D%E5%8A%9B%E4%B9%8B%E6%98%9F/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cnblog20220401clusterpedia-e4b88ae6a69c-csdn-it-e68a80e69cafe5bdb1e5938de58a9be4b98be6989f><span>Clusterpedia 上榜| CSDN IT 技术影响力之星</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cnblog20220301e8a786e9a291e8aeb2e8a7a3clusterpedia-e5a49ae4ba91e78eafe5a283e4b88be79a84e8b584e6ba90e5a48de69d82e6a380e7b4a2-li>
+<a href=/zh-cn/blog/2022/03/01/%E8%A7%86%E9%A2%91%E8%AE%B2%E8%A7%A3clusterpedia-%E5%A4%9A%E4%BA%91%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E8%B5%84%E6%BA%90%E5%A4%8D%E6%9D%82%E6%A3%80%E7%B4%A2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cnblog20220301e8a786e9a291e8aeb2e8a7a3clusterpedia-e5a49ae4ba91e78eafe5a283e4b88be79a84e8b584e6ba90e5a48de69d82e6a380e7b4a2><span>视频讲解｜Clusterpedia -- 多云环境下的资源复杂检索</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cnblog20220216e9a696e58f91clusterpedia-010-e59b9be5a4a7e9878de8a681e58a9fe883bd-li>
+<a href=/zh-cn/blog/2022/02/16/%E9%A6%96%E5%8F%91clusterpedia-0.1.0-%E5%9B%9B%E5%A4%A7%E9%87%8D%E8%A6%81%E5%8A%9F%E8%83%BD/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cnblog20220216e9a696e58f91clusterpedia-010-e59b9be5a4a7e9878de8a681e58a9fe883bd><span>首发｜Clusterpedia 0.1.0 四大重要功能</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cnblog20220215e58d87e7baa7e588b0-clusterpedia-010-li>
+<a href=/zh-cn/blog/2022/02/15/%E5%8D%87%E7%BA%A7%E5%88%B0-clusterpedia-0.1.0/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cnblog20220215e58d87e7baa7e588b0-clusterpedia-010><span>升级到 Clusterpedia 0.1.0</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cnblog20211203clusterpedia-e58aa0e68c81-kubectle6a380e7b4a2e5a49ae99b86e7bea4e8b584e6ba90-li>
+<a href=/zh-cn/blog/2021/12/03/clusterpedia-%E5%8A%A0%E6%8C%81-kubectl%E6%A3%80%E7%B4%A2%E5%A4%9A%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cnblog20211203clusterpedia-e58aa0e68c81-kubectle6a380e7b4a2e5a49ae99b86e7bea4e8b584e6ba90><span>Clusterpedia 加持 kubectl，检索多集群资源</span></a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+<aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+<a href=https://github.com/clusterpedia-io/website/tree/main/content/zh-cn/blog/install-with-helm.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> 查看页面源码</a>
+<a href=https://github.com/clusterpedia-io/website/edit/main/content/zh-cn/blog/install-with-helm.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+<a href="https://github.com/clusterpedia-io/website/new/main/content/zh-cn/blog/install-with-helm.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+<a href="https://github.com/clusterpedia-io/website/issues/new?title=%e4%bd%bf%e7%94%a8%20Helm%20%e5%bf%ab%e9%80%9f%e9%83%a8%e7%bd%b2%20Clusterpedia" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+<a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
+<a id=print href=/zh-cn/blog/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
+</div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#准备阶段>准备阶段</a>
+<ul>
+<li><a href=#选择存储组件>选择存储组件</a></li>
+<li><a href=#选择-crd-的安装管理方式>选择 CRD 的安装/管理方式</a></li>
+<li><a href=#决定是否需要创建-local-pv>决定是否需要创建 Local PV</a></li>
+</ul>
+</li>
+<li><a href=#安装-clusterpedia>安装 Clusterpedia</a></li>
+<li><a href=#卸载-clusterpedia>卸载 Clusterpedia</a></li>
+<li><a href=#准备阶段-1>准备阶段</a>
+<ul>
+<li><a href=#选择存储组件-1>选择存储组件</a></li>
+<li><a href=#选择-crd-的安装管理方式-1>选择 CRD 的安装/管理方式</a></li>
+<li><a href=#决定是否需要创建-local-pv-1>决定是否需要创建 Local PV</a></li>
+</ul>
+</li>
+<li><a href=#安装-clusterpedia-1>安装 Clusterpedia</a></li>
+<li><a href=#卸载-clusterpedia-1>卸载 Clusterpedia</a></li>
+<li><a href=#准备阶段-2>准备阶段</a>
+<ul>
+<li><a href=#选择存储组件-2>选择存储组件</a></li>
+<li><a href=#选择-crd-的安装管理方式-2>选择 CRD 的安装/管理方式</a></li>
+<li><a href=#决定是否需要创建-local-pv-2>决定是否需要创建 Local PV</a></li>
+</ul>
+</li>
+<li><a href=#安装-clusterpedia-2>安装 Clusterpedia</a></li>
+<li><a href=#卸载-clusterpedia-2>卸载 Clusterpedia</a></li>
+<li><a href=#准备阶段-3>准备阶段</a>
+<ul>
+<li><a href=#选择存储组件-3>选择存储组件</a></li>
+<li><a href=#选择-crd-的安装管理方式-3>选择 CRD 的安装/管理方式</a></li>
+<li><a href=#决定是否需要创建-local-pv-3>决定是否需要创建 Local PV</a></li>
+</ul>
+</li>
+<li><a href=#安装-clusterpedia-3>安装 Clusterpedia</a></li>
+<li><a href=#卸载-clusterpedia-3>卸载 Clusterpedia</a></li>
+</ul>
+</nav></div>
+</aside>
+<main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role=main>
+<div class=td-content>
+<h1>使用 Helm 快速部署 Clusterpedia</h1>
+<div class="td-byline mb-4">
+<time datetime=2022-04-11 class=text-muted>2022.04.11</time>
+</div>
+<header class=article-meta>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 4 分钟阅读 &nbsp;</p>
+</header>
+<p>当前 Clusterpedia 已经支持通过 Helm 来快速的部署</p>
+<p>首先需要保证当前环境已经安装 helm v3</p>
+<h2 id=准备阶段>准备阶段</h2>
+<p>拉取仓库代码</p>
+<blockquote>
+<p>当前暂时还未将 chart 上传至 charts 公共仓库</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git clone https://github.com/clusterpedia-io/clusterpedia.git
+$ <span style=color:#204a87>cd</span> clusterpedia/charts
+</code></pre></div><p>由于 clusterpedia 使用 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 作为存储组件子 chart，
+所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm repo add bitnami https://charts.bitnami.com/bitnami
+$ helm dependency build
+</code></pre></div><h3 id=选择存储组件>选择存储组件</h3>
+<p>Clusterpedia Chart 通过子 chart 的方式，提供了 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 两款存储组件可供选择。</p>
+<p><code>postgresql</code> 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 <code>--set postgresql.enabled=false --set mysql.enabled=true</code></p>
+<p>更多关于存储组件的配置，可以参考 <a href=https://github.com/bitnami/charts/tree/master/bitnami/postgresql>bitnami/postgresql</a> 和 <a href=https://github.com/bitnami/charts/tree/master/bitnami/mysql>bitnami/mysql</a>.</p>
+<p><strong>用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml</strong></p>
+<h3 id=选择-crd-的安装管理方式>选择 CRD 的安装/管理方式</h3>
+<p>clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。</p>
+<h4 id=手动管理>手动管理</h4>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl apply -f ./_crds
+</code></pre></div><h4 id=使用-helm-管理>使用 Helm 管理</h4>
+<p>在后续安装命令中需要手动添加 <code>--set installCRDs=true</code> 即可</p>
+<h3 id=决定是否需要创建-local-pv>决定是否需要创建 Local PV</h3>
+<p>Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。</p>
+<p><strong>用户在安装时需要通过 <code>--set persistenceMatchNode=&lt;selected node name></code> 来指定 Local PV 所在节点。</strong></p>
+<p>如果用户不需要创建 Local PV，那么需要使用 <code>--set persistenceMatchNode=None</code> 显式声明。</p>
+<h2 id=安装-clusterpedia>安装 Clusterpedia</h2>
+<p>经过上述决策后，用户可以进行安装</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm install clusterpedia . <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --namespace clusterpedia-system <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --create-namespace <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --set <span style=color:#000>persistenceMatchNode</span><span style=color:#ce5c00;font-weight:700>={{</span> LOCAL_PV_NODE <span style=color:#ce5c00;font-weight:700>}}</span> <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  <span style=color:#8f5902;font-style:italic># --set installCRDs=true</span>
+</code></pre></div><h2 id=卸载-clusterpedia>卸载 Clusterpedia</h2>
+<p>在卸载 Clusterpedia 前需要手动清理所有 <code>PediaCluster</code> 资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
+</code></pre></div><p><code>PediaCluster</code> 清理完成后就可以执行卸载命令</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm -n clusterpedia-system uninstall clusterpedia
+</code></pre></div><p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl delete -f ./_crds
+</code></pre></div><p><strong>注意 PVC 和 PV 并不会删除，用户需要手动删除</strong></p>
+<p>如果创建了 Local PV 那么还需要进入相应节点，清理 Local PV 的遗留数据</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 登录 Local PV 绑定的节点</span>
+$ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
+</code></pre></div><p>当前 Clusterpedia 已经支持通过 Helm 来快速的部署</p>
+<p>首先需要保证当前环境已经安装 helm v3</p>
+<h2 id=准备阶段-1>准备阶段</h2>
+<p>拉取仓库代码</p>
+<blockquote>
+<p>当前暂时还未将 chart 上传至 charts 公共仓库</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git clone https://github.com/clusterpedia-io/clusterpedia.git
+$ <span style=color:#204a87>cd</span> clusterpedia/charts
+</code></pre></div><p>由于 clusterpedia 使用 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 作为存储组件子 chart，
+所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm repo add bitnami https://charts.bitnami.com/bitnami
+$ helm dependency build
+</code></pre></div><h3 id=选择存储组件-1>选择存储组件</h3>
+<p>Clusterpedia Chart 通过子 chart 的方式，提供了 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 两款存储组件可供选择。</p>
+<p><code>postgresql</code> 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 <code>--set postgresql.enabled=false --set mysql.enabled=true</code></p>
+<p>更多关于存储组件的配置，可以参考 <a href=https://github.com/bitnami/charts/tree/master/bitnami/postgresql>bitnami/postgresql</a> 和 <a href=https://github.com/bitnami/charts/tree/master/bitnami/mysql>bitnami/mysql</a>.</p>
+<p><strong>用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml</strong></p>
+<h3 id=选择-crd-的安装管理方式-1>选择 CRD 的安装/管理方式</h3>
+<p>clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。</p>
+<h4 id=手动管理-1>手动管理</h4>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl apply -f ./_crds
+</code></pre></div><h4 id=使用-helm-管理-1>使用 Helm 管理</h4>
+<p>在后续安装命令中需要手动添加 <code>--set installCRDs=true</code> 即可</p>
+<h3 id=决定是否需要创建-local-pv-1>决定是否需要创建 Local PV</h3>
+<p>Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。</p>
+<p><strong>用户在安装时需要通过 <code>--set persistenceMatchNode=&lt;selected node name></code> 来指定 Local PV 所在节点。</strong></p>
+<p>如果用户不需要创建 Local PV，那么需要使用 <code>--set persistenceMatchNode=None</code> 显式声明。</p>
+<h2 id=安装-clusterpedia-1>安装 Clusterpedia</h2>
+<p>经过上述决策后，用户可以进行安装</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm install clusterpedia . <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --namespace clusterpedia-system <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --create-namespace <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --set <span style=color:#000>persistenceMatchNode</span><span style=color:#ce5c00;font-weight:700>={{</span> LOCAL_PV_NODE <span style=color:#ce5c00;font-weight:700>}}</span> <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  <span style=color:#8f5902;font-style:italic># --set installCRDs=true</span>
+</code></pre></div><h2 id=卸载-clusterpedia-1>卸载 Clusterpedia</h2>
+<p>在卸载 Clusterpedia 前需要手动清理所有 <code>PediaCluster</code> 资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
+</code></pre></div><p><code>PediaCluster</code> 清理完成后就可以执行卸载命令</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm -n clusterpedia-system uninstall clusterpedia
+</code></pre></div><p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl delete -f ./_crds
+</code></pre></div><p><strong>注意 PVC 和 PV 并不会删除，用户需要手动删除</strong></p>
+<p>如果创建了 Local PV 那么还需要进入相应节点，清理 Local PV 的遗留数据</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 登录 Local PV 绑定的节点</span>
+$ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
+</code></pre></div><p>当前 Clusterpedia 已经支持通过 Helm 来快速的部署</p>
+<p>首先需要保证当前环境已经安装 helm v3</p>
+<h2 id=准备阶段-2>准备阶段</h2>
+<p>拉取仓库代码</p>
+<blockquote>
+<p>当前暂时还未将 chart 上传至 charts 公共仓库</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git clone https://github.com/clusterpedia-io/clusterpedia.git
+$ <span style=color:#204a87>cd</span> clusterpedia/charts
+</code></pre></div><p>由于 clusterpedia 使用 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 作为存储组件子 chart，
+所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm repo add bitnami https://charts.bitnami.com/bitnami
+$ helm dependency build
+</code></pre></div><h3 id=选择存储组件-2>选择存储组件</h3>
+<p>Clusterpedia Chart 通过子 chart 的方式，提供了 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 两款存储组件可供选择。</p>
+<p><code>postgresql</code> 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 <code>--set postgresql.enabled=false --set mysql.enabled=true</code></p>
+<p>更多关于存储组件的配置，可以参考 <a href=https://github.com/bitnami/charts/tree/master/bitnami/postgresql>bitnami/postgresql</a> 和 <a href=https://github.com/bitnami/charts/tree/master/bitnami/mysql>bitnami/mysql</a>.</p>
+<p><strong>用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml</strong></p>
+<h3 id=选择-crd-的安装管理方式-2>选择 CRD 的安装/管理方式</h3>
+<p>clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。</p>
+<h4 id=手动管理-2>手动管理</h4>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl apply -f ./_crds
+</code></pre></div><h4 id=使用-helm-管理-2>使用 Helm 管理</h4>
+<p>在后续安装命令中需要手动添加 <code>--set installCRDs=true</code> 即可</p>
+<h3 id=决定是否需要创建-local-pv-2>决定是否需要创建 Local PV</h3>
+<p>Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。</p>
+<p><strong>用户在安装时需要通过 <code>--set persistenceMatchNode=&lt;selected node name></code> 来指定 Local PV 所在节点。</strong></p>
+<p>如果用户不需要创建 Local PV，那么需要使用 <code>--set persistenceMatchNode=None</code> 显式声明。</p>
+<h2 id=安装-clusterpedia-2>安装 Clusterpedia</h2>
+<p>经过上述决策后，用户可以进行安装</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm install clusterpedia . <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --namespace clusterpedia-system <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --create-namespace <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --set <span style=color:#000>persistenceMatchNode</span><span style=color:#ce5c00;font-weight:700>={{</span> LOCAL_PV_NODE <span style=color:#ce5c00;font-weight:700>}}</span> <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  <span style=color:#8f5902;font-style:italic># --set installCRDs=true</span>
+</code></pre></div><h2 id=卸载-clusterpedia-2>卸载 Clusterpedia</h2>
+<p>在卸载 Clusterpedia 前需要手动清理所有 <code>PediaCluster</code> 资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
+</code></pre></div><p><code>PediaCluster</code> 清理完成后就可以执行卸载命令</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm -n clusterpedia-system uninstall clusterpedia
+</code></pre></div><p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl delete -f ./_crds
+</code></pre></div><p><strong>注意 PVC 和 PV 并不会删除，用户需要手动删除</strong></p>
+<p>如果创建了 Local PV 那么还需要进入相应节点，清理 Local PV 的遗留数据</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 登录 Local PV 绑定的节点</span>
+$ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
+</code></pre></div><p>当前 Clusterpedia 已经支持通过 Helm 来快速的部署</p>
+<p>首先需要保证当前环境已经安装 helm v3</p>
+<h2 id=准备阶段-3>准备阶段</h2>
+<p>拉取仓库代码</p>
+<blockquote>
+<p>当前暂时还未将 chart 上传至 charts 公共仓库</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git clone https://github.com/clusterpedia-io/clusterpedia.git
+$ <span style=color:#204a87>cd</span> clusterpedia/charts
+</code></pre></div><p>由于 clusterpedia 使用 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 作为存储组件子 chart，
+所以需要添加 bitnami 仓库，并更新 clusterpedia chart 的依赖</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm repo add bitnami https://charts.bitnami.com/bitnami
+$ helm dependency build
+</code></pre></div><h3 id=选择存储组件-3>选择存储组件</h3>
+<p>Clusterpedia Chart 通过子 chart 的方式，提供了 <code>bitnami/postgresql</code> 和 <code>bitnami/mysql</code> 两款存储组件可供选择。</p>
+<p><code>postgresql</code> 为默认的存储组件，如果想要使用 mysql，那么在后续安装命令中添加 <code>--set postgresql.enabled=false --set mysql.enabled=true</code></p>
+<p>更多关于存储组件的配置，可以参考 <a href=https://github.com/bitnami/charts/tree/master/bitnami/postgresql>bitnami/postgresql</a> 和 <a href=https://github.com/bitnami/charts/tree/master/bitnami/mysql>bitnami/mysql</a>.</p>
+<p><strong>用户也可以选择不安装存储组件，而是使用外部组件，相关设置可以参考 charts/values.yaml</strong></p>
+<h3 id=选择-crd-的安装管理方式-3>选择 CRD 的安装/管理方式</h3>
+<p>clusterpedia 要求环境中创建相应的 CRD 资源，可以选择手动部署 CRD YAML，也可以在 Helm 中管理。</p>
+<h4 id=手动管理-3>手动管理</h4>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl apply -f ./_crds
+</code></pre></div><h4 id=使用-helm-管理-3>使用 Helm 管理</h4>
+<p>在后续安装命令中需要手动添加 <code>--set installCRDs=true</code> 即可</p>
+<h3 id=决定是否需要创建-local-pv-3>决定是否需要创建 Local PV</h3>
+<p>Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。</p>
+<p><strong>用户在安装时需要通过 <code>--set persistenceMatchNode=&lt;selected node name></code> 来指定 Local PV 所在节点。</strong></p>
+<p>如果用户不需要创建 Local PV，那么需要使用 <code>--set persistenceMatchNode=None</code> 显式声明。</p>
+<h2 id=安装-clusterpedia-3>安装 Clusterpedia</h2>
+<p>经过上述决策后，用户可以进行安装</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm install clusterpedia . <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --namespace clusterpedia-system <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --create-namespace <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --set <span style=color:#000>persistenceMatchNode</span><span style=color:#ce5c00;font-weight:700>={{</span> LOCAL_PV_NODE <span style=color:#ce5c00;font-weight:700>}}</span> <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  <span style=color:#8f5902;font-style:italic># --set installCRDs=true</span>
+</code></pre></div><h2 id=卸载-clusterpedia-3>卸载 Clusterpedia</h2>
+<p>在卸载 Clusterpedia 前需要手动清理所有 <code>PediaCluster</code> 资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
+</code></pre></div><p><code>PediaCluster</code> 清理完成后就可以执行卸载命令</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm -n clusterpedia-system uninstall clusterpedia
+</code></pre></div><p>如果用户使用手动创建的 CRD 资源，那么同样也需要手动清理 CRD</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl delete -f ./_crds
+</code></pre></div><p><strong>注意 PVC 和 PV 并不会删除，用户需要手动删除</strong></p>
+<p>如果创建了 Local PV 那么还需要进入相应节点，清理 Local PV 的遗留数据</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 登录 Local PV 绑定的节点</span>
+$ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
+</code></pre></div>
+<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
+<li>
+<a href=/zh-cn/blog/2022/04/01/clusterpedia-%E4%B8%8A%E6%A6%9C-csdn-it-%E6%8A%80%E6%9C%AF%E5%BD%B1%E5%93%8D%E5%8A%9B%E4%B9%8B%E6%98%9F/ aria-label="上一页 - Clusterpedia 上榜| CSDN IT 技术影响力之星" class="btn btn-primary"><span class=mr-1>←</span>上一页</a>
+</li>
+<a href=/zh-cn/blog/2022/04/12/clusterpedia-v0.2.0-%E5%8F%91%E5%B8%83/ aria-label="下一页 - Clusterpedia v0.2.0 发布" class="btn btn-primary">下一页<span class=ml-1>→</span></a>
+</li>
+</ul>
+</div>
+</main>
+</div>
+</div>
+<footer class="bg-dark py-5 row d-print-none">
+<div class="container-fluid mx-sm-5">
+<div class=row>
+<div class="col-6 col-sm-4 text-xs-center order-sm-2">
+</div>
+<div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+<ul class="list-inline mb-0">
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub>
+<a class=text-white target=_blank rel=noopener href=https://github.com/clusterpedia-io aria-label=GitHub>
+<i class="fab fa-github"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=Slack aria-label=Slack>
+<a class=text-white target=_blank rel=noopener href=https://clusterpedia.slack.com aria-label=Slack>
+<i class="fab fa-slack"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="Developer mailing list" aria-label="Developer mailing list">
+<a class=text-white target=_blank rel=noopener href=mailto:clusterpedia@googlegroups.com aria-label="Developer mailing list">
+<i class="fa fa-envelope"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+<small class=text-white>&copy; 2022 The Clusterpedia Authors 保留所有权利</small>
+<p class=mt-2><a href=/zh-cn/about/>关于 Clusterpedia</a></p>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
+<script src=/js/tabpane-persist.js></script>
+<script src=/js/main.min.8ab8f81ff7e1454d30024cd6f956d4d341c3a97e2a673f988065f2ee4e147922.js integrity="sha256-irj4H/fhRU0wAkzW+VbU00HDqX4qZz+YgGXy7k4UeSI=" crossorigin=anonymous></script>
+<script src=https://cdn.bootcdn.net/ajax/libs/asciinema-player/2.6.1/asciinema-player.min.js></script>
+</body>
+</html>
