@@ -47,7 +47,7 @@ sed "s|__NODE_NAME__|$STORAGE_NODE_NAME|g" `grep __NODE_NAME__ -rl ./templates` 
 
 **部署存储组件**
 ```bash
-kubectl create -f .
+kubectl apply -f .
 
 # 跳回 Clusterpedia 项目根目录
 cd ../../../

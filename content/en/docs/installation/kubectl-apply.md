@@ -48,7 +48,7 @@ sed "s|__NODE_NAME__|$STORAGE_NODE_NAME|g" `grep __NODE_NAME__ -rl ./templates` 
 
 **Deploy storage component**
 ```bash
-kubectl create -f .
+kubectl apply -f .
 
 # Go back to Clusterpedia root directory
 cd ../../../
