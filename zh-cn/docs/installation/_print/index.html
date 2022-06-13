@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.6242c67d9be8d4b5cd9cdbe90fdb23c5.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.7a470ae60379f14a481ca93cdc72ebfc.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -131,7 +131,7 @@ git checkout v0.3.0
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#204a87>export</span> <span style=color:#000>STORAGE_NODE_NAME</span><span style=color:#ce5c00;font-weight:700>=</span>&lt;节点名称&gt;
 sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000>$STORAGE_NODE_NAME</span><span style=color:#4e9a06>|g&#34;</span> <span style=color:#4e9a06>`</span>grep __NODE_NAME__ -rl ./templates<span style=color:#4e9a06>`</span> &gt; clusterpedia_internalstorage_pv.yaml
 </code></pre></div><p><strong>部署存储组件</strong></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl create -f .
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl apply -f .
 
 <span style=color:#8f5902;font-style:italic># 跳回 Clusterpedia 项目根目录</span>
 <span style=color:#204a87>cd</span> ../../../
