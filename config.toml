@@ -82,7 +82,7 @@ time_format_blog = "2006.01.02"
 [[menu.main]]
   name = "Slack"
   weight = 60
-  url = "https://join.slack.com/t/clusterpedia/shared_invite/zt-11smmdntu-Im1YjOahqvHhJFqNzLELOA"
+  url = "https://cloud-native.slack.com/messages/clusterpedia"
   pre = "<i class='fab fa-slack'></i>"
 
 [markup]
@@ -204,7 +204,7 @@ enable = true
         desc = "Development takes place here!"
 [[params.links.developer]]
 	name = "Slack"
-	url = "https://clusterpedia.slack.com"
+	url = "https://cloud-native.slack.com/messages/clusterpedia"
 	icon = "fab fa-slack"
         desc = "Chat with other project developers"
 [[params.links.developer]]
