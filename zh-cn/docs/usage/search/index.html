@@ -69,7 +69,7 @@ Search Labels： …">
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.682115f05e9acad486f906d10ad31053.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.22fff903b46ef2517d9366c3982757c4.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -79,7 +79,7 @@ Search Labels： …">
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.682115f05e9acad486f906d10ad31053.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.22fff903b46ef2517d9366c3982757c4.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -115,10 +115,14 @@ Search Labels： …">
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsconcepts-li>
 <a href=/zh-cn/docs/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsconcepts><span>概念</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscollection-resource-li>
-<a href=/zh-cn/docs/concepts/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscollection-resource><span>聚合资源(Collection Resource)</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptspediacluster-li>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptspediacluster-li>
 <a href=/zh-cn/docs/concepts/pediacluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptspediacluster><span>PediaCluster</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscluster-sync-resources-li>
+<a href=/zh-cn/docs/concepts/cluster-sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscluster-sync-resources><span>公共的集群资源同步配置(ClusterSyncResources)</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscollection-resource-li>
+<a href=/zh-cn/docs/concepts/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscollection-resource><span>聚合资源(Collection Resource)</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscluster-import-policy-li>
+<a href=/zh-cn/docs/concepts/cluster-import-policy/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscluster-import-policy><span>集群接入策略(ClusterImportPolicy)</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zh-cndocsusage-li>
@@ -187,6 +191,7 @@ Search Labels： …">
 <li><a href=#label-过滤>Label 过滤</a></li>
 <li><a href=#字段过滤>字段过滤</a></li>
 <li><a href=#高级检索自定义条件检索>高级检索(自定义条件检索)</a></li>
+<li><a href=#collectionresource-url-query>CollectionResource URL Query</a></li>
 </ul>
 </nav></div>
 </aside>
@@ -473,6 +478,34 @@ Search Labels： …">
 </table>
 <p>自定义检索并不支持通过 search lable，只能使用 url query 来传递自定义搜素的语句。</p>
 <p>另外该功能暂时还是处于 alpha 阶段，需要用户在 <code>clusterpedia apiserver</code> 中开启相应的 Feature Gate，详细可以参考 <a href=../../features/raw-sql-query>自定义条件检索</a></p>
+<h2 id=collectionresource-url-query>CollectionResource URL Query</h2>
+<p>以下 URL Query 专属于 Collection Resource。</p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>url query</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=collection-resource#only-metadata>只获取资源的 metadata</a></td>
+<td><code>onlyMetadata</code></td>
+<td><em>onlyMetadata=true</em></td>
+</tr>
+<tr>
+<td><a href=collection-resource#any-collectionresource>指定 any collectionresource 的 groups</a></td>
+<td><code>groups</code></td>
+<td><em>groups=apps,cert-manager.io/v1</em></td>
+</tr>
+<tr>
+<td><a href=collection-resource#any-collectionresource>指定 any collectionresource 的 resources</a></td>
+<td><code>resources</code></td>
+<td><em>resources=apps/deployments,batch/v1/cronjobs</em></td>
+</tr>
+</tbody>
+</table>
 <div class=section-index>
 <hr class=panel-line>
 <div class=entry>

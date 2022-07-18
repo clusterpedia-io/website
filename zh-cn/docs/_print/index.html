@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.682115f05e9acad486f906d10ad31053.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.22fff903b46ef2517d9366c3982757c4.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -95,8 +95,10 @@
 </ul>
 <li>2: <a href=#pg-dd948255948d6b59b32c471abcb62997>概念</a></li>
 <ul>
-<li>2.1: <a href=#pg-40243a331b263af5e1b61fd771638878>聚合资源(Collection Resource)</a></li>
-<li>2.2: <a href=#pg-911128911953cea7ceaaad409a1badf1>PediaCluster</a></li>
+<li>2.1: <a href=#pg-911128911953cea7ceaaad409a1badf1>PediaCluster</a></li>
+<li>2.2: <a href=#pg-90ee9ed4f8367758c09e96dc82d2a800>公共的集群资源同步配置(ClusterSyncResources)</a></li>
+<li>2.3: <a href=#pg-40243a331b263af5e1b61fd771638878>聚合资源(Collection Resource)</a></li>
+<li>2.4: <a href=#pg-d8808d404dd9644ce0c0ae679468c3a2>集群接入策略(ClusterImportPolicy)</a></li>
 </ul>
 <li>3: <a href=#pg-ec5a5e9379174e59d723f74f5206953c>使用</a></li>
 <ul>
@@ -390,21 +392,107 @@ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 <h1 id=pg-dd948255948d6b59b32c471abcb62997>2 - 概念</h1>
 </div>
 <div class=td-content>
-<h1 id=pg-40243a331b263af5e1b61fd771638878>2.1 - 聚合资源(Collection Resource)</h1>
+<h1 id=pg-911128911953cea7ceaaad409a1badf1>2.1 - PediaCluster</h1>
+<p>Clusterpedia 中使用 <code>PediaCluster</code> 资源来代表一个需要同步资源的集群。</p>
+<blockquote>
+<p>Clusterpedia 需要非常友好的对接到其他多云平台中，而多云平台可能会使用 <code>Cluster</code> 资源来代表纳管的集群，为了避免冲突 Clusterpedia 使用 PediaCluster。</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get pediacluster
+NAME        APISERVER                        VERSION            STATUS
+demo1       https://10.6.101.100:6443        v1.22.3-aliyun.1   Healthy
+demo2       https://10.6.101.100:6443        v1.21.0            Healthy
+</code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>demo1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>apiserver</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://10.6.101.100:6443</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>kubeconfig</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>caData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>tokenData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>certData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>keyData</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncAllCustomResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>false</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResourcesRefName</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>PediaCluster 有两个作用</p>
+<ul>
+<li>配置集群的认证信息</li>
+<li>配置同步的资源</li>
+</ul>
+<p>配置集群认证信息可以参考 <a href=../../usage/import-clusters>集群接入</a></p>
+<p>有三个字段可以配置同步的资源：</p>
+<ul>
+<li><code>spec.syncResources</code> 配置该集群需要同步的资源</li>
+<li><code>spec.syncAllCustomResources</code> 同步所有的自定义资源</li>
+<li><code>spec.syncResourcesRefName</code> 引用 <a href=../cluster-sync-resources>公共的集群资源同步配置</a></li>
+</ul>
+<p>具体配置同步资源，可以参考 <a href=../../usage/sync-resources>同步集群资源</a></p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-90ee9ed4f8367758c09e96dc82d2a800>2.2 - 公共的集群资源同步配置(ClusterSyncResources)</h1>
+<p>Clusterpedia 提供了公共的集群资源同步配置 ——  <strong>ClusterSyncResources</strong>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get clustersyncresources
+</code></pre></div><p>ClusterSyncResources 的 <code>spec.syncResources</code> 字段和 PediaCluster 的 <code>spec.syncResources</code> 配置方式相同，可以参考 <a href=../../usage/sync-resources>同步集群资源</a></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ClusterSyncResources</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>global-base</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#000>pods</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>未来会支持 <code>spec.syncAllCustomResources</code> 字段来支持设置同步所有的自定义资源</p>
+<p>任何 <strong>PediaCluster</strong> 都可以通过 <code>spec.syncResourcesRefName</code> 引用相同的 <code>ClusterSyncResources</code>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>demo1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResourcesRefName</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;global-base&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p><strong>当我们修改 ClusterSyncResources 时，所有引用它的 PediaCluster 内同步的资源都会发生相应的修改。</strong></p>
+<p>如果 <strong>PediaCluster</strong> 同时设置了 <code>spec.syncResourcesRefName</code> 和 <code>spec.syncResources</code>，那么会取两者的并集</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>demo1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResourcesRefName</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;global-base&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#000>pods</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#000>configmaps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>上例中，clusterpedia 会同步 demo1 集群中 pods 和 configmaps，以及 apps group 下的所有资源。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-40243a331b263af5e1b61fd771638878>2.3 - 聚合资源(Collection Resource)</h1>
 <p>Clusterpedia 为了能够一次性获取多个类型的资源，在单个资源类型的基础上提供了一种新的资源 —— <code>聚合资源（Collection Resource）</code>。</p>
 <p><code>聚合资源</code>是由不同的资源类型组合而成，可以对这些资源类型进行统一的检索和分页。</p>
-<p><strong>具体支持哪些聚合资源是由<code>存储层</code>来决定的</strong>，例如 <code>默认存储层</code> 支持 <code>workloads</code> 和 <code>kuberesources</code> 两种聚合资源。</p>
+<p><strong>具体支持哪些聚合资源是由<code>存储层</code>来决定的</strong>，例如 <code>默认存储层</code> 支持 <code>any</code>，<code>workloads</code> 和 <code>kuberesources</code> 两种聚合资源。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources
 </code></pre></div><pre tabindex=0><code># 输出:
 NAME            RESOURCES
+any             * 
 workloads       deployments.apps,daemonsets.apps,statefulsets.apps
-kuberesources   *,*.admission.k8s.io,*.admissionregistration.k8s.io,*.apiextensions.k8s.io,*.apps,*.authentication.k8s.io,*.authorization.k8s.io,*.autoscaling,*.batch,*.certificates.k8s.io,*.coordination.k8s.io,*.discovery.k8s.io,*.events.k8s.io,*.extensions,*.flowcontrol.apiserver.k8s.io,*.imagepolicy.k8s.io,*.internal.apiserver.k8s.io,*.networking.k8s.io,*.node.k8s.io,*.policy,*.rbac.authorization.k8s.io,*.scheduling.k8s.io,*.storage.k8s.io
-</code></pre><p><code>kuberesources</code> 包含了所有 kube 的内置资源，我们可以通过 <code>kuberesources</code> 来对所有的内置资源进行统一的过滤和检索。</p>
+kuberesources   .*,*.admission.k8s.io,*.admissionregistration.k8s.io,*.apiextensions.k8s.io,*.apps,*.authentication.k8s.io,*.authorization.k8s.io,*.autoscaling,*.batch,*.certificates.k8s.io,*.coordination.k8s.io,*.discovery.k8s.io,*.events.k8s.io,*.extensions,*.flowcontrol.apiserver.k8s.io,*.imagepolicy.k8s.io,*.internal.apiserver.k8s.io,*.networking.k8s.io,*.node.k8s.io,*.policy,*.rbac.authorization.k8s.io,*.scheduling.k8s.io,*.storage.k8s.io
+</code></pre><p><code>any</code> 表示任意的资源，用户在使用时需要传递想要组合的 groups 或者 resources，具体使用可以参考 <a href=../../usage/search/collection-resource#any-collectionresource>使用 Any CollectionResource</a></p>
+<p><code>kuberesources</code> 包含了所有 kube 的内置资源，我们可以通过 <code>kuberesources</code> 来对所有的内置资源进行统一的过滤和检索。</p>
 <p><strong>以 yaml 形式查看支持的<code>聚合资源</code></strong></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get collectionresources -o yaml
 </code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># 输出：</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>items</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia.io/v1beta1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>CollectionResource</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>creationTimestamp</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>null</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>any</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resourceTypes</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[]</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia.io/v1beta1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>CollectionResource</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -457,10 +545,33 @@ kuberesources   *,*.admission.k8s.io,*.admissionregistration.k8s.io,*.apiextensi
 <p>而 <code>kuberesources</code> 则包含了 kube 内置的所有资源。</p>
 <p>更多关于<code>聚合资源</code>的操作可以查看 <a href=../../usage/search/collection-resource>聚合资源检索</a></p>
 <h2 id=自定义聚合资源>自定义聚合资源</h2>
-<p><code>内置存储层</code>未来会支持<code>自定义聚合资源</code>，允许用户随意组合任意的资源类型。</p>
+<p>Clusterpedia 计划提供两种方式来让用户随意组合想要查询的资源类型</p>
+<ul>
+<li><strong><code>Any CollectionResource</code></strong> —— 使用聚合资源 <code>any</code></li>
+<li><strong><code>CustomCollectionResource</code></strong> —— 自定义聚合资源</li>
+</ul>
+<p>0.4 中，Clusterpedia 提供了 any collectionresource 来让用户通过传递 <code>groups</code> 和 <code>resources</code> 参数来组合不同类型的资源。</p>
+<p>不过需要注意 any collectionresource 不能使用 kubectl 来获取，具体使用可以参考 <a href=../../usage/search/collection-resource/use-any-collection-resource>使用 Any CollectionResource</a></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get collectionresources any
+Error from server <span style=color:#ce5c00;font-weight:700>(</span>BadRequest<span style=color:#ce5c00;font-weight:700>)</span>: url query - <span style=color:#4e9a06>`</span>groups<span style=color:#4e9a06>`</span> or <span style=color:#4e9a06>`</span>resources<span style=color:#4e9a06>`</span> is required
+</code></pre></div><p><strong>自定义聚合资源</strong>允许用户通过 <code>kubectl apply collectionresource &lt;collectionresource name></code> 来创建或者更新一个 Collection Resource，用户随意的配置 Collection Resource 的资源类型</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia.io/v1beta1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>CollectionResource</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>workloads</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>resourceTypes</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>deployments</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>daemonsets</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>apps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>statefulsets</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>batch</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cronjobs</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p><strong>当前还未支持自定义聚合资源</strong></p>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-911128911953cea7ceaaad409a1badf1>2.2 - PediaCluster</h1>
+<h1 id=pg-d8808d404dd9644ce0c0ae679468c3a2>2.4 - 集群接入策略(ClusterImportPolicy)</h1>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-ec5a5e9379174e59d723f74f5206953c>3 - 使用</h1>
@@ -676,6 +787,35 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><p>通过<code>全资源通配符</code> 可以同步集群中的内置资源，自定义资源以及聚合式 API 资源。</p>
 <p>使用该功能会创建大量的长连接，所以需要谨慎使用，并且在 <code>clustersynchro-manager</code> 中开启相应的 Feature Gate, 具体操作可以参考 <a href=../../features/sync-all-resources>同步所有资源</a></p>
+<h2 id=引用-clustersyncresources>引用 ClusterSyncResources</h2>
+<p><code>ClusterSyncResources</code> 用于定义多个 PediaCluster 共同引用的集群资源同步配置，关于 <code>ClusterSyncResources</code> 可以查看 <a href=../../concepts/cluster-sync-resources>公共的集群资源同步配置(ClusterSyncResources) </a></p>
+<p>PediaCluster 通过 <code>spec.syncResourceRefName</code> 来设置引用的 <code>ClusterSyncResources</code>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ClusterSyncResources</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>global-base</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#000>pods</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000>---</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>demo1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResourcesRefName</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;global-base&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#000>pods</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#000>configmaps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>如果 <strong>PediaCluster</strong> 同时设置了 <code>spec.syncResourcesRefName</code> 和 <code>spec.syncResources</code>，那么会取两者的并集。</p>
+<p>上例中，clusterpedia 会同步 demo1 的 pods 和 confgimaps，以及 apps group 下的所有资源。</p>
 <h2 id=查看资源同步状态>查看资源同步状态</h2>
 <p>我们可以通过 <code>PediaCluster</code> 资源的 <code>Status</code> 来查看资源的信息，同步的资源版本和状态以及存储版本</p>
 <p>在 <code>Status</code> 中，资源会有<strong>同步版本</strong>和<strong>存储版本</strong>：</p>
@@ -1150,6 +1290,34 @@ issuers                    cert-manager.io/v1   true         Issuer
 </table>
 <p>自定义检索并不支持通过 search lable，只能使用 url query 来传递自定义搜素的语句。</p>
 <p>另外该功能暂时还是处于 alpha 阶段，需要用户在 <code>clusterpedia apiserver</code> 中开启相应的 Feature Gate，详细可以参考 <a href=../../features/raw-sql-query>自定义条件检索</a></p>
+<h2 id=collectionresource-url-query>CollectionResource URL Query</h2>
+<p>以下 URL Query 专属于 Collection Resource。</p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>url query</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=collection-resource#only-metadata>只获取资源的 metadata</a></td>
+<td><code>onlyMetadata</code></td>
+<td><em>onlyMetadata=true</em></td>
+</tr>
+<tr>
+<td><a href=collection-resource#any-collectionresource>指定 any collectionresource 的 groups</a></td>
+<td><code>groups</code></td>
+<td><em>groups=apps,cert-manager.io/v1</em></td>
+</tr>
+<tr>
+<td><a href=collection-resource#any-collectionresource>指定 any collectionresource 的 resources</a></td>
+<td><code>resources</code></td>
+<td><em>resources=apps/deployments,batch/v1/cronjobs</em></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-ec8e2360424d04fb82dc27fbc4824983>3.4.1 - 多集群检索</h1>
@@ -1623,6 +1791,67 @@ cluster-2   apps    v1        Deployment   kube-system                   coredns
 ...
 </code></pre><p><strong>请使用 URL 来检索<code>聚合资源</code></strong></p>
 </div></div>
+<h2 id=only-metadata>Only Metadata</h2>
+<p>我们在检索 CollectionResource 时，获取到的资源默认是全量的资源信息，但是我们通常只需要获取资源的 metadata 即可。</p>
+<p>在检索时我们可以使用 url query —— <code>onlyMetadata</code> 来只获取资源 Metadata。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get --raw <span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/collectionresources/workloads?onlyMetadata=true&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<span style=color:#ce5c00;font-weight:700>{</span>
+  <span style=color:#4e9a06>&#34;kind&#34;</span>: <span style=color:#4e9a06>&#34;CollectionResource&#34;</span>,
+  <span style=color:#4e9a06>&#34;apiVersion&#34;</span>: <span style=color:#4e9a06>&#34;clusterpedia.io/v1beta1&#34;</span>,
+  <span style=color:#4e9a06>&#34;metadata&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+    <span style=color:#4e9a06>&#34;name&#34;</span>: <span style=color:#4e9a06>&#34;workloads&#34;</span>,
+    <span style=color:#4e9a06>&#34;creationTimestamp&#34;</span>: null
+  <span style=color:#ce5c00;font-weight:700>}</span>,
+  <span style=color:#4e9a06>&#34;resourceTypes&#34;</span>: <span style=color:#ce5c00;font-weight:700>[</span>
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;group&#34;</span>: <span style=color:#4e9a06>&#34;apps&#34;</span>,
+      <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>,
+      <span style=color:#4e9a06>&#34;kind&#34;</span>: <span style=color:#4e9a06>&#34;Deployment&#34;</span>,
+      <span style=color:#4e9a06>&#34;resource&#34;</span>: <span style=color:#4e9a06>&#34;deployments&#34;</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>
+  <span style=color:#ce5c00;font-weight:700>]</span>,
+  <span style=color:#4e9a06>&#34;items&#34;</span>: <span style=color:#ce5c00;font-weight:700>[</span>
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;apiVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1&#34;</span>,
+      <span style=color:#4e9a06>&#34;kind&#34;</span>: <span style=color:#4e9a06>&#34;Deployment&#34;</span>,
+      <span style=color:#4e9a06>&#34;metadata&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+        <span style=color:#4e9a06>&#34;annotations&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+          <span style=color:#4e9a06>&#34;deployment.kubernetes.io/revision&#34;</span>: <span style=color:#4e9a06>&#34;1&#34;</span>,
+          <span style=color:#4e9a06>&#34;shadow.clusterpedia.io/cluster-name&#34;</span>: <span style=color:#4e9a06>&#34;cluster-example&#34;</span>
+        <span style=color:#ce5c00;font-weight:700>}</span>,
+        <span style=color:#4e9a06>&#34;creationTimestamp&#34;</span>: <span style=color:#4e9a06>&#34;2021-09-24T10:19:19Z&#34;</span>,
+        <span style=color:#4e9a06>&#34;generation&#34;</span>: 1,
+        <span style=color:#4e9a06>&#34;labels&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+          <span style=color:#4e9a06>&#34;k8s-app&#34;</span>: <span style=color:#4e9a06>&#34;tigera-operator&#34;</span>
+        <span style=color:#ce5c00;font-weight:700>}</span>,
+        <span style=color:#4e9a06>&#34;name&#34;</span>: <span style=color:#4e9a06>&#34;tigera-operator&#34;</span>,
+        <span style=color:#4e9a06>&#34;namespace&#34;</span>: <span style=color:#4e9a06>&#34;tigera-operator&#34;</span>,
+        <span style=color:#4e9a06>&#34;resourceVersion&#34;</span>: <span style=color:#4e9a06>&#34;125073610&#34;</span>,
+        <span style=color:#4e9a06>&#34;uid&#34;</span>: <span style=color:#4e9a06>&#34;992f9d53-37cb-4184-a004-15b278b11f79&#34;</span>
+      <span style=color:#ce5c00;font-weight:700>}</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>
+  <span style=color:#ce5c00;font-weight:700>]</span>
+<span style=color:#ce5c00;font-weight:700>}</span>
+</code></pre></div><h2 id=any-collectionresource>Any CollectionResource</h2>
+<blockquote>
+<p><code>any collectionresource</code> 是用户自由组合资源类型的方式之一，可以通过 <a href=../../../concepts/collection-resource#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%81%9A%E5%90%88%E8%B5%84%E6%BA%90>自定义聚合资源</a> 来查看更多。</p>
+</blockquote>
+<p>clusterpedia 支持一种特殊的 CollectionResource —— <code>any</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get collectionresources
+NAME            RESOURCES
+any             *
+</code></pre></div><p>在检索 any collectionresource 时，我们必须通过 url query 来指定一组资源类型，因此我们只能通过 <a href=https://github.com/clusterpedia-io/client-go/pull/43>clusterpedia-io/client-go</a> 或者 url 来访问 any collectionresource</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get collectionresources any
+Error from server <span style=color:#ce5c00;font-weight:700>(</span>BadRequest<span style=color:#ce5c00;font-weight:700>)</span>: url query - <span style=color:#4e9a06>`</span>groups<span style=color:#4e9a06>`</span> or <span style=color:#4e9a06>`</span>resources<span style=color:#4e9a06>`</span> is required
+</code></pre></div><p><code>any collectionresource</code> 支持两个 url query —— <code>groups</code> 和 <code>resources</code></p>
+<p><strong><code>groups</code> 和 <code>resources</code> 可以同时指定，当前是取两者并集，并且不会进行去重处理，由调用者负责去重</strong>，未来对该行为有一些优化。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get --raw <span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/collectionresources/any?onlyMetadata=true&amp;groups=apps&amp;resources=batch/jobs,batch/cronjobs&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><h4 id=groups>groups</h4>
+<p><code>groups</code> 可以指定一组资源的组和版本，多个组版本使用 <code>,</code> 分隔，组版本格式为 <strong>&lt; group >/&lt; version ></strong>，也可以不指定版本 <strong>&lt; group ></strong>，<em>对于 /api 下的资源，可以直接使用空字符串</em></p>
+<p>示例：<strong>groups=apps/v1,,batch</strong> 指定了三个组 apps/v1, core, batch。</p>
+<h4 id=resources>resources</h4>
+<p><code>resources</code> 可以指定具体的资源类型，多个资源类型使用 <code>,</code> 分隔，资源类型格式为 <strong>&lt; group >/&lt; version >/&lt; resource></strong>，通过也可以不指定版本 <strong>&lt; group >/&lt; resource ></strong>。</p>
+<p>示例：<strong>resources=apps/v1/deployments,apps/daemonsets,/pods</strong> 指定了三种资源 deloyments，daemonsets 和 pods。</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-56dc2b1c45b2c6b0983526530ba75d01>4 - 特性功能</h1>

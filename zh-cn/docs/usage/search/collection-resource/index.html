@@ -31,7 +31,7 @@ URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一�
 由于 kubectl 的限制，我们无法通过 Label Selector 或者其他方式来传递检索参数， 所以建议以 URL 的方式来检索聚合资源。
 URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一定要搭配分页功能使用。
  kubectl get --raw=&#34;/apis/clusterpedia.io/v1beta1/collectionresources/workloads?limit=1&#34; | jq # 输出 { &#34;kind&#34;: &#34;CollectionResource&#34;, &#34;apiVersion&#34;: &#34;clusterpedia.io/v1beta1&#34;, &#34;metadata&#34;: { &#34;name&#34;: &#34;workloads&#34;, &#34;creationTimestamp&#34;: null }, &#34;resourceTypes&#34;: [ { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;kind&#34;: &#34;Deployment&#34;, &#34;resource&#34;: &#34;deployments&#34; }, { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;resource&#34;: &#34;daemonsets&#34; }, { &#34;group&#34;: &#34;apps&#34;, &#34;version&#34;: &#34;v1&#34;, &#34;resource&#34;: &#34;statefulsets&#34; } ], &#34;items&#34;: [ { &#34;apiVersion&#34;: &#34;apps/v1&#34;, &#34;kind&#34;: &#34;Deployment&#34;, .">
-<meta itemprop=wordCount content="137">
+<meta itemprop=wordCount content="331">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="聚合资源检索">
 <meta name=twitter:description content="关于聚合资源的概念可以查看 什么是聚合资源 （Collection Resource）
@@ -79,7 +79,7 @@ URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一�
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.682115f05e9acad486f906d10ad31053.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.22fff903b46ef2517d9366c3982757c4.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -89,7 +89,7 @@ URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一�
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.682115f05e9acad486f906d10ad31053.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.22fff903b46ef2517d9366c3982757c4.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -125,10 +125,14 @@ URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一�
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsconcepts-li>
 <a href=/zh-cn/docs/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsconcepts><span>概念</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscollection-resource-li>
-<a href=/zh-cn/docs/concepts/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscollection-resource><span>聚合资源(Collection Resource)</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptspediacluster-li>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptspediacluster-li>
 <a href=/zh-cn/docs/concepts/pediacluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptspediacluster><span>PediaCluster</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscluster-sync-resources-li>
+<a href=/zh-cn/docs/concepts/cluster-sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscluster-sync-resources><span>公共的集群资源同步配置(ClusterSyncResources)</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscollection-resource-li>
+<a href=/zh-cn/docs/concepts/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscollection-resource><span>聚合资源(Collection Resource)</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscluster-import-policy-li>
+<a href=/zh-cn/docs/concepts/cluster-import-policy/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscluster-import-policy><span>集群接入策略(ClusterImportPolicy)</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zh-cndocsusage-li>
@@ -186,6 +190,16 @@ URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一�
 <a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
 <a id=print href=/zh-cn/docs/usage/search/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#only-metadata>Only Metadata</a></li>
+<li><a href=#any-collectionresource>Any CollectionResource</a>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class=td-breadcrumbs>
@@ -207,7 +221,7 @@ URL kubectl  请求聚合资源时，由于资源数量可能会非常大，一�
 <div class=td-content>
 <h1>聚合资源检索</h1>
 <header class=article-meta>
-<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 少于1分钟 &nbsp;</p>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 2 分钟阅读 &nbsp;</p>
 </header>
 <p>关于聚合资源的概念可以查看 <a href=../../../concepts/collection-resource>什么是聚合资源 （Collection Resource）</a></p>
 <p>由于 kubectl 的限制，我们无法通过 <code>Label Selector</code> 或者其他方式来传递检索参数，
@@ -273,6 +287,67 @@ cluster-2   apps    v1        Deployment   kube-system                   coredns
 ...
 </code></pre><p><strong>请使用 URL 来检索<code>聚合资源</code></strong></p>
 </div></div>
+<h2 id=only-metadata>Only Metadata</h2>
+<p>我们在检索 CollectionResource 时，获取到的资源默认是全量的资源信息，但是我们通常只需要获取资源的 metadata 即可。</p>
+<p>在检索时我们可以使用 url query —— <code>onlyMetadata</code> 来只获取资源 Metadata。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get --raw <span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/collectionresources/workloads?onlyMetadata=true&amp;limit=1&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+<span style=color:#ce5c00;font-weight:700>{</span>
+  <span style=color:#4e9a06>&#34;kind&#34;</span>: <span style=color:#4e9a06>&#34;CollectionResource&#34;</span>,
+  <span style=color:#4e9a06>&#34;apiVersion&#34;</span>: <span style=color:#4e9a06>&#34;clusterpedia.io/v1beta1&#34;</span>,
+  <span style=color:#4e9a06>&#34;metadata&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+    <span style=color:#4e9a06>&#34;name&#34;</span>: <span style=color:#4e9a06>&#34;workloads&#34;</span>,
+    <span style=color:#4e9a06>&#34;creationTimestamp&#34;</span>: null
+  <span style=color:#ce5c00;font-weight:700>}</span>,
+  <span style=color:#4e9a06>&#34;resourceTypes&#34;</span>: <span style=color:#ce5c00;font-weight:700>[</span>
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;group&#34;</span>: <span style=color:#4e9a06>&#34;apps&#34;</span>,
+      <span style=color:#4e9a06>&#34;version&#34;</span>: <span style=color:#4e9a06>&#34;v1&#34;</span>,
+      <span style=color:#4e9a06>&#34;kind&#34;</span>: <span style=color:#4e9a06>&#34;Deployment&#34;</span>,
+      <span style=color:#4e9a06>&#34;resource&#34;</span>: <span style=color:#4e9a06>&#34;deployments&#34;</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>
+  <span style=color:#ce5c00;font-weight:700>]</span>,
+  <span style=color:#4e9a06>&#34;items&#34;</span>: <span style=color:#ce5c00;font-weight:700>[</span>
+    <span style=color:#ce5c00;font-weight:700>{</span>
+      <span style=color:#4e9a06>&#34;apiVersion&#34;</span>: <span style=color:#4e9a06>&#34;apps/v1&#34;</span>,
+      <span style=color:#4e9a06>&#34;kind&#34;</span>: <span style=color:#4e9a06>&#34;Deployment&#34;</span>,
+      <span style=color:#4e9a06>&#34;metadata&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+        <span style=color:#4e9a06>&#34;annotations&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+          <span style=color:#4e9a06>&#34;deployment.kubernetes.io/revision&#34;</span>: <span style=color:#4e9a06>&#34;1&#34;</span>,
+          <span style=color:#4e9a06>&#34;shadow.clusterpedia.io/cluster-name&#34;</span>: <span style=color:#4e9a06>&#34;cluster-example&#34;</span>
+        <span style=color:#ce5c00;font-weight:700>}</span>,
+        <span style=color:#4e9a06>&#34;creationTimestamp&#34;</span>: <span style=color:#4e9a06>&#34;2021-09-24T10:19:19Z&#34;</span>,
+        <span style=color:#4e9a06>&#34;generation&#34;</span>: 1,
+        <span style=color:#4e9a06>&#34;labels&#34;</span>: <span style=color:#ce5c00;font-weight:700>{</span>
+          <span style=color:#4e9a06>&#34;k8s-app&#34;</span>: <span style=color:#4e9a06>&#34;tigera-operator&#34;</span>
+        <span style=color:#ce5c00;font-weight:700>}</span>,
+        <span style=color:#4e9a06>&#34;name&#34;</span>: <span style=color:#4e9a06>&#34;tigera-operator&#34;</span>,
+        <span style=color:#4e9a06>&#34;namespace&#34;</span>: <span style=color:#4e9a06>&#34;tigera-operator&#34;</span>,
+        <span style=color:#4e9a06>&#34;resourceVersion&#34;</span>: <span style=color:#4e9a06>&#34;125073610&#34;</span>,
+        <span style=color:#4e9a06>&#34;uid&#34;</span>: <span style=color:#4e9a06>&#34;992f9d53-37cb-4184-a004-15b278b11f79&#34;</span>
+      <span style=color:#ce5c00;font-weight:700>}</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>
+  <span style=color:#ce5c00;font-weight:700>]</span>
+<span style=color:#ce5c00;font-weight:700>}</span>
+</code></pre></div><h2 id=any-collectionresource>Any CollectionResource</h2>
+<blockquote>
+<p><code>any collectionresource</code> 是用户自由组合资源类型的方式之一，可以通过 <a href=../../../concepts/collection-resource#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%81%9A%E5%90%88%E8%B5%84%E6%BA%90>自定义聚合资源</a> 来查看更多。</p>
+</blockquote>
+<p>clusterpedia 支持一种特殊的 CollectionResource —— <code>any</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get collectionresources
+NAME            RESOURCES
+any             *
+</code></pre></div><p>在检索 any collectionresource 时，我们必须通过 url query 来指定一组资源类型，因此我们只能通过 <a href=https://github.com/clusterpedia-io/client-go/pull/43>clusterpedia-io/client-go</a> 或者 url 来访问 any collectionresource</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get collectionresources any
+Error from server <span style=color:#ce5c00;font-weight:700>(</span>BadRequest<span style=color:#ce5c00;font-weight:700>)</span>: url query - <span style=color:#4e9a06>`</span>groups<span style=color:#4e9a06>`</span> or <span style=color:#4e9a06>`</span>resources<span style=color:#4e9a06>`</span> is required
+</code></pre></div><p><code>any collectionresource</code> 支持两个 url query —— <code>groups</code> 和 <code>resources</code></p>
+<p><strong><code>groups</code> 和 <code>resources</code> 可以同时指定，当前是取两者并集，并且不会进行去重处理，由调用者负责去重</strong>，未来对该行为有一些优化。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get --raw <span style=color:#4e9a06>&#34;/apis/clusterpedia.io/v1beta1/collectionresources/any?onlyMetadata=true&amp;groups=apps&amp;resources=batch/jobs,batch/cronjobs&#34;</span> <span style=color:#000;font-weight:700>|</span> jq
+</code></pre></div><h4 id=groups>groups</h4>
+<p><code>groups</code> 可以指定一组资源的组和版本，多个组版本使用 <code>,</code> 分隔，组版本格式为 <strong>&lt; group >/&lt; version ></strong>，也可以不指定版本 <strong>&lt; group ></strong>，<em>对于 /api 下的资源，可以直接使用空字符串</em></p>
+<p>示例：<strong>groups=apps/v1,,batch</strong> 指定了三个组 apps/v1, core, batch。</p>
+<h4 id=resources>resources</h4>
+<p><code>resources</code> 可以指定具体的资源类型，多个资源类型使用 <code>,</code> 分隔，资源类型格式为 <strong>&lt; group >/&lt; version >/&lt; resource></strong>，通过也可以不指定版本 <strong>&lt; group >/&lt; resource ></strong>。</p>
+<p>示例：<strong>resources=apps/v1/deployments,apps/daemonsets,/pods</strong> 指定了三种资源 deloyments，daemonsets 和 pods。</p>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
 <h2 class=feedback--title>Feedback</h2>
