@@ -120,3 +120,12 @@ Owner Group 的格式为 `resource.group`，例如 *deployments.apps* 或者 *no
 自定义检索并不支持通过 search lable，只能使用 url query 来传递自定义搜素的语句。
 
 另外该功能暂时还是处于 alpha 阶段，需要用户在 `clusterpedia apiserver` 中开启相应的 Feature Gate，详细可以参考 [自定义条件检索](../../features/raw-sql-query)
+
+## CollectionResource URL Query
+以下 URL Query 专属于 Collection Resource。
+
+|作用|url query| example
+| -- | ------- | ------|
+|[只获取资源的 metadata](collection-resource#only-metadata) |`onlyMetadata`|*onlyMetadata=true*
+|[指定 any collectionresource 的 groups](collection-resource#any-collectionresource) | `groups` | *groups=apps,cert-manager.io/v1*
+|[指定 any collectionresource 的 resources](collection-resource#any-collectionresource) | `resources` | *resources=apps/deployments,batch/v1/cronjobs*
