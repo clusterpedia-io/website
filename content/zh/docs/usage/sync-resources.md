@@ -173,6 +173,41 @@ spec:
 
 使用该功能会创建大量的长连接，所以需要谨慎使用，并且在 `clustersynchro-manager` 中开启相应的 Feature Gate, 具体操作可以参考 [同步所有资源](../../features/sync-all-resources)
 
+## 引用 ClusterSyncResources
+`ClusterSyncResources` 用于定义多个 PediaCluster 共同引用的集群资源同步配置，关于 `ClusterSyncResources` 可以查看 [公共的集群资源同步配置(ClusterSyncResources) ](../../concepts/cluster-sync-resources)
+
+PediaCluster 通过 `spec.syncResourceRefName` 来设置引用的 `ClusterSyncResources`。
+
+```yaml
+apiVersion: cluster.clusterpedia.io/v1alpha2
+kind: ClusterSyncResources
+metadata:
+  name: global-base
+spec:
+  syncResources:
+    - group: ""
+      resources:
+        - pods
+    - group: "apps"
+      resources:
+        - "*"
+---
+apiVersion: cluster.clusterpedia.io/v1alpha2
+kind: PediaCluster
+metadata:
+  name: demo1
+spec:
+  syncResourcesRefName: "global-base"
+  syncResources:
+    - group: ""
+      resources:
+        - pods
+        - configmaps
+```
+如果 **PediaCluster** 同时设置了 `spec.syncResourcesRefName` 和 `spec.syncResources`，那么会取两者的并集。
+
+上例中，clusterpedia 会同步 demo1 的 pods 和 confgimaps，以及 apps group 下的所有资源。
+
 ## 查看资源同步状态
 我们可以通过 `PediaCluster` 资源的 `Status` 来查看资源的信息，同步的资源版本和状态以及存储版本
 
