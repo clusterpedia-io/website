@@ -1,6 +1,6 @@
 ---
 title: "同步集群资源"
-weight: 2
+weight: 20
 ---
 
 Clusterpedia 的主要功能，便是提供对多集群内的资源进行复杂检索。
