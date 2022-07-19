@@ -77,3 +77,87 @@ cluster-2   apps    v1        Deployment   kube-system                   coredns
 {{< /tab >}}
 
 {{< /tabs >}}
+
+## Only Metadata
+When we retrieve a CollectionResource, the default resource is the full resource content, but sometimes we just need to retrieve the metadata of the resource.
+
+We can use url query -- `onlyMetadata` to retrieve only the resource metadata when retrieving.
+```bash
+$ kubectl get --raw "/apis/clusterpedia.io/v1beta1/collectionresources/workloads?onlyMetadata=true&limit=1" | jq
+{
+  "kind": "CollectionResource",
+  "apiVersion": "clusterpedia.io/v1beta1",
+  "metadata": {
+    "name": "workloads",
+    "creationTimestamp": null
+  },
+  "resourceTypes": [
+    {
+      "group": "apps",
+      "version": "v1",
+      "kind": "Deployment",
+      "resource": "deployments"
+    }
+  ],
+  "items": [
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/revision": "1",
+          "shadow.clusterpedia.io/cluster-name": "cluster-example"
+        },
+        "creationTimestamp": "2021-09-24T10:19:19Z",
+        "generation": 1,
+        "labels": {
+          "k8s-app": "tigera-operator"
+        },
+        "name": "tigera-operator",
+        "namespace": "tigera-operator",
+        "resourceVersion": "125073610",
+        "uid": "992f9d53-37cb-4184-a004-15b278b11f79"
+      }
+    }
+  ]
+}
+```
+
+## Any CollectionResource
+> `any collectionresource` is one of the ways that users can freely combine resource types with [custom collection resources](../../../concepts/collection-resource#custom-collection-resource) to see more.
+
+clusterpedia supports a special CollectionResource —— `any`.
+```bash
+$ kubectl get collectionresources
+NAME            RESOURCES
+any             *
+```
+
+When retrieving `any collectionresource`, we must specify a set of resource types by url query, so we can only retrieve `any collectionresource` via [clusterpedia-io/client-go](https://github.com/clusterpedia-io/client-go/pull/43) or URL.
+```bash
+$ kubectl get collectionresources any
+Error from server (BadRequest): url query - `groups` or `resources` is required
+```
+
+`any collectionresource` supports two url queries —— `groups` and `resources`
+
+**`groups` and `resources` can be specified together, currently they are taken together and are not de-duplicated, the caller is responsible for de-duplication**,
+there are some future optimizations for this behavior.
+
+```bash
+$ kubectl get --raw "/apis/clusterpedia.io/v1beta1/collectionresources/any?onlyMetadata=true&groups=apps&resources=batch/jobs,batch/cronjobs" | jq
+```
+
+#### groups
+`groups` can specify a group and version of a set of resources, with multiple group versions separated by `,`,
+
+the group version format is **< group >/< version >**, or no version can be specified **< group >**, *for resources under /api, you can just use the empty string*.
+
+**Example**: **groups=apps/v1,,batch** specifies three groups apps/v1, core, batch.
+
+#### resources
+`resources` can specify a specific resource type, multiple resource types are separated by `,`,
+
+the resource type format is **< group >/< version >/< resource>**, by also not specifying the version **< group >/< resource >**.
+
+**Example**: **resources=apps/v1/deployments,apps/daemonsets,/pods** specifies three resources deloyments, daemonsets and pods.

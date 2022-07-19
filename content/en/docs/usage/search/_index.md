@@ -119,3 +119,12 @@ Custom search is a feature provided by the `default storage layer` to meet more 
 Custom search is not supported by *search label*, only *url query* can be used to pass custom search SQL.
 
 In addition, this feature is still in alpha stage, you need to open the corresponding Feature Gate in `clusterpedia apiserver`, for details, please refer to [Raw SQL Query](../../features/raw-sql-query)
+
+## CollectionResource URL Query
+The following URL Query belongs exclusively to Collection Resource.
+
+|Role|url query| example
+| -- | ------- | ------|
+|[get only the metadata of the resource](collection-resource#only-metadata) |`onlyMetadata`|*onlyMetadata=true*
+|[specify the groups of `any collectionresource`](collection-resource#any-collectionresource) | `groups` | *groups=apps,cert-manager.io/v1*
+|[specify the resources of `any collectionresource`](collection-resource#any-collectionresource) | `resources` | *resources=apps/deployments,batch/v1/cronjobs*

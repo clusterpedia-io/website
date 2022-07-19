@@ -176,6 +176,40 @@ The `All-resources Wildcard` allows we to sync built-in resources, custom resour
 
 This feature creates a large number of long connections, so use it with caution and enable the corresponding Feature Gate in the `clustersynchro-manager`, as described in [Sync All Resources](../../features/sync-all-resources)
 
+## Reference ClusterSyncResources
+`ClusterSyncResources` is used to define cluster resource synchronization configurations that are commonly referenced by multiple PediaClusters, see [Public Configuration of Cluster Sync Resources](../../concepts/cluster-sync-resources) for more information about `ClusterSyncResources`
+
+**PediaCluster** sets the referenced `ClusterSyncResources` by `spec.syncResourceRefName`.
+```yaml
+apiVersion: cluster.clusterpedia.io/v1alpha2
+kind: ClusterSyncResources
+metadata:
+  name: global-base
+spec:
+  syncResources:
+    - group: ""
+      resources:
+        - pods
+    - group: "apps"
+      resources:
+        - "*"
+---
+apiVersion: cluster.clusterpedia.io/v1alpha2
+kind: PediaCluster
+metadata:
+  name: demo1
+spec:
+  syncResourcesRefName: "global-base"
+  syncResources:
+    - group: ""
+      resources:
+        - pods
+        - configmaps
+```
+If **PediaCluster** has both `spec.syncResourcesRefName` and `spec.syncResources` set, then the concatenation of the two will be used.
+
+In the above example, clusterpedia synchronizes the pods and configmaps resources, and all resources under the apps group in the *demo1* cluster.
+
 ## View synchronized resources
 You can view resources, sync versions, and storage versions by using `Status` of the `PediaCluster` resource.  
 
