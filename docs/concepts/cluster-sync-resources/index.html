@@ -3,7 +3,6 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=generator content="Hugo 0.91.2">
-<link rel=alternate type=text/html href=/docs/usage/search/_print/>
 <meta name=robots content="index, follow">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16>
@@ -14,17 +13,33 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>Search | Clusterpedia.io</title>
-<meta name=description content="Clusterpedia supports complex search for multi-cluster resources, specified cluster resoruces, and Collection Resources.
-And these complex search …">
-<meta property="og:title" content="Search">
-<meta property="og:description" content="Clusterpedia.io website">
-<meta property="og:type" content="website">
-<meta property="og:url" content="/docs/usage/search/"><meta property="og:site_name" content="Clusterpedia.io">
-<meta itemprop=name content="Search">
-<meta itemprop=description content="Clusterpedia.io website"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Search">
-<meta name=twitter:description content="Clusterpedia.io website">
+<title>Public Configuration of Cluster Sync Resources(ClusterSyncResources) | Clusterpedia.io</title>
+<meta name=description content="The Clusterpedia provides the public configuration of cluster sync resources —— ClusterSyncResources
+kubectl get clustersyncresources
+The …">
+<meta property="og:title" content="Public Configuration of Cluster Sync Resources(ClusterSyncResources)">
+<meta property="og:description" content="The Clusterpedia provides the public configuration of cluster sync resources —— ClusterSyncResources
+kubectl get clustersyncresources The spec.syncResources field of ClusterSyncResources is configured in the same way as PediaCluster&rsquo;s spec.syncResources, see Synchronize Cluster Resources
+apiVersion:cluster.clusterpedia.io/v1alpha2kind:ClusterSyncResourcesmetadata:name:global-basespec:syncResources:- group:&#34;&#34;resources:- pods- group:&#34;apps&#34;resources:- &#34;*&#34;The spec.syncAllCustomResource field will be supported in the future to support setting up the synchronization of all custom resources
+Any PediaCluster can refer to the same ClusterSyncResources via spec.syncResourcesRefName field.
+apiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:demo1spec:syncResourcesRefName:&#34;global-base&#34;When we modify ClusterSyncResources, all resource types syncronized within the PediaCluster that reference it will be modified accordingly.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/docs/concepts/cluster-sync-resources/"><meta property="article:section" content="docs">
+<meta property="og:site_name" content="Clusterpedia.io">
+<meta itemprop=name content="Public Configuration of Cluster Sync Resources(ClusterSyncResources)">
+<meta itemprop=description content="The Clusterpedia provides the public configuration of cluster sync resources —— ClusterSyncResources
+kubectl get clustersyncresources The spec.syncResources field of ClusterSyncResources is configured in the same way as PediaCluster&rsquo;s spec.syncResources, see Synchronize Cluster Resources
+apiVersion:cluster.clusterpedia.io/v1alpha2kind:ClusterSyncResourcesmetadata:name:global-basespec:syncResources:- group:&#34;&#34;resources:- pods- group:&#34;apps&#34;resources:- &#34;*&#34;The spec.syncAllCustomResource field will be supported in the future to support setting up the synchronization of all custom resources
+Any PediaCluster can refer to the same ClusterSyncResources via spec.syncResourcesRefName field.
+apiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:demo1spec:syncResourcesRefName:&#34;global-base&#34;When we modify ClusterSyncResources, all resource types syncronized within the PediaCluster that reference it will be modified accordingly.">
+<meta itemprop=wordCount content="127">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Public Configuration of Cluster Sync Resources(ClusterSyncResources)">
+<meta name=twitter:description content="The Clusterpedia provides the public configuration of cluster sync resources —— ClusterSyncResources
+kubectl get clustersyncresources The spec.syncResources field of ClusterSyncResources is configured in the same way as PediaCluster&rsquo;s spec.syncResources, see Synchronize Cluster Resources
+apiVersion:cluster.clusterpedia.io/v1alpha2kind:ClusterSyncResourcesmetadata:name:global-basespec:syncResources:- group:&#34;&#34;resources:- pods- group:&#34;apps&#34;resources:- &#34;*&#34;The spec.syncAllCustomResource field will be supported in the future to support setting up the synchronization of all custom resources
+Any PediaCluster can refer to the same ClusterSyncResources via spec.syncResourcesRefName field.
+apiVersion:cluster.clusterpedia.io/v1alpha2kind:PediaClustermetadata:name:demo1spec:syncResourcesRefName:&#34;global-base&#34;When we modify ClusterSyncResources, all resource types syncronized within the PediaCluster that reference it will be modified accordingly.">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -33,7 +48,7 @@ And these complex search …">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZQPMJ4HH3"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NZQPMJ4HH3',{anonymize_ip:!1})}</script>
 </head>
-<body class=td-section>
+<body class=td-page>
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=/>
@@ -61,7 +76,7 @@ And these complex search …">
 English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/zh-cn/docs/usage/search/>中文 Chinese</a>
+<a class=dropdown-item href=/zh-cn/docs/concepts/cluster-sync-resources/>中文 Chinese</a>
 </div>
 </li>
 </ul>
@@ -86,7 +101,7 @@ English
 English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/zh-cn/docs/usage/search/>中文 Chinese</a>
+<a class=dropdown-item href=/zh-cn/docs/concepts/cluster-sync-resources/>中文 Chinese</a>
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
@@ -109,18 +124,18 @@ English
 </ul>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsconcepts-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsconcepts-li>
 <a href=/docs/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsconcepts><span>Concepts</span></a>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptspediacluster-li>
 <a href=/docs/concepts/pediacluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptspediacluster><span>PediaCluster</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscluster-sync-resources-li>
-<a href=/docs/concepts/cluster-sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscluster-sync-resources><span>Public Configuration of Cluster Sync Resources(ClusterSyncResources)</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsconceptscluster-sync-resources-li>
+<a href=/docs/concepts/cluster-sync-resources/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsconceptscluster-sync-resources><span class=td-sidebar-nav-active-item>Public Configuration of Cluster Sync Resources(ClusterSyncResources)</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscollection-resource-li>
 <a href=/docs/concepts/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscollection-resource><span>Collection Resource</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsusage-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsusage-li>
 <a href=/docs/usage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsusage><span>Usage</span></a>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusageimport-clusters-li>
@@ -129,8 +144,8 @@ English
 <a href=/docs/usage/sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesync-resources><span>Synchronize Cluster Resources</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusageaccess-clusterpedia-li>
 <a href=/docs/usage/access-clusterpedia/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusageaccess-clusterpedia><span>Access the Clusterpedia</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsusagesearch-li>
-<a href=/docs/usage/search/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id=m-docsusagesearch><span class=td-sidebar-nav-active-item>Search</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsusagesearch-li>
+<a href=/docs/usage/search/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsusagesearch><span>Search</span></a>
 <ul class="ul-3 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchmulti-cluster-li>
 <a href=/docs/usage/search/multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchmulti-cluster><span>Multiple Clusters</span></a>
@@ -168,27 +183,13 @@ English
 </aside>
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href=https://github.com/clusterpedia-io/website/tree/main/content/en/docs/usage/search/_index.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> View page source</a>
-<a href=https://github.com/clusterpedia-io/website/edit/main/content/en/docs/usage/search/_index.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/clusterpedia-io/website/new/main/content/en/docs/usage/search/_index.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Create child page</a>
-<a href="https://github.com/clusterpedia-io/website/issues/new?title=Search" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href=https://github.com/clusterpedia-io/website/tree/main/content/en/docs/concepts/cluster-sync-resources.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> View page source</a>
+<a href=https://github.com/clusterpedia-io/website/edit/main/content/en/docs/concepts/cluster-sync-resources.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/clusterpedia-io/website/new/main/content/en/docs/concepts/cluster-sync-resources.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Create child page</a>
+<a href="https://github.com/clusterpedia-io/website/issues/new?title=Public%20Configuration%20of%20Cluster%20Sync%20Resources%28ClusterSyncResources%29" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 <a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
-<a id=print href=/docs/usage/search/_print/><i class="fa fa-print fa-fw"></i> Print entire section</a>
+<a id=print href=/docs/concepts/_print/><i class="fa fa-print fa-fw"></i> Print entire section</a>
 </div>
-<div class=td-toc><nav id=TableOfContents>
-<ul>
-<li><a href=#search-by-metadata>Search by metadata</a></li>
-<li><a href=#fuzzy-search>Fuzzy Search</a></li>
-<li><a href=#search-by-creation-time-interval>Search by creation time interval</a></li>
-<li><a href=#search-by-owner>Search by Owner</a></li>
-<li><a href=#orderby>OrderBy</a></li>
-<li><a href=#paging>Paging</a></li>
-<li><a href=#label-selector>Label Selector</a></li>
-<li><a href=#field-selector>Field Selector</a></li>
-<li><a href=#advanced-searchcustom-conditional-search>Advanced Search(Custom Conditional Search)</a></li>
-<li><a href=#collectionresource-url-query>CollectionResource URL Query</a></li>
-</ul>
-</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class=td-breadcrumbs>
@@ -197,331 +198,55 @@ English
 <a href=/docs/>Documentation</a>
 </li>
 <li class=breadcrumb-item>
-<a href=/docs/usage/>Usage</a>
+<a href=/docs/concepts/>Concepts</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=/docs/usage/search/>Search</a>
+<a href=/docs/concepts/cluster-sync-resources/>Public Configuration of Cluster Sync Resources(ClusterSyncResources)</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>Search</h1>
+<h1>Public Configuration of Cluster Sync Resources(ClusterSyncResources)</h1>
 <header class=article-meta>
-<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 4 minute read &nbsp;</p>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; less than a minute &nbsp;</p>
 </header>
-<p>Clusterpedia supports complex search for <a href=multi-cluster>multi-cluster resources</a>, <a href=specified-cluster>specified cluster resoruces</a>, and <a href=collection-resource>Collection Resources</a>.</p>
-<p>And these complex search conditions can be passed to <code>Clusterpedia APIServer</code> in two ways:</p>
-<ul>
-<li><code>URL Query</code>: directly pass query conditions as Query</li>
-<li><code>Search Labels</code>: to keep <strong>compatible with Kubernetes OpenAPI</strong>, the search conditions can be set via Label Selector</li>
-</ul>
-<p><strong>Both <code>Search Labels</code> and <code>URL Query</code> support same operators as Label Selector:</strong></p>
-<ul>
-<li><code>exist</code>, <code>not exist</code></li>
-<li><code>=</code>, <code>==</code>, <code>!=</code></li>
-<li><code>in</code>, <code>notin</code></li>
-</ul>
-<p>In addition to conditional retrieval, Clusterpedia also enhances <a href=#field-selector><code>Field Selector</code></a> to meet the filtering requirements by fields such as <code>metadata.annotation</code> or <code>status.*</code>.</p>
-<h2 id=search-by-metadata>Search by metadata</h2>
-<blockquote>
-<p>Supported Operators: <code>==</code>, <code>=</code>, <code>in</code>.</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Role</th>
-<th>search label key</th>
-<th>url query</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Filter cluster names</td>
-<td><code>search.clusterpedia.io/clusters</code></td>
-<td><code>clusters</code></td>
-</tr>
-<tr>
-<td>Filter namespaces</td>
-<td><code>search.clusterpedia.io/namespaces</code></td>
-<td><code>namespaces</code></td>
-</tr>
-<tr>
-<td>Filter resource names</td>
-<td><code>search.clusterpedia.io/names</code></td>
-<td><code>names</code></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>Current, we don&rsquo;t support operators such as <code>!=</code>, <code>notin</code> operators,
-if you have these needs or scenarios, you can discuss them in the issue.</p>
-</blockquote>
-<h2 id=fuzzy-search>Fuzzy Search</h2>
-<blockquote>
-<p>Supported Operators: <code>==</code>, <code>=</code>, <code>in</code>.</p>
-</blockquote>
-<p>This feature is expermental and only search label are available for now</p>
-<table>
-<thead>
-<tr>
-<th>Role</th>
-<th>search label key</th>
-<th>url query</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Fuzzy Search for resource name</td>
-<td>internalstorage.clusterpedia.io/fuzzy-name</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-<h2 id=search-by-creation-time-interval>Search by creation time interval</h2>
-<blockquote>
-<p>Supported Operators: <code>==</code>, <code>=</code>.</p>
-</blockquote>
-<p>The search is based on the creation time interval of the resource,
-using a left-closed, right-open internval.</p>
-<table>
-<thead>
-<tr>
-<th>Role</th>
-<th>search label key</th>
-<th>url query</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Search</td>
-<td>search.clusterpedia.io/since</td>
-<td>since</td>
-</tr>
-<tr>
-<td>Before</td>
-<td>search.clusterpedia.io/before</td>
-<td>before</td>
-</tr>
-</tbody>
-</table>
-<p>There are four formats for creation time:</p>
-<ol>
-<li><code>Unix Timestamp</code> for ease of use will distinguish between units of <code>s</code> or <code>ms</code> based on the length of the timestamp. The 10-bit timestamp is in seconds, the 13-bit timestamp is in milliseconds.</li>
-<li><code>RFC3339</code> <em>2006-01-02T15:04:05Z</em> or <em>2006-01-02T15:04:05+08:00</em></li>
-<li><code>UTC Date</code> <em>2006-01-02</em></li>
-<li><code>UTC Datetime</code> <em>2006-01-02 15:04:05</em></li>
-</ol>
-<p>Because of the limitation of the kube label selector, the search label only supports <code>Unix Timestamp</code> and <code>UTC Date</code>.</p>
-<p>All formats are available using the url query method.</p>
-<h2 id=search-by-owner>Search by Owner</h2>
-<blockquote>
-<p>Supported Operators: <code>==</code>, <code>=</code>.</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Role</th>
-<th>search label key</th>
-<th>url query</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Specified Owner UID</td>
-<td>search.clusterpedia.io/owner-uid</td>
-<td>ownerUID</td>
-</tr>
-<tr>
-<td>Specified Owner Name</td>
-<td>search.clusterpedia.io/owner-name</td>
-<td>ownerName</td>
-</tr>
-<tr>
-<td>SPecified Owner Group Resource</td>
-<td>search.clusterpedia.io/owner-gr</td>
-<td>ownerGR</td>
-</tr>
-<tr>
-<td>Specified Owner Seniority</td>
-<td><code>internalstorage.clusterpedia.io/owner-seniority</code></td>
-<td><code>ownerSeniority</code></td>
-</tr>
-</tbody>
-</table>
-<p>Note that when specifying <code>Owner UID</code>, <code>Owner Name</code> and <code>Owner Group Resource</code> will be ignored.</p>
-<p>The format of the <code>Owner Group Resource</code> is <code>resource.group</code>, for example <em>deployments.apps</em> or <em>nodes</em>.</p>
-<h2 id=orderby>OrderBy</h2>
-<blockquote>
-<p>Supported Operators: <code>=</code>, <code>==</code>, <code>in</code>.</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Role</th>
-<th>search label key</th>
-<th>url query</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Order by fields</td>
-<td><code>search.clusterpedia.io/orderby</code></td>
-<td><code>orderby</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id=paging>Paging</h2>
-<blockquote>
-<p>Supported Operators: <code>=</code>, <code>==</code>.</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Role</th>
-<th>search label key</th>
-<th>url query</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Set page size</td>
-<td><code>search.clusterpedia.io/size</code></td>
-<td><code>limit</code></td>
-</tr>
-<tr>
-<td>Set page offset</td>
-<td><code>search.clusterpedia.io/offset</code></td>
-<td><code>continue</code></td>
-</tr>
-<tr>
-<td>Response required with Continue</td>
-<td><code>search.clusterpedia.io/with-continue</code></td>
-<td><code>withContinue</code></td>
-</tr>
-<tr>
-<td>Response required with remaining count</td>
-<td><code>search.clusterpedia.io/with-remaining-count</code></td>
-<td><code>withRemainingCount</code></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>When you perform operations with kubectl, the page size can only be set via <code>kubectl --chunk-size</code>, because kubectl will set the default limit to 500.</p>
-</blockquote>
-<h2 id=label-selector>Label Selector</h2>
-<p>Regardless of kubectl or URL, all Label Selectors that do not contain <em>clusterpedia.io</em> in the Key will be used as Label Selectors to filter resources.</p>
-<p>All behaviors are consistent with those provided by Kubernetes.</p>
-<table>
-<thead>
-<tr>
-<th>Role</th>
-<th>kubectl</th>
-<th>url query</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Filter by labels</td>
-<td><code>kubectl -l</code> or <code>kubectl --label-selector</code></td>
-<td><code>labelSelector</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id=field-selector>Field Selector</h2>
-<p><strong>Field Selector is consistent with Label Selector in terms of operators, and Clusterpedia also supports:</strong></p>
-<p><strong><code>exist</code>, <code>not exist</code>, <code>==</code>, <code>=</code>, <code>!=</code>, <code>in</code>, <code>notin</code>.</strong></p>
-<p>All command parameters for URL and kubectl are same as those for Field Selector.</p>
-<table>
-<thead>
-<tr>
-<th>Role</th>
-<th>kubectl</th>
-<th>url query</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Filter by fields</td>
-<td><code>kubectl --field-selector</code></td>
-<td><code>fieldSelector</code></td>
-</tr>
-</tbody>
-</table>
-<p>For details refer to:</p>
-<ul>
-<li><a href=./multi-cluster#field-selector>search for resources by filtering fields</a></li>
-<li><a href=https://github.com/clusterpedia-io/clusterpedia/pull/36>support field selector</a></li>
-<li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/48>issue: support list field filtering</a></li>
-</ul>
-<h2 id=advanced-searchcustom-conditional-search>Advanced Search(Custom Conditional Search)</h2>
-<p>Custom search is a feature provided by the <code>default storage layer</code> to meet more flexible and variable search needs of users.</p>
-<table>
-<thead>
-<tr>
-<th>Feature</th>
-<th>search label key</th>
-<th>url query</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>custom SQL used for filter</td>
-<td>-</td>
-<td>whereSQL</td>
-</tr>
-</tbody>
-</table>
-<p>Custom search is not supported by <em>search label</em>, only <em>url query</em> can be used to pass custom search SQL.</p>
-<p>In addition, this feature is still in alpha stage, you need to open the corresponding Feature Gate in <code>clusterpedia apiserver</code>, for details, please refer to <a href=../../features/raw-sql-query>Raw SQL Query</a></p>
-<h2 id=collectionresource-url-query>CollectionResource URL Query</h2>
-<p>The following URL Query belongs exclusively to Collection Resource.</p>
-<table>
-<thead>
-<tr>
-<th>Role</th>
-<th>url query</th>
-<th>example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href=collection-resource#only-metadata>get only the metadata of the resource</a></td>
-<td><code>onlyMetadata</code></td>
-<td><em>onlyMetadata=true</em></td>
-</tr>
-<tr>
-<td><a href=collection-resource#any-collectionresource>specify the groups of <code>any collectionresource</code></a></td>
-<td><code>groups</code></td>
-<td><em>groups=apps,cert-manager.io/v1</em></td>
-</tr>
-<tr>
-<td><a href=collection-resource#any-collectionresource>specify the resources of <code>any collectionresource</code></a></td>
-<td><code>resources</code></td>
-<td><em>resources=apps/deployments,batch/v1/cronjobs</em></td>
-</tr>
-</tbody>
-</table>
-<div class=section-index>
-<hr class=panel-line>
-<div class=entry>
-<h5>
-<a href=/docs/usage/search/multi-cluster/>Multiple Clusters</a>
-</h5>
-<p></p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/usage/search/specified-cluster/>Specified a Cluster</a>
-</h5>
-<p></p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/usage/search/collection-resource/>Collection Resource</a>
-</h5>
-<p></p>
-</div>
-</div>
+<p>The Clusterpedia provides the public configuration of cluster sync resources —— <code>ClusterSyncResources</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get clustersyncresources
+</code></pre></div><p>The <code>spec.syncResources</code> field of <strong>ClusterSyncResources</strong> is configured in the same way as <strong>PediaCluster</strong>&rsquo;s <code>spec.syncResources</code>, see <a href=../../usage/sync-resources>Synchronize Cluster Resources</a></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ClusterSyncResources</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>global-base</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#000>pods</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;apps&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#4e9a06>&#34;*&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>The <code>spec.syncAllCustomResource</code> field will be supported in the future to support <a href=../../usage/sync-resources#sync-all-custom-resources>setting up the synchronization of all custom resources</a></p>
+<p>Any <strong>PediaCluster</strong> can refer to the same <strong>ClusterSyncResources</strong> via <code>spec.syncResourcesRefName</code> field.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>demo1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResourcesRefName</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;global-base&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>When we modify <strong>ClusterSyncResources</strong>, all resource types syncronized within the <strong>PediaCluster</strong> that reference it will be modified accordingly.</p>
+<p>If <strong>PediaCluster</strong> has both <code>spec.syncResourcesRefName</code> and <code>spec.syncResources</code> set, then the concatenation of the two will be used.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>demo1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResourcesRefName</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;global-base&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#000>pods</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#000>configmaps</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>In the above example, clusterpedia synchronizes the pods and configmaps resources, and all resources under the apps group in the <em>demo1</em> cluster.</p>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
 <h2 class=feedback--title>Feedback</h2>
