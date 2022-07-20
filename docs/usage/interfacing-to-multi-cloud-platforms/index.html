@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-cn class=no-js>
+<!doctype html><html lang=en class=no-js>
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
@@ -13,41 +13,26 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>接入多云平台 | Clusterpedia.io</title>
-<meta name=description content="0.4.0 后，Clusterpedia 提供了更加友好的接入多云平台的方式。
-用户通过创建 ClusterImportPolicy 来自动发现多云平台中纳管的集群，并将这些集群自动同步为 PediaCluster，用户不需要根据纳管的集群来手动去维护 PediaCluster 了。 …">
-<meta property="og:title" content="接入多云平台">
-<meta property="og:description" content="0.4.0 后，Clusterpedia 提供了更加友好的接入多云平台的方式。
-用户通过创建 ClusterImportPolicy 来自动发现多云平台中纳管的集群，并将这些集群自动同步为 PediaCluster，用户不需要根据纳管的集群来手动去维护 PediaCluster 了。
-我们在 Clusterpedia 仓库 中维护了各个多云平台的 ClusterImportPolicy。 大家也提交用于对接其他多云平台的 ClusterImportPolicy。
-用户在安装 Clusterpedia 后，创建合适的 ClusterImportPolicy 即可，用户也可以根据自己的需求来创建新的 ClusterImportPolicy
-Karmada ClusterImportPolicy  对于 Karmada 平台，用户首先需要先将 Clusterpedia 部署在 Karmada APIServer 中，部署步骤可以参考 https://github.com/Iceber/deploy-clusterpedia-to-karmada
- 创建用于对接 Karmada 平台的 ClusterImportPolicy。
-$ kubectl create -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/karmada.yaml $ kubectl get clusterimportpolicy NAME AGE karmada 7d5h 查看 Karmada Cluster 与 PediaClusterLifecycle
-$ kubectl get cluster NAME VERSION MODE READY AGE argocd Push False 8d member1 v1.">
+<title>Interfacing to Multi-Cloud Platforms | Clusterpedia.io</title>
+<meta name=description content="After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms.
+Users can create ClusterImportPolicy to automatically …">
+<meta property="og:title" content="Interfacing to Multi-Cloud Platforms">
+<meta property="og:description" content="After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms.
+Users can create ClusterImportPolicy to automatically discover managed clusters in the multi-cloud platform and automatically synchronize them as PediaCluster, so you don&rsquo;t need to maintain PediaCluster manually based on the managed clusters.
+We maintain PediaCluster for each multi-cloud platform in the Clusterpedia repository. ClusterImportPolicy` for each multi-cloud platform. People also submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="/zh-cn/docs/usage/interfacing-to-multi-cloud-platforms/"><meta property="article:section" content="docs">
+<meta property="og:url" content="/docs/usage/interfacing-to-multi-cloud-platforms/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
-<meta itemprop=name content="接入多云平台">
-<meta itemprop=description content="0.4.0 后，Clusterpedia 提供了更加友好的接入多云平台的方式。
-用户通过创建 ClusterImportPolicy 来自动发现多云平台中纳管的集群，并将这些集群自动同步为 PediaCluster，用户不需要根据纳管的集群来手动去维护 PediaCluster 了。
-我们在 Clusterpedia 仓库 中维护了各个多云平台的 ClusterImportPolicy。 大家也提交用于对接其他多云平台的 ClusterImportPolicy。
-用户在安装 Clusterpedia 后，创建合适的 ClusterImportPolicy 即可，用户也可以根据自己的需求来创建新的 ClusterImportPolicy
-Karmada ClusterImportPolicy  对于 Karmada 平台，用户首先需要先将 Clusterpedia 部署在 Karmada APIServer 中，部署步骤可以参考 https://github.com/Iceber/deploy-clusterpedia-to-karmada
- 创建用于对接 Karmada 平台的 ClusterImportPolicy。
-$ kubectl create -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/karmada.yaml $ kubectl get clusterimportpolicy NAME AGE karmada 7d5h 查看 Karmada Cluster 与 PediaClusterLifecycle
-$ kubectl get cluster NAME VERSION MODE READY AGE argocd Push False 8d member1 v1.">
-<meta itemprop=wordCount content="281">
+<meta itemprop=name content="Interfacing to Multi-Cloud Platforms">
+<meta itemprop=description content="After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms.
+Users can create ClusterImportPolicy to automatically discover managed clusters in the multi-cloud platform and automatically synchronize them as PediaCluster, so you don&rsquo;t need to maintain PediaCluster manually based on the managed clusters.
+We maintain PediaCluster for each multi-cloud platform in the Clusterpedia repository. ClusterImportPolicy` for each multi-cloud platform. People also submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.">
+<meta itemprop=wordCount content="532">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="接入多云平台">
-<meta name=twitter:description content="0.4.0 后，Clusterpedia 提供了更加友好的接入多云平台的方式。
-用户通过创建 ClusterImportPolicy 来自动发现多云平台中纳管的集群，并将这些集群自动同步为 PediaCluster，用户不需要根据纳管的集群来手动去维护 PediaCluster 了。
-我们在 Clusterpedia 仓库 中维护了各个多云平台的 ClusterImportPolicy。 大家也提交用于对接其他多云平台的 ClusterImportPolicy。
-用户在安装 Clusterpedia 后，创建合适的 ClusterImportPolicy 即可，用户也可以根据自己的需求来创建新的 ClusterImportPolicy
-Karmada ClusterImportPolicy  对于 Karmada 平台，用户首先需要先将 Clusterpedia 部署在 Karmada APIServer 中，部署步骤可以参考 https://github.com/Iceber/deploy-clusterpedia-to-karmada
- 创建用于对接 Karmada 平台的 ClusterImportPolicy。
-$ kubectl create -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/karmada.yaml $ kubectl get clusterimportpolicy NAME AGE karmada 7d5h 查看 Karmada Cluster 与 PediaClusterLifecycle
-$ kubectl get cluster NAME VERSION MODE READY AGE argocd Push False 8d member1 v1.">
+<meta name=twitter:title content="Interfacing to Multi-Cloud Platforms">
+<meta name=twitter:description content="After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms.
+Users can create ClusterImportPolicy to automatically discover managed clusters in the multi-cloud platform and automatically synchronize them as PediaCluster, so you don&rsquo;t need to maintain PediaCluster manually based on the managed clusters.
+We maintain PediaCluster for each multi-cloud platform in the Clusterpedia repository. ClusterImportPolicy` for each multi-cloud platform. People also submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -59,19 +44,19 @@ $ kubectl get cluster NAME VERSION MODE READY AGE argocd Push False 8d member1 v
 <body class=td-page>
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
-<a class=navbar-brand href=/zh-cn/>
+<a class=navbar-brand href=/>
 <span class=navbar-logo><svg id="Graph" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g id="Cpedia_-_Graph_-_Color_Dark" data-name="Cpedia - Graph - Color Dark"><rect id="Frame" width="512" height="512" fill="none"/><path id="Secondary" d="M476 221.051A274.908 274.908.0 00428.269 256 282.438 282.438.0 01395.7 220.752a322.971 322.971.0 0156.3-41.27zM362.4 256a334.139 334.139.0 00-53.2 92.145A329.953 329.953.0 00295.32 394.6a322.932 322.932.0 00-7.587 69.4h48a274.957 274.957.0 016.4-58.813 282.32 282.32.0 0114.238-45.835 285.94 285.94.0 0139.323-68.1A330.2 330.2.0 01362.4 256zM169.865 405.189a274.9 274.9.0 016.4 58.811h48a322.893 322.893.0 00-7.589-69.4 282.46 282.46.0 00-46.811 10.589zM179.94 300.03A333.961 333.961.0 00149.6 256a330 330 0 00-33.291-35.248A322.915 322.915.0 0060 179.482L36 221.051A274.964 274.964.0 0183.733 256a282.3 282.3.0 0132.576 35.248 286.331 286.331.0 0122.054 32.768 286.3 286.3.0 0117.264 35.339A330.144 330.144.0 01202.8 348.148 334.156 334.156.0 00179.94 300.03zM169.865 106.811a274.966 274.966.0 01-54.132-23.862l-24 41.569a322.934 322.934.0 0063.894 28.127 282.241 282.241.0 0014.238-45.834zm186.507 45.836a322.994 322.994.0 0063.895-28.129l-24-41.569a275.02 275.02.0 01-54.133 23.864A282.293 282.293.0 01295.32 117.4a286.278 286.278.0 01-39.307 2.716h-.1a286.366 286.366.0 01-39.237-2.718 330.245 330.245.0 01-13.88 46.455 334.129 334.129.0 0053.1 4.263h.115a333.931 333.931.0 0053.187-4.261 329.92 329.92.0 0047.174-11.208z" fill="#1b1c1d"/><path id="Primary" d="M211.993 256l22-38.1h44l22 38.1-22 38.105h-44zM342.134 106.813A274.957 274.957.0 01335.733 48h-48a322.932 322.932.0 007.587 69.4 282.293 282.293.0 0046.814-10.587zM428.269 256A282.438 282.438.0 01395.7 220.752a285.92 285.92.0 01-39.323-68.105A329.92 329.92.0 01309.2 163.854 334.125 334.125.0 00362.4 256a330.2 330.2.0 0033.3 35.248 322.971 322.971.0 0056.3 41.27l24-41.569A274.908 274.908.0 01428.269 256zM149.6 256a333.961 333.961.0 0030.34-44.03 334.156 334.156.0 0022.86-48.118 330.245 330.245.0 0013.88-46.455A322.893 322.893.0 00224.267 48h-48a274.9 274.9.0 01-6.4 58.811 282.241 282.241.0 01-14.238 45.834 286.3 286.3.0 01-17.264 35.339 286.331 286.331.0 01-22.054 32.768A330 330 0 01149.6 256zm-65.867.0A274.964 274.964.0 0136 290.949l24 41.569a322.915 322.915.0 0056.309-41.27A282.3 282.3.0 0083.733 256zM255.9 343.885a334.129 334.129.0 00-53.1 4.263 330.144 330.144.0 00-47.171 11.207 322.934 322.934.0 00-63.894 28.127l24 41.569a274.966 274.966.0 0154.132-23.862A282.46 282.46.0 01216.678 394.6a286.366 286.366.0 0139.237-2.718h.1A286.278 286.278.0 01295.32 394.6a329.953 329.953.0 0113.88-46.456 334.028 334.028.0 00-53.187-4.26zm86.236 61.3a275.027 275.027.0 0154.133 23.864l24-41.569a322.991 322.991.0 00-63.895-28.13 282.32 282.32.0 00-14.24 45.837z" fill="#33de72"/></g></svg></span><span class=font-weight-bold>Clusterpedia.io</span>
 </a>
 <div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar>
 <ul class="navbar-nav mt-2 mt-lg-0">
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class=nav-link href=/zh-cn/about/><span>关于</span></a>
+<a class=nav-link href=/about/><span>About</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class=nav-link href=/zh-cn/blog/><i class="fas fa-blog"></i><span>博客</span></a>
+<a class=nav-link href=/blog/><i class="fas fa-blog"></i><span>Blog</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class="nav-link active" href=/zh-cn/docs/><i class="fas fa-book"></i><span class=active>文档</span></a>
+<a class="nav-link active" href=/docs/><i class="fas fa-book"></i><span class=active>Documentation</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=https://github.com/clusterpedia-io/clusterpedia target=_blank><i class="fab fa-github"></i><span>GitHub</span></a>
@@ -81,15 +66,15 @@ $ kubectl get cluster NAME VERSION MODE READY AGE argocd Push False 8d member1 v
 </li>
 <li class="nav-item dropdown mr-4 d-none d-lg-block">
 <a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
-中文 Chinese
+English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/docs/usage/interfacing-to-multi-cloud-platforms/>English</a>
+<a class=dropdown-item href=/zh-cn/docs/usage/interfacing-to-multi-cloud-platforms/>中文 Chinese</a>
 </div>
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.efdb994c1bf571402510d5cb7289466d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.efdb994c1bf571402510d5cb7289466d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -99,93 +84,93 @@ $ kubectl get cluster NAME VERSION MODE READY AGE argocd Push False 8d member1 v
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.efdb994c1bf571402510d5cb7289466d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.efdb994c1bf571402510d5cb7289466d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
 <nav class="collapse td-sidebar-nav" id=td-section-nav>
 <div class="nav-item dropdown d-block d-lg-none">
 <a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
-中文 Chinese
+English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/docs/usage/interfacing-to-multi-cloud-platforms/>English</a>
+<a class=dropdown-item href=/zh-cn/docs/usage/interfacing-to-multi-cloud-platforms/>中文 Chinese</a>
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zh-cndocs-li>
-<a href=/zh-cn/docs/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-zh-cndocs><span>文档</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li>
+<a href=/docs/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Documentation</span></a>
 <ul class=ul-1>
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsinstallation-li>
-<a href=/zh-cn/docs/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsinstallation><span>安装</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsinstallation-li>
+<a href=/docs/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsinstallation><span>Installation</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsinstallationkubectl-apply-li>
-<a href=/zh-cn/docs/installation/kubectl-apply/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsinstallationkubectl-apply><span>使用 kubectl apply</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsinstallationhelm-li>
-<a href=/zh-cn/docs/installation/helm/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsinstallationhelm><span>使用 Helm</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsinstallationconfigurate-li>
-<a href=/zh-cn/docs/installation/configurate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsinstallationconfigurate><span>配置</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsinstallationkubectl-apply-li>
+<a href=/docs/installation/kubectl-apply/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsinstallationkubectl-apply><span>kubectl apply</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsinstallationhelm-li>
+<a href=/docs/installation/helm/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsinstallationhelm><span>Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsinstallationconfiguration-li>
+<a href=/docs/installation/configuration/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsinstallationconfiguration><span>Configuration</span></a>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsinstallationconfigurateconfigurate-internalstorage-li>
-<a href=/zh-cn/docs/installation/configurate/configurate-internalstorage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsinstallationconfigurateconfigurate-internalstorage><span>配置存储层</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsinstallationconfigurationconfigure-internalstorage-li>
+<a href=/docs/installation/configuration/configure-internalstorage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsinstallationconfigurationconfigure-internalstorage><span>Configure Storage Layer</span></a>
 </li>
 </ul>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsconcepts-li>
-<a href=/zh-cn/docs/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsconcepts><span>概念</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsconcepts-li>
+<a href=/docs/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsconcepts><span>Concepts</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptspediacluster-li>
-<a href=/zh-cn/docs/concepts/pediacluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptspediacluster><span>PediaCluster</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscluster-sync-resources-li>
-<a href=/zh-cn/docs/concepts/cluster-sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscluster-sync-resources><span>公共的集群资源同步配置(ClusterSyncResources)</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscollection-resource-li>
-<a href=/zh-cn/docs/concepts/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscollection-resource><span>聚合资源(Collection Resource)</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscluster-import-policy-li>
-<a href=/zh-cn/docs/concepts/cluster-import-policy/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscluster-import-policy><span>集群自动接入策略(ClusterImportPolicy)</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptspediacluster-li>
+<a href=/docs/concepts/pediacluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptspediacluster><span>PediaCluster</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscluster-sync-resources-li>
+<a href=/docs/concepts/cluster-sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscluster-sync-resources><span>Public Configuration of Cluster Sync Resources(ClusterSyncResources)</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscollection-resource-li>
+<a href=/docs/concepts/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscollection-resource><span>Collection Resource</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscluster-import-policy-li>
+<a href=/docs/concepts/cluster-import-policy/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscluster-import-policy><span>Cluster Auto Import Policy</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zh-cndocsusage-li>
-<a href=/zh-cn/docs/usage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsusage><span>使用</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsusage-li>
+<a href=/docs/usage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsusage><span>Usage</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusageimport-clusters-li>
-<a href=/zh-cn/docs/usage/import-clusters/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusageimport-clusters><span>集群接入</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zh-cndocsusageinterfacing-to-multi-cloud-platforms-li>
-<a href=/zh-cn/docs/usage/interfacing-to-multi-cloud-platforms/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusageinterfacing-to-multi-cloud-platforms><span class=td-sidebar-nav-active-item>接入多云平台</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesync-resources-li>
-<a href=/zh-cn/docs/usage/sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesync-resources><span>同步集群资源</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusageaccess-clusterpedia-li>
-<a href=/zh-cn/docs/usage/access-clusterpedia/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusageaccess-clusterpedia><span>访问 Clusterpedia</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsusagesearch-li>
-<a href=/zh-cn/docs/usage/search/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsusagesearch><span>资源检索</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusageimport-clusters-li>
+<a href=/docs/usage/import-clusters/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusageimport-clusters><span>Import Clusters</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsusageinterfacing-to-multi-cloud-platforms-li>
+<a href=/docs/usage/interfacing-to-multi-cloud-platforms/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsusageinterfacing-to-multi-cloud-platforms><span class=td-sidebar-nav-active-item>Interfacing to Multi-Cloud Platforms</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesync-resources-li>
+<a href=/docs/usage/sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesync-resources><span>Synchronize Cluster Resources</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusageaccess-clusterpedia-li>
+<a href=/docs/usage/access-clusterpedia/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusageaccess-clusterpedia><span>Access the Clusterpedia</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsusagesearch-li>
+<a href=/docs/usage/search/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsusagesearch><span>Search</span></a>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchmulti-cluster-li>
-<a href=/zh-cn/docs/usage/search/multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchmulti-cluster><span>多集群检索</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchspecified-cluster-li>
-<a href=/zh-cn/docs/usage/search/specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchspecified-cluster><span>指定集群检索</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchcollection-resource-li>
-<a href=/zh-cn/docs/usage/search/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchcollection-resource><span>聚合资源检索</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchmulti-cluster-li>
+<a href=/docs/usage/search/multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchmulti-cluster><span>Multiple Clusters</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchspecified-cluster-li>
+<a href=/docs/usage/search/specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchspecified-cluster><span>Specified a Cluster</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchcollection-resource-li>
+<a href=/docs/usage/search/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchcollection-resource><span>Collection Resource</span></a>
 </li>
 </ul>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsfeatures-li>
-<a href=/zh-cn/docs/features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsfeatures><span>特性功能</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsfeatures-li>
+<a href=/docs/features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsfeatures><span>Features</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesremaining-item-count-li>
-<a href=/zh-cn/docs/features/remaining-item-count/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesremaining-item-count><span>返回剩余资源数量</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesraw-sql-query-li>
-<a href=/zh-cn/docs/features/raw-sql-query/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesraw-sql-query><span>原生 SQL 查询</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesprune-fields-li>
-<a href=/zh-cn/docs/features/prune-fields/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesprune-fields><span>资源字段裁剪</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync-all-custom-resources-li>
-<a href=/zh-cn/docs/features/sync-all-custom-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync-all-custom-resources><span>同步所有的自定义资源</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync-all-resources-li>
-<a href=/zh-cn/docs/features/sync-all-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync-all-resources><span>同步所有的资源</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesremaining-item-count-li>
+<a href=/docs/features/remaining-item-count/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesremaining-item-count><span>Return RemainingItemCount</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesraw-sql-query-li>
+<a href=/docs/features/raw-sql-query/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesraw-sql-query><span>Raw SQL Query</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesprune-fields-li>
+<a href=/docs/features/prune-fields/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesprune-fields><span>Resource Field Pruning</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturessync-all-custom-resources-li>
+<a href=/docs/features/sync-all-custom-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturessync-all-custom-resources><span>Sync All Custom Resources</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturessync-all-resources-li>
+<a href=/docs/features/sync-all-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturessync-all-resources><span>Sync All Resources</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsrelease-notes-li>
-<a href=https://github.com/clusterpedia-io/clusterpedia/releases class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsrelease-notes><span>版本日志</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsrelease-notes-li>
+<a href=https://github.com/clusterpedia-io/clusterpedia/releases class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsrelease-notes><span>Release notes</span></a>
 </li>
 </ul>
 </li>
@@ -195,17 +180,17 @@ $ kubectl get cluster NAME VERSION MODE READY AGE argocd Push False 8d member1 v
 </aside>
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href=https://github.com/clusterpedia-io/website/tree/main/content/zh-cn/docs/usage/interfacing-to-multi-cloud-platforms.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> 查看页面源码</a>
-<a href=https://github.com/clusterpedia-io/website/edit/main/content/zh-cn/docs/usage/interfacing-to-multi-cloud-platforms.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-<a href="https://github.com/clusterpedia-io/website/new/main/content/zh-cn/docs/usage/interfacing-to-multi-cloud-platforms.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-<a href="https://github.com/clusterpedia-io/website/issues/new?title=%e6%8e%a5%e5%85%a5%e5%a4%9a%e4%ba%91%e5%b9%b3%e5%8f%b0" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
-<a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
-<a id=print href=/zh-cn/docs/usage/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
+<a href=https://github.com/clusterpedia-io/website/tree/main/content/en/docs/usage/interfacing-to-multi-cloud-platforms.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> View page source</a>
+<a href=https://github.com/clusterpedia-io/website/edit/main/content/en/docs/usage/interfacing-to-multi-cloud-platforms.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/clusterpedia-io/website/new/main/content/en/docs/usage/interfacing-to-multi-cloud-platforms.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Create child page</a>
+<a href="https://github.com/clusterpedia-io/website/issues/new?title=Interfacing%20to%20Multi-Cloud%20Platforms" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+<a id=print href=/docs/usage/_print/><i class="fa fa-print fa-fw"></i> Print entire section</a>
 </div>
 <div class=td-toc><nav id=TableOfContents>
 <ul>
 <li><a href=#karmada-clusterimportpolicy>Karmada ClusterImportPolicy</a></li>
-<li><a href=#新建-clusterimportpolicy>新建 ClusterImportPolicy</a></li>
+<li><a href=#new-clusterimportpolicy>New ClusterImportPolicy</a></li>
 </ul>
 </nav></div>
 </aside>
@@ -213,59 +198,63 @@ $ kubectl get cluster NAME VERSION MODE READY AGE argocd Push False 8d member1 v
 <nav aria-label=breadcrumb class=td-breadcrumbs>
 <ol class=breadcrumb>
 <li class=breadcrumb-item>
-<a href=/zh-cn/docs/>文档</a>
+<a href=/docs/>Documentation</a>
 </li>
 <li class=breadcrumb-item>
-<a href=/zh-cn/docs/usage/>使用</a>
+<a href=/docs/usage/>Usage</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=/zh-cn/docs/usage/interfacing-to-multi-cloud-platforms/>接入多云平台</a>
+<a href=/docs/usage/interfacing-to-multi-cloud-platforms/>Interfacing to Multi-Cloud Platforms</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>接入多云平台</h1>
+<h1>Interfacing to Multi-Cloud Platforms</h1>
 <header class=article-meta>
-<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 2 分钟阅读 &nbsp;</p>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 3 minute read &nbsp;</p>
 </header>
-<p>0.4.0 后，Clusterpedia 提供了更加友好的接入多云平台的方式。</p>
-<p>用户通过创建 <code>ClusterImportPolicy</code> 来自动发现多云平台中纳管的集群，并将这些集群自动同步为 <code>PediaCluster</code>，用户不需要根据纳管的集群来手动去维护 <code>PediaCluster</code> 了。</p>
-<p>我们在 <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia 仓库</a> 中维护了各个多云平台的 <code>ClusterImportPolicy</code>。
-<strong>大家也提交用于对接其他多云平台的 <code>ClusterImportPolicy</code>。</strong></p>
-<p>用户在<a href=../../installation>安装 Clusterpedia</a> 后，创建合适的 <code>ClusterImportPolicy</code> 即可，用户也可以根据自己的需求来<a href=#%E6%96%B0%E5%BB%BA-clusterimportpolicy>创建新的 <code>ClusterImportPolicy</code></a></p>
+<p>After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms.</p>
+<p>Users can create <code>ClusterImportPolicy</code> to automatically discover managed clusters in the multi-cloud platform and automatically synchronize them as <code>PediaCluster</code>,
+so you don&rsquo;t need to maintain <code>PediaCluster</code> manually based on the managed clusters.</p>
+<p>We maintain <code>PediaCluster</code> for each multi-cloud platform in the <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia repository</a>. ClusterImportPolicy` for each multi-cloud platform.
+<strong>People also submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.</strong></p>
+<p>After <a href=../../installation>installing Clusterpedia</a>, you can create the appropriate <code>ClusterImportPolicy</code>,
+or you can <a href=#new-clusterimportpolicy>create a new <code>ClusterImportPolicy</code></a> according to your needs (multi-cloud platform).</p>
 <h2 id=karmada-clusterimportpolicy>Karmada ClusterImportPolicy</h2>
 <blockquote>
-<p>对于 Karmada 平台，用户首先需要先将 Clusterpedia 部署在 Karmada APIServer 中，部署步骤可以参考 <a href=https://github.com/Iceber/deploy-clusterpedia-to-karmada>https://github.com/Iceber/deploy-clusterpedia-to-karmada</a></p>
+<p>For Karmada platform, you need to first deploy Clusterpedia in Karmada APIServer, the deployment steps can be found at <a href=https://github.com/Iceber/deploy-clusterpedia-to-karmada>https://github.com/Iceber/deploy-clusterpedia-to-karmada</a></p>
 </blockquote>
-<p>创建用于对接 Karmada 平台的 <code>ClusterImportPolicy</code>。</p>
+<p>Create <code>ClusterImportPolicy</code> for interfacing to the Karmada platform.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl create -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/karmada.yaml
 $ kubectl get clusterimportpolicy
 NAME      AGE
 karmada   7d5h
-</code></pre></div><p>查看 <code>Karmada Cluster</code> 与 <code>PediaClusterLifecycle</code></p>
+</code></pre></div><p>View <code>Karmada Cluster</code> and <code>PediaClusterLifecycle</code> resources.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get cluster
 NAME      VERSION   MODE   READY   AGE
 argocd              Push   False   8d
 member1   v1.23.4   Push   True    22d
 member3   v1.23.4   Pull   True    22d
-
 $ kubectl get pediaclusterlifecycle
 NAME              AGE
 karmada-argocd    7d5h
 karmada-member1   7d5h
 karmada-member3   7d5h
-</code></pre></div><p>Clusterpedia 会为每一个 Karmada Cluster 创建对应的 <code>PediaClusterLifecycle</code>，可以使用 <code>kubectl describe pediaclusterlifecycle &lt;name></code> 来查看 Karmada Cluster 与 PediaCluster 的转换状态</p>
+</code></pre></div><p>Clusterpedia creates a corresponding <code>PediaClusterLifecycle</code> for each Karmada Cluster,
+and you can use <code>kubectl describe pediaclusterlifecycle &lt;name></code> to see the status of the transition between Karmada Cluster and PediaCluster resources.</p>
 <blockquote>
-<p>未来会在 <code>kubectl get pediaclusterlifecycle</code> 中详细状态</p>
+<p>The status will be detailed in <code>kubectl get pediaclusterlifecycle</code> in the future</p>
 </blockquote>
-<p>查看成功创建的 <code>PediaCluster</code></p>
+<p>View the successfully created <code>PediaCluster</code></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>NAME              APISERVER                 VERSION   STATUS
 karmada-member1   https://172.18.0.4:6443   v1.23.4   Healthy
-</code></pre></div><p>karmada clusterimportpolicy 要求 karmada 集群为 Push 模式，并且处于 Ready 状态，所以为 <em>member-1</em> 集群创建了 <em>karmada-member-1</em> pediacluster 资源。</p>
-<h2 id=新建-clusterimportpolicy>新建 ClusterImportPolicy</h2>
-<p>如果 <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia 仓库</a> 中没有维护某个平台的 ClusterImportPolicy，那么我们可以新建 ClusterImportPolicy</p>
-<p><strong>关于 ClusterImportPolicy 原理和字段的详细描述可以参考 <a href=../../concepts/cluster-import-policy>集群自动接入策略</a></strong></p>
-<p>现在假定有一个多云平台 <strong>MCP</strong>，该平台使用自定义资源 —— Cluster 来代表被纳管的集群，并且将集群的认证信息保存在和集群同名的 Secret 中</p>
+</code></pre></div><p>The karmada clusterimportpolicy requires the karmada cluster to be in Push mode and in Ready state,
+so the <em>karmada-member-1</em> pediacluster resource is created for the <em>member-1</em> cluster.</p>
+<h2 id=new-clusterimportpolicy>New ClusterImportPolicy</h2>
+<p>If the <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia repository</a> does not maintain a ClusterImportPolicy for a platform, then we can create a new ClusterImportPolicy</p>
+<p><strong>A detailed description of the <code>ClusterImportPolicy</code> principles and fields can be found in the <a href=../../concepts/cluster-import-policy>Cluster Auto Import Policy</a></strong></p>
+<p>Now assume that there is a multi-cloud platform <strong>MCP</strong> that uses a custom resource &ndash; Cluster to represent the managed clusters
+and stores the cluster authentication information in a Secret with the same name as the cluster</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.mcp.io</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Cluster</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -287,7 +276,7 @@ karmada-member1   https://172.18.0.4:6443   v1.23.4   Healthy
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>data</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>ca</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#8f5902;font-style:italic>**cluster</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ca bundle**</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>token</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#8f5902;font-style:italic>**cluster</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>token**</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>我们为 <strong>MCP</strong> 平台定义一个 <code>ClusterImportPolicy</code> 资源，并且默认同步 pods 和 apps group 下的资源</p>
+</span></code></pre></div><p>We define a <code>ClusterImportPolicy</code> resource for the <strong>MCP</strong> platform and synchronize the pods resource and all resources under the apps group by default.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>policy.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ClusterImportPolicy</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -327,11 +316,11 @@ karmada-member1   https://172.18.0.4:6443   v1.23.4   Healthy
 </span><span style=color:#8f5902;font-style:italic>      {{ end }}
 </span><span style=color:#8f5902;font-style:italic>    {{ end }}</span><span style=color:#f8f8f8;text-decoration:underline>    
 </span></code></pre></div><ul>
-<li><code>spec.source</code> 定义了需要监听的资源 Cluster</li>
-<li><code>spec.references</code> 定义了将 MCP Cluster 转换为 PediaCluster 时涉及到的资源，当前只有 secrets 资源</li>
-<li><code>spec.nameTemplate</code> 会根据 MCP Cluster 资源渲染出 PediaCluster 资源的名字</li>
-<li><code>spec.template</code> 通过 MCP Cluster 和 <code>spec.references</code> 中定义的资源来渲染出 PediaCluster 资源，具体规则可以参考 <a href=../../concepts/cluster-import-policy#pediacluster-template>PediaCluster Template</a></li>
-<li><code>spec.creationCondition</code> 可以根据 MCP Cluster 和 <code>spec.references</code> 定义的资源来可以决定了什么时候可以创建 PediaCluster，这里定义了当 MCP Cluster 处于 Ready 后再创建 PediaCluster，具体使用可以参考 <a href=../../concepts/cluster-import-policy#creation-condition>Creation Condition</a></li>
+<li><code>spec.source</code> defines the resource Cluster that needs to be watched to</li>
+<li><code>spec.preferences</code> defines the resources involved in converting an MCP Cluster to a PediaCluster, currently only secrets resources are used</li>
+<li><code>spec.nameTemplate</code> will render the name of the PediaCluster resource based on the MCP Cluster resource</li>
+<li><code>spec.template</code> renders the PediaCluster resource from the resources defined in MCP Cluster and <code>spec.references</code>, see <a href=../../concepts/cluster-import-policy#pediacluster-template>PediaCluster Template</a> for rules</li>
+<li><code>spec.creationCondition</code> determines when a PediaCluster can be created based on the resources defined by the MCP Cluster and <code>spec.references</code>, here it defines when the MCP Cluster is Ready before creating the PediaCluster. See <a href=../../concepts/cluster-import-policy#creation-condition>Creation Condition</a> for details</li>
 </ul>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
@@ -377,8 +366,8 @@ Sorry to hear that. Please <a href=https://github.com/USERNAME/REPOSITORY/issues
 </ul>
 </div>
 <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-<small class=text-white>&copy; 2022 The Clusterpedia Authors 保留所有权利</small>
-<p class=mt-2><a href=/zh-cn/about/>关于 Clusterpedia</a></p>
+<small class=text-white>&copy; 2022 The Clusterpedia Authors All Rights Reserved</small>
+<p class=mt-2><a href=/about/>About Clusterpedia</a></p>
 </div>
 </div>
 </div>

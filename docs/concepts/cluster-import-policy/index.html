@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-cn class=no-js>
+<!doctype html><html lang=en class=no-js>
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
@@ -13,41 +13,26 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>集群自动接入策略(ClusterImportPolicy) | Clusterpedia.io</title>
-<meta name=description content="自定义资源 ClusterImportPolicy 定义了某种类型的资源应该如何转换成 PediaCluster，这样 clusterpedia 便可以根据某种资源来自动的创建、更新和删除 PediaCluster
-首先需要在 ClusterImportPolicy 资源中定义监听（想要转换的）的资 …">
-<meta property="og:title" content="集群自动接入策略(ClusterImportPolicy)">
-<meta property="og:description" content="自定义资源 ClusterImportPolicy 定义了某种类型的资源应该如何转换成 PediaCluster，这样 clusterpedia 便可以根据某种资源来自动的创建、更新和删除 PediaCluster
-首先需要在 ClusterImportPolicy 资源中定义监听（想要转换的）的资源类型，我们将被监听的资源称为 Source 资源。
-当一个 Source 资源被创建或者删除时，ClusterImportPolicy Controller 会创建相应 PediaClusterLifecycle 资源。 而 PediaClusterLifecycle 会根据具体的 Source 资源来创建，更新以及删除 PediaCluster。
-在创建和更新 PediaCluster 时，Source 资源可能会将集群的认证信息（例如 CA，Token 等）保存在其他资源中，我们将这些涉及到的其他资源统称为 References 资源。
- 对于 ClusterImportPolicy 和 PediaClusterLifecycle 的调协由 Clusterpedia Controller Manager 内的 ClusterImportPolicy Controller 和 PediaClusterLifecycle Controller 负责
-ClusterImportPolicy 和 PediaCusterLifecycle 资源结构的更新可能会比较频繁，为了避免对 cluster.clusterpedia.io group 带来不必要的影响，所以放在 policy.clusterpedia.io group 中, 未来 1.0 发布时，可能会迁移到 cluster.clusterpedia.io 中。
- ClusterImportPolicy 一个完整 ClusterImportPolicy 示例如下：
-apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:mcpspec:source:group:&#34;cluster.example.io&#34;resource:clustersreferences:- group:&#34;&#34;resource:secretsnamespaceTemplate:&#34;{{ .">
+<title>Cluster Auto Import Policy | Clusterpedia.io</title>
+<meta name=description content="The custom resource ClusterImportPolicy defines how a certain type of resource should be converted into a PediaCluster,
+so that clusterpedia can …">
+<meta property="og:title" content="Cluster Auto Import Policy">
+<meta property="og:description" content="The custom resource ClusterImportPolicy defines how a certain type of resource should be converted into a PediaCluster, so that clusterpedia can automatically create, update and delete PediaCluster based on a certain resource.
+First we need to define the type of resource (that you want to convert) to watch to in the ClusterImportPolicy resource , we will call the resource being watched to the Source resource.
+When a Source resource is created or deleted, the ClusterImportPolicy Controller creates the corresponding PediaClusterLifecycle resource.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="/zh-cn/docs/concepts/cluster-import-policy/"><meta property="article:section" content="docs">
+<meta property="og:url" content="/docs/concepts/cluster-import-policy/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
-<meta itemprop=name content="集群自动接入策略(ClusterImportPolicy)">
-<meta itemprop=description content="自定义资源 ClusterImportPolicy 定义了某种类型的资源应该如何转换成 PediaCluster，这样 clusterpedia 便可以根据某种资源来自动的创建、更新和删除 PediaCluster
-首先需要在 ClusterImportPolicy 资源中定义监听（想要转换的）的资源类型，我们将被监听的资源称为 Source 资源。
-当一个 Source 资源被创建或者删除时，ClusterImportPolicy Controller 会创建相应 PediaClusterLifecycle 资源。 而 PediaClusterLifecycle 会根据具体的 Source 资源来创建，更新以及删除 PediaCluster。
-在创建和更新 PediaCluster 时，Source 资源可能会将集群的认证信息（例如 CA，Token 等）保存在其他资源中，我们将这些涉及到的其他资源统称为 References 资源。
- 对于 ClusterImportPolicy 和 PediaClusterLifecycle 的调协由 Clusterpedia Controller Manager 内的 ClusterImportPolicy Controller 和 PediaClusterLifecycle Controller 负责
-ClusterImportPolicy 和 PediaCusterLifecycle 资源结构的更新可能会比较频繁，为了避免对 cluster.clusterpedia.io group 带来不必要的影响，所以放在 policy.clusterpedia.io group 中, 未来 1.0 发布时，可能会迁移到 cluster.clusterpedia.io 中。
- ClusterImportPolicy 一个完整 ClusterImportPolicy 示例如下：
-apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:mcpspec:source:group:&#34;cluster.example.io&#34;resource:clustersreferences:- group:&#34;&#34;resource:secretsnamespaceTemplate:&#34;{{ .">
-<meta itemprop=wordCount content="563">
+<meta itemprop=name content="Cluster Auto Import Policy">
+<meta itemprop=description content="The custom resource ClusterImportPolicy defines how a certain type of resource should be converted into a PediaCluster, so that clusterpedia can automatically create, update and delete PediaCluster based on a certain resource.
+First we need to define the type of resource (that you want to convert) to watch to in the ClusterImportPolicy resource , we will call the resource being watched to the Source resource.
+When a Source resource is created or deleted, the ClusterImportPolicy Controller creates the corresponding PediaClusterLifecycle resource.">
+<meta itemprop=wordCount content="1199">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="集群自动接入策略(ClusterImportPolicy)">
-<meta name=twitter:description content="自定义资源 ClusterImportPolicy 定义了某种类型的资源应该如何转换成 PediaCluster，这样 clusterpedia 便可以根据某种资源来自动的创建、更新和删除 PediaCluster
-首先需要在 ClusterImportPolicy 资源中定义监听（想要转换的）的资源类型，我们将被监听的资源称为 Source 资源。
-当一个 Source 资源被创建或者删除时，ClusterImportPolicy Controller 会创建相应 PediaClusterLifecycle 资源。 而 PediaClusterLifecycle 会根据具体的 Source 资源来创建，更新以及删除 PediaCluster。
-在创建和更新 PediaCluster 时，Source 资源可能会将集群的认证信息（例如 CA，Token 等）保存在其他资源中，我们将这些涉及到的其他资源统称为 References 资源。
- 对于 ClusterImportPolicy 和 PediaClusterLifecycle 的调协由 Clusterpedia Controller Manager 内的 ClusterImportPolicy Controller 和 PediaClusterLifecycle Controller 负责
-ClusterImportPolicy 和 PediaCusterLifecycle 资源结构的更新可能会比较频繁，为了避免对 cluster.clusterpedia.io group 带来不必要的影响，所以放在 policy.clusterpedia.io group 中, 未来 1.0 发布时，可能会迁移到 cluster.clusterpedia.io 中。
- ClusterImportPolicy 一个完整 ClusterImportPolicy 示例如下：
-apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:mcpspec:source:group:&#34;cluster.example.io&#34;resource:clustersreferences:- group:&#34;&#34;resource:secretsnamespaceTemplate:&#34;{{ .">
+<meta name=twitter:title content="Cluster Auto Import Policy">
+<meta name=twitter:description content="The custom resource ClusterImportPolicy defines how a certain type of resource should be converted into a PediaCluster, so that clusterpedia can automatically create, update and delete PediaCluster based on a certain resource.
+First we need to define the type of resource (that you want to convert) to watch to in the ClusterImportPolicy resource , we will call the resource being watched to the Source resource.
+When a Source resource is created or deleted, the ClusterImportPolicy Controller creates the corresponding PediaClusterLifecycle resource.">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -59,19 +44,19 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 <body class=td-page>
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
-<a class=navbar-brand href=/zh-cn/>
+<a class=navbar-brand href=/>
 <span class=navbar-logo><svg id="Graph" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g id="Cpedia_-_Graph_-_Color_Dark" data-name="Cpedia - Graph - Color Dark"><rect id="Frame" width="512" height="512" fill="none"/><path id="Secondary" d="M476 221.051A274.908 274.908.0 00428.269 256 282.438 282.438.0 01395.7 220.752a322.971 322.971.0 0156.3-41.27zM362.4 256a334.139 334.139.0 00-53.2 92.145A329.953 329.953.0 00295.32 394.6a322.932 322.932.0 00-7.587 69.4h48a274.957 274.957.0 016.4-58.813 282.32 282.32.0 0114.238-45.835 285.94 285.94.0 0139.323-68.1A330.2 330.2.0 01362.4 256zM169.865 405.189a274.9 274.9.0 016.4 58.811h48a322.893 322.893.0 00-7.589-69.4 282.46 282.46.0 00-46.811 10.589zM179.94 300.03A333.961 333.961.0 00149.6 256a330 330 0 00-33.291-35.248A322.915 322.915.0 0060 179.482L36 221.051A274.964 274.964.0 0183.733 256a282.3 282.3.0 0132.576 35.248 286.331 286.331.0 0122.054 32.768 286.3 286.3.0 0117.264 35.339A330.144 330.144.0 01202.8 348.148 334.156 334.156.0 00179.94 300.03zM169.865 106.811a274.966 274.966.0 01-54.132-23.862l-24 41.569a322.934 322.934.0 0063.894 28.127 282.241 282.241.0 0014.238-45.834zm186.507 45.836a322.994 322.994.0 0063.895-28.129l-24-41.569a275.02 275.02.0 01-54.133 23.864A282.293 282.293.0 01295.32 117.4a286.278 286.278.0 01-39.307 2.716h-.1a286.366 286.366.0 01-39.237-2.718 330.245 330.245.0 01-13.88 46.455 334.129 334.129.0 0053.1 4.263h.115a333.931 333.931.0 0053.187-4.261 329.92 329.92.0 0047.174-11.208z" fill="#1b1c1d"/><path id="Primary" d="M211.993 256l22-38.1h44l22 38.1-22 38.105h-44zM342.134 106.813A274.957 274.957.0 01335.733 48h-48a322.932 322.932.0 007.587 69.4 282.293 282.293.0 0046.814-10.587zM428.269 256A282.438 282.438.0 01395.7 220.752a285.92 285.92.0 01-39.323-68.105A329.92 329.92.0 01309.2 163.854 334.125 334.125.0 00362.4 256a330.2 330.2.0 0033.3 35.248 322.971 322.971.0 0056.3 41.27l24-41.569A274.908 274.908.0 01428.269 256zM149.6 256a333.961 333.961.0 0030.34-44.03 334.156 334.156.0 0022.86-48.118 330.245 330.245.0 0013.88-46.455A322.893 322.893.0 00224.267 48h-48a274.9 274.9.0 01-6.4 58.811 282.241 282.241.0 01-14.238 45.834 286.3 286.3.0 01-17.264 35.339 286.331 286.331.0 01-22.054 32.768A330 330 0 01149.6 256zm-65.867.0A274.964 274.964.0 0136 290.949l24 41.569a322.915 322.915.0 0056.309-41.27A282.3 282.3.0 0083.733 256zM255.9 343.885a334.129 334.129.0 00-53.1 4.263 330.144 330.144.0 00-47.171 11.207 322.934 322.934.0 00-63.894 28.127l24 41.569a274.966 274.966.0 0154.132-23.862A282.46 282.46.0 01216.678 394.6a286.366 286.366.0 0139.237-2.718h.1A286.278 286.278.0 01295.32 394.6a329.953 329.953.0 0113.88-46.456 334.028 334.028.0 00-53.187-4.26zm86.236 61.3a275.027 275.027.0 0154.133 23.864l24-41.569a322.991 322.991.0 00-63.895-28.13 282.32 282.32.0 00-14.24 45.837z" fill="#33de72"/></g></svg></span><span class=font-weight-bold>Clusterpedia.io</span>
 </a>
 <div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar>
 <ul class="navbar-nav mt-2 mt-lg-0">
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class=nav-link href=/zh-cn/about/><span>关于</span></a>
+<a class=nav-link href=/about/><span>About</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class=nav-link href=/zh-cn/blog/><i class="fas fa-blog"></i><span>博客</span></a>
+<a class=nav-link href=/blog/><i class="fas fa-blog"></i><span>Blog</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class="nav-link active" href=/zh-cn/docs/><i class="fas fa-book"></i><span class=active>文档</span></a>
+<a class="nav-link active" href=/docs/><i class="fas fa-book"></i><span class=active>Documentation</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=https://github.com/clusterpedia-io/clusterpedia target=_blank><i class="fab fa-github"></i><span>GitHub</span></a>
@@ -81,15 +66,15 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 </li>
 <li class="nav-item dropdown mr-4 d-none d-lg-block">
 <a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
-中文 Chinese
+English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/docs/concepts/cluster-import-policy/>English</a>
+<a class=dropdown-item href=/zh-cn/docs/concepts/cluster-import-policy/>中文 Chinese</a>
 </div>
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.efdb994c1bf571402510d5cb7289466d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.efdb994c1bf571402510d5cb7289466d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -99,93 +84,93 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.efdb994c1bf571402510d5cb7289466d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.efdb994c1bf571402510d5cb7289466d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
 <nav class="collapse td-sidebar-nav" id=td-section-nav>
 <div class="nav-item dropdown d-block d-lg-none">
 <a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
-中文 Chinese
+English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/docs/concepts/cluster-import-policy/>English</a>
+<a class=dropdown-item href=/zh-cn/docs/concepts/cluster-import-policy/>中文 Chinese</a>
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zh-cndocs-li>
-<a href=/zh-cn/docs/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-zh-cndocs><span>文档</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li>
+<a href=/docs/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Documentation</span></a>
 <ul class=ul-1>
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsinstallation-li>
-<a href=/zh-cn/docs/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsinstallation><span>安装</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsinstallation-li>
+<a href=/docs/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsinstallation><span>Installation</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsinstallationkubectl-apply-li>
-<a href=/zh-cn/docs/installation/kubectl-apply/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsinstallationkubectl-apply><span>使用 kubectl apply</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsinstallationhelm-li>
-<a href=/zh-cn/docs/installation/helm/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsinstallationhelm><span>使用 Helm</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsinstallationconfigurate-li>
-<a href=/zh-cn/docs/installation/configurate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsinstallationconfigurate><span>配置</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsinstallationkubectl-apply-li>
+<a href=/docs/installation/kubectl-apply/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsinstallationkubectl-apply><span>kubectl apply</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsinstallationhelm-li>
+<a href=/docs/installation/helm/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsinstallationhelm><span>Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsinstallationconfiguration-li>
+<a href=/docs/installation/configuration/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsinstallationconfiguration><span>Configuration</span></a>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsinstallationconfigurateconfigurate-internalstorage-li>
-<a href=/zh-cn/docs/installation/configurate/configurate-internalstorage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsinstallationconfigurateconfigurate-internalstorage><span>配置存储层</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsinstallationconfigurationconfigure-internalstorage-li>
+<a href=/docs/installation/configuration/configure-internalstorage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsinstallationconfigurationconfigure-internalstorage><span>Configure Storage Layer</span></a>
 </li>
 </ul>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zh-cndocsconcepts-li>
-<a href=/zh-cn/docs/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsconcepts><span>概念</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsconcepts-li>
+<a href=/docs/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsconcepts><span>Concepts</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptspediacluster-li>
-<a href=/zh-cn/docs/concepts/pediacluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptspediacluster><span>PediaCluster</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscluster-sync-resources-li>
-<a href=/zh-cn/docs/concepts/cluster-sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscluster-sync-resources><span>公共的集群资源同步配置(ClusterSyncResources)</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscollection-resource-li>
-<a href=/zh-cn/docs/concepts/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscollection-resource><span>聚合资源(Collection Resource)</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zh-cndocsconceptscluster-import-policy-li>
-<a href=/zh-cn/docs/concepts/cluster-import-policy/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscluster-import-policy><span class=td-sidebar-nav-active-item>集群自动接入策略(ClusterImportPolicy)</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptspediacluster-li>
+<a href=/docs/concepts/pediacluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptspediacluster><span>PediaCluster</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscluster-sync-resources-li>
+<a href=/docs/concepts/cluster-sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscluster-sync-resources><span>Public Configuration of Cluster Sync Resources(ClusterSyncResources)</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscollection-resource-li>
+<a href=/docs/concepts/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscollection-resource><span>Collection Resource</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsconceptscluster-import-policy-li>
+<a href=/docs/concepts/cluster-import-policy/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsconceptscluster-import-policy><span class=td-sidebar-nav-active-item>Cluster Auto Import Policy</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsusage-li>
-<a href=/zh-cn/docs/usage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsusage><span>使用</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsusage-li>
+<a href=/docs/usage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsusage><span>Usage</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusageimport-clusters-li>
-<a href=/zh-cn/docs/usage/import-clusters/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusageimport-clusters><span>集群接入</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusageinterfacing-to-multi-cloud-platforms-li>
-<a href=/zh-cn/docs/usage/interfacing-to-multi-cloud-platforms/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusageinterfacing-to-multi-cloud-platforms><span>接入多云平台</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesync-resources-li>
-<a href=/zh-cn/docs/usage/sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesync-resources><span>同步集群资源</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusageaccess-clusterpedia-li>
-<a href=/zh-cn/docs/usage/access-clusterpedia/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusageaccess-clusterpedia><span>访问 Clusterpedia</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsusagesearch-li>
-<a href=/zh-cn/docs/usage/search/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsusagesearch><span>资源检索</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusageimport-clusters-li>
+<a href=/docs/usage/import-clusters/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusageimport-clusters><span>Import Clusters</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusageinterfacing-to-multi-cloud-platforms-li>
+<a href=/docs/usage/interfacing-to-multi-cloud-platforms/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusageinterfacing-to-multi-cloud-platforms><span>Interfacing to Multi-Cloud Platforms</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesync-resources-li>
+<a href=/docs/usage/sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesync-resources><span>Synchronize Cluster Resources</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusageaccess-clusterpedia-li>
+<a href=/docs/usage/access-clusterpedia/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusageaccess-clusterpedia><span>Access the Clusterpedia</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsusagesearch-li>
+<a href=/docs/usage/search/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsusagesearch><span>Search</span></a>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchmulti-cluster-li>
-<a href=/zh-cn/docs/usage/search/multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchmulti-cluster><span>多集群检索</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchspecified-cluster-li>
-<a href=/zh-cn/docs/usage/search/specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchspecified-cluster><span>指定集群检索</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchcollection-resource-li>
-<a href=/zh-cn/docs/usage/search/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchcollection-resource><span>聚合资源检索</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchmulti-cluster-li>
+<a href=/docs/usage/search/multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchmulti-cluster><span>Multiple Clusters</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchspecified-cluster-li>
+<a href=/docs/usage/search/specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchspecified-cluster><span>Specified a Cluster</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchcollection-resource-li>
+<a href=/docs/usage/search/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchcollection-resource><span>Collection Resource</span></a>
 </li>
 </ul>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsfeatures-li>
-<a href=/zh-cn/docs/features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsfeatures><span>特性功能</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsfeatures-li>
+<a href=/docs/features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsfeatures><span>Features</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesremaining-item-count-li>
-<a href=/zh-cn/docs/features/remaining-item-count/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesremaining-item-count><span>返回剩余资源数量</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesraw-sql-query-li>
-<a href=/zh-cn/docs/features/raw-sql-query/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesraw-sql-query><span>原生 SQL 查询</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesprune-fields-li>
-<a href=/zh-cn/docs/features/prune-fields/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesprune-fields><span>资源字段裁剪</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync-all-custom-resources-li>
-<a href=/zh-cn/docs/features/sync-all-custom-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync-all-custom-resources><span>同步所有的自定义资源</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync-all-resources-li>
-<a href=/zh-cn/docs/features/sync-all-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync-all-resources><span>同步所有的资源</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesremaining-item-count-li>
+<a href=/docs/features/remaining-item-count/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesremaining-item-count><span>Return RemainingItemCount</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesraw-sql-query-li>
+<a href=/docs/features/raw-sql-query/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesraw-sql-query><span>Raw SQL Query</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesprune-fields-li>
+<a href=/docs/features/prune-fields/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesprune-fields><span>Resource Field Pruning</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturessync-all-custom-resources-li>
+<a href=/docs/features/sync-all-custom-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturessync-all-custom-resources><span>Sync All Custom Resources</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturessync-all-resources-li>
+<a href=/docs/features/sync-all-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturessync-all-resources><span>Sync All Resources</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsrelease-notes-li>
-<a href=https://github.com/clusterpedia-io/clusterpedia/releases class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsrelease-notes><span>版本日志</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsrelease-notes-li>
+<a href=https://github.com/clusterpedia-io/clusterpedia/releases class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsrelease-notes><span>Release notes</span></a>
 </li>
 </ul>
 </li>
@@ -195,27 +180,27 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 </aside>
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href=https://github.com/clusterpedia-io/website/tree/main/content/zh-cn/docs/concepts/cluster-import-policy.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> 查看页面源码</a>
-<a href=https://github.com/clusterpedia-io/website/edit/main/content/zh-cn/docs/concepts/cluster-import-policy.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-<a href="https://github.com/clusterpedia-io/website/new/main/content/zh-cn/docs/concepts/cluster-import-policy.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-<a href="https://github.com/clusterpedia-io/website/issues/new?title=%e9%9b%86%e7%be%a4%e8%87%aa%e5%8a%a8%e6%8e%a5%e5%85%a5%e7%ad%96%e7%95%a5%28ClusterImportPolicy%29" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
-<a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
-<a id=print href=/zh-cn/docs/concepts/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
+<a href=https://github.com/clusterpedia-io/website/tree/main/content/en/docs/concepts/cluster-import-policy.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> View page source</a>
+<a href=https://github.com/clusterpedia-io/website/edit/main/content/en/docs/concepts/cluster-import-policy.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/clusterpedia-io/website/new/main/content/en/docs/concepts/cluster-import-policy.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Create child page</a>
+<a href="https://github.com/clusterpedia-io/website/issues/new?title=Cluster%20Auto%20Import%20Policy" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+<a id=print href=/docs/concepts/_print/><i class="fa fa-print fa-fw"></i> Print entire section</a>
 </div>
 <div class=td-toc><nav id=TableOfContents>
 <ul>
 <li><a href=#clusterimportpolicy>ClusterImportPolicy</a></li>
-<li><a href=#source-和-references-资源>Source 和 References 资源</a></li>
+<li><a href=#source-and-references-resource>Source and References Resource</a></li>
 <li><a href=#pediaclusterlifecycle>PediaClusterLifecycle</a>
 <ul>
 <li><a href=#pediaclusterlifecycle-和-pediacluster>PediaClusterLifecycle 和 PediaCluster</a></li>
 </ul>
 </li>
-<li><a href=#pediacluster-转换策略>PediaCluster 转换策略</a>
+<li><a href=#pediacluster-convertion-policy>PediaCluster Convertion Policy</a>
 <ul>
 <li><a href=#creation-condition>Creation Condition</a></li>
 <li><a href=#pediacluster-template>PediaCluster Template</a></li>
-<li><a href=#pediacluster-的删除>PediaCluster 的删除</a></li>
+<li><a href=#pediacluster-deletion-condition>PediaCluster Deletion Condition</a></li>
 </ul>
 </li>
 </ul>
@@ -225,33 +210,34 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 <nav aria-label=breadcrumb class=td-breadcrumbs>
 <ol class=breadcrumb>
 <li class=breadcrumb-item>
-<a href=/zh-cn/docs/>文档</a>
+<a href=/docs/>Documentation</a>
 </li>
 <li class=breadcrumb-item>
-<a href=/zh-cn/docs/concepts/>概念</a>
+<a href=/docs/concepts/>Concepts</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=/zh-cn/docs/concepts/cluster-import-policy/>集群自动接入策略(ClusterImportPolicy)</a>
+<a href=/docs/concepts/cluster-import-policy/>Cluster Auto Import Policy</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>集群自动接入策略(ClusterImportPolicy)</h1>
+<h1>Cluster Auto Import Policy</h1>
 <header class=article-meta>
-<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 3 分钟阅读 &nbsp;</p>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 6 minute read &nbsp;</p>
 </header>
-<p>自定义资源 <code>ClusterImportPolicy</code> 定义了某种类型的资源应该如何转换成 <code>PediaCluster</code>，这样 clusterpedia 便可以根据某种资源来自动的创建、更新和删除 <a href=../pediacluster>PediaCluster</a></p>
-<p>首先需要在 <code>ClusterImportPolicy</code> 资源中定义监听（想要转换的）的资源类型，我们将被监听的资源称为 <strong>Source</strong> 资源。</p>
-<p>当一个 <strong>Source</strong> 资源被创建或者删除时，<em>ClusterImportPolicy Controller</em> 会创建相应 <code>PediaClusterLifecycle</code> 资源。
-而 <code>PediaClusterLifecycle</code> 会根据具体的 <strong>Source</strong> 资源来创建，更新以及删除 <code>PediaCluster</code>。</p>
-<p>在创建和更新 <code>PediaCluster</code> 时，<strong>Source</strong> 资源可能会将集群的认证信息（例如 CA，Token 等）保存在其他资源中，我们将这些涉及到的其他资源统称为 <strong>References</strong> 资源。</p>
+<p>The custom resource <code>ClusterImportPolicy</code> defines how a certain type of resource should be converted into a <code>PediaCluster</code>,
+so that clusterpedia can automatically create, update and delete <a href=../pediacluster>PediaCluster</a> based on a certain resource.</p>
+<p>First we need to define the type of resource (that you want to convert) to watch to in the <code>ClusterImportPolicy</code> resource , we will call the resource being watched to the <strong>Source</strong> resource.</p>
+<p>When a <strong>Source</strong> resource is created or deleted, the <em>ClusterImportPolicy Controller</em> creates the corresponding <code>PediaClusterLifecycle</code> resource.</p>
+<p>The custom resource <code>PediaClusterLifecycle</code> creates, updates and deletes <code>PediaCluster</code> based on the specific <strong>Source</strong> resource.</p>
+<p>When creating and updating a <code>PediaCluster</code>, the <strong>Source</strong> resource may store the cluster&rsquo;s authentication information (eg. CA, Token, etc.) in other resources, which are collectively referred to as <strong>Reference</strong> resources.</p>
 <blockquote>
-<p>对于 <code>ClusterImportPolicy</code> 和 <code>PediaClusterLifecycle</code> 的调协由 <strong>Clusterpedia Controller Manager</strong> 内的 <em>ClusterImportPolicy Controller</em> 和 <em>PediaClusterLifecycle Controller</em> 负责</p>
-<p><code>ClusterImportPolicy</code> 和 <code>PediaCusterLifecycle</code> 资源结构的更新可能会比较频繁，为了避免对 <em>cluster.clusterpedia.io</em> group 带来不必要的影响，所以放在 <em>policy.clusterpedia.io</em> group 中,
-未来 1.0 发布时，可能会迁移到 <em>cluster.clusterpedia.io</em> 中。</p>
+<p>The reconciliation of <code>ClusterImportPolicy</code> and <code>PediaClusterLifecycle</code> is done by the <em>ClusterImportPolicy Controller</em> and <em>PediaClusterLifecycle Controller</em> within the <strong>Clusterpedia Controller Manager</strong></p>
+<p><code>ClusterImportPolicy</code> and <code>PediaClusterLifecycle</code> resource structures may be updated more frequently, so to avoid unnecessary impact on the <em>cluster.clusterpedia.io</em> group, they are placed in the <em>policy.clusterpedia.io</em> group.
+It may be migrated to <em>cluster.clusterpedia.io</em> in the future 1.0 release.</p>
 </blockquote>
 <h2 id=clusterimportpolicy>ClusterImportPolicy</h2>
-<p>一个完整 <code>ClusterImportPolicy</code> 示例如下：</p>
+<p>An example of a complete <code>ClusterImportPolicy</code> resource is as follows:</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>policy.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ClusterImportPolicy</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -287,15 +273,15 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 </span><span style=color:#8f5902;font-style:italic>        {{ end }}
 </span><span style=color:#8f5902;font-style:italic>      {{ end }}
 </span><span style=color:#8f5902;font-style:italic>    {{ end }}</span><span style=color:#f8f8f8;text-decoration:underline>    
-</span></code></pre></div><p>主要分为三部分</p>
+</span></code></pre></div><p>There are these sections:</p>
 <ul>
-<li><code>spec.source</code> 和 <code>spec.references</code> 分别定义 <strong>Source</strong> 资源和 <strong>References</strong> 资源</li>
-<li><code>spec.nameTemplate</code> 定义生成的 <code>PediaClusterLifecycle</code> 和 <code>PediaCluster</code> 的名称，可以根据 <strong>Source</strong> 资源进行渲染</li>
-<li><code>spec.template</code> 和 <code>spec.creationCondition</code> 定义资源转换策略。</li>
+<li><code>spec.source</code> and <code>spec.references</code> define <strong>Source</strong> resource type and <strong>Reference</strong> resources</li>
+<li><code>spec.nameTemplate</code> defines the name of the generated <code>PediaClusterLifecycle</code> and <code>PediaCluster</code>, which can be rendered according to the <strong>Source</strong> resource.</li>
+<li><code>spec.template</code> and <code>spec.creationCondition</code> define the resource conversion policy.</li>
 </ul>
-<p><strong>references，template，creationCondition 内的模板均支持由 <a href=https://github.com/Masterminds/sprig>sprig</a> 提供的 70 多种模版函数</strong>，<a href=http://masterminds.github.io/sprig/>Sprig Function Documentation</a></p>
-<h2 id=source-和-references-资源>Source 和 References 资源</h2>
-<p>在 <code>ClusterImportPolicy</code> 资源中我们首先需要定义的就是 <strong>Source</strong> 资源类型以及 <strong>References</strong> 资源</p>
+<p><strong>Templates within references, template, and creationCondition all support the 70+ template functions provided by <a href=https://github.com/Masterminds/sprig>sprig</a></strong>, <a href=http://masterminds.github.io/sprig/>Sprig Function Documentation</a></p>
+<h2 id=source-and-references-resource>Source and References Resource</h2>
+<p>The first thing we need to define in the <code>ClusterImportPolicy</code> resource is the <strong>Source</strong> resource type and the <strong>Reference</strong> resources.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>policy.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ClusterImportPolicy</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -312,14 +298,14 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>namespaceTemplate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;{{ .source.spec.secretRef.namespace }}&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>nameTemplate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;{{ .source.spec.secretRef.name }}&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>key</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>secret</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p><strong>Source</strong> 资源通过 <code>spec.source.group</code> 和 <code>spec.source.resource</code> 指定了资源组和资源名称。我们也可以使用 <code>spec.source.versions</code> 来限制 <strong>Source</strong> 的资源版本，默认是不会对 <strong>Source</strong> 资源版本进行限制</p>
+</span></code></pre></div><p>The <strong>Source</strong> resource specifies the resource group and resource name via <code>spec.source.group</code> and <code>spec.source.resource</code>. We can also use <code>spec.source.versions</code> to restrict <strong>Source</strong> resource versions, by default there is no restriction on <strong>Source</strong> resource versions</p>
 <blockquote>
-<p><strong>一种 Source 资源只能有一个负责转换该资源的 <code>ClusterImportPolicy</code> 资源</strong></p>
+<p><strong>A Source resource can only have one <code>ClusterImportPolicy</code> resource responsible for converting that resource</strong></p>
 </blockquote>
-<p><strong>source</strong> 资源可以通过 <code>{{ .source.&lt;field> }}</code> 来用于其他的模版字段</p>
-<p><code>spec.references</code> 中定义了在转换过程中涉及到的资源，我们需要指定资源的类型，以及通过 namespace 和 name 模版来获取具体的 <strong>reference</strong> 资源。我们也可以和 <strong>Source</strong> 资源一样对 Reference 资源的版本进行限制。</p>
-<p>除此之外还要为 <strong>reference</strong> 资源设置一个 key，这个 key 会以 <code>{{ .references.&lt;key> }}</code> 的方式来让后续模版字段使用</p>
-<p><em><code>spec.references</code> 中后面的项也可以通过 <code>.references.&lt;key></code> 来引用前面的项</em></p>
+<p><strong>source</strong> resources can be used for other template fields via <code>{{ .source.&lt;field> }}</code></p>
+<p>The resources involved in the conversion process are defined in <code>spec.references</code> and we need to specify the type of the resource and the specific <strong>reference</strong> resource via namespace and name templates. We can also restrict the version of the Reference resource in the same way as the <strong>Source</strong> resource.</p>
+<p>In addition to this, we need to set a key for the <strong>reference</strong> resource, which will be used by subsequent template fields as <code>{{ .references.&lt;key> }}</code></p>
+<p>*The later items in *<code>spec.references</code> can also refer to the earlier ones via <code>.references.&lt;key></code></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>references</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>a.example.io</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -333,21 +319,21 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>nameTemplate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;{{ .references.refA.spec.bName }}&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>key</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>refB</span><span style=color:#f8f8f8;text-decoration:underline>
 </span></code></pre></div><h2 id=pediaclusterlifecycle>PediaClusterLifecycle</h2>
-<p>当一个 <strong>Source</strong> 被创建后，<em>ClusterImportPolicy Controller</em> 会根据 <code>ClusterImportPolicy</code> 创建相应的 <code>PediaClusterLifecycle</code> 资源。</p>
-<p><code>PediaClusterLifecycle</code> 资源的名字是通过 <code>ClusterImportPolicy</code> 的 <code>spec.nameTemplate</code> 字段来设置的。</p>
+<p>When a <strong>Source</strong> is created, the <em>ClusterImportPolicy Controller</em> creates the corresponding <code>PediaClusterLifecycle</code> resource based on the <code>ClusterImportPolicy</code> resource.</p>
+<p>The name of the <code>PediaClusterLifecycle</code> resource is set via the <code>spec.nameTemplate</code> field of the <code>ClusterImportPolicy</code>.</p>
 <pre tabindex=0><code>apiVersion: policy.clusterpedia.io/v1alpha1
 kind: ClusterImportPolicy
 metadata:
   name: multi-cluster-platform
 spec:
   nameTemplate: &quot;mcp-{{ .source.metadata.namespace }}-{{ .source.metadata.name }}&quot;
-</code></pre><p>nameTemplate 只能根据 <strong>Source</strong> 资源来渲染模版，通常根据是否为 Cluster Scoped 资源来设置该字段：</p>
+</code></pre><p>The nameTemplate can only render templates based on <strong>Source</strong> resources, and the field is usually set based on whether it is a Cluster Scoped resource.</p>
 <ul>
 <li><code>nameTemplate: "&lt;prefix>-{{ .source.metadata.namespace}}-{{ .source.metadata.name }}"</code></li>
 <li><code>nameTemplate: "&lt;prefix>-{{ .source.metadata.name }}"</code></li>
 </ul>
-<p><strong>nameTemplate 前缀通常是多云平台或者其他有意义的名字，当然也可以没有前缀。</strong></p>
-<p><code>PediaClusterLifecycle</code> 中会设置具体的 <strong>source</strong> 资源和 <strong>references</strong> 资源以及转换策略</p>
+<p>**nameTemplate is usually prefixed with a multi-cloud platform or other meaningful name, but can of course be set without a prefix. **</p>
+<p>The <code>PediaClusterLifecycle</code> sets the specific <strong>source</strong> resource and <strong>references</strong> resource and the conversion policy</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>policy.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaClusterLifecycle</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -366,18 +352,18 @@ spec:
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>namespaceTemplate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;{{ .source.spec.secretRef.namespace }}&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>nameTemplate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;{{ .source.spec.secretRef.name }}&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>key</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>secret</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p><code>PediaClusterLifecycle</code> 的 <code>spec.source</code> 设置了一个具体的 <strong>Source</strong> 资源，包括了资源的具体版本，命名空间和名称。</p>
-<p><code>spec.references</code> 相比 <code>ClusterImportPolicy</code> 包含了具体的资源版本，其他字段和 <code>ClusterImportPolicy</code> 内的 References 定义相同。
-references 资源的命名空间和名字会在转换资源时进行解析。</p>
+</span></code></pre></div><p>The <code>spec.source</code> of the <code>PediaClusterLifecycle</code> sets a specific <strong>Source</strong> resource, including the specific version, namespace and name of the resource.</p>
+<p><code>spec.references</code> contains the specific resource version compared to <code>ClusterImportPolicy</code>, the other fields are the same as the References definition within <code>ClusterImportPolicy</code>.</p>
+<p>The namespace and name of the references resource will be resolved when converting the resource.</p>
 <h3 id=pediaclusterlifecycle-和-pediacluster>PediaClusterLifecycle 和 PediaCluster</h3>
-<p><code>PediaClusterLifecycle</code> 的名字会和 <code>PediaCluster</code> 进行一一对应，<code>PediaClusterLifecycle</code> 根据转换策略创建和更新同名的 <code>PediaCluster</code>。</p>
-<h2 id=pediacluster-转换策略>PediaCluster 转换策略</h2>
-<p>我们在定义转换策略时，主要关注以下方面:</p>
+<p>The name of <code>PediaClusterLifecycle</code> corresponds to <code>PediaCluster</code>, and <code>PediaClusterLifecycle</code> creates and updates <code>PediaCluster</code> with the same name according to the conversion policy.</p>
+<h2 id=pediacluster-convertion-policy>PediaCluster Convertion Policy</h2>
+<p>We focus on the following aspects when defining the conversion policy:</p>
 <ul>
-<li>用于创建或者更新 <code>PediaCluster</code> 的模版</li>
-<li>什么时候触发 <code>PediaCluster</code> 的创建</li>
+<li>the template used to create or update the <code>PediaCluster</code></li>
+<li>When to trigger the creation of a `PediaCluster</li>
 </ul>
-<p>在 <code>ClusterImportPolicy</code> 中，我们使用 <code>spec.template</code> 和 <code>spec.creationCondition</code> 来定义他们</p>
+<p>In <code>ClusterImportPolicy</code>, we use <code>spec.template</code> and <code>spec.creationCondition</code> to define them</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>policy.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ClusterImportPolicy</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -404,10 +390,10 @@ references 资源的命名空间和名字会在转换资源时进行解析。</p
 </span><span style=color:#8f5902;font-style:italic>        {{ end }}
 </span><span style=color:#8f5902;font-style:italic>      {{ end }}
 </span><span style=color:#8f5902;font-style:italic>    {{ end }}</span><span style=color:#f8f8f8;text-decoration:underline>    
-</span></code></pre></div><p>这两个字段都是模版字段，需要根据 <strong>Source</strong> 资源和 <strong>References</strong> 资源来渲染。</p>
-<p>当 <strong>Source</strong> 资源被创建后，<strong>ClusterImportPolicy Controller</strong> 会根据 <code>ClusterImportPolicy</code> 创建对应的 <code>PediaClusterLifecycle</code>，并且 <code>PediaClusterLifecycle</code> 中也会包含转换策略。</p>
+</span></code></pre></div><p>Both of these fields are template fields that need to be rendered based on <strong>Source</strong> resource and <strong>References</strong> resources.</p>
+<p>When the <strong>Source</strong> resource is created, the <strong>ClusterImportPolicy Controller</strong> will create the corresponding <code>PediaClusterLifecycle</code> based on the <code>ClusterImportPolicy</code>, and the <code>PediaClusterLifecycle</code> will will also contain the conversion policy.</p>
 <blockquote>
-<p>当然如果 <code>ClusterImportPolicy</code> 内的策略发生修改，也会同步给所属的所有 <code>PediaClusterLifecycle</code> 资源。</p>
+<p>Of course, if the policy in <code>ClusterImportPolicy</code> is modified, it will be synchronized to all <code>PediaClusterLifecycle</code> resources it belongs to.</p>
 </blockquote>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>policy.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ClusterImportPolicy</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -435,22 +421,23 @@ references 资源的命名空间和名字会在转换资源时进行解析。</p
 </span><span style=color:#8f5902;font-style:italic>        {{ end }}
 </span><span style=color:#8f5902;font-style:italic>      {{ end }}
 </span><span style=color:#8f5902;font-style:italic>    {{ end }}</span><span style=color:#f8f8f8;text-decoration:underline>    
-</span></code></pre></div><p><code>PediaClusterLifecycle</code> 会负责根据 <code>spec.creationCondition</code> 和 <code>spec.template</code> 来创建更新具体的 <code>PediaCluster</code>。</p>
+</span></code></pre></div><p>PediaClusterLifecycle<code>is responsible for creating and updating specific</code>PediaClusters<code>based on</code>spec.creationCondition<code>and</code>spec.template`.</p>
 <h3 id=creation-condition>Creation Condition</h3>
-<p>我们有时在 <strong>Source</strong> 资源创建后并不会立刻创建 <code>PediaCluster</code>, 而是需要等到 <strong>Source</strong> 资源某些字段或者某些状态就绪后再创建 <code>PediaCluster</code>。</p>
-<p><code>spec.creationCondition</code> 使用模版语法来判断是否满足创建条件，当模版渲染后的值为 <code>True</code>（大小写模糊）后则会根据 <code>spec.Template</code> 创建 <code>PediaCluster</code>。</p>
-<p>如果 <code>PediaCluster</code> 已经存在，<code>spec.creationCondition</code> 不会影响后续对 <code>PediaCluster</code> 的更新。</p>
+<p>Sometimes we don&rsquo;t create a <code>PediaCluster</code> immediately after a <strong>Source</strong> resource is created, but rather we need to wait until some fields or some state of the <strong>Source</strong> resource is ready before creating the <code>PediaCluster</code>.</p>
+<p><code>spec.creationCondition</code> uses the template syntax to determine if the creation condition is met,
+and when the template is rendered with a value of <code>True</code> (case insensitive) then <code>PediaCluster</code> is created according to `spec.</p>
+<p>If the <code>PediaCluster</code> already exists, <code>spec.creationCondition</code> will not affect updates to the <code>PediaCluster</code>.</p>
 <h3 id=pediacluster-template>PediaCluster Template</h3>
-<p><code>spec.template</code> 定义了 <code>PediaCluster</code> 资源模版，在创建或者更新 <code>PediaCluster</code> 时，会根据 <strong>Source</strong> 资源和 <strong>References</strong> 资源来渲染出具体的资源。</p>
-<p><code>PediaCluster</code> 模版可以分成三部分：</p>
+<p><code>spec.template</code> defines a <code>PediaCluster</code> resource template that renders specific resources based on <strong>Source</strong> resource and <strong>References</strong> resources when creating or updating a <code>PediaCluster</code>.</p>
+<p>The <code>PediaCluster</code> template can be separated into three parts.</p>
 <ul>
-<li>元信息：labels 和 annotations</li>
-<li>集群访问与认证字段：<code>spec.apiserver</code>，<code>spec.caData</code>，<code>spec.tokenData</code>，<code>spec.certData</code>，<code>spec.keyData</code> 还有 <code>spec.kubeconfig</code></li>
-<li>资源同步字段：<code>spec.syncResources</code>，<code>spec.syncAllCustomResources</code>，<code>spec.syncResourcesRefName</code></li>
+<li>Metadata: labels and annotations</li>
+<li>Cluster endpoint and authentication fields: <code>spec.apiserver</code>, <code>spec.caData</code>, <code>spec.tokenData</code>, <code>spec.certData</code>, <code>spec.keyData</code> and <code>spec.kubeconfig</code></li>
+<li>Resource sync fields: <code>spec.syncResources</code>, <code>spec.syncAllCustomResources</code>, <code>spec.syncResourcesRefName</code></li>
 </ul>
-<p><code>PediaCluster</code> 资源的<strong>元信息</strong>和<strong>资源同步字段</strong>只有在创建 PediaCluser 时才会有效，在更新 <code>PediaCluster</code> 资源时，只会更新<strong>集群访问与认证字段</strong></p>
-<h3 id=pediacluster-的删除>PediaCluster 的删除</h3>
-<p>如果一个 <code>PediaCluster</code> 是由 <code>PediaClusterLifecycle</code> 创建，那么会将 <code>PediaClusterLifecycle</code> 设置为该 <code>PediaCluster</code> 资源的 owner</p>
+<p>The <strong>metadata</strong> and <strong>resource sync fields</strong> of the <code>PediaCluster</code> resource are only available when the PediaCluser is created, and only the <strong>cluster endpoint and authentication fields</strong> are updated when the <code>PediaCluster</code> resource is updated</p>
+<h3 id=pediacluster-deletion-condition>PediaCluster Deletion Condition</h3>
+<p>If a <code>PediaCluster</code> is created by <code>PediaClusterLifecycle</code>, then <code>PediaClusterLifecycle</code> will be set to the owner of that <code>PediaCluster</code> resource.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>cluster.clusterpedia.io/v1alpha2</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaCluster</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -460,9 +447,9 @@ references 资源的命名空间和名字会在转换资源时进行解析。</p
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>PediaClusterLifecycle</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>mcp-example</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>uid</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>f932483a-b1c5-4894-a524-00f78ea34a9f</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>当一个 <strong>Source</strong> 资源被删除时，会同步删除 <code>PediaClusterLifecycle</code>，<code>PediaCluster</code> 会自动删除。</p>
-<p>如果 <code>PediaCluster</code> 在 <code>PediaClusterLifecycle</code> 前已经出现了，那么 <strong>Source</strong> 删除时不会自动的删除 <code>PediaCluster</code>。</p>
-<p>未来会增加 DeletionCondition 来允许用户强制或者提前删除 <code>PediaCluster</code>。</p>
+</span></code></pre></div><p>When a <strong>Source</strong> resource is deleted, the <code>PediaClusterLifecycle</code> is deleted at the same time and the <code>PediaCluster</code> is deleted automatically.</p>
+<p>If <code>PediaCluster</code> already existed before <code>PediaClusterLifecycle</code>, then <strong>Source</strong> will not automatically delete <code>PediaCluster</code> when it is deleted.</p>
+<p>DeletionCondition will be added in the future to allow users to force or preempt the deletion of <code>PediaCluster</code>.</p>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
 <h2 class=feedback--title>Feedback</h2>
@@ -507,8 +494,8 @@ Sorry to hear that. Please <a href=https://github.com/USERNAME/REPOSITORY/issues
 </ul>
 </div>
 <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-<small class=text-white>&copy; 2022 The Clusterpedia Authors 保留所有权利</small>
-<p class=mt-2><a href=/zh-cn/about/>关于 Clusterpedia</a></p>
+<small class=text-white>&copy; 2022 The Clusterpedia Authors All Rights Reserved</small>
+<p class=mt-2><a href=/about/>About Clusterpedia</a></p>
 </div>
 </div>
 </div>
