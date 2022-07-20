@@ -1,11 +1,12 @@
 ---
 title: "Access the Clusterpedia"
-weight: 4
+weight: 30
 ---
 
 Clusterpedia has two main components:
 * `ClusterSynchroManager` manages the `PediaCluster` resource in the *master cluster*, connects to the specified cluster through the `PediaCluster` authentication information, and synchronizes the corresponding resources in real time.
 * `APIServer` also listens to the `PediaCluster` resource in the *master cluster* and provides complex search for resources in a **compatible Kubernetes OpenAPI** manner based on the resources synchronized by the cluster.  
+* `Controller Manager`
 
 Also, the `Clusterpedia APIServer` will be registered to the *master cluster* APIServer in the way of [Aggregation API](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation), so that we can access Clusterpedia through the same entry as the master cluster.
 
