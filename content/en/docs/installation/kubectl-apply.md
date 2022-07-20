@@ -14,7 +14,7 @@ Pull clusterpedia project:
 ```bash
 git clone https://github.com/clusterpedia-io/clusterpedia.git
 cd clusterpedia
-git checkout v0.3.0
+git checkout v0.4.0
 ```
 
 ### Install storage component
@@ -71,7 +71,31 @@ Check if the component Pods are running properly
 kubectl -n clusterpedia-system get pods
 ```
 
+### Create Cluster Auto Import Policy —— ClusterImportPolicy
+After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms.
+
+Users can create `ClusterImportPolicy` to automatically discover managed clusters in the multi-cloud platform and automatically synchronize them as `PediaCluster`,
+so you don't need to maintain `PediaCluster` manually based on the managed clusters.
+
+We maintain `PediaCluster` for each multi-cloud platform in the [Clusterpedia repository](https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy). ClusterImportPolicy` for each multi-cloud platform.
+**People also submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.**
+
+After installing Clusterpedia, you can create the appropriate `ClusterImportPolicy`,
+or [create a new `ClusterImportPolicy`](../../usage/interfacing-to-multi-cloud-platforms#new-clusterimportpolicy) according to your needs (multi-cloud platform).
+
+For details, please refer to [Interfacing to Multi-Cloud Platforms](../../usage/interfacing-to-multi-cloud-platforms#new-clusterimportpolicy)
+```bash
+kubectl get clusterimportpolicy
+```
+
 ## Uninstall
+### Clean up ClusterImportPolicy
+If you have deployed `ClusterImportPolicy` then you need to clean up the `ClusterImportPolicy` resources first.
+
+```bash
+kubectl get clusterimportpolicy
+```
+
 ### Clean up PediaCluster
 Before uninstalling Clusterpedia, you need to check if PediaCluster resources still exist in your environment, and clean up those resources.
 
