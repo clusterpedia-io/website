@@ -65,7 +65,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.efdb994c1bf571402510d5cb7289466d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.90c6cef562635c1f170bde4cd0607371.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -109,7 +109,7 @@ This is the multi-page printable view of this section.
 <p>Pull clusterpedia project:</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
 <span style=color:#204a87>cd</span> clusterpedia
-git checkout v0.3.0
+git checkout v0.4.0
 </code></pre></div><h3 id=install-storage-component>Install storage component</h3>
 <p>Clusterpedia installation provides two storage components (<strong>MySQL 8.0</strong> and <strong>PostgreSQL 12</strong>) to choose.</p>
 <blockquote>
@@ -147,8 +147,21 @@ kubectl apply -f ./deploy
 </code></pre></div><h3 id=final-check>Final check</h3>
 <p>Check if the component Pods are running properly</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n clusterpedia-system get pods
+</code></pre></div><h3 id=create-cluster-auto-import-policy--clusterimportpolicy>Create Cluster Auto Import Policy —— ClusterImportPolicy</h3>
+<p>After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms.</p>
+<p>Users can create <code>ClusterImportPolicy</code> to automatically discover managed clusters in the multi-cloud platform and automatically synchronize them as <code>PediaCluster</code>,
+so you don&rsquo;t need to maintain <code>PediaCluster</code> manually based on the managed clusters.</p>
+<p>We maintain <code>PediaCluster</code> for each multi-cloud platform in the <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia repository</a>. ClusterImportPolicy` for each multi-cloud platform.
+<strong>People also submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.</strong></p>
+<p>After installing Clusterpedia, you can create the appropriate <code>ClusterImportPolicy</code>,
+or <a href=../../usage/interfacing-to-multi-cloud-platforms#new-clusterimportpolicy>create a new <code>ClusterImportPolicy</code></a> according to your needs (multi-cloud platform).</p>
+<p>For details, please refer to <a href=../../usage/interfacing-to-multi-cloud-platforms#new-clusterimportpolicy>Interfacing to Multi-Cloud Platforms</a></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get clusterimportpolicy
 </code></pre></div><h2 id=uninstall>Uninstall</h2>
-<h3 id=clean-up-pediacluster>Clean up PediaCluster</h3>
+<h3 id=clean-up-clusterimportpolicy>Clean up ClusterImportPolicy</h3>
+<p>If you have deployed <code>ClusterImportPolicy</code> then you need to clean up the <code>ClusterImportPolicy</code> resources first.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get clusterimportpolicy
+</code></pre></div><h3 id=clean-up-pediacluster>Clean up PediaCluster</h3>
 <p>Before uninstalling Clusterpedia, you need to check if PediaCluster resources still exist in your environment, and clean up those resources.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
 </code></pre></div><h3 id=uninstall-clusterpedia>Uninstall Clusterpedia</h3>

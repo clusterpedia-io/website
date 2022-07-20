@@ -29,7 +29,7 @@ git clone …">
 <meta property="og:description" content="安装 Clusterpedia 的安装分为两个部分：
  安装存储组件 安装 Clusterpedia   用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过安装存储组件。
  拉取项目：
-git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.3.0 安装存储组件 Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择。
+git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.4.0 安装存储组件 Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择。
  用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过存储组件安装。
  PostgreSQL MySQL 进入所选存储组件的安装目录
 cd ./deploy/internalstorage/postgres  进入所选存储组件的安装目录
@@ -44,7 +44,7 @@ kubectl apply -f .">
 <meta itemprop=description content="安装 Clusterpedia 的安装分为两个部分：
  安装存储组件 安装 Clusterpedia   用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过安装存储组件。
  拉取项目：
-git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.3.0 安装存储组件 Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择。
+git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.4.0 安装存储组件 Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择。
  用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过存储组件安装。
  PostgreSQL MySQL 进入所选存储组件的安装目录
 cd ./deploy/internalstorage/postgres  进入所选存储组件的安装目录
@@ -52,13 +52,13 @@ cd ./deploy/internalstorage/mysql  存储组件使用 Local PV 的方式存储�
  用户可以选择自己提供 PV
  export STORAGE_NODE_NAME=<节点名称> sed &#34;s|__NODE_NAME__|$STORAGE_NODE_NAME|g&#34; `grep __NODE_NAME__ -rl ./templates` > clusterpedia_internalstorage_pv.yaml 部署存储组件
 kubectl apply -f .">
-<meta itemprop=wordCount content="169">
+<meta itemprop=wordCount content="231">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="使用 kubectl apply">
 <meta name=twitter:description content="安装 Clusterpedia 的安装分为两个部分：
  安装存储组件 安装 Clusterpedia   用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过安装存储组件。
  拉取项目：
-git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.3.0 安装存储组件 Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择。
+git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.4.0 安装存储组件 Clusterpedia 安装时提供了 MySQL 8.0 和 PostgreSQL 12 两种存储组件以供选择。
  用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接跳过存储组件安装。
  PostgreSQL MySQL 进入所选存储组件的安装目录
 cd ./deploy/internalstorage/postgres  进入所选存储组件的安装目录
@@ -107,7 +107,7 @@ kubectl apply -f .">
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.efdb994c1bf571402510d5cb7289466d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.90c6cef562635c1f170bde4cd0607371.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -117,7 +117,7 @@ kubectl apply -f .">
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.efdb994c1bf571402510d5cb7289466d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.90c6cef562635c1f170bde4cd0607371.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -227,10 +227,12 @@ kubectl apply -f .">
 <li><a href=#安装存储组件>安装存储组件</a></li>
 <li><a href=#安装-clusterpedia>安装 Clusterpedia</a></li>
 <li><a href=#安装完成>安装完成</a></li>
+<li><a href=#部署集群自动接入策略--clusterimportpolicy>部署集群自动接入策略 —— ClusterImportPolicy</a></li>
 </ul>
 </li>
 <li><a href=#卸载>卸载</a>
 <ul>
+<li><a href=#删除-clusterimportpolicy>删除 ClusterImportPolicy</a></li>
 <li><a href=#清理-pediacluster>清理 PediaCluster</a></li>
 <li><a href=#卸载-clusterpedia>卸载 Clusterpedia</a></li>
 <li><a href=#卸载存储组件>卸载存储组件</a></li>
@@ -256,7 +258,7 @@ kubectl apply -f .">
 <div class=td-content>
 <h1>使用 kubectl apply</h1>
 <header class=article-meta>
-<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 少于1分钟 &nbsp;</p>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 2 分钟阅读 &nbsp;</p>
 </header>
 <h2 id=安装>安装</h2>
 <p>Clusterpedia 的安装分为两个部分：</p>
@@ -270,7 +272,7 @@ kubectl apply -f .">
 <p>拉取项目：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
 <span style=color:#204a87>cd</span> clusterpedia
-git checkout v0.3.0
+git checkout v0.4.0
 </code></pre></div><h3 id=安装存储组件>安装存储组件</h3>
 <p>Clusterpedia 安装时提供了 <strong>MySQL 8.0</strong> 和 <strong>PostgreSQL 12</strong> 两种存储组件以供选择。</p>
 <blockquote>
@@ -308,17 +310,35 @@ kubectl apply -f ./deploy
 </code></pre></div><h3 id=安装完成>安装完成</h3>
 <p>检查组件 Pods 运行是否正常</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n clusterpedia-system get pods
+</code></pre></div><h3 id=部署集群自动接入策略--clusterimportpolicy>部署集群自动接入策略 —— ClusterImportPolicy</h3>
+<p>0.4.0 后，Clusterpedia 提供了更加友好的接入多云平台的方式。</p>
+<p>用户通过创建 <code>ClusterImportPolicy</code> 来自动发现多云平台中纳管的集群，并将这些集群自动同步为 <code>PediaCluster</code>，用户不需要根据纳管的集群来手动去维护 <code>PediaCluster</code> 了。</p>
+<p>我们在 <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia 仓库</a> 中维护了各个多云平台的 <code>ClusterImportPolicy</code>。
+<strong>大家也提交用于对接其他多云平台的 <code>ClusterImportPolicy</code>。</strong></p>
+<p>用户在安装 Clusterpedia 后，创建合适的 <code>ClusterImportPolicy</code> 即可，用户也可以根据自己的需求来<a href=../../usage/interfacing-to-multi-cloud-platforms#%E6%96%B0%E5%BB%BA-clusterimportpolicy>创建新的 <code>ClusterImportPolicy</code></a></p>
+<p>具体可以参考 <a href=../../usage/interfacing-to-multi-cloud-platforms>接入多云平台</a></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get clusterimportpolicy
 </code></pre></div><h2 id=卸载>卸载</h2>
-<h3 id=清理-pediacluster>清理 PediaCluster</h3>
+<h3 id=删除-clusterimportpolicy>删除 ClusterImportPolicy</h3>
+<p>如果用户部署了 ClusterImportPolicy 那么需要先清理 ClusterImportPolicy 资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get clusterimportpolicy
+</code></pre></div><h3 id=清理-pediacluster>清理 PediaCluster</h3>
 <p>在卸载 Clusterpedia 前，需要查看环境中是否还存在 PediaCluster 资源，如果存在那么需要删除这些资源。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
 </code></pre></div><h3 id=卸载-clusterpedia>卸载 Clusterpedia</h3>
 <p>PediaCluster 资源清理完成后，卸载 Clusterpedia 相关组件。</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/clusterpedia_apiserver_apiservice.yaml
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># delete compontents</span>
+kubectl delete -f ./deploy/clusterpedia_apiserver_apiservice.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
+kubectl delete -f ./deploy/clusterpedia_controller_manager_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
+
+<span style=color:#8f5902;font-style:italic># delete crds</span>
+kubectl delete -f ./deploy/cluster.clusterpedia.io_clustersyncresources.yaml
 kubectl delete -f ./deploy/cluster.clusterpedia.io_pediaclusers.yaml
+kubectl delete -f ./deploy/policy.clusterpedia.io_clusterimportpolicies.yaml
+kubectl delete -f ./deploy/policy.clusterpedia.io_pediaclusterlifecycles.yaml
 </code></pre></div><h3 id=卸载存储组件>卸载存储组件</h3>
 <p>根据选择的存储组件类型，来移除相关的资源。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/internalstorage/&lt;storage type&gt;
