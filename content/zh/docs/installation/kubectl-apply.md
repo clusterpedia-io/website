@@ -16,7 +16,7 @@ Clusterpedia 的安装分为两个部分：
 ```bash
 git clone https://github.com/clusterpedia-io/clusterpedia.git
 cd clusterpedia
-git checkout v0.3.0
+git checkout v0.4.0
 ```
 
 ### 安装存储组件
@@ -84,7 +84,29 @@ kubectl apply -f ./deploy
 kubectl -n clusterpedia-system get pods
 ```
 
+### 部署集群自动接入策略 —— ClusterImportPolicy
+0.4.0 后，Clusterpedia 提供了更加友好的接入多云平台的方式。
+
+用户通过创建 `ClusterImportPolicy` 来自动发现多云平台中纳管的集群，并将这些集群自动同步为 `PediaCluster`，用户不需要根据纳管的集群来手动去维护 `PediaCluster` 了。
+
+我们在 [Clusterpedia 仓库](https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy) 中维护了各个多云平台的 `ClusterImportPolicy`。
+**大家也提交用于对接其他多云平台的 `ClusterImportPolicy`。**
+
+用户在安装 Clusterpedia 后，创建合适的 `ClusterImportPolicy` 即可，用户也可以根据自己的需求来[创建新的 `ClusterImportPolicy`](../../usage/interfacing-to-multi-cloud-platforms#新建-clusterimportpolicy)
+
+具体可以参考 [接入多云平台](../../usage/interfacing-to-multi-cloud-platforms)
+```bash
+kubectl get clusterimportpolicy
+```
+
 ## 卸载
+
+### 删除 ClusterImportPolicy
+如果用户部署了 ClusterImportPolicy 那么需要先清理 ClusterImportPolicy 资源
+
+```bash
+kubectl get clusterimportpolicy
+```
 
 ### 清理 PediaCluster
 
@@ -99,11 +121,18 @@ kubectl get pediacluster
 PediaCluster 资源清理完成后，卸载 Clusterpedia 相关组件。
 
 ```bash
+# delete compontents
 kubectl delete -f ./deploy/clusterpedia_apiserver_apiservice.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
+kubectl delete -f ./deploy/clusterpedia_controller_manager_deployment.yaml
 kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
+
+# delete crds
+kubectl delete -f ./deploy/cluster.clusterpedia.io_clustersyncresources.yaml
 kubectl delete -f ./deploy/cluster.clusterpedia.io_pediaclusers.yaml
+kubectl delete -f ./deploy/policy.clusterpedia.io_clusterimportpolicies.yaml
+kubectl delete -f ./deploy/policy.clusterpedia.io_pediaclusterlifecycles.yaml
 ```
 
 ### 卸载存储组件
