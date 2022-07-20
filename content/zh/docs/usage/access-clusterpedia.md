@@ -1,11 +1,12 @@
 ---
 title: "访问 Clusterpedia"
-weight: 4
+weight: 30
 ---
 
 Clusterpedia 主要有两个组件：
 * `ClusterSynchroManager` 管理 *主集群* 内的 `PediaCluster` 资源，通过 `PediaCluster` 配置认证信息连接到指定集群，并且实时同步相应的资源。
 * `APIServer` 同样会监听 *主集群* 内的 `PediaCluster` 资源，并根据集群同步的资源以**兼容 Kubernetes OpenAPI**的方式来提供对资源的复杂检索。
+* `ControllerManager`
 
 并且 `Clusterpedia APIServer` 会以[聚合式 API](https://kubernetes.io/zh/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation) 的方式注册到 *主集群* 的 APIServer 中，
 这样我们通过和主集群相同的入口便可访问 Clusterpedia
