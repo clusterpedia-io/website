@@ -1,6 +1,6 @@
 ---
 title: "Synchronize Cluster Resources"
-weight: 2
+weight: 20
 ---
 
 The main function of Clusterpedia is to provide complex search for resources in multiple clusters.  
