@@ -34,10 +34,10 @@ DEPLOY_YAML_PATH=https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/
 CRD_YAML_PATH=$DEPLOY_YAML_PATH/crds
 
 kubectl apply -f \
-    $CRD_YAML_PATH/cluster.clusterpedia.io_pediaclusters.yaml,\
-    $DEPLOY_YAML_PATH/clusterpedia_clustersynchro_manager_deployment.yaml,\
-    $DEPLOY_YAML_PATH/clusterpedia_apiserver_deployment.yaml,\
-    $DEPLOY_YAML_PATH/clusterpedia_apiserver_apiservice.yaml
+$CRD_YAML_PATH/cluster.clusterpedia.io_pediaclusters.yaml,\
+$DEPLOY_YAML_PATH/clusterpedia_clustersynchro_manager_deployment.yaml,\
+$DEPLOY_YAML_PATH/clusterpedia_apiserver_deployment.yaml,\
+$DEPLOY_YAML_PATH/clusterpedia_apiserver_apiservice.yaml
 ```
 可以将 YAML 下载到本地，或者拉取项目到本地，进入 ./deploy 目录下执行 kubectl apply。
 
