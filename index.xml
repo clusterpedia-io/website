@@ -90,7 +90,7 @@ NAME PHASE AGE VERSION
 capi-quickstart Provisioned 8s v1.24.2
 $ kubectl get kubeadmcontrolplane -w
 NAME CLUSTER INITIALIZED API SERVER AVAILABLE REPLICAS READY UPDATED UNAVAILABLE AGE VERSION
-capi-quickstart-2xcsz capi-quickstart True &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 86s v1.24.2
+capi-quickstart-2xcsz capi-quickstart &lt;span style="color:#204a87">true&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> 86s v1.24.2
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>when kubeadmcontrolplane&amp;rsquo;s Initialized is true&lt;/strong>, lusterpedia will automatically synchronize the resources in the cluster, you can use &lt;code>kubectl --cluster clusterpedia get&lt;/code> to search the resources.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ kubectl get pediacluster
 NAME READY VERSION APISERVER

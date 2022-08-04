@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.5c9d652d518f40c2b1c53d0c3aeff6a2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e0513430eaf7249975a64c013c5f49d8.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -88,6 +88,7 @@
 </div>
 <h1 class=title>博客</h1>
 <ul>
+<li><a href=#pg-cc054d8ee6a886e6b372f1c6e1e3f4c7>Cluster API Searching Has Never Been Easier</a></li>
 <li><a href=#pg-7577e1f00c898d6b5b357ef97fca540f>Clusterpedia 入选云原生全景图</a></li>
 <li><a href=#pg-570d9cd46f5853e421c710b83718495c>Clusterpedia v0.2.0 发布</a></li>
 <li><a href=#pg-5c2e1f7ae120a013634369fe0b07ac44>使用 Helm 快速部署 Clusterpedia</a></li>
@@ -101,6 +102,218 @@
 </div>
 </div>
 <div class=td-content>
+<h1 id=pg-cc054d8ee6a886e6b372f1c6e1e3f4c7>Cluster API Searching Has Never Been Easier</h1>
+<div class="td-byline mb-4">
+<time datetime=2022-08-04 class=text-muted>2022.08.04</time>
+</div>
+<p>0.4.0 后，Clusterpedia 提供了更加友好的接入多云平台的方式，用户在多云平台创建或者纳管集群后，便可以直接使用 kubectl 来检索这些集群内的资源。</p>
+<blockquote>
+<p>我们在 <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia 仓库</a> 中维护了各个多云平台的 <a href=https://clusterpedia.io/zh-cn/docs/concepts/cluster-import-policy/>ClusterImportPolicy</a>。 非常欢迎大家提交用于对接其他多云平台的 ClusterImportPolicy。</p>
+<p>用户在安装 Clusterpedia 后，创建合适的 ClusterImportPolicy 即可，用户也可以根据自己的需求来<a href=https://clusterpedia.io/docs/usage/interfacing-to-multi-cloud-platforms/#new-clusterimportpolicy>创建新的 ClusterImportPolicy</a></p>
+</blockquote>
+<p>Cluster API 的 ClusterImportPolicy 已经在 <a href=https://github.com/clusterpedia-io/clusterpedia/pull/288>clusterpedia#288</a> 中提交, 在 Cluster API 中创建集群后，可以直接使用 Clusterpedia 来对这些集群内的资源进行复杂检索。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get cluster
+NAME                PHASE         AGE    VERSION
+capi-quickstart     Provisioned   10m    v1.24.2
+capi-quickstart-2   Provisioned   118s   v1.24.2
+
+$ kubectl get kubeadmcontrolplane
+NAME                      CLUSTER             INITIALIZED   API SERVER AVAILABLE   REPLICAS   READY   UPDATED   UNAVAILABLE   AGE   VERSION
+capi-quickstart-2-ctm9k   capi-quickstart-2   <span style=color:#204a87>true</span>                                 <span style=color:#0000cf;font-weight:700>1</span>                  <span style=color:#0000cf;font-weight:700>1</span>         <span style=color:#0000cf;font-weight:700>1</span>             10m   v1.24.2
+capi-quickstart-2xcsz     capi-quickstart     <span style=color:#204a87>true</span>                                 <span style=color:#0000cf;font-weight:700>1</span>                  <span style=color:#0000cf;font-weight:700>1</span>         <span style=color:#0000cf;font-weight:700>1</span>             19m   v1.24.2
+
+$ <span style=color:#8f5902;font-style:italic># pediacluster 会根据 cluster 资源自动创建，更新和删除</span>
+$ kubectl get pediacluster -o wide
+NAME                        READY   VERSION   APISERVER   VALIDATED   SYNCHRORUNNING   CLUSTERHEALTHY
+default-capi-quickstart     True    v1.24.2               Validated   Running          Healthy
+default-capi-quickstart-2   True    v1.24.2               Validated   Running          Healthy
+
+$ kubectl --cluster clusterpedia get no
+CLUSTER                     NAME                                            STATUS     ROLES           AGE   VERSION
+default-capi-quickstart-2   capi-quickstart-2-ctm9k-g2m87                   NotReady   control-plane   12m   v1.24.2
+default-capi-quickstart-2   capi-quickstart-2-md-0-s8hbx-7bd44554b5-kzcb6   NotReady   &lt;none&gt;          11m   v1.24.2
+default-capi-quickstart     capi-quickstart-2xcsz-fxrrk                     NotReady   control-plane   21m   v1.24.2
+default-capi-quickstart     capi-quickstart-md-0-9tw2g-b8b4f46cf-gggvq      NotReady   &lt;none&gt;          20m   v1.24.2
+</code></pre></div><h2 id=快速部署一套-cluster-api-and-clusterpedia-的示例环境>快速部署一套 Cluster API And Clusterpedia 的示例环境</h2>
+<h3 id=预备条件>预备条件</h3>
+<ul>
+<li>安装 <a href=https://kubernetes.io/docs/tasks/tools/install-kubectl/>kubectl</a> 到本地环境</li>
+<li>安装 <a href=https://kind.sigs.k8s.io/>Kind</a> and <a href=https://www.docker.com/>Docker</a></li>
+<li>安装 <a href=https://cluster-api.sigs.k8s.io/user/quick-start.html#install-clusterctl>clusterctl</a></li>
+</ul>
+<blockquote>
+<p>Minimum kind supported version: v0.14.0</p>
+</blockquote>
+<h3 id=创键管理集群并部署-cluster-api>创键管理集群并部署 Cluster API</h3>
+<blockquote>
+<p>部署 Cluster API 也可以参考 <a href=https://cluster-api.sigs.k8s.io/user/quick-start.html>https://cluster-api.sigs.k8s.io/user/quick-start.html</a></p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ cat &gt; kind-cluster-with-extramounts.yaml <span style=color:#4e9a06>&lt;&lt;EOF
+</span><span style=color:#4e9a06>kind: Cluster
+</span><span style=color:#4e9a06>apiVersion: kind.x-k8s.io/v1alpha4
+</span><span style=color:#4e9a06>nodes:
+</span><span style=color:#4e9a06>- role: control-plane
+</span><span style=color:#4e9a06>  extraMounts:
+</span><span style=color:#4e9a06>    - hostPath: /var/run/docker.sock
+</span><span style=color:#4e9a06>      containerPath: /var/run/docker.sock
+</span><span style=color:#4e9a06>EOF</span>
+
+$ kind create cluster --name capi-sample --config kind-cluster-with-extramounts.yaml
+
+$ <span style=color:#204a87>export</span> <span style=color:#000>CLUSTER_TOPOLOGY</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87>true</span>
+$ clusterctl init --infrastructure docker
+</code></pre></div><h3 id=部署-clusterpedia>部署 Clusterpedia</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git clone https://github.com/clusterpedia-io/clusterpedia.git <span style=color:#ce5c00;font-weight:700>&amp;&amp;</span> <span style=color:#204a87>cd</span> clusterpedia/charts
+$ helm install clusterpedia . <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --namespace clusterpedia-system <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --create-namespace <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --set <span style=color:#000>installCRDs</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87>true</span> <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  <span style=color:#8f5902;font-style:italic># --set persistenceMatchNode={{ LOCAL_PV_NODE }}</span>
+  --set <span style=color:#000>persistenceMatchNode</span><span style=color:#ce5c00;font-weight:700>=</span>capi-sample-control-plane
+</code></pre></div><blockquote>
+<p>clusterpedia charts 提供了 Local PV，需要创建 LOCAL PV 绑定的节点.
+如果不需要 charts 来创建 LOCAL PV，可以使用 <code>--set persistenceMatchNode=None</code>.
+<a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/charts>详见</a></p>
+</blockquote>
+<p>创建用于接入 Cluster API 的<a href=https://clusterpedia.io/docs/concepts/cluster-import-policy/>集群自动导入策略</a></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl apply -f https://raw.githubusercontent.com/Iceber/clusterpedia/add_cluster_api_clusterimportpolicy/deploy/clusterimportpolicy/cluster_api.yaml
+</code></pre></div><blockquote>
+<p>Clusterpedia 可以接入任何的多云管理平台，接入方式可以参考 <a href=https://clusterpedia.io/docs/usage/interfacing-to-multi-cloud-platforms/>Interfacing to Multi-Cloud Platforms</a></p>
+</blockquote>
+<p><a href=https://clusterpedia.io/docs/usage/access-clusterpedia/#configure-the-cluster-shortcut-for-kubectl>生成 kubectl cluster shortcut</a>，如果使用 client-go 或者 OpenAPI 来访问，可以省略该步骤</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
+
+$ <span style=color:#8f5902;font-style:italic># 使用 kubectl 检索多集群资源，当前 Cluster API 未创建集群，所以返回空</span>
+$ kubectl --cluster clusterpedia api-resources
+</code></pre></div><h2 id=使用-cluster-api-创建集群>使用 Cluster API 创建集群</h2>
+<p>使用示例环境的 Docker Provider 来创建集群时，需要添加 <code>--flavor development</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ clusterctl generate cluster capi-quickstart --flavor development <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --kubernetes-version v1.24.2 <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --control-plane-machine-count<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#0000cf;font-weight:700>1</span> <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --worker-machine-count<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#0000cf;font-weight:700>1</span> <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  &gt; capi-quickstart.yaml
+$ kubectl apply -f ./capi-quickstart.yaml
+</code></pre></div><h3 id=观察集群创建情况>观察集群创建情况</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get cluster
+NAME              PHASE         AGE   VERSION
+capi-quickstart   Provisioned   8s    v1.24.2
+
+$ kubectl get kubeadmcontrolplane -w
+NAME                    CLUSTER           INITIALIZED   API SERVER AVAILABLE   REPLICAS   READY   UPDATED   UNAVAILABLE   AGE   VERSION
+capi-quickstart-2xcsz   capi-quickstart   <span style=color:#204a87>true</span>                                 <span style=color:#0000cf;font-weight:700>1</span>                  <span style=color:#0000cf;font-weight:700>1</span>         <span style=color:#0000cf;font-weight:700>1</span>             86s   v1.24.2
+</code></pre></div><p><strong>当 kubeadmcontrolplane 的 Initialized 为 True 后</strong>，clusterpedia 会自动同步该集群内的资源，可以使用 <code>kubectl --cluster clusterpedia get po -A</code> 来查看资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get pediacluster
+NAME                      READY   VERSION   APISERVER
+default-capi-quickstart   True    v1.24.2
+
+$ kubectl --cluster clusterpedia get pod -A
+NAMESPACE     CLUSTER                   NAME                                                  READY   STATUS    RESTARTS   AGE
+kube-system   default-capi-quickstart   kube-apiserver-capi-quickstart-2xcsz-fxrrk            1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          2m32s
+kube-system   default-capi-quickstart   kube-scheduler-capi-quickstart-2xcsz-fxrrk            1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          2m31s
+kube-system   default-capi-quickstart   coredns-6d4b75cb6d-lrwj4                              0/1     Pending   <span style=color:#0000cf;font-weight:700>0</span>          2m20s
+kube-system   default-capi-quickstart   kube-proxy-p8v9m                                      1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          2m20s
+kube-system   default-capi-quickstart   kube-controller-manager-capi-quickstart-2xcsz-fxrrk   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          2m32s
+kube-system   default-capi-quickstart   etcd-capi-quickstart-2xcsz-fxrrk                      1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          2m32s
+kube-system   default-capi-quickstart   kube-proxy-2ln2w                                      1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          105s
+kube-system   default-capi-quickstart   coredns-6d4b75cb6d-2hcmz                              0/1     Pending   <span style=color:#0000cf;font-weight:700>0</span>          2m20s
+</code></pre></div><p>自动创建的 pediacluster 默认的同步资源在 cluster-api <a href=https://clusterpedia.io/docs/concepts/cluster-import-policy/#pediacluster-template>clusterimportpolicy 中设置</a>，</p>
+<p>用户也可以手动修改 pediacluster 中同步的配置, <a href=https://clusterpedia.io/docs/usage/sync-resources/>Synchronize Cluster Resources</a></p>
+<p>在 Cluster API 中删除集群时，Clusterpedia 也同步删除 PeidaCluster，不会继续同步该集群</p>
+<h2 id=对多个集群的资源检索>对多个集群的资源检索</h2>
+<p>使用上述步骤创建多个集群</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get cluster
+NAME                PHASE         AGE    VERSION
+capi-quickstart     Provisioned   10m    v1.24.2
+capi-quickstart-2   Provisioned   118s   v1.24.2
+
+$ kubectl get kubeadmcontrolplane
+NAME                      CLUSTER             INITIALIZED   API SERVER AVAILABLE   REPLICAS   READY   UPDATED   UNAVAILABLE   AGE   VERSION
+capi-quickstart-2-ctm9k   capi-quickstart-2   <span style=color:#204a87>true</span>                                 <span style=color:#0000cf;font-weight:700>1</span>                  <span style=color:#0000cf;font-weight:700>1</span>         <span style=color:#0000cf;font-weight:700>1</span>             10m   v1.24.2
+capi-quickstart-2xcsz     capi-quickstart     <span style=color:#204a87>true</span>                                 <span style=color:#0000cf;font-weight:700>1</span>                  <span style=color:#0000cf;font-weight:700>1</span>         <span style=color:#0000cf;font-weight:700>1</span>             19m   v1.24.2
+
+$ <span style=color:#8f5902;font-style:italic># pediacluster 会根据 cluster 资源自动创建</span>
+$ kubectl get pediacluster -o wide
+NAME                        READY   VERSION   APISERVER   VALIDATED   SYNCHRORUNNING   CLUSTERHEALTHY
+default-capi-quickstart     True    v1.24.2               Validated   Running          Healthy
+default-capi-quickstart-2   True    v1.24.2               Validated   Running          Healthy
+
+$ kubectl --cluster clusterpedia get no
+CLUSTER                     NAME                                            STATUS     ROLES           AGE   VERSION
+default-capi-quickstart-2   capi-quickstart-2-ctm9k-g2m87                   NotReady   control-plane   12m   v1.24.2
+default-capi-quickstart-2   capi-quickstart-2-md-0-s8hbx-7bd44554b5-kzcb6   NotReady   &lt;none&gt;          11m   v1.24.2
+default-capi-quickstart     capi-quickstart-2xcsz-fxrrk                     NotReady   control-plane   21m   v1.24.2
+default-capi-quickstart     capi-quickstart-md-0-9tw2g-b8b4f46cf-gggvq      NotReady   &lt;none&gt;          20m   v1.24.2
+</code></pre></div><p><strong>clusterpedia 提供了两种资源检索方式</strong></p>
+<ul>
+<li><a href=https://clusterpedia.io/zh-cn/docs/usage/access-clusterpedia/#%E8%AE%BF%E9%97%AE-clusterpedia-%E8%B5%84%E6%BA%90>兼容 Kubernetes OpenAPI 的资源检索</a></li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl --cluster clusterpedia get cm -A
+NAMESPACE         CLUSTER                     NAME                                 DATA   AGE
+kube-system       default-capi-quickstart     extension-apiserver-authentication   <span style=color:#0000cf;font-weight:700>6</span>      19m
+kube-system       default-capi-quickstart     kubeadm-config                       <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-public       default-capi-quickstart     cluster-info                         <span style=color:#0000cf;font-weight:700>2</span>      19m
+kube-system       default-capi-quickstart     kube-proxy                           <span style=color:#0000cf;font-weight:700>2</span>      19m
+kube-node-lease   default-capi-quickstart     kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-system       default-capi-quickstart-2   extension-apiserver-authentication   <span style=color:#0000cf;font-weight:700>6</span>      10m
+kube-system       default-capi-quickstart     kubelet-config                       <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-system       default-capi-quickstart     coredns                              <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-system       default-capi-quickstart     kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-public       default-capi-quickstart     kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-system       default-capi-quickstart-2   coredns                              <span style=color:#0000cf;font-weight:700>1</span>      10m
+default           default-capi-quickstart     kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-system       default-capi-quickstart-2   kube-proxy                           <span style=color:#0000cf;font-weight:700>2</span>      10m
+kube-system       default-capi-quickstart-2   kubeadm-config                       <span style=color:#0000cf;font-weight:700>1</span>      10m
+kube-system       default-capi-quickstart-2   kubelet-config                       <span style=color:#0000cf;font-weight:700>1</span>      10m
+kube-system       default-capi-quickstart-2   kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      10m
+kube-node-lease   default-capi-quickstart-2   kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      10m
+kube-public       default-capi-quickstart-2   cluster-info                         <span style=color:#0000cf;font-weight:700>3</span>      10m
+kube-public       default-capi-quickstart-2   kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      10m
+default           default-capi-quickstart-2   kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      10m
+
+$ <span style=color:#8f5902;font-style:italic># gen cluster shortcuts</span>
+$ curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
+$ kubectl --cluster default-capi-quickstart get cm -n kube-system
+</code></pre></div><ul>
+<li><a href=https://clusterpedia.io/zh-cn/docs/concepts/collection-resource/>Collection Resource</a></li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get collectionresources
+NAME            RESOURCES
+any             *
+workloads       apps.deployments,apps.daemonsets,apps.statefulsets
+kuberesources   .*,admission.k8s.io.*,admissionregistration.k8s.io.*,apiextensions.k8s.io.*,apps.*,authentication.k8s.io.*,authorization.k8s.io.*,autoscaling.*,batch.*,certificates.k8s.io.*,coordination.k8s.io.*,discovery.k8s.io.*,events.k8s.io.*,extensions.*,flowcontrol.apiserver.k8s.io.*,imagepolicy.k8s.io.*,internal.apiserver.k8s.io.*,networking.k8s.io.*,node.k8s.io.*,policy.*,rbac.authorization.k8s.io.*,scheduling.k8s.io.*,storage.k8s.io.*
+
+$ kubectl get collectionresources workloads
+</code></pre></div><h3 id=检索条件>检索条件</h3>
+<ul>
+<li><a href=https://clusterpedia.io/docs/usage/search/#search-by-metadata>元信息过滤(资源名称，命名空间，集群，创建时间区间)</a></li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl --cluster clusterpedia get cm -A -l <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/clusters in (default-capi-quickstart,default-capi-quickstart-2),\
+</span><span style=color:#4e9a06>    search.clusterpedia.io/namespaces in (kube-system,default)&#34;</span>
+NAMESPACE     CLUSTER                     NAME                                 DATA   AGE
+kube-system   default-capi-quickstart     extension-apiserver-authentication   <span style=color:#0000cf;font-weight:700>6</span>      23m
+kube-system   default-capi-quickstart     kubeadm-config                       <span style=color:#0000cf;font-weight:700>1</span>      23m
+kube-system   default-capi-quickstart     kube-proxy                           <span style=color:#0000cf;font-weight:700>2</span>      23m
+kube-system   default-capi-quickstart-2   extension-apiserver-authentication   <span style=color:#0000cf;font-weight:700>6</span>      14m
+kube-system   default-capi-quickstart     kubelet-config                       <span style=color:#0000cf;font-weight:700>1</span>      23m
+kube-system   default-capi-quickstart     coredns                              <span style=color:#0000cf;font-weight:700>1</span>      23m
+kube-system   default-capi-quickstart     kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      23m
+kube-system   default-capi-quickstart-2   coredns                              <span style=color:#0000cf;font-weight:700>1</span>      14m
+default       default-capi-quickstart     kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      23m
+kube-system   default-capi-quickstart-2   kube-proxy                           <span style=color:#0000cf;font-weight:700>2</span>      14m
+kube-system   default-capi-quickstart-2   kubeadm-config                       <span style=color:#0000cf;font-weight:700>1</span>      14m
+kube-system   default-capi-quickstart-2   kubelet-config                       <span style=color:#0000cf;font-weight:700>1</span>      14m
+kube-system   default-capi-quickstart-2   kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      14m
+default       default-capi-quickstart-2   kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      14m
+</code></pre></div><ul>
+<li><a href=https://clusterpedia.io/docs/usage/search/multi-cluster/#fuzzy-search>模糊搜索</a></li>
+<li><a href=https://clusterpedia.io/docs/usage/search/multi-cluster/#field-selector>增强的 Field Selector</a></li>
+<li><a href=https://clusterpedia.io/docs/usage/search/multi-cluster/#search-by-parent-or-ancestor-owner>根据父辈或者祖辈 Owner 检索</a></li>
+<li><a href=https://clusterpedia.io/docs/usage/search/multi-cluster/#paging-and-sorting>分页和排序</a></li>
+<li><a href=https://clusterpedia.io/docs/usage/search/#advanced-searchcustom-conditional-search>自定义条件搜索</a></li>
+</ul>
+</div>
+<div class=td-content style=page-break-before:always>
 <h1 id=pg-7577e1f00c898d6b5b357ef97fca540f>Clusterpedia 入选云原生全景图</h1>
 <div class="td-byline mb-4">
 <time datetime=2022-04-29 class=text-muted>2022.04.29</time>
