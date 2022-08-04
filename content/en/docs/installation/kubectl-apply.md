@@ -14,7 +14,7 @@ Pull clusterpedia project:
 ```bash
 git clone https://github.com/clusterpedia-io/clusterpedia.git
 cd clusterpedia
-git checkout v0.4.0
+git checkout v0.4.1
 ```
 
 ### Install storage component
