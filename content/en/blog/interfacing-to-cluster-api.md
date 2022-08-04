@@ -6,7 +6,7 @@ date: 2022-08-04
 After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms,
 Users simply create or join clusters in the multi-cloud platform and then use Clusterpedia to retrieve the resources within those clusters directly .
 
-> We maintain PediaCluster for each multi-cloud platform in the [Clusterpedia repository](https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy). You are very welcome to submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.
+> We maintain `ClusterImportPolicy` for each multi-cloud platform in the [Clusterpedia repository](https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy). You are very welcome to submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.
 >
 > After installing Clusterpedia, you can create the appropriate ClusterImportPolicy, or you can [create a new ClusterImportPolicy](https://clusterpedia.io/docs/usage/interfacing-to-multi-cloud-platforms/#new-clusterimportpolicy) according to your needs (multi-cloud platform).
 
@@ -38,8 +38,7 @@ default-capi-quickstart     capi-quickstart-2xcsz-fxrrk                     NotR
 default-capi-quickstart     capi-quickstart-md-0-9tw2g-b8b4f46cf-gggvq      NotReady   <none>          20m   v1.24.2
 ```
 
-
-## Quickly deploy a sample evironment for Cluster API With Clusterpedia
+## Quickly deploy a sample environment for Cluster API and Clusterpedia
 
 ### Prerequisites
 * Install and setup [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) in your local environment
@@ -48,7 +47,7 @@ default-capi-quickstart     capi-quickstart-md-0-9tw2g-b8b4f46cf-gggvq      NotR
 
 > Minimum kind supported version: v0.14.0
 
-### Create a management cluster, and deploy the Cluster API
+### Create a management cluster and deploy the Cluster API
 > Deploying the Cluster API can also be found in https://cluster-api.sigs.k8s.io/user/quick-start.html
 
 ```bash
@@ -99,7 +98,7 @@ $ kubectl --cluster clusterpedia api-resources
 ```
 
 ## Create a cluster using the Cluster API
-> When using the sample enironments' Docker Provider to create a cluster, you need to add `--flavor development` flag.
+> When using the sample environments' Docker Provider to create a cluster, you need to add `--flavor development` flag.
 
 ```bash
 $ clusterctl generate cluster capi-quickstart --flavor development \
