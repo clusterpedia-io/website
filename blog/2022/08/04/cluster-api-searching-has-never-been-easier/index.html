@@ -18,7 +18,7 @@
 Users simply create or join clusters in the multi-cloud …">
 <meta property="og:title" content="Cluster API Searching Has Never Been Easier">
 <meta property="og:description" content="After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms, Users simply create or join clusters in the multi-cloud platform and then use Clusterpedia to retrieve the resources within those clusters directly .
- We maintain PediaCluster for each multi-cloud platform in the Clusterpedia repository. You are very welcome to submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.
+ We maintain ClusterImportPolicy for each multi-cloud platform in the Clusterpedia repository. You are very welcome to submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.
 After installing Clusterpedia, you can create the appropriate ClusterImportPolicy, or you can create a new ClusterImportPolicy according to your needs (multi-cloud platform).">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/blog/2022/08/04/cluster-api-searching-has-never-been-easier/"><meta property="article:section" content="blog">
@@ -26,14 +26,14 @@ After installing Clusterpedia, you can create the appropriate ClusterImportPolic
 <meta property="article:modified_time" content="2022-08-04T00:00:00+00:00"><meta property="og:site_name" content="Clusterpedia.io">
 <meta itemprop=name content="Cluster API Searching Has Never Been Easier">
 <meta itemprop=description content="After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms, Users simply create or join clusters in the multi-cloud platform and then use Clusterpedia to retrieve the resources within those clusters directly .
- We maintain PediaCluster for each multi-cloud platform in the Clusterpedia repository. You are very welcome to submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.
+ We maintain ClusterImportPolicy for each multi-cloud platform in the Clusterpedia repository. You are very welcome to submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.
 After installing Clusterpedia, you can create the appropriate ClusterImportPolicy, or you can create a new ClusterImportPolicy according to your needs (multi-cloud platform)."><meta itemprop=datePublished content="2022-08-04T00:00:00+00:00">
 <meta itemprop=dateModified content="2022-08-04T00:00:00+00:00">
 <meta itemprop=wordCount content="1167">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Cluster API Searching Has Never Been Easier">
 <meta name=twitter:description content="After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms, Users simply create or join clusters in the multi-cloud platform and then use Clusterpedia to retrieve the resources within those clusters directly .
- We maintain PediaCluster for each multi-cloud platform in the Clusterpedia repository. You are very welcome to submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.
+ We maintain ClusterImportPolicy for each multi-cloud platform in the Clusterpedia repository. You are very welcome to submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.
 After installing Clusterpedia, you can create the appropriate ClusterImportPolicy, or you can create a new ClusterImportPolicy according to your needs (multi-cloud platform).">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
@@ -76,7 +76,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.d58b8d07e764e9b85330f3afdde97856.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.5c9d652d518f40c2b1c53d0c3aeff6a2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -86,7 +86,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.d58b8d07e764e9b85330f3afdde97856.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.5c9d652d518f40c2b1c53d0c3aeff6a2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -139,10 +139,10 @@ English
 </div>
 <div class=td-toc><nav id=TableOfContents>
 <ul>
-<li><a href=#quickly-deploy-a-sample-evironment-for-cluster-api-with-clusterpedia>Quickly deploy a sample evironment for Cluster API With Clusterpedia</a>
+<li><a href=#quickly-deploy-a-sample-environment-for-cluster-api-and-clusterpedia>Quickly deploy a sample environment for Cluster API and Clusterpedia</a>
 <ul>
 <li><a href=#prerequisites>Prerequisites</a></li>
-<li><a href=#create-a-management-cluster-and-deploy-the-cluster-api>Create a management cluster, and deploy the Cluster API</a></li>
+<li><a href=#create-a-management-cluster-and-deploy-the-cluster-api>Create a management cluster and deploy the Cluster API</a></li>
 <li><a href=#deploy-clusterpedia>Deploy Clusterpedia</a></li>
 </ul>
 </li>
@@ -171,7 +171,7 @@ English
 <p>After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms,
 Users simply create or join clusters in the multi-cloud platform and then use Clusterpedia to retrieve the resources within those clusters directly .</p>
 <blockquote>
-<p>We maintain PediaCluster for each multi-cloud platform in the <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia repository</a>. You are very welcome to submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.</p>
+<p>We maintain <code>ClusterImportPolicy</code> for each multi-cloud platform in the <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia repository</a>. You are very welcome to submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.</p>
 <p>After installing Clusterpedia, you can create the appropriate ClusterImportPolicy, or you can <a href=https://clusterpedia.io/docs/usage/interfacing-to-multi-cloud-platforms/#new-clusterimportpolicy>create a new ClusterImportPolicy</a> according to your needs (multi-cloud platform).</p>
 </blockquote>
 <p>The ClusterImportPolicy for the Cluster API has been submitted in <a href=https://github.com/clusterpedia-io/clusterpedia/pull/288>clusterpedia#288</a>.
@@ -198,7 +198,7 @@ default-capi-quickstart-2   capi-quickstart-2-ctm9k-g2m87                   NotR
 default-capi-quickstart-2   capi-quickstart-2-md-0-s8hbx-7bd44554b5-kzcb6   NotReady   &lt;none&gt;          11m   v1.24.2
 default-capi-quickstart     capi-quickstart-2xcsz-fxrrk                     NotReady   control-plane   21m   v1.24.2
 default-capi-quickstart     capi-quickstart-md-0-9tw2g-b8b4f46cf-gggvq      NotReady   &lt;none&gt;          20m   v1.24.2
-</code></pre></div><h2 id=quickly-deploy-a-sample-evironment-for-cluster-api-with-clusterpedia>Quickly deploy a sample evironment for Cluster API With Clusterpedia</h2>
+</code></pre></div><h2 id=quickly-deploy-a-sample-environment-for-cluster-api-and-clusterpedia>Quickly deploy a sample environment for Cluster API and Clusterpedia</h2>
 <h3 id=prerequisites>Prerequisites</h3>
 <ul>
 <li>Install and setup <a href=https://kubernetes.io/docs/tasks/tools/install-kubectl/>kubectl</a> in your local environment</li>
@@ -208,7 +208,7 @@ default-capi-quickstart     capi-quickstart-md-0-9tw2g-b8b4f46cf-gggvq      NotR
 <blockquote>
 <p>Minimum kind supported version: v0.14.0</p>
 </blockquote>
-<h3 id=create-a-management-cluster-and-deploy-the-cluster-api>Create a management cluster, and deploy the Cluster API</h3>
+<h3 id=create-a-management-cluster-and-deploy-the-cluster-api>Create a management cluster and deploy the Cluster API</h3>
 <blockquote>
 <p>Deploying the Cluster API can also be found in <a href=https://cluster-api.sigs.k8s.io/user/quick-start.html>https://cluster-api.sigs.k8s.io/user/quick-start.html</a></p>
 </blockquote>
@@ -251,7 +251,7 @@ $ <span style=color:#8f5902;font-style:italic># Using kubectl to retrieve multic
 $ kubectl --cluster clusterpedia api-resources
 </code></pre></div><h2 id=create-a-cluster-using-the-cluster-api>Create a cluster using the Cluster API</h2>
 <blockquote>
-<p>When using the sample enironments' Docker Provider to create a cluster, you need to add <code>--flavor development</code> flag.</p>
+<p>When using the sample environments' Docker Provider to create a cluster, you need to add <code>--flavor development</code> flag.</p>
 </blockquote>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ clusterctl generate cluster capi-quickstart --flavor development <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>  --kubernetes-version v1.24.2 <span style=color:#4e9a06>\
