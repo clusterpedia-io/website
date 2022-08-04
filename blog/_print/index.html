@@ -65,7 +65,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.b4a18f9d1e7588110e52ff152dab896a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.d58b8d07e764e9b85330f3afdde97856.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -88,6 +88,7 @@ This is the multi-page printable view of this section.
 </div>
 <h1 class=title>Blog</h1>
 <ul>
+<li><a href=#pg-cc054d8ee6a886e6b372f1c6e1e3f4c7>Cluster API Searching Has Never Been Easier</a></li>
 <li><a href=#pg-7577e1f00c898d6b5b357ef97fca540f>Clusterpedia is Listed in the CNCF Cloud Native Landscape</a></li>
 <li><a href=#pg-570d9cd46f5853e421c710b83718495c>Clusterpedia v0.2.0 Release</a></li>
 <li><a href=#pg-5c2e1f7ae120a013634369fe0b07ac44>Quickly Deploy Clusterpedia with Helm</a></li>
@@ -101,6 +102,226 @@ This is the multi-page printable view of this section.
 </div>
 </div>
 <div class=td-content>
+<h1 id=pg-cc054d8ee6a886e6b372f1c6e1e3f4c7>Cluster API Searching Has Never Been Easier</h1>
+<div class="td-byline mb-4">
+<time datetime=2022-08-04 class=text-muted>Thursday, August 04, 2022</time>
+</div>
+<p>After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms,
+Users simply create or join clusters in the multi-cloud platform and then use Clusterpedia to retrieve the resources within those clusters directly .</p>
+<blockquote>
+<p>We maintain PediaCluster for each multi-cloud platform in the <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia repository</a>. You are very welcome to submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.</p>
+<p>After installing Clusterpedia, you can create the appropriate ClusterImportPolicy, or you can <a href=https://clusterpedia.io/docs/usage/interfacing-to-multi-cloud-platforms/#new-clusterimportpolicy>create a new ClusterImportPolicy</a> according to your needs (multi-cloud platform).</p>
+</blockquote>
+<p>The ClusterImportPolicy for the Cluster API has been submitted in <a href=https://github.com/clusterpedia-io/clusterpedia/pull/288>clusterpedia#288</a>.
+After creating clusters in the Cluster API, you can use Clusterpedia directly to do complex searches of resources within these clusters.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get cluster
+NAME                PHASE         AGE    VERSION
+capi-quickstart     Provisioned   10m    v1.24.2
+capi-quickstart-2   Provisioned   118s   v1.24.2
+
+$ kubectl get kubeadmcontrolplane
+NAME                      CLUSTER             INITIALIZED   API SERVER AVAILABLE   REPLICAS   READY   UPDATED   UNAVAILABLE   AGE   VERSION
+capi-quickstart-2-ctm9k   capi-quickstart-2   <span style=color:#204a87>true</span>                                 <span style=color:#0000cf;font-weight:700>1</span>                  <span style=color:#0000cf;font-weight:700>1</span>         <span style=color:#0000cf;font-weight:700>1</span>             10m   v1.24.2
+capi-quickstart-2xcsz     capi-quickstart     <span style=color:#204a87>true</span>                                 <span style=color:#0000cf;font-weight:700>1</span>                  <span style=color:#0000cf;font-weight:700>1</span>         <span style=color:#0000cf;font-weight:700>1</span>             19m   v1.24.2
+
+$ <span style=color:#8f5902;font-style:italic># the pediacluster resources will automatically create, updates or delete based on cluster resources</span>
+$ kubectl get pediacluster -o wide
+NAME                        READY   VERSION   APISERVER   VALIDATED   SYNCHRORUNNING   CLUSTERHEALTHY
+default-capi-quickstart     True    v1.24.2               Validated   Running          Healthy
+default-capi-quickstart-2   True    v1.24.2               Validated   Running          Healthy
+
+$ kubectl --cluster clusterpedia get no
+CLUSTER                     NAME                                            STATUS     ROLES           AGE   VERSION
+default-capi-quickstart-2   capi-quickstart-2-ctm9k-g2m87                   NotReady   control-plane   12m   v1.24.2
+default-capi-quickstart-2   capi-quickstart-2-md-0-s8hbx-7bd44554b5-kzcb6   NotReady   &lt;none&gt;          11m   v1.24.2
+default-capi-quickstart     capi-quickstart-2xcsz-fxrrk                     NotReady   control-plane   21m   v1.24.2
+default-capi-quickstart     capi-quickstart-md-0-9tw2g-b8b4f46cf-gggvq      NotReady   &lt;none&gt;          20m   v1.24.2
+</code></pre></div><h2 id=quickly-deploy-a-sample-evironment-for-cluster-api-with-clusterpedia>Quickly deploy a sample evironment for Cluster API With Clusterpedia</h2>
+<h3 id=prerequisites>Prerequisites</h3>
+<ul>
+<li>Install and setup <a href=https://kubernetes.io/docs/tasks/tools/install-kubectl/>kubectl</a> in your local environment</li>
+<li>Install <a href=https://kind.sigs.k8s.io/>Kind</a> and <a href=https://www.docker.com/>Docker</a></li>
+<li>Install <a href=https://cluster-api.sigs.k8s.io/user/quick-start.html#install-clusterctl>clusterctl</a></li>
+</ul>
+<blockquote>
+<p>Minimum kind supported version: v0.14.0</p>
+</blockquote>
+<h3 id=create-a-management-cluster-and-deploy-the-cluster-api>Create a management cluster, and deploy the Cluster API</h3>
+<blockquote>
+<p>Deploying the Cluster API can also be found in <a href=https://cluster-api.sigs.k8s.io/user/quick-start.html>https://cluster-api.sigs.k8s.io/user/quick-start.html</a></p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ cat &gt; kind-cluster-with-extramounts.yaml <span style=color:#4e9a06>&lt;&lt;EOF
+</span><span style=color:#4e9a06>kind: Cluster
+</span><span style=color:#4e9a06>apiVersion: kind.x-k8s.io/v1alpha4
+</span><span style=color:#4e9a06>nodes:
+</span><span style=color:#4e9a06>- role: control-plane
+</span><span style=color:#4e9a06>  extraMounts:
+</span><span style=color:#4e9a06>    - hostPath: /var/run/docker.sock
+</span><span style=color:#4e9a06>      containerPath: /var/run/docker.sock
+</span><span style=color:#4e9a06>EOF</span>
+
+$ kind create cluster --name capi-sample --config kind-cluster-with-extramounts.yaml
+
+$ <span style=color:#204a87>export</span> <span style=color:#000>CLUSTER_TOPOLOGY</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87>true</span>
+$ clusterctl init --infrastructure docker
+</code></pre></div><h3 id=deploy-clusterpedia>Deploy Clusterpedia</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git clone https://github.com/clusterpedia-io/clusterpedia.git <span style=color:#ce5c00;font-weight:700>&amp;&amp;</span> <span style=color:#204a87>cd</span> clusterpedia/charts
+$ helm install clusterpedia . <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --namespace clusterpedia-system <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --create-namespace <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --set <span style=color:#000>installCRDs</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87>true</span> <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  <span style=color:#8f5902;font-style:italic># --set persistenceMatchNode={{ LOCAL_PV_NODE }}</span>
+  --set <span style=color:#000>persistenceMatchNode</span><span style=color:#ce5c00;font-weight:700>=</span>capi-sample-control-plane
+</code></pre></div><blockquote>
+<p>The Clusterpedia Chart creates a local pv for the storage component, but you need to specify the node using the persistenceMatchNode option, eg. &ndash;set persistenceMatchNode=master-1.</p>
+<p>If you don&rsquo;t need to create a local pv, add the &ndash;set persistenceMatchNode=None flag.
+<a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/charts>Lean More</a></p>
+</blockquote>
+<p>Create <a href=https://clusterpedia.io/docs/concepts/cluster-import-policy/>ClusterImportPolicy</a> for interfacing to the Cluster API</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl apply -f https://raw.githubusercontent.com/Iceber/clusterpedia/add_cluster_api_clusterimportpolicy/deploy/clusterimportpolicy/cluster_api.yaml
+</code></pre></div><blockquote>
+<p>Clusterpedia can be integrated into any multi-cloud management platform, <a href=https://clusterpedia.io/docs/usage/interfacing-to-multi-cloud-platforms/>Lean More</a></p>
+</blockquote>
+<p><a href=https://clusterpedia.io/docs/usage/access-clusterpedia/#configure-the-cluster-shortcut-for-kubectl>Gen cluster shortcut for kubectl</a>, If you use client-go or OpenAPI to access, you can omit this step</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
+
+$ <span style=color:#8f5902;font-style:italic># Using kubectl to retrieve multicluster resources, the current Cluster API does not create a cluster, so it returns null</span>
+$ kubectl --cluster clusterpedia api-resources
+</code></pre></div><h2 id=create-a-cluster-using-the-cluster-api>Create a cluster using the Cluster API</h2>
+<blockquote>
+<p>When using the sample enironments' Docker Provider to create a cluster, you need to add <code>--flavor development</code> flag.</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ clusterctl generate cluster capi-quickstart --flavor development <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --kubernetes-version v1.24.2 <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --control-plane-machine-count<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#0000cf;font-weight:700>1</span> <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  --worker-machine-count<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#0000cf;font-weight:700>1</span> <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>  &gt; capi-quickstart.yaml
+$ kubectl apply -f ./capi-quickstart.yaml
+</code></pre></div><h3 id=view-cluster-creation-status>View cluster creation status</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get cluster
+NAME              PHASE         AGE   VERSION
+capi-quickstart   Provisioned   8s    v1.24.2
+
+$ kubectl get kubeadmcontrolplane -w
+NAME                    CLUSTER           INITIALIZED   API SERVER AVAILABLE   REPLICAS   READY   UPDATED   UNAVAILABLE   AGE   VERSION
+capi-quickstart-2xcsz   capi-quickstart   True                                 <span style=color:#0000cf;font-weight:700>1</span>                  <span style=color:#0000cf;font-weight:700>1</span>         <span style=color:#0000cf;font-weight:700>1</span>             86s   v1.24.2
+</code></pre></div><p><strong>when kubeadmcontrolplane&rsquo;s Initialized is true</strong>, lusterpedia will automatically synchronize the resources in the cluster, you can use <code>kubectl --cluster clusterpedia get</code> to search the resources.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get pediacluster
+NAME                      READY   VERSION   APISERVER
+default-capi-quickstart   True    v1.24.2
+
+$ kubectl --cluster clusterpedia get pod -A
+NAMESPACE     CLUSTER                   NAME                                                  READY   STATUS    RESTARTS   AGE
+kube-system   default-capi-quickstart   kube-apiserver-capi-quickstart-2xcsz-fxrrk            1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          2m32s
+kube-system   default-capi-quickstart   kube-scheduler-capi-quickstart-2xcsz-fxrrk            1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          2m31s
+kube-system   default-capi-quickstart   coredns-6d4b75cb6d-lrwj4                              0/1     Pending   <span style=color:#0000cf;font-weight:700>0</span>          2m20s
+kube-system   default-capi-quickstart   kube-proxy-p8v9m                                      1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          2m20s
+kube-system   default-capi-quickstart   kube-controller-manager-capi-quickstart-2xcsz-fxrrk   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          2m32s
+kube-system   default-capi-quickstart   etcd-capi-quickstart-2xcsz-fxrrk                      1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          2m32s
+kube-system   default-capi-quickstart   kube-proxy-2ln2w                                      1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          105s
+kube-system   default-capi-quickstart   coredns-6d4b75cb6d-2hcmz                              0/1     Pending   <span style=color:#0000cf;font-weight:700>0</span>          2m20s
+</code></pre></div><p>The <a href=https://github.com/clusterpedia-io/clusterpedia/pull/288/files>cluster-api clusterimportpolicy</a> sets the resources to be synchronized by default in the cluster.</p>
+<p>Users can also manually modify the configuration of synchronization in pediacluster, <a href=https://clusterpedia.io/docs/usage/sync-resources/>Synchronize Cluster Resources</a></p>
+<p>When the cluster is deleted in the Cluster API, Clusterpedia also deletes <a href=https://clusterpedia.io/docs/concepts/pediacluster/>PeidaCluster</a> at the same time.</p>
+<h2 id=resources-retrieval-for-multiple-clusters>Resources retrieval for multiple clusters</h2>
+<p>Use the above steps to create multiple clusters</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get cluster
+NAME                PHASE         AGE    VERSION
+capi-quickstart     Provisioned   10m    v1.24.2
+capi-quickstart-2   Provisioned   118s   v1.24.2
+
+$ kubectl get kubeadmcontrolplane
+NAME                      CLUSTER             INITIALIZED   API SERVER AVAILABLE   REPLICAS   READY   UPDATED   UNAVAILABLE   AGE   VERSION
+capi-quickstart-2-ctm9k   capi-quickstart-2   <span style=color:#204a87>true</span>                                 <span style=color:#0000cf;font-weight:700>1</span>                  <span style=color:#0000cf;font-weight:700>1</span>         <span style=color:#0000cf;font-weight:700>1</span>             10m   v1.24.2
+capi-quickstart-2xcsz     capi-quickstart     <span style=color:#204a87>true</span>                                 <span style=color:#0000cf;font-weight:700>1</span>                  <span style=color:#0000cf;font-weight:700>1</span>         <span style=color:#0000cf;font-weight:700>1</span>             19m   v1.24.2
+
+$ <span style=color:#8f5902;font-style:italic># the pediacluster resources will automatically create, updates or delete based on cluster resources</span>
+$ kubectl get pediacluster -o wide
+NAME                        READY   VERSION   APISERVER   VALIDATED   SYNCHRORUNNING   CLUSTERHEALTHY
+default-capi-quickstart     True    v1.24.2               Validated   Running          Healthy
+default-capi-quickstart-2   True    v1.24.2               Validated   Running          Healthy
+
+$ kubectl --cluster clusterpedia get no
+CLUSTER                     NAME                                            STATUS     ROLES           AGE   VERSION
+default-capi-quickstart-2   capi-quickstart-2-ctm9k-g2m87                   NotReady   control-plane   12m   v1.24.2
+default-capi-quickstart-2   capi-quickstart-2-md-0-s8hbx-7bd44554b5-kzcb6   NotReady   &lt;none&gt;          11m   v1.24.2
+default-capi-quickstart     capi-quickstart-2xcsz-fxrrk                     NotReady   control-plane   21m   v1.24.2
+default-capi-quickstart     capi-quickstart-md-0-9tw2g-b8b4f46cf-gggvq      NotReady   &lt;none&gt;          20m   v1.24.2
+</code></pre></div><p>Clusterpedia supports two types of resource search:</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl api-resources <span style=color:#000;font-weight:700>|</span> grep clusterpedia.io
+collectionresources     clusterpedia.io/v1beta1  <span style=color:#204a87>false</span>   CollectionResource
+resources               clusterpedia.io/v1beta1  <span style=color:#204a87>false</span>   Resources
+</code></pre></div><ul>
+<li><a href=https://clusterpedia.io/docs/usage/access-clusterpedia/#access-the-clusterpedia-resources>Resources that are compatible with Kubernetes OpenAPI</a></li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl --cluster clusterpedia get cm -A
+NAMESPACE         CLUSTER                     NAME                                 DATA   AGE
+kube-system       default-capi-quickstart     extension-apiserver-authentication   <span style=color:#0000cf;font-weight:700>6</span>      19m
+kube-system       default-capi-quickstart     kubeadm-config                       <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-public       default-capi-quickstart     cluster-info                         <span style=color:#0000cf;font-weight:700>2</span>      19m
+kube-system       default-capi-quickstart     kube-proxy                           <span style=color:#0000cf;font-weight:700>2</span>      19m
+kube-node-lease   default-capi-quickstart     kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-system       default-capi-quickstart-2   extension-apiserver-authentication   <span style=color:#0000cf;font-weight:700>6</span>      10m
+kube-system       default-capi-quickstart     kubelet-config                       <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-system       default-capi-quickstart     coredns                              <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-system       default-capi-quickstart     kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-public       default-capi-quickstart     kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-system       default-capi-quickstart-2   coredns                              <span style=color:#0000cf;font-weight:700>1</span>      10m
+default           default-capi-quickstart     kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      19m
+kube-system       default-capi-quickstart-2   kube-proxy                           <span style=color:#0000cf;font-weight:700>2</span>      10m
+kube-system       default-capi-quickstart-2   kubeadm-config                       <span style=color:#0000cf;font-weight:700>1</span>      10m
+kube-system       default-capi-quickstart-2   kubelet-config                       <span style=color:#0000cf;font-weight:700>1</span>      10m
+kube-system       default-capi-quickstart-2   kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      10m
+kube-node-lease   default-capi-quickstart-2   kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      10m
+kube-public       default-capi-quickstart-2   cluster-info                         <span style=color:#0000cf;font-weight:700>3</span>      10m
+kube-public       default-capi-quickstart-2   kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      10m
+default           default-capi-quickstart-2   kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      10m
+
+$ <span style=color:#8f5902;font-style:italic># gen cluster shortcuts</span>
+$ curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
+$ kubectl --cluster default-capi-quickstart get cm -n kube-system
+</code></pre></div><ul>
+<li><a href=https://clusterpedia.io/docs/concepts/collection-resource/>Collection Resource</a></li>
+</ul>
+<p>Clusterpedia can also perform more advanced aggregation of resources. For example, you can use Collection Resource to get a set of different resources at once.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get collectionresources
+NAME            RESOURCES
+any             *
+workloads       apps.deployments,apps.daemonsets,apps.statefulsets
+kuberesources   .*,admission.k8s.io.*,admissionregistration.k8s.io.*,apiextensions.k8s.io.*,apps.*,authentication.k8s.io.*,authorization.k8s.io.*,autoscaling.*,batch.*,certificates.k8s.io.*,coordination.k8s.io.*,discovery.k8s.io.*,events.k8s.io.*,extensions.*,flowcontrol.apiserver.k8s.io.*,imagepolicy.k8s.io.*,internal.apiserver.k8s.io.*,networking.k8s.io.*,node.k8s.io.*,policy.*,rbac.authorization.k8s.io.*,scheduling.k8s.io.*,storage.k8s.io.*
+
+$ kubectl get collectionresources workloads
+</code></pre></div><h3 id=searchhttpsgithubcomclusterpedia-ioclusterpediasearch-label-and-url-query><a href=https://github.com/clusterpedia-io/clusterpedia#search-label-and-url-query>Search</a></h3>
+<ul>
+<li><a href=https://clusterpedia.io/docs/usage/search/#search-by-metadata>Search by metadata(clusters, namespaces, resource names, creation time interval</a></li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl --cluster clusterpedia get cm -A -l <span style=color:#4e9a06>\
+</span><span style=color:#4e9a06></span>    <span style=color:#4e9a06>&#34;search.clusterpedia.io/clusters in (default-capi-quickstart,default-capi-quickstart-2),\
+</span><span style=color:#4e9a06>    search.clusterpedia.io/namespaces in (kube-system,default)&#34;</span>
+NAMESPACE     CLUSTER                     NAME                                 DATA   AGE
+kube-system   default-capi-quickstart     extension-apiserver-authentication   <span style=color:#0000cf;font-weight:700>6</span>      23m
+kube-system   default-capi-quickstart     kubeadm-config                       <span style=color:#0000cf;font-weight:700>1</span>      23m
+kube-system   default-capi-quickstart     kube-proxy                           <span style=color:#0000cf;font-weight:700>2</span>      23m
+kube-system   default-capi-quickstart-2   extension-apiserver-authentication   <span style=color:#0000cf;font-weight:700>6</span>      14m
+kube-system   default-capi-quickstart     kubelet-config                       <span style=color:#0000cf;font-weight:700>1</span>      23m
+kube-system   default-capi-quickstart     coredns                              <span style=color:#0000cf;font-weight:700>1</span>      23m
+kube-system   default-capi-quickstart     kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      23m
+kube-system   default-capi-quickstart-2   coredns                              <span style=color:#0000cf;font-weight:700>1</span>      14m
+default       default-capi-quickstart     kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      23m
+kube-system   default-capi-quickstart-2   kube-proxy                           <span style=color:#0000cf;font-weight:700>2</span>      14m
+kube-system   default-capi-quickstart-2   kubeadm-config                       <span style=color:#0000cf;font-weight:700>1</span>      14m
+kube-system   default-capi-quickstart-2   kubelet-config                       <span style=color:#0000cf;font-weight:700>1</span>      14m
+kube-system   default-capi-quickstart-2   kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      14m
+default       default-capi-quickstart-2   kube-root-ca.crt                     <span style=color:#0000cf;font-weight:700>1</span>      14m
+</code></pre></div><ul>
+<li><a href=https://clusterpedia.io/docs/usage/search/multi-cluster/#fuzzy-search>Fuzzy Search</a></li>
+<li><a href=https://clusterpedia.io/docs/usage/search/multi-cluster/#field-selector>Enhanced Field Selector</a></li>
+<li><a href=https://clusterpedia.io/docs/usage/search/multi-cluster/#search-by-parent-or-ancestor-owner>Search by Parent or Ancestor Owner</a></li>
+<li><a href=https://clusterpedia.io/docs/usage/search/multi-cluster/#paging-and-sorting>Paging and Sorting</a></li>
+<li><a href=https://clusterpedia.io/docs/usage/search/#advanced-searchcustom-conditional-search>Advanced Search</a></li>
+</ul>
+</div>
+<div class=td-content style=page-break-before:always>
 <h1 id=pg-7577e1f00c898d6b5b357ef97fca540f>Clusterpedia is Listed in the CNCF Cloud Native Landscape</h1>
 <div class="td-byline mb-4">
 <time datetime=2022-04-29 class=text-muted>Friday, April 29, 2022</time>
