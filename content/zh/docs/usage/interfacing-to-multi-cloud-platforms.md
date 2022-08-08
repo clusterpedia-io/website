@@ -12,6 +12,54 @@ weight: 10
 
 用户在[安装 Clusterpedia](../../installation) 后，创建合适的 `ClusterImportPolicy` 即可，用户也可以根据自己的需求来[创建新的 `ClusterImportPolicy`](#新建-clusterimportpolicy)
 
+## Cluster API ClusterImportPolicy
+用户可以参考 [Cluster API Quick Start](https://cluster-api.sigs.k8s.io/user/quick-start.html) 来安装 Cluster API，或者参考 [快速部署 Cluster API + Clusterpedia](https://clusterpedia.io/zh-cn/blog/2022/08/04/cluster-api-searching-has-never-been-easier/#%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%E4%B8%80%E5%A5%97-cluster-api-and-clusterpedia-%E7%9A%84%E7%A4%BA%E4%BE%8B%E7%8E%AF%E5%A2%83) 来搭建示例环境。
+
+创建用于对接 Cluster API 平台的 `ClusterImportPolicy`。
+```bash
+$ kubectl applyf -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/cluster_api.yaml
+$ kubectl get clusterimportpolicy
+NAME          AGE
+cluster-api   4d19h
+```
+
+如果集群中已经存在由 Cluster API 创建的集群，那么可以查看 `Cluster` 与 `PediaCluster` 资源
+```bash
+$ kubectl get cluster
+NAME                PHASE         AGE     VERSION
+capi-quickstart     Provisioned   3d23h   v1.24.2
+capi-quickstart-2   Provisioned   3d23h   v1.24.2
+
+$ kubectl get pediaclusterlifecycle
+NAME                        AGE
+default-capi-quickstart     3d23h
+default-capi-quickstart-2   3d23h
+
+$ kubectl get pediacluster
+NAME                        READY   VERSION   APISERVER
+default-capi-quickstart     True    v1.24.2
+default-capi-quickstart-2   True    v1.24.2
+```
+[PediaCluster](../../concepts/pediacluster) 会根据 Cluster 自动创建，并且当 Cluster 的 kubeconfig 发生变动时会自动更新 [PediaCluster](../../concepts/pediacluster).
+
+新建一个 Cluster 资源时，Clusterpedia 根据 [Cluster API ClusterImportPolicy](https://github.com/clusterpedia-io/clusterpedia/blob/main/deploy/clusterimportpolicy/cluster_api.yaml) 等到 ControlPlaneInitialized 为 True 时才会自动创建 PediaCluster，可以通过 `kubectl get kubeadmcontrolplane` 来查看集群的初始化状态
+```bash
+NAME                    CLUSTER           INITIALIZED   API SERVER AVAILABLE   REPLICAS   READY   UPDATED   UNAVAILABLE   AGE   VERSION
+capi-quickstart-2xcsz   capi-quickstart   true                                 1                  1         1             86s   v1.24.2
+```
+
+Cluster 初始化完成后，就可以直接使用 kubectl 来检索多集群资源了
+> 使用 kubectl 前，需要为多集群资源检索生成集群快捷配置 —— [为 kubectl 生成集群访问的快捷配置](../access-clusterpedia#为-kubectl-生成集群访问的快捷配置)
+```bash
+$ # Since CNI is not installed, the nodes are not ready.
+$ kubectl --cluster clusterpedia get no
+CLUSTER                     NAME                                            STATUS     ROLES           AGE   VERSION
+default-capi-quickstart-2   capi-quickstart-2-ctm9k-g2m87                   NotReady   control-plane   12m   v1.24.2
+default-capi-quickstart-2   capi-quickstart-2-md-0-s8hbx-7bd44554b5-kzcb6   NotReady   <none>          11m   v1.24.2
+default-capi-quickstart     capi-quickstart-2xcsz-fxrrk                     NotReady   control-plane   21m   v1.24.2
+default-capi-quickstart     capi-quickstart-md-0-9tw2g-b8b4f46cf-gggvq      NotReady   <none>          20m   v1.24.2
+```
+
 ## Karmada ClusterImportPolicy
 > 对于 Karmada 平台，用户首先需要先将 Clusterpedia 部署在 Karmada APIServer 中，部署步骤可以参考 https://github.com/Iceber/deploy-clusterpedia-to-karmada
 
