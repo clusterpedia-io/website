@@ -65,7 +65,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.e0513430eaf7249975a64c013c5f49d8.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.a033e2147e662dcd846e6a9818ecd990.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -907,7 +907,45 @@ so you don&rsquo;t need to maintain <code>PediaCluster</code> manually based on 
 <strong>People also submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.</strong></p>
 <p>After <a href=../../installation>installing Clusterpedia</a>, you can create the appropriate <code>ClusterImportPolicy</code>,
 or you can <a href=#new-clusterimportpolicy>create a new <code>ClusterImportPolicy</code></a> according to your needs (multi-cloud platform).</p>
-<h2 id=karmada-clusterimportpolicy>Karmada ClusterImportPolicy</h2>
+<h2 id=clusterapi-clusterimportpolicy>ClusterAPI ClusterImportPolicy</h2>
+<p>Users can refer to <a href=https://cluster-api.sigs.k8s.io/user/quick-start.html>Cluster API Quick Start</a> to install the Cluster API，or refer to <a href=https://clusterpedia.io/zh-cn/blog/2022/08/04/cluster-api-searching-has-never-been-easier#quickly-deploy-a-sample-environment-for-cluster-api-and-clusterpedia>Quickly deploy Cluster API + Clusterpedia</a> to deploy a sample environment.</p>
+<p>Create <code>ClusterImportPolicy</code> for interfacing to the ClusterAPI platform.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl applyf -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/cluster_api.yaml
+$ kubectl get clusterimportpolicy
+NAME          AGE
+cluster-api   4d19h
+</code></pre></div><p>If the clusters created by the ClusterAPI already exists in the management cluster, then you can view the <code>Cluster</code> and <code>PediaCluster</code> resources.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get cluster
+NAME                PHASE         AGE     VERSION
+capi-quickstart     Provisioned   3d23h   v1.24.2
+capi-quickstart-2   Provisioned   3d23h   v1.24.2
+
+$ kubectl get pediaclusterlifecycle
+NAME                        AGE
+default-capi-quickstart     3d23h
+default-capi-quickstart-2   3d23h
+
+$ kubectl get pediacluster
+NAME                        READY   VERSION   APISERVER
+default-capi-quickstart     True    v1.24.2
+default-capi-quickstart-2   True    v1.24.2
+</code></pre></div><p><a href=../../concepts/pediacluster>PediaCluster</a> is automatically created based on the Cluster, and the kubeconfig of <a href=../../concepts/pediacluster>PediaCluster</a> is automatically updated when the kubeconfig of the Cluster changes.</p>
+<p>When creating a new Cluster, Clusterpedia automatically creates a PediaCluster when <strong>ControlPlaneInitialized</strong> is True according to the <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/deploy/clusterimportpolicy/cluster_api.yaml>Cluster API ClusterImportPolicy</a>,
+and you can check the initialization status of the cluster by using <code>kubectl get kubeadmcontrolplane</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>NAME                    CLUSTER           INITIALIZED   API SERVER AVAILABLE   REPLICAS   READY   UPDATED   UNAVAILABLE   AGE   VERSION
+capi-quickstart-2xcsz   capi-quickstart   <span style=color:#204a87>true</span>                                 <span style=color:#0000cf;font-weight:700>1</span>                  <span style=color:#0000cf;font-weight:700>1</span>         <span style=color:#0000cf;font-weight:700>1</span>             86s   v1.24.2
+</code></pre></div><p>Once the Cluster has been initialized, you can use kubectl to retrieve multiple cluster resources directly.</p>
+<blockquote>
+<p>Beforing using kubectl, you need to <a href=../access-clusterpedia/#configure-the-cluster-shortcut-for-kubectl>generate cluster shortcut configuration</a> for multi-cluster resource retrieval.</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ <span style=color:#8f5902;font-style:italic># Since CNI is not installed, the nodes are not ready.</span>
+$ kubectl --cluster clusterpedia get no
+CLUSTER                     NAME                                            STATUS     ROLES           AGE   VERSION
+default-capi-quickstart-2   capi-quickstart-2-ctm9k-g2m87                   NotReady   control-plane   12m   v1.24.2
+default-capi-quickstart-2   capi-quickstart-2-md-0-s8hbx-7bd44554b5-kzcb6   NotReady   &lt;none&gt;          11m   v1.24.2
+default-capi-quickstart     capi-quickstart-2xcsz-fxrrk                     NotReady   control-plane   21m   v1.24.2
+default-capi-quickstart     capi-quickstart-md-0-9tw2g-b8b4f46cf-gggvq      NotReady   &lt;none&gt;          20m   v1.24.2
+</code></pre></div><h2 id=karmada-clusterimportpolicy>Karmada ClusterImportPolicy</h2>
 <blockquote>
 <p>For Karmada platform, you need to first deploy Clusterpedia in Karmada APIServer, the deployment steps can be found at <a href=https://github.com/Iceber/deploy-clusterpedia-to-karmada>https://github.com/Iceber/deploy-clusterpedia-to-karmada</a></p>
 </blockquote>

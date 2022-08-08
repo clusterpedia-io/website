@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e0513430eaf7249975a64c013c5f49d8.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a033e2147e662dcd846e6a9818ecd990.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -181,7 +181,44 @@ cluster-2      https://10.50.10.11:16443   v1.10.11   Healthy
 <p>我们在 <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia 仓库</a> 中维护了各个多云平台的 <code>ClusterImportPolicy</code>。
 <strong>大家也提交用于对接其他多云平台的 <code>ClusterImportPolicy</code>。</strong></p>
 <p>用户在<a href=../../installation>安装 Clusterpedia</a> 后，创建合适的 <code>ClusterImportPolicy</code> 即可，用户也可以根据自己的需求来<a href=#%E6%96%B0%E5%BB%BA-clusterimportpolicy>创建新的 <code>ClusterImportPolicy</code></a></p>
-<h2 id=karmada-clusterimportpolicy>Karmada ClusterImportPolicy</h2>
+<h2 id=cluster-api-clusterimportpolicy>Cluster API ClusterImportPolicy</h2>
+<p>用户可以参考 <a href=https://cluster-api.sigs.k8s.io/user/quick-start.html>Cluster API Quick Start</a> 来安装 Cluster API，或者参考 <a href=https://clusterpedia.io/zh-cn/blog/2022/08/04/cluster-api-searching-has-never-been-easier/#%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%E4%B8%80%E5%A5%97-cluster-api-and-clusterpedia-%E7%9A%84%E7%A4%BA%E4%BE%8B%E7%8E%AF%E5%A2%83>快速部署 Cluster API + Clusterpedia</a> 来搭建示例环境。</p>
+<p>创建用于对接 Cluster API 平台的 <code>ClusterImportPolicy</code>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl applyf -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/cluster_api.yaml
+$ kubectl get clusterimportpolicy
+NAME          AGE
+cluster-api   4d19h
+</code></pre></div><p>如果集群中已经存在由 Cluster API 创建的集群，那么可以查看 <code>Cluster</code> 与 <code>PediaCluster</code> 资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get cluster
+NAME                PHASE         AGE     VERSION
+capi-quickstart     Provisioned   3d23h   v1.24.2
+capi-quickstart-2   Provisioned   3d23h   v1.24.2
+
+$ kubectl get pediaclusterlifecycle
+NAME                        AGE
+default-capi-quickstart     3d23h
+default-capi-quickstart-2   3d23h
+
+$ kubectl get pediacluster
+NAME                        READY   VERSION   APISERVER
+default-capi-quickstart     True    v1.24.2
+default-capi-quickstart-2   True    v1.24.2
+</code></pre></div><p><a href=../../concepts/pediacluster>PediaCluster</a> 会根据 Cluster 自动创建，并且当 Cluster 的 kubeconfig 发生变动时会自动更新 <a href=../../concepts/pediacluster>PediaCluster</a>.</p>
+<p>新建一个 Cluster 资源时，Clusterpedia 根据 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/deploy/clusterimportpolicy/cluster_api.yaml>Cluster API ClusterImportPolicy</a> 等到 ControlPlaneInitialized 为 True 时才会自动创建 PediaCluster，可以通过 <code>kubectl get kubeadmcontrolplane</code> 来查看集群的初始化状态</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>NAME                    CLUSTER           INITIALIZED   API SERVER AVAILABLE   REPLICAS   READY   UPDATED   UNAVAILABLE   AGE   VERSION
+capi-quickstart-2xcsz   capi-quickstart   <span style=color:#204a87>true</span>                                 <span style=color:#0000cf;font-weight:700>1</span>                  <span style=color:#0000cf;font-weight:700>1</span>         <span style=color:#0000cf;font-weight:700>1</span>             86s   v1.24.2
+</code></pre></div><p>Cluster 初始化完成后，就可以直接使用 kubectl 来检索多集群资源了</p>
+<blockquote>
+<p>使用 kubectl 前，需要为多集群资源检索生成集群快捷配置 —— <a href=../access-clusterpedia#%E4%B8%BA-kubectl-%E7%94%9F%E6%88%90%E9%9B%86%E7%BE%A4%E8%AE%BF%E9%97%AE%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%85%8D%E7%BD%AE>为 kubectl 生成集群访问的快捷配置</a></p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ <span style=color:#8f5902;font-style:italic># Since CNI is not installed, the nodes are not ready.</span>
+$ kubectl --cluster clusterpedia get no
+CLUSTER                     NAME                                            STATUS     ROLES           AGE   VERSION
+default-capi-quickstart-2   capi-quickstart-2-ctm9k-g2m87                   NotReady   control-plane   12m   v1.24.2
+default-capi-quickstart-2   capi-quickstart-2-md-0-s8hbx-7bd44554b5-kzcb6   NotReady   &lt;none&gt;          11m   v1.24.2
+default-capi-quickstart     capi-quickstart-2xcsz-fxrrk                     NotReady   control-plane   21m   v1.24.2
+default-capi-quickstart     capi-quickstart-md-0-9tw2g-b8b4f46cf-gggvq      NotReady   &lt;none&gt;          20m   v1.24.2
+</code></pre></div><h2 id=karmada-clusterimportpolicy>Karmada ClusterImportPolicy</h2>
 <blockquote>
 <p>对于 Karmada 平台，用户首先需要先将 Clusterpedia 部署在 Karmada APIServer 中，部署步骤可以参考 <a href=https://github.com/Iceber/deploy-clusterpedia-to-karmada>https://github.com/Iceber/deploy-clusterpedia-to-karmada</a></p>
 </blockquote>
