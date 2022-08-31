@@ -18,4 +18,4 @@ It is recommended to specify specific resource types, if you need to dynamically
 To use `All-resources Wildcard` you need to enable Feature Gate in `clustersynchro manager`.
 |desc|feature gate|default|
 |---|------------|-----|
-|Allow synchronization of all resources|`AllowSyncAllCustomResources`|true|
+|Allow synchronization of all resources|`AllowSyncAllResources`|true|
