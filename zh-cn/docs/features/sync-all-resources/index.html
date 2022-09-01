@@ -23,7 +23,7 @@ spec:
 spec:syncResources:- group:&#34;*&#34;resources:- &#34;*&#34;请谨慎使用该功能，该功能会创建大量的长连接，未来 Clusterpedia 添加 Agent 功能后，可以避免长连接的创建
 建议指定具体的资源类型，如果需要对自定义资源进行动态同步，可以使用 同步所有的自定义资源
 使用全资源通配符 需要在 clustersynchro manager 中开启 Feature Gate
-   作用 feature gate 默认值     允许同步所有的资源 AllowSyncAllCustomResources true    ">
+   作用 feature gate 默认值     允许同步所有的资源 AllowSyncAllResources true    ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/zh-cn/docs/features/sync-all-resources/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
@@ -32,7 +32,7 @@ spec:syncResources:- group:&#34;*&#34;resources:- &#34;*&#34;请谨慎使用该�
 spec:syncResources:- group:&#34;*&#34;resources:- &#34;*&#34;请谨慎使用该功能，该功能会创建大量的长连接，未来 Clusterpedia 添加 Agent 功能后，可以避免长连接的创建
 建议指定具体的资源类型，如果需要对自定义资源进行动态同步，可以使用 同步所有的自定义资源
 使用全资源通配符 需要在 clustersynchro manager 中开启 Feature Gate
-   作用 feature gate 默认值     允许同步所有的资源 AllowSyncAllCustomResources true    ">
+   作用 feature gate 默认值     允许同步所有的资源 AllowSyncAllResources true    ">
 <meta itemprop=wordCount content="32">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="同步所有的资源">
@@ -40,7 +40,7 @@ spec:syncResources:- group:&#34;*&#34;resources:- &#34;*&#34;请谨慎使用该�
 spec:syncResources:- group:&#34;*&#34;resources:- &#34;*&#34;请谨慎使用该功能，该功能会创建大量的长连接，未来 Clusterpedia 添加 Agent 功能后，可以避免长连接的创建
 建议指定具体的资源类型，如果需要对自定义资源进行动态同步，可以使用 同步所有的自定义资源
 使用全资源通配符 需要在 clustersynchro manager 中开启 Feature Gate
-   作用 feature gate 默认值     允许同步所有的资源 AllowSyncAllCustomResources true    ">
+   作用 feature gate 默认值     允许同步所有的资源 AllowSyncAllResources true    ">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -82,7 +82,7 @@ spec:syncResources:- group:&#34;*&#34;resources:- &#34;*&#34;请谨慎使用该�
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a033e2147e662dcd846e6a9818ecd990.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.154b3c2e1c52ad3948cafcee52b64a9f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -92,7 +92,7 @@ spec:syncResources:- group:&#34;*&#34;resources:- &#34;*&#34;请谨慎使用该�
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a033e2147e662dcd846e6a9818ecd990.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.154b3c2e1c52ad3948cafcee52b64a9f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -235,7 +235,7 @@ spec:syncResources:- group:&#34;*&#34;resources:- &#34;*&#34;请谨慎使用该�
 <tbody>
 <tr>
 <td>允许同步所有的资源</td>
-<td><code>AllowSyncAllCustomResources</code></td>
+<td><code>AllowSyncAllResources</code></td>
 <td>true</td>
 </tr>
 </tbody>
