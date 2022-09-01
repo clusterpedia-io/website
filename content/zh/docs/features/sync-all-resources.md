@@ -19,4 +19,4 @@ spec:
 使用`全资源通配符` 需要在 `clustersynchro manager` 中开启 Feature Gate
 |作用|feature gate|默认值|
 |---|------------|-----|
-|允许同步所有的资源|`AllowSyncAllCustomResources`|true|
+|允许同步所有的资源|`AllowSyncAllResources`|true|
