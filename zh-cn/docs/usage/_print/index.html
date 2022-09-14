@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2a694e5d9774ef0e9990d4899b69a6fe.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b18483b1e4c206bdb7854ff8d4558271.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -559,7 +559,7 @@ resources                          clusterpedia.io/v1beta1    false        Resou
 <h3 id=为-kubectl-生成集群访问的快捷配置>为 kubectl 生成集群访问的快捷配置</h3>
 <p>尽管我们可以使用 URL 来访问 Clusterpedia 资源，但是如果想要更方便的使用 kubectl 来查询的话，就需要配置集群的 kubeconfig cluster 配置。</p>
 <p>Clusterpedia 提供了一个简单的脚本来帮助生成 <code>cluster kube config</code></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.4.1/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.5.0/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
 </code></pre></div><pre tabindex=0><code># 输出：
 Current Context: kubernetes-admin@kubernetes
 Current Cluster: kubernetes
