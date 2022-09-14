@@ -24,7 +24,7 @@
  对于 ClusterImportPolicy 和 PediaClusterLifecycle 的调协由 Clusterpedia Controller Manager 内的 ClusterImportPolicy Controller 和 PediaClusterLifecycle Controller 负责
 ClusterImportPolicy 和 PediaCusterLifecycle 资源结构的更新可能会比较频繁，为了避免对 cluster.clusterpedia.io group 带来不必要的影响，所以放在 policy.clusterpedia.io group 中, 未来 1.0 发布时，可能会迁移到 cluster.clusterpedia.io 中。
  ClusterImportPolicy 一个完整 ClusterImportPolicy 示例如下：
-apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:mcpspec:source:group:&#34;cluster.example.io&#34;resource:clustersreferences:- group:&#34;&#34;resource:secretsnamespaceTemplate:&#34;{{ .">
+apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:mcpspec:source:group:&#34;cluster.example.io&#34;resource:clustersselectorTemplate:&#34;&#34;references:- group:&#34;&#34;resource:secretsnamespaceTemplate:&#34;{{ .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/zh-cn/docs/concepts/cluster-import-policy/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
@@ -36,8 +36,8 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
  对于 ClusterImportPolicy 和 PediaClusterLifecycle 的调协由 Clusterpedia Controller Manager 内的 ClusterImportPolicy Controller 和 PediaClusterLifecycle Controller 负责
 ClusterImportPolicy 和 PediaCusterLifecycle 资源结构的更新可能会比较频繁，为了避免对 cluster.clusterpedia.io group 带来不必要的影响，所以放在 policy.clusterpedia.io group 中, 未来 1.0 发布时，可能会迁移到 cluster.clusterpedia.io 中。
  ClusterImportPolicy 一个完整 ClusterImportPolicy 示例如下：
-apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:mcpspec:source:group:&#34;cluster.example.io&#34;resource:clustersreferences:- group:&#34;&#34;resource:secretsnamespaceTemplate:&#34;{{ .">
-<meta itemprop=wordCount content="563">
+apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:mcpspec:source:group:&#34;cluster.example.io&#34;resource:clustersselectorTemplate:&#34;&#34;references:- group:&#34;&#34;resource:secretsnamespaceTemplate:&#34;{{ .">
+<meta itemprop=wordCount content="597">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="集群自动接入策略(ClusterImportPolicy)">
 <meta name=twitter:description content="自定义资源 ClusterImportPolicy 定义了某种类型的资源应该如何转换成 PediaCluster，这样 clusterpedia 便可以根据某种资源来自动的创建、更新和删除 PediaCluster
@@ -47,7 +47,7 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
  对于 ClusterImportPolicy 和 PediaClusterLifecycle 的调协由 Clusterpedia Controller Manager 内的 ClusterImportPolicy Controller 和 PediaClusterLifecycle Controller 负责
 ClusterImportPolicy 和 PediaCusterLifecycle 资源结构的更新可能会比较频繁，为了避免对 cluster.clusterpedia.io group 带来不必要的影响，所以放在 policy.clusterpedia.io group 中, 未来 1.0 发布时，可能会迁移到 cluster.clusterpedia.io 中。
  ClusterImportPolicy 一个完整 ClusterImportPolicy 示例如下：
-apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:mcpspec:source:group:&#34;cluster.example.io&#34;resource:clustersreferences:- group:&#34;&#34;resource:secretsnamespaceTemplate:&#34;{{ .">
+apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:mcpspec:source:group:&#34;cluster.example.io&#34;resource:clustersselectorTemplate:&#34;&#34;references:- group:&#34;&#34;resource:secretsnamespaceTemplate:&#34;{{ .">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -89,7 +89,7 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.154b3c2e1c52ad3948cafcee52b64a9f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2a694e5d9774ef0e9990d4899b69a6fe.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -99,7 +99,7 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.154b3c2e1c52ad3948cafcee52b64a9f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2a694e5d9774ef0e9990d4899b69a6fe.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -260,6 +260,7 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>source</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;cluster.example.io&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusters</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>selectorTemplate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>references</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>secrets</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -305,6 +306,8 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;example.io&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusters</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>versions</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>selectorTemplate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      </span><span style=color:#f8f8f8;text-decoration:underline>      </span>{{<span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>if eq .source.metadata.namespace &#34;default&#34; }} true {{ end }}</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>references</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>secrets</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -316,7 +319,22 @@ apiVersion:policy.clusterpedia.io/v1alpha1kind:ClusterImportPolicymetadata:name:
 <blockquote>
 <p><strong>一种 Source 资源只能有一个负责转换该资源的 <code>ClusterImportPolicy</code> 资源</strong></p>
 </blockquote>
-<p><strong>source</strong> 资源可以通过 <code>{{ .source.&lt;field> }}</code> 来用于其他的模版字段</p>
+<p>用户也可以通过 <code>spec.source.selectorTemplate</code> 字段来过滤 <strong>Source</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>policy.clusterpedia.io/v1alpha1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ClusterImportPolicy</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>kubevela</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>source</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>group</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>resource</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>secrets</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>selectorTemplate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      {{ if eq .source.metadata.namespace &#34;vela-system&#34; }}
+</span><span style=color:#8f5902;font-style:italic>        {{ if .source.metadata.labels }}
+</span><span style=color:#8f5902;font-style:italic>          {{ eq (index .source.metadata.labels &#34;cluster.core.oam.dev/cluster-credential-type&#34;) &#34;X509Certificate&#34; }}
+</span><span style=color:#8f5902;font-style:italic>        {{ end }}
+</span><span style=color:#8f5902;font-style:italic>      {{ end }}</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span></code></pre></div><p><strong>source</strong> 资源可以通过 <code>{{ .source.&lt;field> }}</code> 来用于其他的模版字段</p>
 <p><code>spec.references</code> 中定义了在转换过程中涉及到的资源，我们需要指定资源的类型，以及通过 namespace 和 name 模版来获取具体的 <strong>reference</strong> 资源。我们也可以和 <strong>Source</strong> 资源一样对 Reference 资源的版本进行限制。</p>
 <p>除此之外还要为 <strong>reference</strong> 资源设置一个 key，这个 key 会以 <code>{{ .references.&lt;key> }}</code> 的方式来让后续模版字段使用</p>
 <p><em><code>spec.references</code> 中后面的项也可以通过 <code>.references.&lt;key></code> 来引用前面的项</em></p>
