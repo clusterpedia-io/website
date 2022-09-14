@@ -27,6 +27,7 @@ spec:
   source:
     group: "cluster.example.io"
     resource: clusters
+    selectorTemplate: ""
   references:
     - group: ""
       resource: secrets
@@ -74,6 +75,8 @@ spec:
     group: "example.io"
     resource: clusters
     versions: []
+    selectorTemplate: |
+      {{ if eq .source.metadata.namespace "default" }} true {{ end }}
   references:
     - group: ""
       resource: secrets
@@ -84,6 +87,24 @@ spec:
 ```
 **Source** 资源通过 `spec.source.group` 和 `spec.source.resource` 指定了资源组和资源名称。我们也可以使用 `spec.source.versions` 来限制 **Source** 的资源版本，默认是不会对 **Source** 资源版本进行限制
 > **一种 Source 资源只能有一个负责转换该资源的 `ClusterImportPolicy` 资源**
+
+用户也可以通过 `spec.source.selectorTemplate` 字段来过滤 **Source**
+```yaml
+apiVersion: policy.clusterpedia.io/v1alpha1
+kind: ClusterImportPolicy
+metadata:
+  name: kubevela
+spec:
+  source:
+    group: ""
+    resource: secrets
+    selectorTemplate: |
+      {{ if eq .source.metadata.namespace "vela-system" }}
+        {{ if .source.metadata.labels }}
+          {{ eq (index .source.metadata.labels "cluster.core.oam.dev/cluster-credential-type") "X509Certificate" }}
+        {{ end }}
+      {{ end }}
+```
 
 **source** 资源可以通过 `{{ .source.<field> }}` 来用于其他的模版字段
 

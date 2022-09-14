@@ -29,6 +29,7 @@ spec:
   source:
     group: "cluster.example.io"
     resource: clusters
+    selectorTemplate: ""
   references:
     - group: ""
       resource: secrets
@@ -77,6 +78,8 @@ spec:
     group: "example.io"
     resource: clusters
     versions: []
+    selectorTemplate: |
+      {{ if eq .source.metadata.namespace "default" }} true {{ end }}
   references:
     - group: ""
       resource: secrets
@@ -87,6 +90,24 @@ spec:
 ```
 The **Source** resource specifies the resource group and resource name via `spec.source.group` and `spec.source.resource`. We can also use `spec.source.versions` to restrict **Source** resource versions, by default there is no restriction on **Source** resource versions
 > **A Source resource can only have one `ClusterImportPolicy` resource responsible for converting that resource**
+
+You can also filter the **Source** by the `spec.source.selectorTemplate` field.
+```yaml
+apiVersion: policy.clusterpedia.io/v1alpha1
+kind: ClusterImportPolicy
+metadata:
+  name: kubevela
+spec:
+  source:
+    group: ""
+    resource: secrets
+    selectorTemplate: |
+      {{ if eq .source.metadata.namespace "vela-system" }}
+        {{ if .source.metadata.labels }}
+          {{ eq (index .source.metadata.labels "cluster.core.oam.dev/cluster-credential-type") "X509Certificate" }}
+        {{ end }}
+      {{ end }}
+```
 
 **source** resources can be used for other template fields via `{{ .source.<field> }}`
 
