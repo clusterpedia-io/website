@@ -95,6 +95,100 @@ karmada-member1   https://172.18.0.4:6443   v1.23.4   Healthy
 ```
 karmada clusterimportpolicy 要求 karmada 集群为 Push 模式，并且处于 Ready 状态，所以为 *member-1* 集群创建了 *karmada-member-1* pediacluster 资源。
 
+## VCluster ClusterImportPolicy
+创建用于自动发现 [VCluster](https://github.com/loft-sh/vcluster) 的 `ClusterImportPolicy`。
+```bash
+$ kubectl create -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/vcluster.yaml
+$ kubectl get clusterimportpolicy
+NAME      AGE
+vclsuter  5h
+```
+
+**需要注意，VCluster 集群在创建时需要保证生成的 kubeconfig 的 Server 地址可以由宿主集群内的其他 Pod 访问。**
+
+可以设置为 VCluster Service 域名，也可以是 Node IP 或者 Ingress 地址
+```yaml
+syncer:
+  extraArgs:
+  - --out-kube-config-server=https://<vcluster name>.<namespace>.svc
+  - --tls-san=<vcluster name>.<namespace>.svc,127.0.0.1
+```
+
+在 default 命名空间创建两个 VCluster，
+创建虚拟集群 vcluster-1
+```yaml
+# vcluster-1.yaml
+syncer:
+  extraArgs:
+  - --out-kube-config-server=https://vcluster-1.default.svc
+  - --tls-san=vcluster-1.default.svc,127.0.0.1
+```
+```bash
+$ vcluster create -n default -f vcluster-1.yaml vcluster-1
+```
+创建虚拟集群 vcluster-2
+```yaml
+# vcluster-2.yaml
+syncer:
+  extraArgs:
+  - --out-kube-config-server=https://vcluster-2.default.svc
+  - --tls-san=vcluster-2.default.svc,127.0.0.1
+```
+```bash
+$ vcluster create -n default -f vcluster-2.yaml vcluster-2
+```
+
+查看所有的 VCluster 集群
+```bash
+$ vcluster list
+ NAME              NAMESPACE         STATUS    CONNECTED   CREATED                         AGE
+ caiwei-vcluster   caiwei-vcluster   Running               2022-08-26 16:10:52 +0800 CST   484h49m6s
+ vcluster-1        default           Running               2022-09-15 20:57:59 +0800 CST   1m59s
+ vcluster-2        default           Running               2022-09-15 20:59:34 +0800 CST   24s
+```
+我们可以直接使用 kubectl + Clusterpedia 来检索任意 VCluster 内的资源
+> 使用 kubectl 前，需要为多集群资源检索生成集群快捷配置 —— [为 kubectl 生成集群访问的快捷配置](../access-clusterpedia#为-kubectl-生成集群访问的快捷配置)
+```bash
+ $ kubectl --cluster clusterpedia get po -A
+NAMESPACE     CLUSTER                              NAME                       READY   STATUS    RESTARTS   AGE
+default       vc-caiwei-vcluster-caiwei-vcluster   backend-77f8f45fc8-5ssww   1/1     Running   0          20d
+default       vc-caiwei-vcluster-caiwei-vcluster   backend-77f8f45fc8-j5m4c   1/1     Running   0          20d
+default       vc-caiwei-vcluster-caiwei-vcluster   backend-77f8f45fc8-vjzf6   1/1     Running   0          20d
+kube-system   vc-default-vcluster-1                coredns-669fb9997d-cxktv   1/1     Running   0          3m40s
+kube-system   vc-default-vcluster-2                coredns-669fb9997d-g7w8l   1/1     Running   0          2m6s
+kube-system   vc-caiwei-vcluster-caiwei-vcluster   coredns-669fb9997d-x6vc2   1/1     Running   0          20d
+
+$ kubectl --cluster clusterpedia get ns
+CLUSTER                              NAME              STATUS   AGE
+vc-default-vcluster-2                default           Active   2m49s
+vc-default-vcluster-1                default           Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   default           Active   20d
+vc-default-vcluster-2                kube-node-lease   Active   2m49s
+vc-default-vcluster-1                kube-node-lease   Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   kube-node-lease   Active   20d
+vc-default-vcluster-2                kube-public       Active   2m49s
+vc-default-vcluster-1                kube-public       Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   kube-public       Active   20d
+vc-default-vcluster-2                kube-system       Active   2m49s
+vc-default-vcluster-1                kube-system       Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   kube-system       Active   20d
+```
+
+Clusterpedia 会自动发现宿主集群内的虚拟集群（VCluster），并根据 [VCluster ClusterImportPolicy](https://github.com/clusterpedia-io/clusterpedia/blob/main/deploy/clusterimportpolicy/vcluster.yaml) 创建相应的 [PediaCluster](../../concepts/pediacluster)，用户可以直接访问 Clusterpedia 来检索资源
+```bash
+$ kubectl get pediaclusterlifecycle
+NAME                                 AGE
+vc-caiwei-vcluster-caiwei-vcluster   20d
+vc-default-vcluster-1                5m57s
+vc-default-vcluster-2                4m24s
+
+$ kubectl get pediacluster
+NAME                                 READY   VERSION        APISERVER
+vc-caiwei-vcluster-caiwei-vcluster   True    v1.23.5+k3s1   https://caiwei-vcluster.caiwei-vcluster.svc
+vc-default-vcluster-1                True    v1.23.5+k3s1   https://vcluster-1.default.svc
+vc-default-vcluster-2                True    v1.23.5+k3s1   https://vcluster-2.default.svc
+```
+
 ## 新建 ClusterImportPolicy
 如果 [Clusterpedia 仓库](https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy) 中没有维护某个平台的 ClusterImportPolicy，那么我们可以新建 ClusterImportPolicy
 
