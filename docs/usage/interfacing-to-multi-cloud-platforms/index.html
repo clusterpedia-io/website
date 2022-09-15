@@ -27,7 +27,7 @@ We maintain PediaCluster for each multi-cloud platform in the Clusterpedia repos
 <meta itemprop=description content="After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms.
 Users can create ClusterImportPolicy to automatically discover managed clusters in the multi-cloud platform and automatically synchronize them as PediaCluster, so you don&rsquo;t need to maintain PediaCluster manually based on the managed clusters.
 We maintain PediaCluster for each multi-cloud platform in the Clusterpedia repository. ClusterImportPolicy` for each multi-cloud platform. People also submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.">
-<meta itemprop=wordCount content="799">
+<meta itemprop=wordCount content="1153">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Interfacing to Multi-Cloud Platforms">
 <meta name=twitter:description content="After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms.
@@ -74,7 +74,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.b18483b1e4c206bdb7854ff8d4558271.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.ed57a2b043ca9d639fccb6523bb0a068.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -84,7 +84,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.b18483b1e4c206bdb7854ff8d4558271.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.ed57a2b043ca9d639fccb6523bb0a068.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -191,6 +191,7 @@ English
 <ul>
 <li><a href=#clusterapi-clusterimportpolicy>ClusterAPI ClusterImportPolicy</a></li>
 <li><a href=#karmada-clusterimportpolicy>Karmada ClusterImportPolicy</a></li>
+<li><a href=#vcluster-clusterimportpolicy>VCluster ClusterImportPolicy</a></li>
 <li><a href=#new-clusterimportpolicy>New ClusterImportPolicy</a></li>
 </ul>
 </nav></div>
@@ -212,7 +213,7 @@ English
 <div class=td-content>
 <h1>Interfacing to Multi-Cloud Platforms</h1>
 <header class=article-meta>
-<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 4 minute read &nbsp;</p>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 6 minute read &nbsp;</p>
 </header>
 <p>After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms.</p>
 <p>Users can create <code>ClusterImportPolicy</code> to automatically discover managed clusters in the multi-cloud platform and automatically synchronize them as <code>PediaCluster</code>,
@@ -289,7 +290,80 @@ and you can use <code>kubectl describe pediaclusterlifecycle &lt;name></code> to
 karmada-member1   https://172.18.0.4:6443   v1.23.4   Healthy
 </code></pre></div><p>The karmada clusterimportpolicy requires the karmada cluster to be in Push mode and in Ready state,
 so the <em>karmada-member-1</em> pediacluster resource is created for the <em>member-1</em> cluster.</p>
-<h2 id=new-clusterimportpolicy>New ClusterImportPolicy</h2>
+<h2 id=vcluster-clusterimportpolicy>VCluster ClusterImportPolicy</h2>
+<p>Create the <code>ClusterImportPolicy</code> for auto-discovery of <a href=https://github.com/loft-sh/vcluster>VCluster</a>.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl create -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/vcluster.yaml
+$ kubectl get clusterimportpolicy
+NAME      AGE
+vclsuter  5h
+</code></pre></div><p><strong>Note that the VCluster cluster needs to be created in such a way that the Server address of the generated kubeconfig can be accessed by other Pods in the host cluster.</strong></p>
+<p>This can be set to a VCluster Service domain name, a Node IP or an Ingress address.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>syncer</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>extraArgs</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- --<span style=color:#000>out-kube-config-server=https://&lt;vcluster name&gt;.&lt;namespace&gt;.svc</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- --<span style=color:#000>tls-san=&lt;vcluster name&gt;.&lt;namespace&gt;.svc,127.0.0.1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p><strong>Create two VClusters in the default namespace</strong></p>
+<p>create the virtual cluster vcluster-1</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># vcluster-1.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>syncer</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>extraArgs</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- --<span style=color:#000>out-kube-config-server=https://vcluster-1.default.svc</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- --<span style=color:#000>tls-san=vcluster-1.default.svc,127.0.0.1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ vcluster create -n default -f vcluster-1.yaml vcluster-1
+</code></pre></div><p>create the virtual cluster vcluster-2</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># vcluster-2.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>syncer</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>extraArgs</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- --<span style=color:#000>out-kube-config-server=https://vcluster-2.default.svc</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- --<span style=color:#000>tls-san=vcluster-2.default.svc,127.0.0.1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ vcluster create -n default -f vcluster-2.yaml vcluster-2
+</code></pre></div><p><strong>List all VCluster clusters</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ vcluster list
+ NAME              NAMESPACE         STATUS    CONNECTED   CREATED                         AGE
+ caiwei-vcluster   caiwei-vcluster   Running               2022-08-26 16:10:52 +0800 CST   484h49m6s
+ vcluster-1        default           Running               2022-09-15 20:57:59 +0800 CST   1m59s
+ vcluster-2        default           Running               2022-09-15 20:59:34 +0800 CST   24s
+</code></pre></div><p><strong>We can use kubectl + Clusterpedia directly to retrieve the resources in any VCluster.</strong></p>
+<blockquote>
+<p>Beforing using kubectl, you need to <a href=../access-clusterpedia/#configure-the-cluster-shortcut-for-kubectl>generate cluster shortcut configuration</a> for multi-cluster resource retrieval.</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash> $ kubectl --cluster clusterpedia get po -A
+NAMESPACE     CLUSTER                              NAME                       READY   STATUS    RESTARTS   AGE
+default       vc-caiwei-vcluster-caiwei-vcluster   backend-77f8f45fc8-5ssww   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          20d
+default       vc-caiwei-vcluster-caiwei-vcluster   backend-77f8f45fc8-j5m4c   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          20d
+default       vc-caiwei-vcluster-caiwei-vcluster   backend-77f8f45fc8-vjzf6   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          20d
+kube-system   vc-default-vcluster-1                coredns-669fb9997d-cxktv   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          3m40s
+kube-system   vc-default-vcluster-2                coredns-669fb9997d-g7w8l   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          2m6s
+kube-system   vc-caiwei-vcluster-caiwei-vcluster   coredns-669fb9997d-x6vc2   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          20d
+
+$ kubectl --cluster clusterpedia get ns
+CLUSTER                              NAME              STATUS   AGE
+vc-default-vcluster-2                default           Active   2m49s
+vc-default-vcluster-1                default           Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   default           Active   20d
+vc-default-vcluster-2                kube-node-lease   Active   2m49s
+vc-default-vcluster-1                kube-node-lease   Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   kube-node-lease   Active   20d
+vc-default-vcluster-2                kube-public       Active   2m49s
+vc-default-vcluster-1                kube-public       Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   kube-public       Active   20d
+vc-default-vcluster-2                kube-system       Active   2m49s
+vc-default-vcluster-1                kube-system       Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   kube-system       Active   20d
+</code></pre></div><p>Clusterpedia will automatically discover the virtual clusters(VClusters) within the host cluster and create the corresponding <a href=../../concepts/pediacluster>PediaCluster</a> according to the <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/deploy/clusterimportpolicy/vcluster.yaml>VCluster ClusterImportPolicy</a>,
+and users can access Clusterpedia directly to retrieve resources</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get pediaclusterlifecycle
+NAME                                 AGE
+vc-caiwei-vcluster-caiwei-vcluster   20d
+vc-default-vcluster-1                5m57s
+vc-default-vcluster-2                4m24s
+
+$ kubectl get pediacluster
+NAME                                 READY   VERSION        APISERVER
+vc-caiwei-vcluster-caiwei-vcluster   True    v1.23.5+k3s1   https://caiwei-vcluster.caiwei-vcluster.svc
+vc-default-vcluster-1                True    v1.23.5+k3s1   https://vcluster-1.default.svc
+vc-default-vcluster-2                True    v1.23.5+k3s1   https://vcluster-2.default.svc
+</code></pre></div><h2 id=new-clusterimportpolicy>New ClusterImportPolicy</h2>
 <p>If the <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia repository</a> does not maintain a ClusterImportPolicy for a platform, then we can create a new ClusterImportPolicy</p>
 <p><strong>A detailed description of the <code>ClusterImportPolicy</code> principles and fields can be found in the <a href=../../concepts/cluster-import-policy>Cluster Auto Import Policy</a></strong></p>
 <p>Now assume that there is a multi-cloud platform <strong>MCP</strong> that uses a custom resource &ndash; Cluster to represent the managed clusters

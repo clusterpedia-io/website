@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.b18483b1e4c206bdb7854ff8d4558271.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.ed57a2b043ca9d639fccb6523bb0a068.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -985,7 +985,79 @@ karmada-member3   7d5h
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>NAME              APISERVER                 VERSION   STATUS
 karmada-member1   https://172.18.0.4:6443   v1.23.4   Healthy
 </code></pre></div><p>karmada clusterimportpolicy 要求 karmada 集群为 Push 模式，并且处于 Ready 状态，所以为 <em>member-1</em> 集群创建了 <em>karmada-member-1</em> pediacluster 资源。</p>
-<h2 id=新建-clusterimportpolicy>新建 ClusterImportPolicy</h2>
+<h2 id=vcluster-clusterimportpolicy>VCluster ClusterImportPolicy</h2>
+<p>创建用于自动发现 <a href=https://github.com/loft-sh/vcluster>VCluster</a> 的 <code>ClusterImportPolicy</code>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl create -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/vcluster.yaml
+$ kubectl get clusterimportpolicy
+NAME      AGE
+vclsuter  5h
+</code></pre></div><p><strong>需要注意，VCluster 集群在创建时需要保证生成的 kubeconfig 的 Server 地址可以由宿主集群内的其他 Pod 访问。</strong></p>
+<p>可以设置为 VCluster Service 域名，也可以是 Node IP 或者 Ingress 地址</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>syncer</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>extraArgs</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- --<span style=color:#000>out-kube-config-server=https://&lt;vcluster name&gt;.&lt;namespace&gt;.svc</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- --<span style=color:#000>tls-san=&lt;vcluster name&gt;.&lt;namespace&gt;.svc,127.0.0.1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>在 default 命名空间创建两个 VCluster，
+创建虚拟集群 vcluster-1</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># vcluster-1.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>syncer</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>extraArgs</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- --<span style=color:#000>out-kube-config-server=https://vcluster-1.default.svc</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- --<span style=color:#000>tls-san=vcluster-1.default.svc,127.0.0.1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ vcluster create -n default -f vcluster-1.yaml vcluster-1
+</code></pre></div><p>创建虚拟集群 vcluster-2</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># vcluster-2.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>syncer</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>extraArgs</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- --<span style=color:#000>out-kube-config-server=https://vcluster-2.default.svc</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- --<span style=color:#000>tls-san=vcluster-2.default.svc,127.0.0.1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ vcluster create -n default -f vcluster-2.yaml vcluster-2
+</code></pre></div><p>查看所有的 VCluster 集群</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ vcluster list
+ NAME              NAMESPACE         STATUS    CONNECTED   CREATED                         AGE
+ caiwei-vcluster   caiwei-vcluster   Running               2022-08-26 16:10:52 +0800 CST   484h49m6s
+ vcluster-1        default           Running               2022-09-15 20:57:59 +0800 CST   1m59s
+ vcluster-2        default           Running               2022-09-15 20:59:34 +0800 CST   24s
+</code></pre></div><p>我们可以直接使用 kubectl + Clusterpedia 来检索任意 VCluster 内的资源</p>
+<blockquote>
+<p>使用 kubectl 前，需要为多集群资源检索生成集群快捷配置 —— <a href=../access-clusterpedia#%E4%B8%BA-kubectl-%E7%94%9F%E6%88%90%E9%9B%86%E7%BE%A4%E8%AE%BF%E9%97%AE%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%85%8D%E7%BD%AE>为 kubectl 生成集群访问的快捷配置</a></p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash> $ kubectl --cluster clusterpedia get po -A
+NAMESPACE     CLUSTER                              NAME                       READY   STATUS    RESTARTS   AGE
+default       vc-caiwei-vcluster-caiwei-vcluster   backend-77f8f45fc8-5ssww   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          20d
+default       vc-caiwei-vcluster-caiwei-vcluster   backend-77f8f45fc8-j5m4c   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          20d
+default       vc-caiwei-vcluster-caiwei-vcluster   backend-77f8f45fc8-vjzf6   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          20d
+kube-system   vc-default-vcluster-1                coredns-669fb9997d-cxktv   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          3m40s
+kube-system   vc-default-vcluster-2                coredns-669fb9997d-g7w8l   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          2m6s
+kube-system   vc-caiwei-vcluster-caiwei-vcluster   coredns-669fb9997d-x6vc2   1/1     Running   <span style=color:#0000cf;font-weight:700>0</span>          20d
+
+$ kubectl --cluster clusterpedia get ns
+CLUSTER                              NAME              STATUS   AGE
+vc-default-vcluster-2                default           Active   2m49s
+vc-default-vcluster-1                default           Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   default           Active   20d
+vc-default-vcluster-2                kube-node-lease   Active   2m49s
+vc-default-vcluster-1                kube-node-lease   Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   kube-node-lease   Active   20d
+vc-default-vcluster-2                kube-public       Active   2m49s
+vc-default-vcluster-1                kube-public       Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   kube-public       Active   20d
+vc-default-vcluster-2                kube-system       Active   2m49s
+vc-default-vcluster-1                kube-system       Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   kube-system       Active   20d
+</code></pre></div><p>Clusterpedia 会自动发现宿主集群内的虚拟集群（VCluster），并根据 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/deploy/clusterimportpolicy/vcluster.yaml>VCluster ClusterImportPolicy</a> 创建相应的 <a href=../../concepts/pediacluster>PediaCluster</a>，用户可以直接访问 Clusterpedia 来检索资源</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl get pediaclusterlifecycle
+NAME                                 AGE
+vc-caiwei-vcluster-caiwei-vcluster   20d
+vc-default-vcluster-1                5m57s
+vc-default-vcluster-2                4m24s
+
+$ kubectl get pediacluster
+NAME                                 READY   VERSION        APISERVER
+vc-caiwei-vcluster-caiwei-vcluster   True    v1.23.5+k3s1   https://caiwei-vcluster.caiwei-vcluster.svc
+vc-default-vcluster-1                True    v1.23.5+k3s1   https://vcluster-1.default.svc
+vc-default-vcluster-2                True    v1.23.5+k3s1   https://vcluster-2.default.svc
+</code></pre></div><h2 id=新建-clusterimportpolicy>新建 ClusterImportPolicy</h2>
 <p>如果 <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia 仓库</a> 中没有维护某个平台的 ClusterImportPolicy，那么我们可以新建 ClusterImportPolicy</p>
 <p><strong>关于 ClusterImportPolicy 原理和字段的详细描述可以参考 <a href=../../concepts/cluster-import-policy>集群自动接入策略</a></strong></p>
 <p>现在假定有一个多云平台 <strong>MCP</strong>，该平台使用自定义资源 —— Cluster 来代表被纳管的集群，并且将集群的认证信息保存在和集群同名的 Secret 中</p>
