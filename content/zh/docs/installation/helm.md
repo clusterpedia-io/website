@@ -1,6 +1,5 @@
 ---
 title: "使用 Helm"
 weight: 30
+manualLink: https://github.com/clusterpedia-io/clusterpedia/tree/main/charts/clusterpedia
 ---
-
-Helm 安装正在开发中 [clusterpedia required helm deployment](https://github.com/clusterpedia-io/clusterpedia/issues/43)
