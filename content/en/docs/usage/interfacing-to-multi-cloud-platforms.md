@@ -99,6 +99,102 @@ karmada-member1   https://172.18.0.4:6443   v1.23.4   Healthy
 The karmada clusterimportpolicy requires the karmada cluster to be in Push mode and in Ready state,
 so the *karmada-member-1* pediacluster resource is created for the *member-1* cluster.
 
+## VCluster ClusterImportPolicy
+Create the `ClusterImportPolicy` for auto-discovery of [VCluster](https://github.com/loft-sh/vcluster).
+```bash
+$ kubectl create -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/vcluster.yaml
+$ kubectl get clusterimportpolicy
+NAME      AGE
+vclsuter  5h
+```
+
+**Note that the VCluster cluster needs to be created in such a way that the Server address of the generated kubeconfig can be accessed by other Pods in the host cluster.**
+
+This can be set to a VCluster Service domain name, a Node IP or an Ingress address.
+```yaml
+syncer:
+  extraArgs:
+  - --out-kube-config-server=https://<vcluster name>.<namespace>.svc
+  - --tls-san=<vcluster name>.<namespace>.svc,127.0.0.1
+```
+
+**Create two VClusters in the default namespace**
+
+create the virtual cluster vcluster-1
+```yaml
+# vcluster-1.yaml
+syncer:
+  extraArgs:
+  - --out-kube-config-server=https://vcluster-1.default.svc
+  - --tls-san=vcluster-1.default.svc,127.0.0.1
+```
+```bash
+$ vcluster create -n default -f vcluster-1.yaml vcluster-1
+```
+create the virtual cluster vcluster-2
+```yaml
+# vcluster-2.yaml
+syncer:
+  extraArgs:
+  - --out-kube-config-server=https://vcluster-2.default.svc
+  - --tls-san=vcluster-2.default.svc,127.0.0.1
+```
+```bash
+$ vcluster create -n default -f vcluster-2.yaml vcluster-2
+```
+
+**List all VCluster clusters**
+```bash
+$ vcluster list
+ NAME              NAMESPACE         STATUS    CONNECTED   CREATED                         AGE
+ caiwei-vcluster   caiwei-vcluster   Running               2022-08-26 16:10:52 +0800 CST   484h49m6s
+ vcluster-1        default           Running               2022-09-15 20:57:59 +0800 CST   1m59s
+ vcluster-2        default           Running               2022-09-15 20:59:34 +0800 CST   24s
+```
+
+**We can use kubectl + Clusterpedia directly to retrieve the resources in any VCluster.**
+> Beforing using kubectl, you need to [generate cluster shortcut configuration](../access-clusterpedia/#configure-the-cluster-shortcut-for-kubectl) for multi-cluster resource retrieval.
+```bash
+ $ kubectl --cluster clusterpedia get po -A
+NAMESPACE     CLUSTER                              NAME                       READY   STATUS    RESTARTS   AGE
+default       vc-caiwei-vcluster-caiwei-vcluster   backend-77f8f45fc8-5ssww   1/1     Running   0          20d
+default       vc-caiwei-vcluster-caiwei-vcluster   backend-77f8f45fc8-j5m4c   1/1     Running   0          20d
+default       vc-caiwei-vcluster-caiwei-vcluster   backend-77f8f45fc8-vjzf6   1/1     Running   0          20d
+kube-system   vc-default-vcluster-1                coredns-669fb9997d-cxktv   1/1     Running   0          3m40s
+kube-system   vc-default-vcluster-2                coredns-669fb9997d-g7w8l   1/1     Running   0          2m6s
+kube-system   vc-caiwei-vcluster-caiwei-vcluster   coredns-669fb9997d-x6vc2   1/1     Running   0          20d
+
+$ kubectl --cluster clusterpedia get ns
+CLUSTER                              NAME              STATUS   AGE
+vc-default-vcluster-2                default           Active   2m49s
+vc-default-vcluster-1                default           Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   default           Active   20d
+vc-default-vcluster-2                kube-node-lease   Active   2m49s
+vc-default-vcluster-1                kube-node-lease   Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   kube-node-lease   Active   20d
+vc-default-vcluster-2                kube-public       Active   2m49s
+vc-default-vcluster-1                kube-public       Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   kube-public       Active   20d
+vc-default-vcluster-2                kube-system       Active   2m49s
+vc-default-vcluster-1                kube-system       Active   4m24s
+vc-caiwei-vcluster-caiwei-vcluster   kube-system       Active   20d
+```
+
+Clusterpedia will automatically discover the virtual clusters(VClusters) within the host cluster and create the corresponding [PediaCluster](../../concepts/pediacluster) according to the [VCluster ClusterImportPolicy](https://github.com/clusterpedia-io/clusterpedia/blob/main/deploy/clusterimportpolicy/vcluster.yaml),
+and users can access Clusterpedia directly to retrieve resources
+```bash
+$ kubectl get pediaclusterlifecycle
+NAME                                 AGE
+vc-caiwei-vcluster-caiwei-vcluster   20d
+vc-default-vcluster-1                5m57s
+vc-default-vcluster-2                4m24s
+
+$ kubectl get pediacluster
+NAME                                 READY   VERSION        APISERVER
+vc-caiwei-vcluster-caiwei-vcluster   True    v1.23.5+k3s1   https://caiwei-vcluster.caiwei-vcluster.svc
+vc-default-vcluster-1                True    v1.23.5+k3s1   https://vcluster-1.default.svc
+vc-default-vcluster-2                True    v1.23.5+k3s1   https://vcluster-2.default.svc
+```
 
 ## New ClusterImportPolicy
 If the [Clusterpedia repository](https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy) does not maintain a ClusterImportPolicy for a platform, then we can create a new ClusterImportPolicy
