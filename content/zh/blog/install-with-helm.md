@@ -96,5 +96,5 @@ $ kubectl delete -f ./_crds
 
 ```bash
 # 登录 Local PV 绑定的节点
-$ rm /var/local/clusterpedia/internalstorage/<storage type>
+$ rm -rf /var/local/clusterpedia/internalstorage/<storage type>
 ```
