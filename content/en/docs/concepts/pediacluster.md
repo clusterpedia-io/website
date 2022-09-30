@@ -2,9 +2,11 @@
 title: PediaCluster
 weight: 1
 ---
-Clusterpedia uses the `PediaCluster` resource to represent a cluster that needs to synchronize and retrieve resources.
-> Clusterpedia needs to be very friendly to other multi-cloud platforms that may use `Cluster` resource to represent managed clusters,
+
+Clusterpedia uses `PediaCluster` to represent a cluster that needs to synchronize and retrieve resources.
+> Clusterpedia needs to be very friendly to integrate with other multi-cloud platforms that may use `Cluster` to represent managed clusters.
 > to avoid conflicts Clusterpedia uses `PediaCluster`.
+
 ```bash
 $ kubectl get pediacluster
 NAME        APISERVER                        VERSION            STATUS
@@ -29,15 +31,15 @@ spec:
   syncResourcesRefName: ""
 ```
 
-PediaCluster has two uses:
-* Configure authentication information for the cluster
-* Configure resources for synchronization
+with `PediaCluster`, you can configure:
+* cluster authentication
+* resources for synchronization
 
-Configuring cluster authentication information can be found in [Import Clusters](../../usage/import-clusters)
+For more information about configuring cluster authentication, see [Import Clusters](../../usage/import-clusters).
 
-There are three fields to configure the resources to be synchronized.
-* `spec.syncResources` configures the resources that need to be synchronized for this cluster
+`PediaCluster` provides three fields to configure the resources to be synchronized.
+* `spec.syncResources` configures the resources that need to be synchronized for a cluster
 * `spec.syncAllCustomResources` synchronizes all custom resources
-* `spec.syncResourcesRefName` references [Public Configuration of Cluster Sync Resources](../cluster-sync-resources)
+* `spec.syncResourcesRefName` references to [Public Configuration of ClusterSyncResources](../cluster-sync-resources)
 
-For details on configuring synchronization resources, see [Synchronize Cluster Resources](../../usage/sync-resources)
+For details on configuring synchronization resources, see [Synchronize Cluster Resources](../../usage/sync-resources).
