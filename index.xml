@@ -486,7 +486,7 @@ Clusterpedia Chart 可以为用户创建存储组件使用 Local PV。
 &lt;p>&lt;strong>Note that PVC and PV will not be deleted. You need to manually delete them.&lt;/strong>&lt;/p>
 &lt;p>If you created a local PV, you need log in to the node and remove all remained data about the local PV.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#8f5902;font-style:italic"># Log in to the node with Local PV&lt;/span>
-rm /var/local/clusterpedia/internalstorage/&amp;lt;storage type&amp;gt;
+rm -rf /var/local/clusterpedia/internalstorage/&amp;lt;storage type&amp;gt;
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Blog: Clusterpedia Awarded | One of IT Technology Influcence Stars Selected by CSDN</title><link>/blog/2022/04/01/clusterpedia-awarded-one-of-it-technology-influcence-stars-selected-by-csdn/</link><pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate><guid>/blog/2022/04/01/clusterpedia-awarded-one-of-it-technology-influcence-stars-selected-by-csdn/</guid><description>
 &lt;div align="center">&lt;img src="http://blog.daocloud.io/wp-content/uploads/d807bc86a68e6e3bd67c041e86e611e0.jpg" style="width:900px;" />&lt;/div>
 &lt;hr>

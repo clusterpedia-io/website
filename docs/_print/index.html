@@ -65,7 +65,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.1a6ecafcaad9b86eaa624caa05ac1ff5.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.3ace0175ced152f8db85f7d0242bd875.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -218,9 +218,9 @@ kubectl delete -f ./deploy/cluster.clusterpedia.io_pediaclusers.yaml
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pv clusterpedia-internalstorage-&lt;storage type&gt;
 </code></pre></div><p>Once you know the node where the data is stored, you can delete the Local PV.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete pv clusterpedia-internalstorage-&lt;storage type&gt;
-</code></pre></div><p>Log in to the node where the data is located and clean up the data</p>
+</code></pre></div><p>Log in to the node where the data is located and clean up the data.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># In the node where the legacy data is located</span>
-rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
+rm -rf /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </code></pre></div>
 </div>
 <div class=td-content style=page-break-before:always>

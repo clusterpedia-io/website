@@ -35,7 +35,7 @@ All of first, you need to check if helm v3 is installed in your current environm
  Currently, the chart has not been uploaded to the public charts repository.
  git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia/charts Since Clusterpedia uses bitnami/postgresql and bitnami/mysql as subcharts of storage components, it is necessary to add the bitnami repository and update the dependencies of the clusterpedia chart."><meta itemprop=datePublished content="2022-04-11T00:00:00+00:00">
 <meta itemprop=dateModified content="2022-04-11T00:00:00+00:00">
-<meta itemprop=wordCount content="430">
+<meta itemprop=wordCount content="431">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Quickly Deploy Clusterpedia with Helm">
 <meta name=twitter:description content="Currently Clusterpedia has supported a rapid deployment with Helm.
@@ -84,7 +84,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.1a6ecafcaad9b86eaa624caa05ac1ff5.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.3ace0175ced152f8db85f7d0242bd875.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -94,7 +94,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.1a6ecafcaad9b86eaa624caa05ac1ff5.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.3ace0175ced152f8db85f7d0242bd875.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -219,7 +219,7 @@ helm dependency build
 <p><strong>Note that PVC and PV will not be deleted. You need to manually delete them.</strong></p>
 <p>If you created a local PV, you need log in to the node and remove all remained data about the local PV.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Log in to the node with Local PV</span>
-rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
+rm -rf /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </code></pre></div>
 <ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
 <li>

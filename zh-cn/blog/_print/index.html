@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1a6ecafcaad9b86eaa624caa05ac1ff5.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3ace0175ced152f8db85f7d0242bd875.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -563,7 +563,7 @@ $ helm dependency build
 </code></pre></div><p><strong>注意 PVC 和 PV 并不会删除，用户需要手动删除。</strong></p>
 <p>如果创建了 Local PV，那么还需要进入相应节点，清理 Local PV 的遗留数据。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 登录 Local PV 绑定的节点</span>
-$ rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
+$ rm -rf /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </code></pre></div>
 </div>
 <div class=td-content style=page-break-before:always>

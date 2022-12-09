@@ -423,7 +423,7 @@ $ helm dependency build
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>注意 PVC 和 PV 并不会删除，用户需要手动删除。&lt;/strong>&lt;/p>
 &lt;p>如果创建了 Local PV，那么还需要进入相应节点，清理 Local PV 的遗留数据。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#8f5902;font-style:italic"># 登录 Local PV 绑定的节点&lt;/span>
-$ rm /var/local/clusterpedia/internalstorage/&amp;lt;storage type&amp;gt;
+$ rm -rf /var/local/clusterpedia/internalstorage/&amp;lt;storage type&amp;gt;
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Blog: Clusterpedia 上榜| CSDN IT 技术影响力之星</title><link>/zh-cn/blog/2022/04/01/clusterpedia-%E4%B8%8A%E6%A6%9C-csdn-it-%E6%8A%80%E6%9C%AF%E5%BD%B1%E5%93%8D%E5%8A%9B%E4%B9%8B%E6%98%9F/</link><pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate><guid>/zh-cn/blog/2022/04/01/clusterpedia-%E4%B8%8A%E6%A6%9C-csdn-it-%E6%8A%80%E6%9C%AF%E5%BD%B1%E5%93%8D%E5%8A%9B%E4%B9%8B%E6%98%9F/</guid><description>
 &lt;div align="center">&lt;img src="http://blog.daocloud.io/wp-content/uploads/d807bc86a68e6e3bd67c041e86e611e0.jpg" style="width:900px;" />&lt;/div>
 &lt;hr>

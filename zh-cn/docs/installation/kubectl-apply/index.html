@@ -52,7 +52,7 @@ cd ./deploy/internalstorage/mysql  存储组件使用 Local PV 的方式存储�
  用户可以选择自己提供 PV
  export STORAGE_NODE_NAME=<节点名称> sed &#34;s|__NODE_NAME__|$STORAGE_NODE_NAME|g&#34; `grep __NODE_NAME__ -rl ./templates` > clusterpedia_internalstorage_pv.yaml 部署存储组件
 kubectl apply -f .">
-<meta itemprop=wordCount content="231">
+<meta itemprop=wordCount content="232">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="使用 kubectl apply">
 <meta name=twitter:description content="安装 Clusterpedia 的安装分为两个部分：
@@ -107,7 +107,7 @@ kubectl apply -f .">
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1a6ecafcaad9b86eaa624caa05ac1ff5.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3ace0175ced152f8db85f7d0242bd875.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -117,7 +117,7 @@ kubectl apply -f .">
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1a6ecafcaad9b86eaa624caa05ac1ff5.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3ace0175ced152f8db85f7d0242bd875.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -310,7 +310,7 @@ sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 部署 Clusterpedia CRD 与组件</span>
 kubectl apply -f ./deploy
 </code></pre></div><h3 id=安装完成>安装完成</h3>
-<p>检查组件 Pods 运行是否正常</p>
+<p>检查组件 Pods 运行是否正常。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n clusterpedia-system get pods
 </code></pre></div><h3 id=部署集群自动接入策略--clusterimportpolicy>部署集群自动接入策略 —— ClusterImportPolicy</h3>
 <p>0.4.0 后，Clusterpedia 提供了更加友好的接入多云平台的方式。</p>
@@ -352,7 +352,7 @@ kubectl delete -f ./deploy/policy.clusterpedia.io_pediaclusterlifecycles.yaml
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete pv clusterpedia-internalstorage-&lt;storage type&gt;
 </code></pre></div><p>登录数据所在节点，清理数据。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 遗留数据所在节点</span>
-rm /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
+rm -rf /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </code></pre></div>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
