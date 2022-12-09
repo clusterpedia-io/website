@@ -68,7 +68,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.465ee6196c51634c70402cc2e77c0900.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1a6ecafcaad9b86eaa624caa05ac1ff5.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -89,9 +89,10 @@
 <ul>
 <li>1: <a href=#pg-95ce10af379e7ffb7ad12d9d7acb553b>返回剩余资源数量</a></li>
 <li>2: <a href=#pg-e22aa1b93a45ad065cfcba03e6c25c76>原生 SQL 查询</a></li>
-<li>3: <a href=#pg-13a0f1b8db8e55183af8d01c55d9e128>资源字段裁剪</a></li>
-<li>4: <a href=#pg-3c4a7ba07443cd53a3dd0494f5a0ac77>同步所有的自定义资源</a></li>
-<li>5: <a href=#pg-9dba7c100e86bba867d7df2e6a4ae266>同步所有的资源</a></li>
+<li>3: <a href=#pg-b7b57e793e57798cc9bab1005a83932a>独立健康检查连接</a></li>
+<li>4: <a href=#pg-13a0f1b8db8e55183af8d01c55d9e128>资源字段裁剪</a></li>
+<li>5: <a href=#pg-3c4a7ba07443cd53a3dd0494f5a0ac77>同步所有的自定义资源</a></li>
+<li>6: <a href=#pg-9dba7c100e86bba867d7df2e6a4ae266>同步所有的资源</a></li>
 </ul>
 <div class=content>
 <p>用户在使用特性功能时，需要开启相应的特性门控。
@@ -149,6 +150,11 @@
 <tr>
 <td>允许同步所有类型的资源</td>
 <td><code>AllowSyncAllResources</code></td>
+<td>false</td>
+</tr>
+<tr>
+<td>集群健康检查使用独立 TCP 连接</td>
+<td><code>HealthCheckerWithStandaloneTCP</code></td>
 <td>false</td>
 </tr>
 </tbody>
@@ -229,7 +235,31 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 <p>原生 SQL 查询当前还在 alpha 阶段，并且对 SQL 注入没有很好的防范，所以需要用户通过 Feature Gates 来开启该功能</p>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-13a0f1b8db8e55183af8d01c55d9e128>3 - 资源字段裁剪</h1>
+<h1 id=pg-b7b57e793e57798cc9bab1005a83932a>3 - 独立健康检查连接</h1>
+<p>在 client-go 中使用相同的配置连接一个集群时，会使用同一条 TCP 连接
+<a href=https://github.com/kubernetes/kubernetes/blob/3f823c0daa002158b12bfb2d53bcfe433516659d/staging/src/k8s.io/client-go/transport/transport.go#L54>https://github.com/kubernetes/kubernetes/blob/3f823c0daa002158b12bfb2d53bcfe433516659d/staging/src/k8s.io/client-go/transport/transport.go#L54</a></p>
+<p>这导致集群的健康检查会和资源同步的 Informer 使用相同的 TCP。在大量资源 Informer 启动时，由于 TCP 阻塞可能会导致健康检查的请求超时，这时即使集群是健康的也会导致健康检查失败。</p>
+<p>我们现在允许健康检查使用单独的一条 TCP 连接，这样资源同步时的 TCP 拥堵并不会影响到健康检查的响应。该功能需要开启 Feature Gate —— <code>HealthCheckerWithStandaloneTCP</code></p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>feature gates</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群健康检查使用独立 TCP 连接</td>
+<td><code>HealthCheckerWithStandaloneTCP</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：开启该功能后，连接到成员集群的 TCP 长连接会从 1 变成 2</strong>，如果接入 1000 个集群，那么 ClusterSynchro Manager 会维持 2000 条 TCP 连接。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-13a0f1b8db8e55183af8d01c55d9e128>4 - 资源字段裁剪</h1>
 <p>资源的 metadata 中有一些字段在实际搜索中通常没有太大用处，所以在同步时我们会默认裁剪这些字段。</p>
 <p>我们使用特性门控来分别控制这些字段是否在资源同步时被裁剪，<strong>这些特性门控专属于 <code>clustersynchro manager</code> 组件</strong></p>
 <table>
@@ -255,7 +285,7 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 </table>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-3c4a7ba07443cd53a3dd0494f5a0ac77>4 - 同步所有的自定义资源</h1>
+<h1 id=pg-3c4a7ba07443cd53a3dd0494f5a0ac77>5 - 同步所有的自定义资源</h1>
 <p>自定义资源不同于 kube 的内置资源，kube 的内置资源通常不会经常性变动(依然有两种情况会导致原生资源类型资源改变)，
 而自定义资源的类型可能会被动态的创建和删除</p>
 <p>用户如果想要根据被纳管集群中的 CRD 的变动来自动调节同步的资源类型,那么用户在 PediaCluster 中指定同步所有自定义资源。</p>
@@ -280,7 +310,7 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 </table>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-9dba7c100e86bba867d7df2e6a4ae266>5 - 同步所有的资源</h1>
+<h1 id=pg-9dba7c100e86bba867d7df2e6a4ae266>6 - 同步所有的资源</h1>
 <p>用户可以通过 <code>全资源通配符</code> 来同步所有类型的资源，当被纳管集群中发生任意的资源类型变动(例如 kube 版本升级，group/version 被禁用，CRD 或者 APIService 变动)都会导致同步的资源类型发生修改。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>

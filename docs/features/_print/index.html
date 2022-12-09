@@ -66,7 +66,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.465ee6196c51634c70402cc2e77c0900.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.1a6ecafcaad9b86eaa624caa05ac1ff5.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -88,8 +88,9 @@ This is the multi-page printable view of this section.
 <li>1: <a href=#pg-95ce10af379e7ffb7ad12d9d7acb553b>Return RemainingItemCount</a></li>
 <li>2: <a href=#pg-e22aa1b93a45ad065cfcba03e6c25c76>Raw SQL Query</a></li>
 <li>3: <a href=#pg-13a0f1b8db8e55183af8d01c55d9e128>Resource Field Pruning</a></li>
-<li>4: <a href=#pg-3c4a7ba07443cd53a3dd0494f5a0ac77>Sync All Custom Resources</a></li>
-<li>5: <a href=#pg-9dba7c100e86bba867d7df2e6a4ae266>Sync All Resources</a></li>
+<li>4: <a href=#pg-b7b57e793e57798cc9bab1005a83932a>Standalone TCP for Health Checker</a></li>
+<li>5: <a href=#pg-3c4a7ba07443cd53a3dd0494f5a0ac77>Sync All Custom Resources</a></li>
+<li>6: <a href=#pg-9dba7c100e86bba867d7df2e6a4ae266>Sync All Resources</a></li>
 </ul>
 <div class=content>
 <p>When using feature functionality, users need to enabled the corresponding feature gates.</p>
@@ -147,6 +148,11 @@ This is the multi-page printable view of this section.
 <tr>
 <td>Allows synchronization of all types of resources</td>
 <td><code>AllowSyncAllResources</code></td>
+<td>false</td>
+</tr>
+<tr>
+<td>Use standalone tcp for health checker</td>
+<td><code>HealthCheckerWithStandaloneTCP</code></td>
 <td>false</td>
 </tr>
 </tbody>
@@ -256,7 +262,33 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 </table>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-3c4a7ba07443cd53a3dd0494f5a0ac77>4 - Sync All Custom Resources</h1>
+<h1 id=pg-b7b57e793e57798cc9bab1005a83932a>4 - Standalone TCP for Health Checker</h1>
+<p>When client-go creates any number of Clients with the same configuration, such as certificates, it reuses the same TCP connection.
+<a href=https://github.com/kubernetes/kubernetes/blob/3f823c0daa002158b12bfb2d53bcfe433516659d/staging/src/k8s.io/client-go/transport/transport.go#L54>https://github.com/kubernetes/kubernetes/blob/3f823c0daa002158b12bfb2d53bcfe433516659d/staging/src/k8s.io/client-go/transport/transport.go#L54</a></p>
+<p>This results in the cluster health check interface using the same TCP connection as the resource synchronized informer, which may cause TCP blocking and increased health check latency if a large number of informers are started for the first time.
+We add a feature gate - <code>HealthCheckerWithStandaloneTCP</code> to allow users to use a standalone tcp for health checks</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>./clustersynchro-manager --feature-gates<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#000>HealthCheckerWithStandaloneTCP</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87>true</span>
+</code></pre></div><table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gates</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Use standalone tcp for health checker</td>
+<td><code>HealthCheckerWithStandaloneTCP</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note: When this feature is turned on, the TCP long connections to member clusters will change from 1 to 2.</strong>
+If 1000 clusters are imported, then ClusterSynchro Manager will keep 2000 TCP connections.</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-3c4a7ba07443cd53a3dd0494f5a0ac77>5 - Sync All Custom Resources</h1>
 <p>The custom resources differ from kube&rsquo;s built-in resources in that kube&rsquo;s built-in resources do not usually change on a regular basis (there are still two cases where the native resource type can change).</p>
 <p>The custom resource types can be created and deleted dynamically.</p>
 <p>If you want to automatically adjust the synchronized resource types based on changes in the CRD of the imported cluster, you specify in <strong>PediaCluster</strong> to synchronize all custom resources.</p>
@@ -281,7 +313,7 @@ kubectl get --raw<span style=color:#ce5c00;font-weight:700>=</span><span style=c
 </table>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-9dba7c100e86bba867d7df2e6a4ae266>5 - Sync All Resources</h1>
+<h1 id=pg-9dba7c100e86bba867d7df2e6a4ae266>6 - Sync All Resources</h1>
 <p>You can synchronize all types of resources with the <code>All-resource Wildcard</code>, and any resource type change in the imported cluster (e.g. kube version upgrade, group/version disabled, CRD or APIService change) will cause the synchronized resource type to be modified.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>syncResources</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>

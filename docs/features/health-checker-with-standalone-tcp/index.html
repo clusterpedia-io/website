@@ -3,7 +3,6 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=generator content="Hugo 0.91.2">
-<link rel=alternate type=text/html href=/docs/release-notes/_print/>
 <meta name=robots content="index, follow">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16>
@@ -14,16 +13,22 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>Release notes | Clusterpedia.io</title>
-<meta name=description content>
-<meta property="og:title" content="Release notes">
-<meta property="og:description" content="Clusterpedia.io website">
-<meta property="og:type" content="website">
-<meta property="og:url" content="/docs/release-notes/"><meta property="og:site_name" content="Clusterpedia.io">
-<meta itemprop=name content="Release notes">
-<meta itemprop=description content="Clusterpedia.io website"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Release notes">
-<meta name=twitter:description content="Clusterpedia.io website">
+<title>Standalone TCP for Health Checker | Clusterpedia.io</title>
+<meta name=description content="When client-go creates any number of Clients with the same configuration, such as certificates, it reuses the same TCP connection. …">
+<meta property="og:title" content="Standalone TCP for Health Checker">
+<meta property="og:description" content="When client-go creates any number of Clients with the same configuration, such as certificates, it reuses the same TCP connection. https://github.com/kubernetes/kubernetes/blob/3f823c0daa002158b12bfb2d53bcfe433516659d/staging/src/k8s.io/client-go/transport/transport.go#L54
+This results in the cluster health check interface using the same TCP connection as the resource synchronized informer, which may cause TCP blocking and increased health check latency if a large number of informers are started for the first time. We add a feature gate - HealthCheckerWithStandaloneTCP to allow users to use a standalone tcp for health checks">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/docs/features/health-checker-with-standalone-tcp/"><meta property="article:section" content="docs">
+<meta property="og:site_name" content="Clusterpedia.io">
+<meta itemprop=name content="Standalone TCP for Health Checker">
+<meta itemprop=description content="When client-go creates any number of Clients with the same configuration, such as certificates, it reuses the same TCP connection. https://github.com/kubernetes/kubernetes/blob/3f823c0daa002158b12bfb2d53bcfe433516659d/staging/src/k8s.io/client-go/transport/transport.go#L54
+This results in the cluster health check interface using the same TCP connection as the resource synchronized informer, which may cause TCP blocking and increased health check latency if a large number of informers are started for the first time. We add a feature gate - HealthCheckerWithStandaloneTCP to allow users to use a standalone tcp for health checks">
+<meta itemprop=wordCount content="126">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Standalone TCP for Health Checker">
+<meta name=twitter:description content="When client-go creates any number of Clients with the same configuration, such as certificates, it reuses the same TCP connection. https://github.com/kubernetes/kubernetes/blob/3f823c0daa002158b12bfb2d53bcfe433516659d/staging/src/k8s.io/client-go/transport/transport.go#L54
+This results in the cluster health check interface using the same TCP connection as the resource synchronized informer, which may cause TCP blocking and increased health check latency if a large number of informers are started for the first time. We add a feature gate - HealthCheckerWithStandaloneTCP to allow users to use a standalone tcp for health checks">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -32,7 +37,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZQPMJ4HH3"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-NZQPMJ4HH3',{anonymize_ip:!1})}</script>
 </head>
-<body class=td-section>
+<body class=td-page>
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=/>
@@ -60,7 +65,7 @@
 English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/zh-cn/docs/release-notes/>中文 Chinese</a>
+<a class=dropdown-item href=/zh-cn/docs/features/health-checker-with-standalone-tcp/>中文 Chinese</a>
 </div>
 </li>
 </ul>
@@ -85,7 +90,7 @@ English
 English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/zh-cn/docs/release-notes/>中文 Chinese</a>
+<a class=dropdown-item href=/zh-cn/docs/features/health-checker-with-standalone-tcp/>中文 Chinese</a>
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
@@ -145,7 +150,7 @@ English
 </ul>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsfeatures-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsfeatures-li>
 <a href=/docs/features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsfeatures><span>Features</span></a>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesremaining-item-count-li>
@@ -154,16 +159,16 @@ English
 <a href=/docs/features/raw-sql-query/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesraw-sql-query><span>Raw SQL Query</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesprune-fields-li>
 <a href=/docs/features/prune-fields/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesprune-fields><span>Resource Field Pruning</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeatureshealth-checker-with-standalone-tcp-li>
-<a href=/docs/features/health-checker-with-standalone-tcp/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeatureshealth-checker-with-standalone-tcp><span>Standalone TCP for Health Checker</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsfeatureshealth-checker-with-standalone-tcp-li>
+<a href=/docs/features/health-checker-with-standalone-tcp/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsfeatureshealth-checker-with-standalone-tcp><span class=td-sidebar-nav-active-item>Standalone TCP for Health Checker</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturessync-all-custom-resources-li>
 <a href=/docs/features/sync-all-custom-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturessync-all-custom-resources><span>Sync All Custom Resources</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturessync-all-resources-li>
 <a href=/docs/features/sync-all-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturessync-all-resources><span>Sync All Resources</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsrelease-notes-li>
-<a href=https://github.com/clusterpedia-io/clusterpedia/releases class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id=m-docsrelease-notes><span class=td-sidebar-nav-active-item>Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsrelease-notes-li>
+<a href=https://github.com/clusterpedia-io/clusterpedia/releases class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsrelease-notes><span>Release notes</span></a>
 </li>
 </ul>
 </li>
@@ -173,12 +178,12 @@ English
 </aside>
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href=https://github.com/clusterpedia-io/website/tree/main/content/en/docs/release-notes/_index.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> View page source</a>
-<a href=https://github.com/clusterpedia-io/website/edit/main/content/en/docs/release-notes/_index.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/clusterpedia-io/website/new/main/content/en/docs/release-notes/_index.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Create child page</a>
-<a href="https://github.com/clusterpedia-io/website/issues/new?title=Release%20notes" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href=https://github.com/clusterpedia-io/website/tree/main/content/en/docs/features/health-checker-with-standalone-tcp.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> View page source</a>
+<a href=https://github.com/clusterpedia-io/website/edit/main/content/en/docs/features/health-checker-with-standalone-tcp.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/clusterpedia-io/website/new/main/content/en/docs/features/health-checker-with-standalone-tcp.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Create child page</a>
+<a href="https://github.com/clusterpedia-io/website/issues/new?title=Standalone%20TCP%20for%20Health%20Checker" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 <a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
-<a id=print href=/docs/release-notes/_print/><i class="fa fa-print fa-fw"></i> Print entire section</a>
+<a id=print href=/docs/features/_print/><i class="fa fa-print fa-fw"></i> Print entire section</a>
 </div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
@@ -187,18 +192,42 @@ English
 <li class=breadcrumb-item>
 <a href=/docs/>Documentation</a>
 </li>
+<li class=breadcrumb-item>
+<a href=/docs/features/>Features</a>
+</li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=/docs/release-notes/>Release notes</a>
+<a href=/docs/features/health-checker-with-standalone-tcp/>Standalone TCP for Health Checker</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>Release notes</h1>
+<h1>Standalone TCP for Health Checker</h1>
 <header class=article-meta>
 <p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; less than a minute &nbsp;</p>
 </header>
-<div class=section-index>
-</div>
+<p>When client-go creates any number of Clients with the same configuration, such as certificates, it reuses the same TCP connection.
+<a href=https://github.com/kubernetes/kubernetes/blob/3f823c0daa002158b12bfb2d53bcfe433516659d/staging/src/k8s.io/client-go/transport/transport.go#L54>https://github.com/kubernetes/kubernetes/blob/3f823c0daa002158b12bfb2d53bcfe433516659d/staging/src/k8s.io/client-go/transport/transport.go#L54</a></p>
+<p>This results in the cluster health check interface using the same TCP connection as the resource synchronized informer, which may cause TCP blocking and increased health check latency if a large number of informers are started for the first time.
+We add a feature gate - <code>HealthCheckerWithStandaloneTCP</code> to allow users to use a standalone tcp for health checks</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>./clustersynchro-manager --feature-gates<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#000>HealthCheckerWithStandaloneTCP</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87>true</span>
+</code></pre></div><table>
+<thead>
+<tr>
+<th>desc</th>
+<th>feature gates</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Use standalone tcp for health checker</td>
+<td><code>HealthCheckerWithStandaloneTCP</code></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note: When this feature is turned on, the TCP long connections to member clusters will change from 1 to 2.</strong>
+If 1000 clusters are imported, then ClusterSynchro Manager will keep 2000 TCP connections.</p>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
 <h2 class=feedback--title>Feedback</h2>
