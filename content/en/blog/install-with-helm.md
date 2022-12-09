@@ -138,5 +138,5 @@ If you created a local PV, you need log in to the node and remove all remained d
 
 ```bash
 # Log in to the node with Local PV
-rm /var/local/clusterpedia/internalstorage/<storage type>
+rm -rf /var/local/clusterpedia/internalstorage/<storage type>
 ```

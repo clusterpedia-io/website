@@ -4,6 +4,7 @@ weight: 10
 ---
 
 ## 安装
+
 Clusterpedia 的安装分为两个部分：
 
 * [安装存储组件](#安装存储组件)
@@ -20,6 +21,7 @@ git checkout v0.5.0
 ```
 
 ### 安装存储组件
+
 Clusterpedia 安装时提供了 **MySQL 8.0** 和 **PostgreSQL 12** 两种存储组件以供选择。
 > 用户如果使用已有的存储组件（MySQL 或者 PostgreSQL），则直接[跳过](#安装-clusterpedia)存储组件安装。
 
@@ -78,13 +80,14 @@ kubectl apply -f ./deploy
 
 ### 安装完成
 
-检查组件 Pods 运行是否正常
+检查组件 Pods 运行是否正常。
 
 ```bash
 kubectl -n clusterpedia-system get pods
 ```
 
 ### 部署集群自动接入策略 —— ClusterImportPolicy
+
 0.4.0 后，Clusterpedia 提供了更加友好的接入多云平台的方式。
 
 用户通过创建 `ClusterImportPolicy` 来自动发现多云平台中纳管的集群，并将这些集群自动同步为 `PediaCluster`，用户不需要根据纳管的集群来手动去维护 `PediaCluster` 了。
@@ -102,6 +105,7 @@ kubectl get clusterimportpolicy
 ## 卸载
 
 ### 删除 ClusterImportPolicy
+
 如果用户部署了 ClusterImportPolicy 那么需要先清理 ClusterImportPolicy 资源
 
 ```bash
@@ -163,5 +167,5 @@ kubectl delete pv clusterpedia-internalstorage-<storage type>
 
 ```bash
 # 遗留数据所在节点
-rm /var/local/clusterpedia/internalstorage/<storage type>
+rm -rf /var/local/clusterpedia/internalstorage/<storage type>
 ```

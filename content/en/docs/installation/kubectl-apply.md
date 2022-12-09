@@ -4,6 +4,7 @@ weight: 10
 ---
 
 ## Install
+
 The installation of Clusterpedia is divided into several parts:
 - [Install storage component](#install-storage-component)
 - [Install Clusterpedia](#install-clusterpedia)
@@ -18,6 +19,7 @@ git checkout v0.5.0
 ```
 
 ### Install storage component
+
 Clusterpedia installation provides two storage components (**MySQL 8.0** and **PostgreSQL 12**) to choose.
 > If you use existing storage components (MySQL or PostgreSQL), directly [skip](#install-clusterpedia) this step
 
@@ -55,6 +57,7 @@ cd ../../../
 ```
 
 ### Install Clusterpedia
+
 Once the storage component are successfully deployed, you can install the Clusterpedia.
 
 **If you uses existing storage component, refer to [Configure Storage Layer](../configuration/configure-internalstorage) to set the storage component into `Default Storage Layer`**
@@ -66,12 +69,14 @@ kubectl apply -f ./deploy
 ```
 
 ### Final check
+
 Check if the component Pods are running properly
 ```bash
 kubectl -n clusterpedia-system get pods
 ```
 
 ### Create Cluster Auto Import Policy —— ClusterImportPolicy
+
 After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms.
 
 Users can create `ClusterImportPolicy` to automatically discover managed clusters in the multi-cloud platform and automatically synchronize them as `PediaCluster`,
@@ -89,7 +94,9 @@ kubectl get clusterimportpolicy
 ```
 
 ## Uninstall
+
 ### Clean up ClusterImportPolicy
+
 If you have deployed `ClusterImportPolicy` then you need to clean up the `ClusterImportPolicy` resources first.
 
 ```bash
@@ -97,6 +104,7 @@ kubectl get clusterimportpolicy
 ```
 
 ### Clean up PediaCluster
+
 Before uninstalling Clusterpedia, you need to check if PediaCluster resources still exist in your environment, and clean up those resources.
 
 ```bash
@@ -104,6 +112,7 @@ kubectl get pediacluster
 ```
 
 ### Uninstall Clusterpedia
+
 After the PediaCluster resource cleanup is complete, uninstall the Clusterpedia components.
 
 ```bash
@@ -115,12 +124,14 @@ kubectl delete -f ./deploy/cluster.clusterpedia.io_pediaclusers.yaml
 ```
 
 ### Uninstall Storage Component
+
 Remove related resources depending on the type of storage component selected.
 ```bash
 kubectl delete -f ./deploy/internalstorage/<storage type>
 ```
 
 #### remove Local PV and clean up data
+
 After the storage component is uninstalled, the Local PV and corresponding data will still be left in the node and we need to clean it manually.
 
 View the mounted nodes via Local PV resource details.
@@ -133,8 +144,8 @@ Once you know the node where the data is stored, you can delete the Local PV.
 kubectl delete pv clusterpedia-internalstorage-<storage type>
 ```
 
-Log in to the node where the data is located and clean up the data
+Log in to the node where the data is located and clean up the data.
 ```bash
 # In the node where the legacy data is located
-rm /var/local/clusterpedia/internalstorage/<storage type>
+rm -rf /var/local/clusterpedia/internalstorage/<storage type>
 ```
