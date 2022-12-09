@@ -26,3 +26,4 @@ Clusterpedia APIServer and Clusterpedia ClusterSynchro Manager have different fe
 |Prune `metadata.annotations['lastAppliedConfiguration']` |`PruneLastAppliedConfiguration`|true|
 |Allows synchronization of all types of custom resources|`AllowSyncCustomResources`|false|
 |Allows synchronization of all types of resources|`AllowSyncAllResources`|false|
+|Use standalone tcp for health checker| `HealthCheckerWithStandaloneTCP` |false|
