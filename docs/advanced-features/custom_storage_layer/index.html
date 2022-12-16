@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-cn class=no-js>
+<!doctype html><html lang=en class=no-js>
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
@@ -13,50 +13,26 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>自定义存储层插件 | Clusterpedia.io</title>
-<meta name=description content="Clusterpedia 可以通过存储层来使用不同的存储组件，例如 MySQL/PostgreSQL, Memory, Elasticsearch
-当前，Clusterpedia 内置了两个存储层：
-
-用于接入关系型数据库的 internalstorage 存储层
-基于内存的 memory …">
-<meta property="og:title" content="自定义存储层插件">
-<meta property="og:description" content="Clusterpedia 可以通过存储层来使用不同的存储组件，例如 MySQL/PostgreSQL, Memory, Elasticsearch
-当前，Clusterpedia 内置了两个存储层：
- 用于接入关系型数据库的 internalstorage 存储层 基于内存的 memory 存储层  尽管 Clusterpedia 已经默认支持了关系型数据库和内存，但是用户的需求往往是多变和复杂的，固定的存储层可能无法满足不同用户对于存储组件和性能的要求，于是 Clusterpedia 支持通过插件的方式来接入用户自己实现的存储层，我们称这种方式为 自定义存储层插件，简称为 存储插件。
-通过存储插件，用户可以做到以下事情：
- 使用任意的存储组件，例如 Elasticsearch，RedisGraph，Etcd，甚至是 MessageQueue 也没有问题 允许用户针对自己的业务来优化资源的存储格式和查询性能 针对存储组件的特性来实现更高级的检索功能  Clusterpedia 也维护了一些存储插件，用户可以根据需求选用：
- Sample Storage: 可以连接关系型数据库的存储插件示例 Elasticsearch Storage: 用于连接 Elasticsearch 的存储插件  存储插件是通过 Go Plugin 的方式来让 Clusterpedia 组件加载，相比 RPC 或者其他方式，这种方式在没有任何损耗的前提下提供非常灵活的插件接入。
- 关于 Go Plugin 对性能的影响可以简单参考 https://github.com/uberswe/goplugins
- 众所周知，Go Plugin 在开发和使用上都比较繁琐，不过 Clusterpedia 通过一些机制来巧妙的优化了存储插件的使用和开发，并且提供了 clusterpedia-io/sample-storage 插件作为参考。
-下面我们以 clusterpedia-io/sample-storage 为例，分别介绍：
- 如何使用 自定义存储层插件 如何实现 自定义存储层插件  使用 自定义存储层插件 存储插件的使用可以大致分为三种方式：">
+<title>Custom Storage Layer Plugin | Clusterpedia.io</title>
+<meta name=description content="Clusterpedia can use different storage components such as MySQL/PostgreSQL, Memory, Elasticsearch through the storage layer.
+Currently, Clusterpedia …">
+<meta property="og:title" content="Custom Storage Layer Plugin">
+<meta property="og:description" content="Clusterpedia can use different storage components such as MySQL/PostgreSQL, Memory, Elasticsearch through the storage layer.
+Currently, Clusterpedia has two built-in storage layers:
+ The internalstorage storage layer for accessing relational databases. The memory storage layer based on Memory  Although Clusterpedia already supports relational databases and memory by default, user requirements are often variable and complex, and a fixed storage layer may not match the requirements of different users for storage components and performance, so Clusterpedia supports access to user-implemented storage layers by means of plugins, which we call custom storage layer plugins, or storage plugins for short.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="/zh-cn/docs/advanced-features/custom_storage_layer/"><meta property="article:section" content="docs">
+<meta property="og:url" content="/docs/advanced-features/custom_storage_layer/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
-<meta itemprop=name content="自定义存储层插件">
-<meta itemprop=description content="Clusterpedia 可以通过存储层来使用不同的存储组件，例如 MySQL/PostgreSQL, Memory, Elasticsearch
-当前，Clusterpedia 内置了两个存储层：
- 用于接入关系型数据库的 internalstorage 存储层 基于内存的 memory 存储层  尽管 Clusterpedia 已经默认支持了关系型数据库和内存，但是用户的需求往往是多变和复杂的，固定的存储层可能无法满足不同用户对于存储组件和性能的要求，于是 Clusterpedia 支持通过插件的方式来接入用户自己实现的存储层，我们称这种方式为 自定义存储层插件，简称为 存储插件。
-通过存储插件，用户可以做到以下事情：
- 使用任意的存储组件，例如 Elasticsearch，RedisGraph，Etcd，甚至是 MessageQueue 也没有问题 允许用户针对自己的业务来优化资源的存储格式和查询性能 针对存储组件的特性来实现更高级的检索功能  Clusterpedia 也维护了一些存储插件，用户可以根据需求选用：
- Sample Storage: 可以连接关系型数据库的存储插件示例 Elasticsearch Storage: 用于连接 Elasticsearch 的存储插件  存储插件是通过 Go Plugin 的方式来让 Clusterpedia 组件加载，相比 RPC 或者其他方式，这种方式在没有任何损耗的前提下提供非常灵活的插件接入。
- 关于 Go Plugin 对性能的影响可以简单参考 https://github.com/uberswe/goplugins
- 众所周知，Go Plugin 在开发和使用上都比较繁琐，不过 Clusterpedia 通过一些机制来巧妙的优化了存储插件的使用和开发，并且提供了 clusterpedia-io/sample-storage 插件作为参考。
-下面我们以 clusterpedia-io/sample-storage 为例，分别介绍：
- 如何使用 自定义存储层插件 如何实现 自定义存储层插件  使用 自定义存储层插件 存储插件的使用可以大致分为三种方式：">
-<meta itemprop=wordCount content="1143">
+<meta itemprop=name content="Custom Storage Layer Plugin">
+<meta itemprop=description content="Clusterpedia can use different storage components such as MySQL/PostgreSQL, Memory, Elasticsearch through the storage layer.
+Currently, Clusterpedia has two built-in storage layers:
+ The internalstorage storage layer for accessing relational databases. The memory storage layer based on Memory  Although Clusterpedia already supports relational databases and memory by default, user requirements are often variable and complex, and a fixed storage layer may not match the requirements of different users for storage components and performance, so Clusterpedia supports access to user-implemented storage layers by means of plugins, which we call custom storage layer plugins, or storage plugins for short.">
+<meta itemprop=wordCount content="2449">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="自定义存储层插件">
-<meta name=twitter:description content="Clusterpedia 可以通过存储层来使用不同的存储组件，例如 MySQL/PostgreSQL, Memory, Elasticsearch
-当前，Clusterpedia 内置了两个存储层：
- 用于接入关系型数据库的 internalstorage 存储层 基于内存的 memory 存储层  尽管 Clusterpedia 已经默认支持了关系型数据库和内存，但是用户的需求往往是多变和复杂的，固定的存储层可能无法满足不同用户对于存储组件和性能的要求，于是 Clusterpedia 支持通过插件的方式来接入用户自己实现的存储层，我们称这种方式为 自定义存储层插件，简称为 存储插件。
-通过存储插件，用户可以做到以下事情：
- 使用任意的存储组件，例如 Elasticsearch，RedisGraph，Etcd，甚至是 MessageQueue 也没有问题 允许用户针对自己的业务来优化资源的存储格式和查询性能 针对存储组件的特性来实现更高级的检索功能  Clusterpedia 也维护了一些存储插件，用户可以根据需求选用：
- Sample Storage: 可以连接关系型数据库的存储插件示例 Elasticsearch Storage: 用于连接 Elasticsearch 的存储插件  存储插件是通过 Go Plugin 的方式来让 Clusterpedia 组件加载，相比 RPC 或者其他方式，这种方式在没有任何损耗的前提下提供非常灵活的插件接入。
- 关于 Go Plugin 对性能的影响可以简单参考 https://github.com/uberswe/goplugins
- 众所周知，Go Plugin 在开发和使用上都比较繁琐，不过 Clusterpedia 通过一些机制来巧妙的优化了存储插件的使用和开发，并且提供了 clusterpedia-io/sample-storage 插件作为参考。
-下面我们以 clusterpedia-io/sample-storage 为例，分别介绍：
- 如何使用 自定义存储层插件 如何实现 自定义存储层插件  使用 自定义存储层插件 存储插件的使用可以大致分为三种方式：">
+<meta name=twitter:title content="Custom Storage Layer Plugin">
+<meta name=twitter:description content="Clusterpedia can use different storage components such as MySQL/PostgreSQL, Memory, Elasticsearch through the storage layer.
+Currently, Clusterpedia has two built-in storage layers:
+ The internalstorage storage layer for accessing relational databases. The memory storage layer based on Memory  Although Clusterpedia already supports relational databases and memory by default, user requirements are often variable and complex, and a fixed storage layer may not match the requirements of different users for storage components and performance, so Clusterpedia supports access to user-implemented storage layers by means of plugins, which we call custom storage layer plugins, or storage plugins for short.">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -68,19 +44,19 @@
 <body class=td-page>
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
-<a class=navbar-brand href=/zh-cn/>
+<a class=navbar-brand href=/>
 <span class=navbar-logo><svg id="Graph" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g id="Cpedia_-_Graph_-_Color_Dark" data-name="Cpedia - Graph - Color Dark"><rect id="Frame" width="512" height="512" fill="none"/><path id="Secondary" d="M476 221.051A274.908 274.908.0 00428.269 256 282.438 282.438.0 01395.7 220.752a322.971 322.971.0 0156.3-41.27zM362.4 256a334.139 334.139.0 00-53.2 92.145A329.953 329.953.0 00295.32 394.6a322.932 322.932.0 00-7.587 69.4h48a274.957 274.957.0 016.4-58.813 282.32 282.32.0 0114.238-45.835 285.94 285.94.0 0139.323-68.1A330.2 330.2.0 01362.4 256zM169.865 405.189a274.9 274.9.0 016.4 58.811h48a322.893 322.893.0 00-7.589-69.4 282.46 282.46.0 00-46.811 10.589zM179.94 300.03A333.961 333.961.0 00149.6 256a330 330 0 00-33.291-35.248A322.915 322.915.0 0060 179.482L36 221.051A274.964 274.964.0 0183.733 256a282.3 282.3.0 0132.576 35.248 286.331 286.331.0 0122.054 32.768 286.3 286.3.0 0117.264 35.339A330.144 330.144.0 01202.8 348.148 334.156 334.156.0 00179.94 300.03zM169.865 106.811a274.966 274.966.0 01-54.132-23.862l-24 41.569a322.934 322.934.0 0063.894 28.127 282.241 282.241.0 0014.238-45.834zm186.507 45.836a322.994 322.994.0 0063.895-28.129l-24-41.569a275.02 275.02.0 01-54.133 23.864A282.293 282.293.0 01295.32 117.4a286.278 286.278.0 01-39.307 2.716h-.1a286.366 286.366.0 01-39.237-2.718 330.245 330.245.0 01-13.88 46.455 334.129 334.129.0 0053.1 4.263h.115a333.931 333.931.0 0053.187-4.261 329.92 329.92.0 0047.174-11.208z" fill="#1b1c1d"/><path id="Primary" d="M211.993 256l22-38.1h44l22 38.1-22 38.105h-44zM342.134 106.813A274.957 274.957.0 01335.733 48h-48a322.932 322.932.0 007.587 69.4 282.293 282.293.0 0046.814-10.587zM428.269 256A282.438 282.438.0 01395.7 220.752a285.92 285.92.0 01-39.323-68.105A329.92 329.92.0 01309.2 163.854 334.125 334.125.0 00362.4 256a330.2 330.2.0 0033.3 35.248 322.971 322.971.0 0056.3 41.27l24-41.569A274.908 274.908.0 01428.269 256zM149.6 256a333.961 333.961.0 0030.34-44.03 334.156 334.156.0 0022.86-48.118 330.245 330.245.0 0013.88-46.455A322.893 322.893.0 00224.267 48h-48a274.9 274.9.0 01-6.4 58.811 282.241 282.241.0 01-14.238 45.834 286.3 286.3.0 01-17.264 35.339 286.331 286.331.0 01-22.054 32.768A330 330 0 01149.6 256zm-65.867.0A274.964 274.964.0 0136 290.949l24 41.569a322.915 322.915.0 0056.309-41.27A282.3 282.3.0 0083.733 256zM255.9 343.885a334.129 334.129.0 00-53.1 4.263 330.144 330.144.0 00-47.171 11.207 322.934 322.934.0 00-63.894 28.127l24 41.569a274.966 274.966.0 0154.132-23.862A282.46 282.46.0 01216.678 394.6a286.366 286.366.0 0139.237-2.718h.1A286.278 286.278.0 01295.32 394.6a329.953 329.953.0 0113.88-46.456 334.028 334.028.0 00-53.187-4.26zm86.236 61.3a275.027 275.027.0 0154.133 23.864l24-41.569a322.991 322.991.0 00-63.895-28.13 282.32 282.32.0 00-14.24 45.837z" fill="#33de72"/></g></svg></span><span class=font-weight-bold>Clusterpedia.io</span>
 </a>
 <div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar>
 <ul class="navbar-nav mt-2 mt-lg-0">
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class=nav-link href=/zh-cn/about/><span>关于</span></a>
+<a class=nav-link href=/about/><span>About</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class=nav-link href=/zh-cn/blog/><i class="fas fa-blog"></i><span>博客</span></a>
+<a class=nav-link href=/blog/><i class="fas fa-blog"></i><span>Blog</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class="nav-link active" href=/zh-cn/docs/><i class="fas fa-book"></i><span class=active>文档</span></a>
+<a class="nav-link active" href=/docs/><i class="fas fa-book"></i><span class=active>Documentation</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=https://github.com/clusterpedia-io/clusterpedia target=_blank><i class="fab fa-github"></i><span>GitHub</span></a>
@@ -90,15 +66,15 @@
 </li>
 <li class="nav-item dropdown mr-4 d-none d-lg-block">
 <a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
-中文 Chinese
+English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/docs/advanced-features/custom_storage_layer/>English</a>
+<a class=dropdown-item href=/zh-cn/docs/advanced-features/custom_storage_layer/>中文 Chinese</a>
 </div>
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.69e4bcf7289095f4cfe857352ad87e6e.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.69e4bcf7289095f4cfe857352ad87e6e.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -108,102 +84,102 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.69e4bcf7289095f4cfe857352ad87e6e.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.69e4bcf7289095f4cfe857352ad87e6e.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
 <nav class="collapse td-sidebar-nav" id=td-section-nav>
 <div class="nav-item dropdown d-block d-lg-none">
 <a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
-中文 Chinese
+English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/docs/advanced-features/custom_storage_layer/>English</a>
+<a class=dropdown-item href=/zh-cn/docs/advanced-features/custom_storage_layer/>中文 Chinese</a>
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zh-cndocs-li>
-<a href=/zh-cn/docs/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-zh-cndocs><span>文档</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li>
+<a href=/docs/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Documentation</span></a>
 <ul class=ul-1>
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsinstallation-li>
-<a href=/zh-cn/docs/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsinstallation><span>安装</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsinstallation-li>
+<a href=/docs/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsinstallation><span>Installation</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsinstallationkubectl-apply-li>
-<a href=/zh-cn/docs/installation/kubectl-apply/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsinstallationkubectl-apply><span>使用 kubectl apply</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsinstallationhelm-li>
-<a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/charts/clusterpedia class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsinstallationhelm><span>使用 Helm</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsinstallationconfigurate-li>
-<a href=/zh-cn/docs/installation/configurate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsinstallationconfigurate><span>配置</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsinstallationkubectl-apply-li>
+<a href=/docs/installation/kubectl-apply/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsinstallationkubectl-apply><span>kubectl apply</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsinstallationhelm-li>
+<a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/charts/clusterpedia class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsinstallationhelm><span>Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsinstallationconfiguration-li>
+<a href=/docs/installation/configuration/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsinstallationconfiguration><span>Configuration</span></a>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsinstallationconfigurateconfigurate-internalstorage-li>
-<a href=/zh-cn/docs/installation/configurate/configurate-internalstorage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsinstallationconfigurateconfigurate-internalstorage><span>配置存储层</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsinstallationconfigurationconfigure-internalstorage-li>
+<a href=/docs/installation/configuration/configure-internalstorage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsinstallationconfigurationconfigure-internalstorage><span>Configure Storage Layer</span></a>
 </li>
 </ul>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsconcepts-li>
-<a href=/zh-cn/docs/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsconcepts><span>概念</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsconcepts-li>
+<a href=/docs/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsconcepts><span>Concepts</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptspediacluster-li>
-<a href=/zh-cn/docs/concepts/pediacluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptspediacluster><span>PediaCluster</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscluster-sync-resources-li>
-<a href=/zh-cn/docs/concepts/cluster-sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscluster-sync-resources><span>公共的集群资源同步配置(ClusterSyncResources)</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscollection-resource-li>
-<a href=/zh-cn/docs/concepts/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscollection-resource><span>聚合资源(Collection Resource)</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsconceptscluster-import-policy-li>
-<a href=/zh-cn/docs/concepts/cluster-import-policy/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsconceptscluster-import-policy><span>集群自动接入策略(ClusterImportPolicy)</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptspediacluster-li>
+<a href=/docs/concepts/pediacluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptspediacluster><span>PediaCluster</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscluster-sync-resources-li>
+<a href=/docs/concepts/cluster-sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscluster-sync-resources><span>Public Configuration of Cluster Sync Resources(ClusterSyncResources)</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscollection-resource-li>
+<a href=/docs/concepts/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscollection-resource><span>Collection Resource</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscluster-import-policy-li>
+<a href=/docs/concepts/cluster-import-policy/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscluster-import-policy><span>Cluster Auto Import Policy</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsusage-li>
-<a href=/zh-cn/docs/usage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsusage><span>使用</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsusage-li>
+<a href=/docs/usage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsusage><span>Usage</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusageimport-clusters-li>
-<a href=/zh-cn/docs/usage/import-clusters/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusageimport-clusters><span>集群接入</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusageinterfacing-to-multi-cloud-platforms-li>
-<a href=/zh-cn/docs/usage/interfacing-to-multi-cloud-platforms/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusageinterfacing-to-multi-cloud-platforms><span>接入多云平台</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesync-resources-li>
-<a href=/zh-cn/docs/usage/sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesync-resources><span>同步集群资源</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusageaccess-clusterpedia-li>
-<a href=/zh-cn/docs/usage/access-clusterpedia/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusageaccess-clusterpedia><span>访问 Clusterpedia</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsusagesearch-li>
-<a href=/zh-cn/docs/usage/search/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsusagesearch><span>资源检索</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusageimport-clusters-li>
+<a href=/docs/usage/import-clusters/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusageimport-clusters><span>Import Clusters</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusageinterfacing-to-multi-cloud-platforms-li>
+<a href=/docs/usage/interfacing-to-multi-cloud-platforms/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusageinterfacing-to-multi-cloud-platforms><span>Interfacing to Multi-Cloud Platforms</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesync-resources-li>
+<a href=/docs/usage/sync-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesync-resources><span>Synchronize Cluster Resources</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusageaccess-clusterpedia-li>
+<a href=/docs/usage/access-clusterpedia/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusageaccess-clusterpedia><span>Access the Clusterpedia</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsusagesearch-li>
+<a href=/docs/usage/search/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsusagesearch><span>Search</span></a>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchmulti-cluster-li>
-<a href=/zh-cn/docs/usage/search/multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchmulti-cluster><span>多集群检索</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchspecified-cluster-li>
-<a href=/zh-cn/docs/usage/search/specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchspecified-cluster><span>指定集群检索</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsusagesearchcollection-resource-li>
-<a href=/zh-cn/docs/usage/search/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsusagesearchcollection-resource><span>聚合资源检索</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchmulti-cluster-li>
+<a href=/docs/usage/search/multi-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchmulti-cluster><span>Multiple Clusters</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchspecified-cluster-li>
+<a href=/docs/usage/search/specified-cluster/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchspecified-cluster><span>Specified a Cluster</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsusagesearchcollection-resource-li>
+<a href=/docs/usage/search/collection-resource/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsusagesearchcollection-resource><span>Collection Resource</span></a>
 </li>
 </ul>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zh-cndocsadvanced-features-li>
-<a href=/zh-cn/docs/advanced-features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsadvanced-features><span>高级功能</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsadvanced-features-li>
+<a href=/docs/advanced-features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsadvanced-features><span>Advanced Features</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zh-cndocsadvanced-featurescustom_storage_layer-li>
-<a href=/zh-cn/docs/advanced-features/custom_storage_layer/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsadvanced-featurescustom_storage_layer><span class=td-sidebar-nav-active-item>自定义存储层插件</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsadvanced-featurescustom_storage_layer-li>
+<a href=/docs/advanced-features/custom_storage_layer/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsadvanced-featurescustom_storage_layer><span class=td-sidebar-nav-active-item>Custom Storage Layer Plugin</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zh-cndocsfeatures-li>
-<a href=/zh-cn/docs/features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsfeatures><span>特性功能</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsfeatures-li>
+<a href=/docs/features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsfeatures><span>Features</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesremaining-item-count-li>
-<a href=/zh-cn/docs/features/remaining-item-count/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesremaining-item-count><span>返回剩余资源数量</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesraw-sql-query-li>
-<a href=/zh-cn/docs/features/raw-sql-query/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesraw-sql-query><span>原生 SQL 查询</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeatureshealth-checker-with-standalone-tcp-li>
-<a href=/zh-cn/docs/features/health-checker-with-standalone-tcp/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeatureshealth-checker-with-standalone-tcp><span>独立健康检查连接</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturesprune-fields-li>
-<a href=/zh-cn/docs/features/prune-fields/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturesprune-fields><span>资源字段裁剪</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync-all-custom-resources-li>
-<a href=/zh-cn/docs/features/sync-all-custom-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync-all-custom-resources><span>同步所有的自定义资源</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsfeaturessync-all-resources-li>
-<a href=/zh-cn/docs/features/sync-all-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zh-cndocsfeaturessync-all-resources><span>同步所有的资源</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesremaining-item-count-li>
+<a href=/docs/features/remaining-item-count/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesremaining-item-count><span>Return RemainingItemCount</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesraw-sql-query-li>
+<a href=/docs/features/raw-sql-query/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesraw-sql-query><span>Raw SQL Query</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturesprune-fields-li>
+<a href=/docs/features/prune-fields/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturesprune-fields><span>Resource Field Pruning</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeatureshealth-checker-with-standalone-tcp-li>
+<a href=/docs/features/health-checker-with-standalone-tcp/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeatureshealth-checker-with-standalone-tcp><span>Standalone TCP for Health Checker</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturessync-all-custom-resources-li>
+<a href=/docs/features/sync-all-custom-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturessync-all-custom-resources><span>Sync All Custom Resources</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeaturessync-all-resources-li>
+<a href=/docs/features/sync-all-resources/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeaturessync-all-resources><span>Sync All Resources</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zh-cndocsrelease-notes-li>
-<a href=https://github.com/clusterpedia-io/clusterpedia/releases class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zh-cndocsrelease-notes><span>版本日志</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsrelease-notes-li>
+<a href=https://github.com/clusterpedia-io/clusterpedia/releases class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsrelease-notes><span>Release notes</span></a>
 </li>
 </ul>
 </li>
@@ -213,29 +189,29 @@
 </aside>
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href=https://github.com/clusterpedia-io/website/tree/main/content/zh-cn/docs/advanced-features/custom_storage_layer.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> 查看页面源码</a>
-<a href=https://github.com/clusterpedia-io/website/edit/main/content/zh-cn/docs/advanced-features/custom_storage_layer.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-<a href="https://github.com/clusterpedia-io/website/new/main/content/zh-cn/docs/advanced-features/custom_storage_layer.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-<a href="https://github.com/clusterpedia-io/website/issues/new?title=%e8%87%aa%e5%ae%9a%e4%b9%89%e5%ad%98%e5%82%a8%e5%b1%82%e6%8f%92%e4%bb%b6" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
-<a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
-<a id=print href=/zh-cn/docs/advanced-features/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
+<a href=https://github.com/clusterpedia-io/website/tree/main/content/en/docs/advanced-features/custom_storage_layer.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> View page source</a>
+<a href=https://github.com/clusterpedia-io/website/edit/main/content/en/docs/advanced-features/custom_storage_layer.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/clusterpedia-io/website/new/main/content/en/docs/advanced-features/custom_storage_layer.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Create child page</a>
+<a href="https://github.com/clusterpedia-io/website/issues/new?title=Custom%20Storage%20Layer%20Plugin" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+<a id=print href=/docs/advanced-features/_print/><i class="fa fa-print fa-fw"></i> Print entire section</a>
 </div>
 <div class=td-toc><nav id=TableOfContents>
 <ul>
-<li><a href=#使用-自定义存储层插件>使用 <code>自定义存储层插件</code></a>
+<li><a href=#use-the-custom-storage-layer-plugin>Use the <code>custom storage layer plugin</code></a>
 <ul>
-<li><a href=#本地运行>本地运行</a></li>
-<li><a href=#存储插件镜像--helm-charts>存储插件镜像 + Helm Charts</a></li>
+<li><a href=#local-run>Local Run</a></li>
+<li><a href=#storage-plugin-image--helm-charts>Storage Plugin Image + Helm Charts</a></li>
 </ul>
 </li>
-<li><a href=#开发自定义存储层插件>开发<code>自定义存储层插件</code></a>
+<li><a href=#developing-custom-storage-layer-plugins>Developing <code>custom storage layer plugins</code></a>
 <ul>
-<li><a href=#核心逻辑>核心逻辑</a></li>
-<li><a href=#本地开发运行>本地开发运行</a></li>
-<li><a href=#存储插件镜像>存储插件镜像</a></li>
+<li><a href=#core-logic>core logic</a></li>
+<li><a href=#local-development-run>Local development run</a></li>
+<li><a href=#storage-plugin-image>storage plugin image</a></li>
 </ul>
 </li>
-<li><a href=#基于-clusterpeida-core-实现高级-chart>基于 clusterpeida-core 实现高级 Chart</a></li>
+<li><a href=#advanced-chart-based-on-clusterpedia-core>Advanced Chart based on clusterpedia-core</a></li>
 </ul>
 </nav></div>
 </aside>
@@ -243,88 +219,90 @@
 <nav aria-label=breadcrumb class=td-breadcrumbs>
 <ol class=breadcrumb>
 <li class=breadcrumb-item>
-<a href=/zh-cn/docs/>文档</a>
+<a href=/docs/>Documentation</a>
 </li>
 <li class=breadcrumb-item>
-<a href=/zh-cn/docs/advanced-features/>高级功能</a>
+<a href=/docs/advanced-features/>Advanced Features</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=/zh-cn/docs/advanced-features/custom_storage_layer/>自定义存储层插件</a>
+<a href=/docs/advanced-features/custom_storage_layer/>Custom Storage Layer Plugin</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>自定义存储层插件</h1>
+<h1>Custom Storage Layer Plugin</h1>
 <header class=article-meta>
-<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 6 分钟阅读 &nbsp;</p>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 12 minute read &nbsp;</p>
 </header>
-<p>Clusterpedia 可以通过存储层来使用不同的存储组件，例如 MySQL/PostgreSQL, Memory, Elasticsearch</p>
-<p>当前，Clusterpedia 内置了两个存储层：</p>
+<p>Clusterpedia can use different storage components such as MySQL/PostgreSQL, Memory, Elasticsearch through the storage layer.</p>
+<p>Currently, Clusterpedia has two built-in storage layers:</p>
 <ul>
-<li>用于接入关系型数据库的 <a href=https://clusterpedia.io/zh-cn/docs/installation/configurate/configurate-internalstorage/>internalstorage</a> 存储层</li>
-<li>基于内存的 <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/pkg/storage/memorystorage>memory</a> 存储层</li>
+<li>The <a href=https://clusterpedia.io/en/docs/installation/configurate/configurate-internalstorage/>internalstorage</a> storage layer for accessing relational databases.</li>
+<li>The <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/pkg/storage/memorystorage>memory</a> storage layer based on Memory</li>
 </ul>
-<p>尽管 Clusterpedia 已经默认支持了关系型数据库和内存，但是用户的需求往往是多变和复杂的，固定的存储层可能无法满足不同用户对于存储组件和性能的要求，于是 Clusterpedia 支持通过插件的方式来接入用户自己实现的存储层，我们称这种方式为 <code>自定义存储层插件</code>，简称为 <code>存储插件</code>。</p>
-<p>通过<code>存储插件</code>，用户可以做到以下事情：</p>
+<p>Although Clusterpedia already supports relational databases and memory by default, user requirements are often variable and complex, and a fixed storage layer may not match the requirements of different users for storage components and performance, so Clusterpedia supports access to user-implemented storage layers by means of plugins, which we call <code>custom storage layer plugins</code>, or <code>storage plugins</code> for short.</p>
+<p>With the <code>storage plugin</code>, users can do the following things:</p>
 <ul>
-<li><strong>使用任意的存储组件</strong>，例如 <code>Elasticsearch</code>，<code>RedisGraph</code>，<code>Etcd</code>，甚至是 <code>MessageQueue</code> 也没有问题</li>
-<li>允许用户针对自己的业务来优化资源的存储格式和查询性能</li>
-<li>针对存储组件的特性来实现更高级的检索功能</li>
+<li><strong>Use any storage component</strong>, such as <code>Elasticsearch</code>, <code>RedisGraph</code>, <code>Etcd</code>, or even <code>MessageQueue</code> with no problem</li>
+<li>Allow users to optimize the storage format and query performance of resources for their business</li>
+<li>Implement more advanced retrieval features for storage components</li>
 </ul>
-<p>Clusterpedia 也维护了一些<code>存储插件</code>，用户可以根据需求选用：</p>
+<p>Clusterpedia also maintains a number of <code>storage plugins</code> that users can choose from, depending on your needs:</p>
 <ul>
-<li><a href=https://github.com/clusterpedia-io/sample-storage>Sample Storage</a>: 可以连接<strong>关系型数据库</strong>的存储插件示例</li>
-<li><a href=https://github.com/clusterpedia-io/elasticsearch-storage>Elasticsearch Storage</a>: 用于连接 <strong>Elasticsearch</strong> 的存储插件</li>
+<li><a href=https://github.com/clusterpedia-io/sample-storage>Sample Storage</a>: Example of a storage plugin that can connect to <strong>relational databases</strong></li>
+<li><a href=https://github.com/clusterpedia-io/elasticsearch-storage>Elasticsearch Storage</a>: Storage plugin for connecting to <strong>Elasticsearch</strong></li>
 </ul>
-<p><code>存储插件</code>是通过 <strong>Go Plugin</strong> 的方式来让 Clusterpedia 组件加载，相比 RPC 或者其他方式，这种方式在没有任何损耗的前提下提供非常灵活的插件接入。</p>
+<p><code>Storage plugins</code> are loaded by Clusterpedia components via <strong>Go Plugin</strong>, which provides very flexible plug-in access without any performance loss compared to RPC or other methods.</p>
 <blockquote>
-<p>关于 <strong>Go Plugin</strong> 对性能的影响可以简单参考 <a href=https://github.com/uberswe/goplugins>https://github.com/uberswe/goplugins</a></p>
+<p>The performance impact of the Go Plugin can be found at <a href=https://github.com/uberswe/goplugins>https://github.com/uberswe/goplugins</a></p>
 </blockquote>
-<p>众所周知，<strong>Go Plugin</strong> 在开发和使用上都比较繁琐，不过 Clusterpedia 通过一些机制来巧妙的优化了存储插件的使用和开发，并且提供了 <a href=https://github.com/clusterpedia-io/sample-storage>clusterpedia-io/sample-storage</a> 插件作为参考。</p>
-<p>下面我们以 <a href=https://github.com/clusterpedia-io/sample-storage>clusterpedia-io/sample-storage</a> 为例，分别介绍：</p>
+<p>As we all know, Go Plugin is troublesome to develop and use, but Clusterpedia cleverly optimizes the use and development of storage plugins through some mechanisms, and provides clusterpedia-io/sample-storage plugin as a reference.</p>
+<p>Here we take <a href=https://github.com/clusterpedia-io/sample-storage>clusterpedia-io/sample-storage</a> as an example to introduce.</p>
 <ul>
-<li><a href=#%E4%BD%BF%E7%94%A8-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%98%E5%82%A8%E5%B1%82%E6%8F%92%E4%BB%B6>如何使用 <code>自定义存储层插件</code></a></li>
-<li><a href=#%E5%BC%80%E5%8F%91%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%98%E5%82%A8%E5%B1%82%E6%8F%92%E4%BB%B6>如何实现 <code>自定义存储层插件</code></a></li>
+<li><a href=#use-the-custom-storage-layer-plugin>How to use the <code>custom storage layer plugin</code></a></li>
+<li><a href=#developing-custom-storage-layer-plugins>How to implement the <code>custom storage layer plugin</code></a></li>
 </ul>
-<h2 id=使用-自定义存储层插件>使用 <code>自定义存储层插件</code></h2>
-<p>存储插件的使用可以大致分为三种方式：</p>
+<h2 id=use-the-custom-storage-layer-plugin>Use the <code>custom storage layer plugin</code></h2>
+<p>The use of the storage plugin can be broadly divided into three ways:</p>
 <ol>
-<li>运行 Clusterpedia 组件二进制并加载 <code>存储插件</code></li>
-<li>使用基础 Chart —— clusterpedia-core 来设置<code>存储插件镜像</code>和配置存储层</li>
-<li>使用 Clusterpedia <strong>高级 Chart</strong>，无需关心存储插件的设置</li>
+<li>Run the Clusterpedia component binary and load the storage plugins</li>
+<li>Use the base Chart &ndash; clusterpedia-core to set up the <code>storage plugin image</code> and configure the storage layer</li>
+<li>Use the Clusterpedia <strong>Advanced Chart</strong> to not care about the storage plugin settings</li>
 </ol>
-<p>通过本地运行组件二进制，我们可以更加了解 Cluserpedia 组件是如何加载和运行 <code>存储插件</code>，</p>
-<p>用户在真正使用时通常是利用已经构建好的<code>存储插件镜像</code>，或者是直接部署 Clusterpedia <strong>高级 Chart</strong></p>
-<h3 id=本地运行>本地运行</h3>
-<h4 id=插件构建>插件构建</h4>
-<p>存储插件实际是一个 <em>.so</em> 后缀的动态链接库，Clusterpedia 组件在启动时可以加载<code>存储插件</code>，并根据指定的存储层名称来使用具体的<code>存储插件</code>。</p>
-<p>我们以 <a href=https://github.com/clusterpedia-io/sample-storage>clusterpedia-io/sample-storage</a> 为例，构建出一个<code>存储插件</code>二进制</p>
+<p>By running the component binary locally, we can get a better understanding of how the Cluserpedia component loads and runs the <code>storage plugins</code>.</p>
+<p>Users can actually use the <code>storage plugin image</code> already built, or deploy Clusterpedia <strong>Advanced Chart</strong> directly</p>
+<h3 id=local-run>Local Run</h3>
+<h4 id=building-plugins>Building Plugins</h4>
+<p>A storage plugin is actually a dynamic link library with a <em>.so</em> suffix.
+Clusterpedia components can load <code>storage plugins</code> at startup and use specific <code>storage plugins</code> depending on the specified storage layer name.</p>
+<p>Let&rsquo;s take <a href=https://github.com/clusterpedia-io/sample-storage>clusterpedia-io/sample-storage</a> as an example and build a <code>storage plugin binary</code></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git clone --recursive https://github.com/clusterpedia-io/sample-storage.git <span style=color:#ce5c00;font-weight:700>&amp;&amp;</span> <span style=color:#204a87>cd</span> sample-storage
 $ make build-plugin
-</code></pre></div><p>使用 <strong>file</strong> 命令查看<code>存储插件</code>信息</p>
+</code></pre></div><p>Use the <strong>file</strong> command to view storage plugin information</p>
 <pre tabindex=0><code>$ file ./plugins/sample-storage-layer.so
 ./plugins/sample-storage-layer.so: Mach-O 64-bit dynamically linked shared library x86_64
-</code></pre><p>Clusterpedia 的 <code>ClusterSynchro Manager</code> 和 <code>APIServer</code> 组件可以通过环境变量和命令参数来加载和使用存储插件：</p>
+</code></pre><p>Clusterpedia&rsquo;s <code>ClusterSynchro Manager</code> and <code>APIServer</code> components can load and use storage plugins via environment variables and command flags:</p>
 <ul>
-<li><code>STORAGE_PLUGINS=&lt;plugins dir></code> 环境变量设置插件所在目录，Clusterpedia 会将该目录下所有插件都加载到组件中</li>
-<li><code>--storage-name=&lt;storage name></code> 插件命令参数，设置存储层名称</li>
-<li><code>--storage-config=&lt;storage config path></code> 插件命令参数，设置存储层配置</li>
+<li><code>STORAGE_PLUGINS=&lt;plugins dir></code> environment variable sets the directory where the plugins are located, and Clusterpedia will load all plugins in that directory into the component</li>
+<li><code>--storage-name=&lt;storage name></code> command flag, set the storage layer name</li>
+<li><code>--storage-config=&lt;storage config path></code> command flag, set the storage layer configuration</li>
 </ul>
-<h4 id=组件构建>组件构建</h4>
-<p>本地运行时，为了保证依赖一致，需要在本地通过 <code>make build-components</code> 命令构建 clusterpedia 组件</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ <span style=color:#8f5902;font-style:italic># 在 sample-storage 目录</span>
+<h4 id=building-components>Building components</h4>
+<p>To ensure consistent dependencies when running locally, clusterpedia components need to be built locally with the <code>make build-components</code> command</p>
+<blockquote>
+<p>For more information on building storage plugins and Clusterpedia components see <a href=#local-development-run>Developing custom storage layer plugins</a></p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ <span style=color:#8f5902;font-style:italic># cd sample-storage</span>
 $ make build-components
 $ ls -al ./bin
 -rwxr-xr-x   <span style=color:#0000cf;font-weight:700>1</span> icebergu  staff  <span style=color:#0000cf;font-weight:700>90707488</span> <span style=color:#0000cf;font-weight:700>11</span>  <span style=color:#0000cf;font-weight:700>7</span> 11:15 apiserver
 -rwxr-xr-x   <span style=color:#0000cf;font-weight:700>1</span> icebergu  staff  <span style=color:#0000cf;font-weight:700>91896016</span> <span style=color:#0000cf;font-weight:700>11</span>  <span style=color:#0000cf;font-weight:700>7</span> 11:16 binding-apiserver
 -rwxr-xr-x   <span style=color:#0000cf;font-weight:700>1</span> icebergu  staff  <span style=color:#0000cf;font-weight:700>82769728</span> <span style=color:#0000cf;font-weight:700>11</span>  <span style=color:#0000cf;font-weight:700>7</span> 11:16 clustersynchro-manager
 -rwxr-xr-x   <span style=color:#0000cf;font-weight:700>1</span> icebergu  staff  <span style=color:#0000cf;font-weight:700>45682000</span> <span style=color:#0000cf;font-weight:700>11</span>  <span style=color:#0000cf;font-weight:700>7</span> 11:17 controller-manager
-</code></pre></div><blockquote>
-<p>关于存储插件与 Clusterpedia 组件的构建可以查看 <a href=#%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91%E8%BF%90%E8%A1%8C>开发自定义存储层插件</a></p>
-</blockquote>
-<h4 id=存储插件运行时的配置文件>存储插件运行时的配置文件</h4>
-<p>在运行 clusterpedia 前还需要准备<code>存储插件</code>在运行时的配置文件，<em>sample-storage</em> 提供了它的配置示例 <a href=https://github.com/clusterpedia-io/sample-storage/blob/main/example-config.yaml>example-config.yaml</a></p>
-<p>在运行时 clusterpedia 组件时，通过 <code>--storage-config=./config.yaml</code> 来指定运行时配置文件</p>
+</code></pre></div><h4 id=storage-plugin-runtime-configuration-file>Storage plugin runtime configuration file</h4>
+<p>Before running clusterpedia you also need to prepare the runtime configuration file for the storage plugin.
+<em>sample-storage</em> provides an example configuration <a href=https://github.com/clusterpedia-io/sample-storage/blob/main/example-config.yaml>example-config.yaml</a></p>
+<p>When running the clusterpedia component, set the configuration file via <code>--storage-config=./config.yaml</code> to specify the runtime configuration file</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># example-config.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>mysql</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>host</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>127.0.0.1</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -336,38 +314,38 @@ $ ls -al ./bin
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>stdout</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>colorful</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>slowThreshold</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>100ms</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>用户需要根据选择的存储层来配置运行时配置</p>
-<h4 id=运行-clusterpedia-clustersynchro-manager>运行 clusterpedia clustersynchro manager</h4>
+</span></code></pre></div><p>The user needs to configure the runtime configuration according to the selected storage layer</p>
+<h4 id=run-clusterpedia-clustersynchro-manager>Run clusterpedia clustersynchro manager</h4>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ <span style=color:#000>STORAGE_PLUGINS</span><span style=color:#ce5c00;font-weight:700>=</span>./plugins ./bin/clustersynchro-manager --kubeconfig ~/.kube/config <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    --storage-name<span style=color:#ce5c00;font-weight:700>=</span>sample-storage-layer <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    --storage-config ./config.yaml
-</code></pre></div><h4 id=运行-clusterpedia-apiserver>运行 clusterpedia apiserver</h4>
-<p>可以选择不使用自己生成的证书，这时需要在运行 apiserver 忽略掉 <code>--client-ca-file ca.crt</code> 参数</p>
+</code></pre></div><h4 id=run-clusterpedia-apiserver>Run clusterpedia apiserver</h4>
+<p>You can choose not to use your own generated certificate, which requires running apiserver without the <code>-client-ca-file ca.crt</code> flag.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ openssl req -nodes -new -x509 -keyout ca.key -out ca.crt
 $ openssl req -out client.csr -new -newkey rsa:4096 -nodes -keyout client.key -subj <span style=color:#4e9a06>&#34;/CN=development/O=system:masters&#34;</span>
 $ openssl x509 -req -days <span style=color:#0000cf;font-weight:700>365</span> -in client.csr -CA ca.crt -CAkey ca.key -set_serial <span style=color:#0000cf;font-weight:700>01</span> -sha256 -out client.crt
-</code></pre></div><p>运行 apiserver</p>
+</code></pre></div><p>run apiserver</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ <span style=color:#000>STORAGE_PLUGINS</span><span style=color:#ce5c00;font-weight:700>=</span>./plugins ./bin/apiserver --client-ca-file ca.crt  --secure-port <span style=color:#0000cf;font-weight:700>8443</span> <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    --kubeconfig ~/.kube/config <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    --authentication-kubeconfig ~/.kube/config <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    --authorization-kubeconfig ~/.kube/config <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    --storage-name<span style=color:#ce5c00;font-weight:700>=</span>sample-storage-layer <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    --storage-config ./config.yaml
-</code></pre></div><h3 id=存储插件镜像--helm-charts>存储插件镜像 + Helm Charts</h3>
-<p>Clusterpeida 已经提供了多个 Charts：</p>
+</code></pre></div><h3 id=storage-plugin-image--helm-charts>Storage Plugin Image + Helm Charts</h3>
+<p>Clusterpeida already provides several Charts:</p>
 <ul>
-<li><a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia>charts/clusterpedia</a> 使用 internalstorage 存储层的 Chart，可以选择部署 MySQL 或者 PostgreSQL，但是不支持设置存储插件</li>
-<li><a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-core>charts/clusterpedia-core</a> 支持配置任意存储层的 Chart，通常作为子 Chart 来使用</li>
-<li><a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-mysql>charts/clusterpedia-mysql</a> 使用 MySQL 作为存储组件的<strong>高级 Chart</strong>，基于 clusterpedia-core 实现</li>
-<li><a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-postgresql>charts/clusterpedia-postgresql</a> 使用 PostgreSQL 作为存储组件的<strong>高级 Chart</strong>，基于 clusterpedia-core 实现</li>
-<li><a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-elasticsearch>charts/clusterpedia-elasticsearch</a> 使用 Elasticsearch 作为存储组件的<strong>高级 Chart</strong>，基于 clusterpedia-core 实现</li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia>charts/clusterpedia</a> is a Chart using the internalstorage storage layer, which can be optionally deployed with MySQL or PostgreSQL, but does not support setting up storage plugins</li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-core>charts/clusterpedia-core</a> supports configuration of any storage layer Chart, usually used as a child Chart</li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-mysql>charts/clusterpedia-mysql</a> is an <strong>advanced Chart</strong> using MySQL as the storage component, based on clusterpedia-core implementation</li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-postgresql>charts/clusterpedia-postgresql</a> is an <strong>advanced Chart</strong> using PostgreSQL as the storage component, based on the clusterpedia-core implementation</li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-elasticsearch>charts/clusterpedia-elasticsearch</a> uses Elasticsearch as the <strong>advanced Chart</strong> for the storage component, based on the clusterpedia-core implementation</li>
 </ul>
-<p>如果用户没有<code>存储插件</code>需求，默认存储层和关系型数据库已经可以满足需求的话，可以直接选用 <a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia>charts/clusterpedia</a>，开箱即用</p>
-<p><a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-mysql>clusterpedia-mysql</a>，<a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-postgresql>clusterpedia-postgresql</a> 和 <a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-elasticsearch>clusterpedia-elasticsearch</a> 便是基于 <a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-core>clusterpedia-core</a> 实现的<strong>高级 Charts</strong>，在这些 Charts 中通过默认配置 clusterpedia-core 的<code>存储插件镜像</code>和存储层配置来为用户屏蔽掉<code>存储插件</code>的复杂概念，开箱即用</p>
-<p>尽管我们在使用中通常会直接使用<strong>高级 Charts</strong>，但是知道如何使用 <a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-core>clusterpedia-core</a> 来设置<code>存储插件镜像</code>，可以让我们更好的理解<code>插件镜像</code>是如何工作的。</p>
+<p>If you don&rsquo;t need a <code>storage plugin</code> and the <em>internalstorage</em> storage layer and <strong>relational database</strong> are sufficient, you can use <a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia>charts/clusterpedia</a> directly, <strong>out of the box</strong>.</p>
+<p><a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-mysql>clusterpedia-mysql</a>，<a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-postgresql>clusterpedia-postgresql</a> and <a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-elasticsearch>clusterpedia-elasticsearch</a> are <strong>advanced Charts</strong> based on <a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-core>charts/clusterpedia-core</a>, in which the user is shielded from the complex concept of <code>storage plugins</code> by default configuration of <em>clusterpedia-core</em>&rsquo;s storage plugin image and storage layer configuration, right <strong>out of the box</strong>.</p>
+<p>Although we usually use <strong>Advanced Charts</strong> directly in our usage, knowing how to use <a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia-core>charts/clusterpedia-core</a> to set up <code>storage plugin images</code> gives us a better understanding of how plugin images work.</p>
 <h4 id=clusterpedia-core>clusterpedia-core</h4>
-<p>我们以 <a href=https://github.com/clusterpedia-io/sample-storage>clusterpedia-io/sample-storage</a> 为例，使用 <a href=https://github.com/clusterpedia-io/sample-storage/pkgs/container/clusterpedia%2Fsample-storage-layer>ghcr.io/clusterpedia-io/clusterpedia/sample-storage-layer</a> 插件镜像来部署 Clusterpedia。</p>
-<p><em>clusterpedia-core</em> 不涉及任何存储组件的部署安装，所以用户需要根据已部署的存储组件来配置存储层</p>
+<p>Let&rsquo;s take <a href=https://github.com/clusterpedia-io/sample-storage>clusterpedia-io/sample-storage</a> as an example and deploy Clusterpedia using the <a href=https://github.com/clusterpedia-io/sample-storage/pkgs/container/clusterpedia%2Fsample-storage-layer>ghcr.io/clusterpedia-io/clusterpedia/sample-storage-layer</a> plugin image.</p>
+<p>The <em>clusterpedia-core</em> does not involve the deployment and installation of any storage components, so users need to configure the storage layer according to the deployed storage components</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># myvalues.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>storage</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;sample-storage-layer&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -382,8 +360,8 @@ $ openssl x509 -req -days <span style=color:#0000cf;font-weight:700>365</span> -
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>user</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>root</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>password</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>dangerous0</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>database</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p><code>storage.name</code> 配置存储镜像插件的存储层名称</p>
-<p>clusterpedia-core 会将 <code>storage.image</code> 定义的插件镜像中的<code>存储插件</code>复制到组件的插件目录下</p>
+</span></code></pre></div><p><code>storage.name</code> sets the storage layer name of the <code>storage image plugin</code></p>
+<p>clusterpedia-core copies the <code>storage plugins</code> from the plugin image defined by <code>storage.image</code> to the component&rsquo;s plugin directory.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># helm template clusterpedia -n clusterpedia-system -f myvalues.yaml ./clusterpedia-core</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>initContainers</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -423,7 +401,7 @@ $ openssl x509 -req -days <span style=color:#0000cf;font-weight:700>365</span> -
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>storage-plugins</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>emptyDir</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span>{}<span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>除了使用 <code>storage.config</code> 定义存储层的运行时配置 config.yaml 外，还可以使用已有的 configmap 以及 secret</p>
+</span></code></pre></div><p>In addition to using <code>storage.config</code> to define the runtime configuration <em>config.yaml</em> for the storage layer, you can also use the existing configmap and secret.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># myvalues.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>storage</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;sample-storage-layer&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -439,13 +417,13 @@ $ openssl x509 -req -days <span style=color:#0000cf;font-weight:700>365</span> -
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>secretKeyRef</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;sample-storage-password&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>key</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>password</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p><em>clusterpedia-core</em> 为了能够作为子 Chart 被其他高级 Charts 引用，在存储层配置上是非常灵活的，但是用户实际在使用中并不一定需要直接使用 clusterpedia-core，只需要使用针对具体存储组件部署的<strong>高级 Charts</strong> 即可，例如 <em>clusterpedia-mysql</em> 和 <em>clusterpedia-postgresql</em></p>
-<p>在下节我们也会介绍如何基于 <em>clusterpedia-core</em> 来针对具体存储组件实现<strong>高级 Chart</strong>。</p>
-<h2 id=开发自定义存储层插件>开发<code>自定义存储层插件</code></h2>
-<p><a href=https://github.com/clusterpedia-io/sample-storage>clusterpedia-io/sample-storage</a> 不仅仅是一个存储插件示例，也是一个模版仓库，其中项目结构和大部分构建工具都可以在其他存储插件项目中使用</p>
-<p>我们首先 clone <em>sample-storage</em>，或者根据 <em>sample-storage</em> 生成一个新的存储插件仓库</p>
+</span></code></pre></div><p><em>clusterpedia-core</em> is very flexible in configuration of the storage layer in order to be referenced by other <strong>advanced Charts</strong> as a child Chart, but users do not necessarily need to use clusterpedia-core directly in practice, just the <strong>advanced Charts</strong> deployed for the specific storage component, such as <em>clusterpedia-mysql</em> and <em>clusterpedia-postgresql</em>.</p>
+<p>In the next section we will also describe how to implement <strong>Advanced Charts</strong> for specific storage components based on <em>clusterpedia-core</em>.</p>
+<h2 id=developing-custom-storage-layer-plugins>Developing <code>custom storage layer plugins</code></h2>
+<p><a href=https://github.com/clusterpedia-io/sample-storage>clusterpedia-io/sample-storage</a> is not only a storage plugin example, but also a template repository where the project structure and most of the build tools can be used in other storage plugin projects</p>
+<p>We first clone <em>sample-storage</em>, or generate a new storage plugin repository based on <em>sample-storage</em></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git clone --recursive https://github.com/clusterpedia-io/sample-storage.git <span style=color:#ce5c00;font-weight:700>&amp;&amp;</span> <span style=color:#204a87>cd</span> sample-storage
-</code></pre></div><p>注意拉取仓库时，需要指定 <code>--recursive</code> 拉取子仓库</p>
+</code></pre></div><p>Note that when pulling the repository, you need to specify <code>--recursive</code> to pull the sub-repository</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ ls -al
 ...
 -rw-r--r--   <span style=color:#0000cf;font-weight:700>1</span> icebergu  staff    <span style=color:#0000cf;font-weight:700>260</span> <span style=color:#0000cf;font-weight:700>12</span> <span style=color:#0000cf;font-weight:700>13</span> 15:14 Dockerfile
@@ -458,14 +436,14 @@ drwxr-xr-x  <span style=color:#0000cf;font-weight:700>32</span> icebergu  staff 
 -rw-r--r--   <span style=color:#0000cf;font-weight:700>1</span> icebergu  staff    <span style=color:#0000cf;font-weight:700>139</span> <span style=color:#0000cf;font-weight:700>11</span> <span style=color:#0000cf;font-weight:700>23</span> 10:25 main.go
 drwxr-xr-x  <span style=color:#0000cf;font-weight:700>16</span> icebergu  staff    <span style=color:#0000cf;font-weight:700>512</span> <span style=color:#0000cf;font-weight:700>12</span> <span style=color:#0000cf;font-weight:700>13</span> 15:33 storage
 drwxr-xr-x   <span style=color:#0000cf;font-weight:700>9</span> icebergu  staff    <span style=color:#0000cf;font-weight:700>288</span> <span style=color:#0000cf;font-weight:700>12</span> <span style=color:#0000cf;font-weight:700>13</span> 15:33 vendor
-</code></pre></div><p>整个项目结构分为三类</p>
+</code></pre></div><p>The entire project structure is divided into three categories:</p>
 <ul>
-<li><code>main.go</code>, <code>storage</code> 包：<code>自定义存储层插件</code>的核心逻辑</li>
-<li><code>clusterpedia</code> 主库，用于本地开发和测试</li>
-<li><em>Dockerfile</em> 和 <em>Makefile</em> 用于项目构建和镜像打包，可以适用于任何存储插件项目</li>
+<li><em>main.go</em>, <em>storage</em> package: the core logic of the custom storage plugin</li>
+<li><code>clusterpedia</code> local repository: used for local development and testing</li>
+<li><em>Dockerfile</em> and <em>Makefile</em> for project build and image packaging, which can be applied to any storage plugin project</li>
 </ul>
-<h3 id=核心逻辑>核心逻辑</h3>
-<p><em>main.go</em> 是存储插件的主文件，主要用来调用 storage 包中的注册函数 —— <code>RegisterStorageLayer</code>。</p>
+<h3 id=core-logic>core logic</h3>
+<p><em>main.go</em> is the main storage plugin file, mainly used to call the registration function in the storage package &ndash; <code>RegisterStorageLayer</code>.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>package</span> <span style=color:#000>main</span>
 
 <span style=color:#204a87;font-weight:700>import</span> <span style=color:#000;font-weight:700>(</span>
@@ -475,9 +453,9 @@ drwxr-xr-x   <span style=color:#0000cf;font-weight:700>9</span> icebergu  staff 
 <span style=color:#204a87;font-weight:700>func</span> <span style=color:#000>init</span><span style=color:#000;font-weight:700>()</span> <span style=color:#000;font-weight:700>{</span>
 	<span style=color:#000>plugin</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>RegisterStorageLayer</span><span style=color:#000;font-weight:700>()</span>
 <span style=color:#000;font-weight:700>}</span>
-</code></pre></div><p>storage 包中的是存储插件的核心逻辑：</p>
+</code></pre></div><p>The storage package contains the core logic of the storage plugin:</p>
 <ol>
-<li>实现 clusterpedia 存储层接口 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/4608c8d13101d82960525dfe39f51e4f64ed49b3/pkg/storage/storage.go#L13><code>storage.StorageFactory</code></a></li>
+<li>Implementing the clusterpedia storage layer interface <a href=https://github.com/clusterpedia-io/clusterpedia/blob/4608c8d13101d82960525dfe39f51e4f64ed49b3/pkg/storage/storage.go#L13><code>storage.StorageFactory</code></a></li>
 </ol>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>import</span> <span style=color:#000;font-weight:700>(</span>
 	<span style=color:#4e9a06>&#34;gorm.io/gorm&#34;</span>
@@ -491,32 +469,31 @@ drwxr-xr-x   <span style=color:#0000cf;font-weight:700>9</span> icebergu  staff 
 
 <span style=color:#204a87;font-weight:700>var</span> <span style=color:#000>_</span> <span style=color:#000>storage</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>StorageFactory</span> <span style=color:#000;font-weight:700>=</span> <span style=color:#ce5c00;font-weight:700>&amp;</span><span style=color:#000>StorageFactory</span><span style=color:#000;font-weight:700>{}</span>
 </code></pre></div><ol start=2>
-<li><a href=https://github.com/clusterpedia-io/sample-storage/blob/main/storage/register.go#L33>NewStorageFactory</a> 函数来返回 <code>storage.StorageFactory</code> 实例</li>
+<li><a href=https://github.com/clusterpedia-io/sample-storage/blob/main/storage/register.go#L33>NewStorageFactory</a> function to return an instance of <code>storage.StorageFactory</code></li>
 </ol>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>func</span> <span style=color:#000>NewStorageFactory</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>configPath</span> <span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>)</span> <span style=color:#000;font-weight:700>(</span><span style=color:#000>storage</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>StorageFactory</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>error</span><span style=color:#000;font-weight:700>)</span>
 </code></pre></div><ol start=3>
-<li>RegisterStorageLayer 函数将 NewStorageFactory 注册到 clusterpedia 中</li>
+<li>The RegisterStorageLayer function registers the NewStorageFactory with clusterpedia</li>
 </ol>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>const</span> <span style=color:#000>StorageName</span> <span style=color:#000;font-weight:700>=</span> <span style=color:#4e9a06>&#34;sample-storage-layer&#34;</span>
 
 <span style=color:#204a87;font-weight:700>func</span> <span style=color:#000>RegisterStorageLayer</span><span style=color:#000;font-weight:700>()</span> <span style=color:#000;font-weight:700>{</span>
 	<span style=color:#000>storage</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>RegisterStorageFactoryFunc</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>StorageName</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>NewStorageFactory</span><span style=color:#000;font-weight:700>)</span>
 <span style=color:#000;font-weight:700>}</span>
-</code></pre></div><p>当用户通过 <code>--storage-name</code> 指定该存储层时，会自动调用注册的 <strong>NewStorageFactory</strong> 来创建 <code>storage.StorageFactory</code> 实例。</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>./bin/apiserver --storage-name<span style=color:#ce5c00;font-weight:700>=</span>sample-storage-layer &lt;other flags&gt;
-</code></pre></div><h3 id=本地开发运行>本地开发运行</h3>
-<p>为了方便开发测试，我们在存储插件的仓库中添加了 clusterpedia 主库作为子库</p>
+</code></pre></div><p>The registered <strong>NewStorageFactory</strong> is automatically called when the user specifies the storage layer with <code>--storage-name</code> to create an instance of <code>storage.StorageFactory</code>.</p>
+<h3 id=local-development-run>Local development run</h3>
+<p>To facilitate development and testing, we have added the clusterpedia repository as a subrepository to the storage plugin repository</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git submodule status
 +4608c8d13101d82960525dfe39f51e4f64ed49b3 clusterpedia <span style=color:#ce5c00;font-weight:700>(</span>v0.6.0<span style=color:#ce5c00;font-weight:700>)</span>
-</code></pre></div><p>并且将 go.mod 中 clusterpedia 仓库 replace 为本地子库</p>
+</code></pre></div><p>and replace the clusterpedia repository in go.mod with a local subrepository</p>
 <pre tabindex=0><code># go.mod
 replace (
         github.com/clusterpedia-io/api =&gt; ./clusterpedia/staging/src/github.com/clusterpedia-io/api
         github.com/clusterpedia-io/clusterpedia =&gt; ./clusterpedia
 )
-</code></pre><p>在构建存储层镜像时，不会使用本地 cluserpedia 子库</p>
-<h4 id=存储插件构建>存储插件构建</h4>
-<p>存储插件的构建分为两部分，分别是构建 clusterpedia 子库中组件和构建存储插件</p>
+</code></pre><p>The local cluserpedia subrepository will not be used when building the <code>storage layer image</code></p>
+<h4 id=build-storage-plugin>Build <code>storage plugin</code></h4>
+<p>The build of the storage plugin is divided into two parts, building the components in the clusterpedia repository and building the <code>storage plugin</code>.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ make build-components
 <span style=color:#000>OUTPUT_DIR</span><span style=color:#ce5c00;font-weight:700>=</span>/Users/icebergu/workspace/clusterpedia/sample-storage-layer <span style=color:#000>ON_PLUGINS</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87>true</span> <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>                /Library/Developer/CommandLineTools/usr/bin/make -C clusterpedia all
@@ -530,27 +507,27 @@ $ ls -al ./bin
 -rwxr-xr-x   <span style=color:#0000cf;font-weight:700>1</span> icebergu  staff  <span style=color:#0000cf;font-weight:700>91936472</span> <span style=color:#0000cf;font-weight:700>12</span> <span style=color:#0000cf;font-weight:700>15</span> 09:52 binding-apiserver
 -rwxr-xr-x   <span style=color:#0000cf;font-weight:700>1</span> icebergu  staff  <span style=color:#0000cf;font-weight:700>82826584</span> <span style=color:#0000cf;font-weight:700>12</span> <span style=color:#0000cf;font-weight:700>15</span> 09:52 clustersynchro-manager
 -rwxr-xr-x   <span style=color:#0000cf;font-weight:700>1</span> icebergu  staff  <span style=color:#0000cf;font-weight:700>45677904</span> <span style=color:#0000cf;font-weight:700>12</span> <span style=color:#0000cf;font-weight:700>15</span> 09:52 controller-manager
-</code></pre></div><p><code>make build-components</code> 命令会在调用 clusterpedia 库中的 <code>make all</code>，并将结果输出到存储插件项目的 ./bin 目录下</p>
+</code></pre></div><p>The <code>make build-components</code> command will call <code>make all</code> from the clusterpedia repository and output the result to <em>./bin</em> directory of the storage plugin project.</p>
 <blockquote>
-<p>如果 clusterpedia 子库未发生更改，那么只需要构建组件即可</p>
+<p>If the clusterpedia subrepository has not changed, then you only need to build the components once</p>
 </blockquote>
-<p>构建存储插件</p>
+<p>Build the storage plugin</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ make build-plugin
 <span style=color:#000>CLUSTERPEDIA_REPO</span><span style=color:#ce5c00;font-weight:700>=</span>/Users/icebergu/workspace/clusterpedia/sample-storage/clusterpedia <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>                clusterpedia/hack/builder.sh plugins sample-storage-layer.so
 
 $ ls -al ./plugins
 -rw-r--r--   <span style=color:#0000cf;font-weight:700>1</span> icebergu  staff  <span style=color:#0000cf;font-weight:700>53354352</span> <span style=color:#0000cf;font-weight:700>12</span> <span style=color:#0000cf;font-weight:700>15</span> 09:47 sample-storage-layer.so
-</code></pre></div><p>本地构建存储插件也是需要使用 clusterpedia 库的 <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/hack/builder.sh>builder.sh</a> 脚本来构建插件二进制</p>
-<p>关于运行存储层插件可以参考 <a href=#%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C>本地运行存储插件</a></p>
-<h3 id=存储插件镜像>存储插件镜像</h3>
-<p>上文提到，存储插件在真正的部署中，是通过镜像的方式将存储插件共享给 clusterpedia。</p>
-<p>Makefile 中提供 <code>make image-plugin</code> 来构建镜像，<code>make push-images</code> 来发布镜像</p>
-<h4 id=构建镜像>构建镜像</h4>
-<p>构建插件镜像时，我们需要使用 <a href=https://github.com/clusterpedia-io/clusterpedia/pkgs/container/clusterpedia%2Fbuilder>clusterpedia/builder</a> 镜像作为基础镜像来构建插件，builder 镜像的版本需要和使用插件的 clusterpedia 组件的版本一致</p>
+</code></pre></div><p>Building the storage plugin locally also requires using the <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/hack/builder.sh>builder.sh</a> script of the clusterpedia repository to build the plugin binary.</p>
+<p>For running storage plugins, see <a href=#local-run>Running storage plugins locally</a></p>
+<h3 id=storage-plugin-image>storage plugin image</h3>
+<p>As mentioned above, <code>storage plugins</code> are shared with clusterpedia by image in a real deployment.</p>
+<p>The Makefile provides <code>make image-plugin</code> to build images and <code>make push-images</code> to publish them.</p>
+<h4 id=building-images>Building images</h4>
+<p>To build a plugin image, we need to use the <a href=https://github.com/clusterpedia-io/clusterpedia/pkgs/container/clusterpedia%2Fbuilder>clusterpedia/builder</a> image as the base image to build the plugin, and the builder image needs to be the same version as the clusterpedia component that uses the plugin</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ <span style=color:#000>BUILDER_IMAGE</span><span style=color:#ce5c00;font-weight:700>=</span>ghcr.io/clusterpedia-io/clusterpedia/builder:v0.6.0 make image-plugin
-</code></pre></div><p>clusterpedia 中维护了已发布版本的 builder 镜像，用户也可以使用自己本地构建的 builder 镜像</p>
-<p>本地构建 builder 镜像</p>
+</code></pre></div><p>clusterpedia maintains a builder image of the published version, and users can also use their own locally built builder image</p>
+<p>Build the builder image locally</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ <span style=color:#204a87>cd</span> clusterpedia
 $ make image-builder
 docker buildx build <span style=color:#4e9a06>\
@@ -558,26 +535,25 @@ docker buildx build <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>                --platform<span style=color:#ce5c00;font-weight:700>=</span>linux/amd64 <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>                --load <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>                -f builder.dockerfile . <span style=color:#000;font-weight:700>;</span> <span style=color:#4e9a06>\
-</span></code></pre></div><p><code>存储插件镜像</code>的 tag 格式为 <storage-version>-&lt;clusterpedia-version/commit>，例如：
-<em>ghcr.io/clusterpedia-io/clusterpedia/sample-storage-layer:v0.0.0-v0.6.0</em></p>
-<p>存储插件镜像可以部署在 &lt;clusterpedia-version/commit> 版本的 Clusterpedia 中</p>
-<h4 id=镜像推送>镜像推送</h4>
-<p><code>make image-plugin</code> 根据手动设置的 builder 镜像来构建存储插件镜像</p>
-<p>而使用 <code>make push-images</code> 推送镜像时会自动为所有兼容版本和架构构建镜像</p>
+</span></code></pre></div><p>The tag format for <code>storage plugin images</code> is &lt; stroage version >-&lt;clusterpedia-version/commit>, for example: <em>ghcr.io/clusterpedia-io/clusterpedia/sample-storage-layer:v0.0.0-v0.6.0</em></p>
+<p>The storage plugin image can be deployed in the &lt;clusterpedia-version/commit> version of Clusterpedia</p>
+<h4 id=push-images>push images</h4>
+<p><code>make image-plugin</code> builds the storage plugin image based on the manually set builder image</p>
+<p>While pushing images with <code>make push-images</code> automatically builds images for all compatible versions and architectures</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-makefile data-lang=makefile><span style=color:#8f5902;font-style:italic># Makefile
 </span><span style=color:#8f5902;font-style:italic></span><span style=color:#000>CLUSTERPEDIA_VERSIONS</span> <span style=color:#ce5c00;font-weight:700>=</span> v0.6.0-beta.1 v0.6.0
 <span style=color:#000>RELEASE_ARCHS</span> <span style=color:#ce5c00;font-weight:700>?=</span> amd64 arm64
-</code></pre></div><p>镜像构建好后，可以<a href=#clusterpedia-core>通过 cluserpedia-core 来使用<code>存储插件镜像</code></a></p>
-<h2 id=基于-clusterpeida-core-实现高级-chart>基于 clusterpeida-core 实现高级 Chart</h2>
-<p>我们在实现自己的存储插件后，为了更加方便的使用，还是需要基于 clusterpedia-core Chart 来封装出<strong>高级 Chart</strong></p>
-<p><strong>高级 Chart</strong> 需要提供以下能力：</p>
+</code></pre></div><p>Once the image is built, <a href=#clusterpedia-core>the storage plugin image can be used via cluserpedia-core</a></p>
+<h2 id=advanced-chart-based-on-clusterpedia-core>Advanced Chart based on clusterpedia-core</h2>
+<p>After implementing our own storage plugin, we still need to provide an <strong>Advanced Chart</strong> based on <em>clusterpedia-core</em> Chart to make it easier to use.</p>
+<p><strong>Advanced Chart</strong> needs to provide the following capabilities:</p>
 <ul>
-<li>设置默认的<code>存储插件镜像</code></li>
-<li>设置存储层名称</li>
-<li>支持动态设置存储层的运行时配置</li>
-<li>提供对存储组件的配置和安装</li>
+<li>Set the default storage plugin image</li>
+<li>Set the storage layer name</li>
+<li>Support dynamic setting of the runtime configuration of the storage layer</li>
+<li>Provide configuration and installation of storage components</li>
 </ul>
-<p>创建一个使用 <em>sample-storage</em> 存储插件的新 Chart —— clusterpedia-sample-mysql，这个 Chart 会使用 mysql 作为存储组件。</p>
+<p>Create a new Chart using the <em>sample-storage</em> storage plugin &ndash; <em>clusterpedia-sample-mysql</em>, which will use mysql as the storage component.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># Chart.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>dependencies</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>mysql</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -589,8 +565,8 @@ docker buildx build <span style=color:#4e9a06>\
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia-core</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>repository</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://clusterpedia-io.github.io/clusterpedia-helm/</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>version</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>0.1</span><span style=color:#000>.x</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>我们需要覆盖 clusterpedia-core 中存储层相关的设置，clusterpedia-core 提供 <strong>values.yaml</strong> 和<strong>动态模版</strong>两种方式来设置存储插件和存储层信息</p>
-<p>我们在 values.yaml 覆盖存储层的静态设置，例如<strong>插件镜像</strong>和<strong>存储层名称</strong></p>
+</span></code></pre></div><p>We need to override the storage layer related settings in clusterpedia-core, which provides both <strong>values.yaml</strong> and <strong>dynamic templates</strong> to set up the storage plugin and storage layer information</p>
+<p>We override the static settings of the storage layer in values.yaml, such as <strong>plugin image</strong> and <strong>storage layer name</strong></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># values.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>clusterpedia-core</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>storage</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -599,8 +575,8 @@ docker buildx build <span style=color:#4e9a06>\
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>registry</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;ghcr.io&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>repository</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;clusterpedia-io/clusterpedia/sample-storage-layer&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>tag</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;v0.0.0-v0.6.0&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>自定义存储层的 <em>config.yaml</em> 和一些环境变量的设置，一般需要引用 ConfigMap 和 Secret，而这些资源的名称会根据 Chart 的 Release 名字动态变化，所以我们需要使用 <strong>动态模版</strong> 的方式来设置</p>
-<p>clusterpedia-core 提供了三个可以覆盖的命名模版</p>
+</span></code></pre></div><p>The <em>config.yaml</em> and some environment variables of the custom storage layer generally need to refer to ConfigMap and Secret, and the names of these resources will change dynamically according to the Chart release name, so we need to use the <strong>dynamic templates</strong> way to set</p>
+<p>clusterpedia-core provides three overriding naming templates</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># clusterpedia-core/templates/_storage_override.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span>{{- <span style=color:#000>define &#34;clusterpedia.storage.override.initContainers&#34; -}}</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span>{{- <span style=color:#000>end -}}</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -610,13 +586,13 @@ docker buildx build <span style=color:#4e9a06>\
 </span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span>{{- <span style=color:#000>define &#34;clusterpedia.storage.override.componentEnv&#34; -}}</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span>{{- <span style=color:#000>end -}}</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>可以分别设置：</p>
+</span></code></pre></div><p>Each of them can be set as follows:</p>
 <ul>
-<li><code>apiserver</code>，<code>clustersynchro manager</code> 组件运行前的 init containers</li>
-<li>保存存储插件需要读取的 config.yaml 配置的 ConfigMap 名称</li>
-<li>存储插件需要使用的环境变量</li>
+<li><code>apiserver</code> and <code>clustersynchro manager</code> init containers before running</li>
+<li>ConfigMap name to store the config.yaml configuration that the plugin needs to read</li>
+<li>Environment variables to be used by the storage plugin</li>
 </ul>
-<p>我们以 <a href=https://github.com/clusterpedia-io/clusterpedia-helm/blob/main/charts/clusterpedia-mysql/templates/_storage_override.yaml>clusterpedia-mysql</a> 为例，看看它的设置</p>
+<p>Let&rsquo;s take <a href=https://github.com/clusterpedia-io/clusterpedia-helm/blob/main/charts/clusterpedia-mysql/templates/_storage_override.yaml>clusterpedia-mysql</a> as an example and see how it is set</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># _storage_override.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span>{{- <span style=color:#000>define &#34;clusterpedia.storage.override.initContainers&#34; -}}</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ensure-database</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -643,7 +619,7 @@ docker buildx build <span style=color:#4e9a06>\
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>configMapRef</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span>{{<span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>include &#34;clusterpedia.mysql.storage.initContainer.env.name&#34; . }}</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span>{{- <span style=color:#000>end -}}</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>clusterpedia-mysql 在 <a href=https://github.com/clusterpedia-io/clusterpedia-helm/blob/main/charts/clusterpedia-mysql/templates/storage-initcontainer-env-configmap.yaml>storage-initcontainer-env-configmap.yaml</a> 中定义了 init container 需要的环境变量</p>
+</span></code></pre></div><p>clusterpedia-mysql defines the environment variables needed to init containers in the <a href=https://github.com/clusterpedia-io/clusterpedia-helm/blob/main/charts/clusterpedia-mysql/templates/storage-initcontainer-env-configmap.yaml>storage-initcontainer-env-configmap.yaml</a></p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>apiVersion</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>kind</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>ConfigMap</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>metadata</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -656,7 +632,7 @@ docker buildx build <span style=color:#4e9a06>\
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>STORAGE_USER</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span>{{<span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>include &#34;clusterpedia.mysql.storage.user&#34; . | quote }}</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>STORAGE_DATABASE</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span>{{<span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>include &#34;clusterpedia.mysql.storage.database&#34; . | quote }}</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>CREARE_DATABASE</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span>{{<span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>.Values.externalStorage.createDatabase | quote }}</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>通过 <code>clusterpedia.storage.override.initContainers</code> 命名模版动态设置的 init container 会被渲染到 Deployment 中：</p>
+</span></code></pre></div><p>The init container dynamically set by the <code>clusterpedia.storage.override.initContainers</code> naming template will be rendered to Deployment</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># helm template clusterpedia -n clusterpedia-system --set persistenceMatchNode=None .</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>spec</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -684,7 +660,7 @@ docker buildx build <span style=color:#4e9a06>\
 </span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>envFrom</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#204a87;font-weight:700>configMapRef</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>            </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>clusterpedia-mysql-storage-initcontainer-env</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>保存<code>存储插件</code>运行时配置 <em>config.yaml</em> 的 ConfigMap 和环境变量也是在 clusterpedia-mysql 中动态配置</p>
+</span></code></pre></div><p>The ConfigMap and environment variables of the storage plugin runtime configuration <em>config.yaml</em> are also dynamically configured in clusterpedia-mysql</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># _storage_override.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span>{{- <span style=color:#000>define &#34;clusterpedia.storage.override.configmap.name&#34; -}}</span><span style=color:#f8f8f8;text-decoration:underline>
@@ -698,8 +674,8 @@ docker buildx build <span style=color:#4e9a06>\
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span>{{<span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>include &#34;clusterpedia.mysql.storage.fullname&#34; . }}</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>key</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>password</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span>{{- <span style=color:#000>end -}}</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>通过 values 静态覆盖和 命名模版的动态设置，存储层配置会被设置到 APIServer 和 ClusterSynchro Manager 的 Deployment 中</p>
-<p>通过类似 <em>clusterpedia-mysql</em> 的<strong>高级 Chart</strong> 可以为用户屏蔽掉底层存储插件的使用，达到开箱即用。</p>
+</span></code></pre></div><p>The storage layer configuration is set to the APIServer and ClusterSynchro Manager Deployment through static override of values and dynamic setting of naming templates</p>
+<p><strong>Advanced Chart</strong> like <em>clusterpedia-mysql</em> allows you to mask the use of underlying storage plugins for users out of the box</p>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
 <h2 class=feedback--title>Feedback</h2>
@@ -744,8 +720,8 @@ Sorry to hear that. Please <a href=https://github.com/USERNAME/REPOSITORY/issues
 </ul>
 </div>
 <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-<small class=text-white>&copy; 2022 The Clusterpedia Authors 保留所有权利</small>
-<p class=mt-2><a href=/zh-cn/about/>关于 Clusterpedia</a></p>
+<small class=text-white>&copy; 2022 The Clusterpedia Authors All Rights Reserved</small>
+<p class=mt-2><a href=/about/>About Clusterpedia</a></p>
 </div>
 </div>
 </div>
