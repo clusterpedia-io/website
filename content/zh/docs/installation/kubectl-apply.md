@@ -17,7 +17,7 @@ Clusterpedia 的安装分为两个部分：
 ```bash
 git clone https://github.com/clusterpedia-io/clusterpedia.git
 cd clusterpedia
-git checkout v0.6.0
+git checkout v0.7.0
 ```
 
 ### 安装存储组件
