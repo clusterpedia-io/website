@@ -72,7 +72,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.69e4bcf7289095f4cfe857352ad87e6e.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.93e428a549ea3aeeb1a28d2991aa544a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -82,7 +82,7 @@ English
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.69e4bcf7289095f4cfe857352ad87e6e.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.93e428a549ea3aeeb1a28d2991aa544a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -259,7 +259,7 @@ resources                          clusterpedia.io/v1beta1    false        Resou
 <h3 id=configure-the-cluster-shortcut-for-kubectl>Configure the cluster shortcut for kubectl</h3>
 <p>Although we can use URLs to access Clusterpedia resources, if we want to use kubectl to query more conveniently, we need to configure the kubeconfig cluster.</p>
 <p>Clusterpedia provides a simple script to generate <code>cluster config</code> in the kubeconfig.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.6.0/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/v0.7.0/hack/gen-clusterconfigs.sh <span style=color:#000;font-weight:700>|</span> sh -
 </code></pre></div><pre tabindex=0><code># Output:
 Current Context: kubernetes-admin@kubernetes
 Current Cluster: kubernetes
@@ -273,7 +273,7 @@ Cluster &quot;clusterpedia&quot; set.
 Cluster &quot;cluster-1&quot; set.
 Cluster &quot;cluster-2&quot; set.
 </code></pre><blockquote>
-<p>Check the script from <a href=https://github.com/clusterpedia-io/clusterpedia/blob/v0.1.0/hack/gen-clusterconfigs.sh>hack/gen-clusterconfigs.sh</a></p>
+<p>Check the script from <a href=https://github.com/clusterpedia-io/clusterpedia/blob/v0.7.0/hack/gen-clusterconfigs.sh>hack/gen-clusterconfigs.sh</a></p>
 </blockquote>
 <p>The script prints the current cluster information and configures the <code>PediaCluster</code> into kubeconfig.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>cat ~/.kube/config
@@ -435,7 +435,7 @@ Sorry to hear that. Please <a href=https://github.com/USERNAME/REPOSITORY/issues
 </ul>
 </div>
 <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-<small class=text-white>&copy; 2022 The Clusterpedia Authors All Rights Reserved</small>
+<small class=text-white>&copy; 2023 The Clusterpedia Authors All Rights Reserved</small>
 <p class=mt-2><a href=/about/>About Clusterpedia</a></p>
 </div>
 </div>
