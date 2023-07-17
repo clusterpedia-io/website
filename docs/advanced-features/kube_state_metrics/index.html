@@ -13,39 +13,28 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>kubectl apply | Clusterpedia.io</title>
-<meta name=description content="Install
-The installation of Clusterpedia is divided into several parts:
-
-Install storage component
-Install Clusterpedia
-Final check
-
-
-If you use …">
-<meta property="og:title" content="kubectl apply">
-<meta property="og:description" content="Install The installation of Clusterpedia is divided into several parts:
- Install storage component Install Clusterpedia Final check   If you use existing storage component (MySQL or PostgreSQL), directly skip the step of installing the storage component.
- Pull clusterpedia project:
-git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.7.0 Install storage component Clusterpedia installation provides two storage components (MySQL 8.0 and PostgreSQL 12) to choose.
- If you use existing storage components (MySQL or PostgreSQL), directly skip this step">
+<title>Multi-Cluster kube-state-metrics | Clusterpedia.io</title>
+<meta name=description content="Clusterpedia provides kube-state-metrics features for multi-cluster resources at a fraction of the cost, providing the same metrics information as …">
+<meta property="og:title" content="Multi-Cluster kube-state-metrics">
+<meta property="og:description" content="Clusterpedia provides kube-state-metrics features for multi-cluster resources at a fraction of the cost, providing the same metrics information as kube-state-metrics, but with the addition of a cluster name label.
+kube_deployment_created{cluster=&#34;test-14&#34;,namespace=&#34;clusterpedia-system&#34;,deployment=&#34;clusterpedia-apiserver&#34;} 1.676557618e+09 Since this feature is experimental, you will install Clusterpedia the standard way first.
+Once Clusterpedia is installed, we need to update the helm to enable the multi-cluster kube-state-metrics feature.
+ The kube-state-metrics feature has been merged into the main branch and will be included in v0.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="/docs/installation/kubectl-apply/"><meta property="article:section" content="docs">
+<meta property="og:url" content="/docs/advanced-features/kube_state_metrics/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="Clusterpedia.io">
-<meta itemprop=name content="kubectl apply">
-<meta itemprop=description content="Install The installation of Clusterpedia is divided into several parts:
- Install storage component Install Clusterpedia Final check   If you use existing storage component (MySQL or PostgreSQL), directly skip the step of installing the storage component.
- Pull clusterpedia project:
-git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.7.0 Install storage component Clusterpedia installation provides two storage components (MySQL 8.0 and PostgreSQL 12) to choose.
- If you use existing storage components (MySQL or PostgreSQL), directly skip this step">
-<meta itemprop=wordCount content="537">
+<meta itemprop=name content="Multi-Cluster kube-state-metrics">
+<meta itemprop=description content="Clusterpedia provides kube-state-metrics features for multi-cluster resources at a fraction of the cost, providing the same metrics information as kube-state-metrics, but with the addition of a cluster name label.
+kube_deployment_created{cluster=&#34;test-14&#34;,namespace=&#34;clusterpedia-system&#34;,deployment=&#34;clusterpedia-apiserver&#34;} 1.676557618e+09 Since this feature is experimental, you will install Clusterpedia the standard way first.
+Once Clusterpedia is installed, we need to update the helm to enable the multi-cluster kube-state-metrics feature.
+ The kube-state-metrics feature has been merged into the main branch and will be included in v0.">
+<meta itemprop=wordCount content="307">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="kubectl apply">
-<meta name=twitter:description content="Install The installation of Clusterpedia is divided into several parts:
- Install storage component Install Clusterpedia Final check   If you use existing storage component (MySQL or PostgreSQL), directly skip the step of installing the storage component.
- Pull clusterpedia project:
-git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia git checkout v0.7.0 Install storage component Clusterpedia installation provides two storage components (MySQL 8.0 and PostgreSQL 12) to choose.
- If you use existing storage components (MySQL or PostgreSQL), directly skip this step">
+<meta name=twitter:title content="Multi-Cluster kube-state-metrics">
+<meta name=twitter:description content="Clusterpedia provides kube-state-metrics features for multi-cluster resources at a fraction of the cost, providing the same metrics information as kube-state-metrics, but with the addition of a cluster name label.
+kube_deployment_created{cluster=&#34;test-14&#34;,namespace=&#34;clusterpedia-system&#34;,deployment=&#34;clusterpedia-apiserver&#34;} 1.676557618e+09 Since this feature is experimental, you will install Clusterpedia the standard way first.
+Once Clusterpedia is installed, we need to update the helm to enable the multi-cluster kube-state-metrics feature.
+ The kube-state-metrics feature has been merged into the main branch and will be included in v0.">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -82,7 +71,7 @@ git clone https://github.com/clusterpedia-io/clusterpedia.git cd clusterpedia gi
 English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/zh-cn/docs/installation/kubectl-apply/>中文 Chinese</a>
+<a class=dropdown-item href=/zh-cn/docs/advanced-features/kube_state_metrics/>中文 Chinese</a>
 </div>
 </li>
 </ul>
@@ -107,18 +96,18 @@ English
 English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/zh-cn/docs/installation/kubectl-apply/>中文 Chinese</a>
+<a class=dropdown-item href=/zh-cn/docs/advanced-features/kube_state_metrics/>中文 Chinese</a>
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li>
 <a href=/docs/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Documentation</span></a>
 <ul class=ul-1>
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsinstallation-li>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsinstallation-li>
 <a href=/docs/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsinstallation><span>Installation</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsinstallationkubectl-apply-li>
-<a href=/docs/installation/kubectl-apply/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsinstallationkubectl-apply><span class=td-sidebar-nav-active-item>kubectl apply</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsinstallationkubectl-apply-li>
+<a href=/docs/installation/kubectl-apply/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsinstallationkubectl-apply><span>kubectl apply</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsinstallationhelm-li>
 <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/charts/clusterpedia class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsinstallationhelm><span>Helm</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsinstallationconfiguration-li>
@@ -167,11 +156,11 @@ English
 </ul>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsadvanced-features-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsadvanced-features-li>
 <a href=/docs/advanced-features/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsadvanced-features><span>Advanced Features</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsadvanced-featureskube_state_metrics-li>
-<a href=/docs/advanced-features/kube_state_metrics/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsadvanced-featureskube_state_metrics><span>Multi-Cluster kube-state-metrics</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsadvanced-featureskube_state_metrics-li>
+<a href=/docs/advanced-features/kube_state_metrics/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsadvanced-featureskube_state_metrics><span class=td-sidebar-nav-active-item>Multi-Cluster kube-state-metrics</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsadvanced-featurescustom_storage_layer-li>
 <a href=/docs/advanced-features/custom_storage_layer/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsadvanced-featurescustom_storage_layer><span>Custom Storage Layer Plugin</span></a>
 </li>
@@ -204,31 +193,24 @@ English
 </aside>
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href=https://github.com/clusterpedia-io/website/tree/main/content/en/docs/installation/kubectl-apply.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> View page source</a>
-<a href=https://github.com/clusterpedia-io/website/edit/main/content/en/docs/installation/kubectl-apply.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/clusterpedia-io/website/new/main/content/en/docs/installation/kubectl-apply.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Create child page</a>
-<a href="https://github.com/clusterpedia-io/website/issues/new?title=kubectl%20apply" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href=https://github.com/clusterpedia-io/website/tree/main/content/en/docs/advanced-features/kube_state_metrics.md class=td-page-meta--view target=_blank rel=noopener><i class="fa fa-file-alt fa-fw"></i> View page source</a>
+<a href=https://github.com/clusterpedia-io/website/edit/main/content/en/docs/advanced-features/kube_state_metrics.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/clusterpedia-io/website/new/main/content/en/docs/advanced-features/kube_state_metrics.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> Create child page</a>
+<a href="https://github.com/clusterpedia-io/website/issues/new?title=Multi-Cluster%20kube-state-metrics" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 <a href=https://github.com/clusterpedia-io/website/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
-<a id=print href=/docs/installation/_print/><i class="fa fa-print fa-fw"></i> Print entire section</a>
+<a id=print href=/docs/advanced-features/_print/><i class="fa fa-print fa-fw"></i> Print entire section</a>
 </div>
 <div class=td-toc><nav id=TableOfContents>
 <ul>
-<li><a href=#install>Install</a>
+<li><a href=#enable-multi-cluster-kube-state-metrics>Enable Multi-Cluster kube-state-metrics</a>
 <ul>
-<li><a href=#install-storage-component>Install storage component</a></li>
-<li><a href=#install-clusterpedia>Install Clusterpedia</a></li>
-<li><a href=#final-check>Final check</a></li>
-<li><a href=#create-cluster-auto-import-policy--clusterimportpolicy>Create Cluster Auto Import Policy —— ClusterImportPolicy</a></li>
+<li><a href=#ensure-clusterpedia-chart-version--v180>Ensure Clusterpedia Chart Version >= v1.8.0</a></li>
+<li><a href=#get-the-current-chart-values>Get the current chart values</a></li>
+<li><a href=#create-patch-values>Create patch values</a></li>
+<li><a href=#update-clusterpedia-to-enable-multi-cluster-kube-state-metrics>Update Clusterpedia to enable multi-cluster kube-state-metrics.</a></li>
 </ul>
 </li>
-<li><a href=#uninstall>Uninstall</a>
-<ul>
-<li><a href=#clean-up-clusterimportpolicy>Clean up ClusterImportPolicy</a></li>
-<li><a href=#clean-up-pediacluster>Clean up PediaCluster</a></li>
-<li><a href=#uninstall-clusterpedia>Uninstall Clusterpedia</a></li>
-<li><a href=#uninstall-storage-component>Uninstall Storage Component</a></li>
-</ul>
-</li>
+<li><a href=#future>Future</a></li>
 </ul>
 </nav></div>
 </aside>
@@ -239,106 +221,63 @@ English
 <a href=/docs/>Documentation</a>
 </li>
 <li class=breadcrumb-item>
-<a href=/docs/installation/>Installation</a>
+<a href=/docs/advanced-features/>Advanced Features</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=/docs/installation/kubectl-apply/>kubectl apply</a>
+<a href=/docs/advanced-features/kube_state_metrics/>Multi-Cluster kube-state-metrics</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>kubectl apply</h1>
+<h1>Multi-Cluster kube-state-metrics</h1>
 <header class=article-meta>
-<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 3 minute read &nbsp;</p>
+<p class=reading-time><i class="fa fa-clock" aria-hidden=true></i>&nbsp; 2 minute read &nbsp;</p>
 </header>
-<h2 id=install>Install</h2>
-<p>The installation of Clusterpedia is divided into several parts:</p>
+<p>Clusterpedia provides kube-state-metrics features for multi-cluster resources at a fraction of the cost, providing the same metrics information as <a href=https://github.com/kubernetes/kube-state-metrics>kube-state-metrics</a>, but with the addition of a cluster name label.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>kube_deployment_created{cluster=&#34;test-14&#34;,namespace=&#34;clusterpedia-system&#34;,deployment=&#34;clusterpedia-apiserver&#34;} 1.676557618e+09
+</code></pre></div><p>Since this feature is experimental, you will install Clusterpedia <a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia#clusterpedia>the standard way first</a>.</p>
+<p>Once Clusterpedia is installed, we need to update the helm to enable the <code>multi-cluster kube-state-metrics</code> feature.</p>
+<blockquote>
+<p>The kube-state-metrics feature has been merged into <a href=https://github.com/clusterpedia-io/clusterpedia>the main branch</a> and will be included in <code>v0.8.0</code> in the future.
+The feature is included in the ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.0</p>
+</blockquote>
+<h2 id=enable-multi-cluster-kube-state-metrics>Enable Multi-Cluster kube-state-metrics</h2>
+<h3 id=ensure-clusterpedia-chart-version--v180>Ensure Clusterpedia Chart Version >= v1.8.0</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm repo update clusterpedia
+$ helm search clusterpedia
+ NAME                            CHART VERSION   APP VERSION     DESCRIPTION
+ clusterpedia/clusterpedia       1.8.0           v0.7.0          A Helm chart <span style=color:#204a87;font-weight:700>for</span> Kubernetes
+</code></pre></div><h3 id=get-the-current-chart-values>Get the current chart values</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm -n clusterpedia-system get values clusterpedia &gt; values.yaml
+</code></pre></div><h3 id=create-patch-values>Create patch values</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#000>$ echo &#34;clustersynchroManager:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>image</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>repository</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>iceber/clusterpedia/clustersynchro-manager</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>tag</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v0.8.0-ksm.0</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>kubeStateMetrics</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>enable</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000>&#34; &gt; patch.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><h3 id=update-clusterpedia-to-enable-multi-cluster-kube-state-metrics>Update Clusterpedia to enable multi-cluster kube-state-metrics.</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm -n clusterpedia-system upgrade -f values.yaml -f patch.yaml clusterpedia clusterpedia/clusterpedia
+</code></pre></div><p>Get clusterpedia kube-state-metrics services</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl -n clusterpedia-system get svc
+NAME                                          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span style=color:#ce5c00;font-weight:700>(</span>S<span style=color:#ce5c00;font-weight:700>)</span>    AGE
+clusterpedia-apiserver                        ClusterIP   10.97.129.238   &lt;none&gt;        443/TCP    150d
+clusterpedia-clustersynchro-manager-metrics   ClusterIP   10.108.129.32   &lt;none&gt;        8081/TCP   51m
+clusterpedia-kube-state-metrics               ClusterIP   10.108.130.62   &lt;none&gt;        8080/TCP   43m
+clusterpedia-mysql                            ClusterIP   10.102.38.225   &lt;none&gt;        3306/TCP   150d
+clusterpedia-mysql-headless                   ClusterIP   None            &lt;none&gt;        3306/TCP   150d
+</code></pre></div><p>For more information on importing clusters and using clusterpedia: <a href=../../usage/import-clusters>Import Clusters</a></p>
+<h2 id=future>Future</h2>
+<p>Multi-cluster kube-state-metrics is a very interesting feature that removes the need to install a single-cluster version of kube-state-metrics in each cluster, and it handles <strong>the issue of differing resource versions very well.</strong></p>
+<p>There is a lot of discussion about this feature here, feel free to comment!</p>
 <ul>
-<li><a href=#install-storage-component>Install storage component</a></li>
-<li><a href=#install-clusterpedia>Install Clusterpedia</a></li>
-<li><a href=#final-check>Final check</a></li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/544>The resource state metrics provide different metrics paths depending on the cluster</a></li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/545>Support remote write to send resource metrics data</a></li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/546>Support for filtering exposed resource state metrics based on namespace</a></li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/547>Support for filtering exposed resource state metrics by cluster labels/annotations</a></li>
 </ul>
-<blockquote>
-<p>If you use existing storage component (MySQL or PostgreSQL), directly skip the step of installing the storage component.</p>
-</blockquote>
-<p>Pull clusterpedia project:</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/clusterpedia-io/clusterpedia.git
-<span style=color:#204a87>cd</span> clusterpedia
-git checkout v0.7.0
-</code></pre></div><h3 id=install-storage-component>Install storage component</h3>
-<p>Clusterpedia installation provides two storage components (<strong>MySQL 8.0</strong> and <strong>PostgreSQL 12</strong>) to choose.</p>
-<blockquote>
-<p>If you use existing storage components (MySQL or PostgreSQL), directly <a href=#install-clusterpedia>skip</a> this step</p>
-</blockquote>
-<ul class="nav nav-tabs" id=tabset-docsinstallationkubectl-apply-1 role=tablist><li class=nav-item><a data-toggle=tab class="nav-link active" href=#tabset-docsinstallationkubectl-apply-1-0 role=tab aria-controls=tabset-docsinstallationkubectl-apply-1-0 aria-selected=true>PostgreSQL</a></li>
-<li class=nav-item><a data-toggle=tab class=nav-link href=#tabset-docsinstallationkubectl-apply-1-1 role=tab aria-controls=tabset-docsinstallationkubectl-apply-1-1>MySQL</a></li></ul>
-<div class=tab-content id=tabset-docsinstallationkubectl-apply-1><div id=tabset-docsinstallationkubectl-apply-1-0 class="tab-pane show active" role=tabpanel aria-labelledby=tabset-docsinstallationkubectl-apply-1-0>
-<p><p><strong>Go to the installation directory of the selected storage component</strong></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#204a87>cd</span> ./deploy/internalstorage/postgres
-</code></pre></div></div>
-<div id=tabset-docsinstallationkubectl-apply-1-1 class=tab-pane role=tabpanel aria-labelledby=tabset-docsinstallationkubectl-apply-1-1>
-<p><p><strong>Go to the installation directory of the selected storage component</strong></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#204a87>cd</span> ./deploy/internalstorage/mysql
-</code></pre></div></div></div>
-<p><strong>The storage component uses the Local PV method to store data, and you shall specify the node where the Local PV is located during deployment</strong></p>
-<blockquote>
-<p>You can choose to provide your own PV</p>
-</blockquote>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#204a87>export</span> <span style=color:#000>STORAGE_NODE_NAME</span><span style=color:#ce5c00;font-weight:700>=</span>&lt;nodename&gt;
-sed <span style=color:#4e9a06>&#34;s|__NODE_NAME__|</span><span style=color:#000>$STORAGE_NODE_NAME</span><span style=color:#4e9a06>|g&#34;</span> <span style=color:#4e9a06>`</span>grep __NODE_NAME__ -rl ./templates<span style=color:#4e9a06>`</span> &gt; clusterpedia_internalstorage_pv.yaml
-</code></pre></div><p><strong>Deploy storage component</strong></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl apply -f .
-
-<span style=color:#8f5902;font-style:italic># Go back to Clusterpedia root directory</span>
-<span style=color:#204a87>cd</span> ../../../
-</code></pre></div><h3 id=install-clusterpedia>Install Clusterpedia</h3>
-<p>Once the storage component are successfully deployed, you can install the Clusterpedia.</p>
-<p><strong>If you uses existing storage component, refer to <a href=../configuration/configure-internalstorage>Configure Storage Layer</a> to set the storage component into <code>Default Storage Layer</code></strong></p>
-<blockquote>
-<p>Run the following cmd in the clusterpedia root directory</p>
-</blockquote>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># Deploy Clusterpedia CRD and components</span>
-kubectl apply -f ./deploy
-</code></pre></div><h3 id=final-check>Final check</h3>
-<p>Check if the component Pods are running properly</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n clusterpedia-system get pods
-</code></pre></div><h3 id=create-cluster-auto-import-policy--clusterimportpolicy>Create Cluster Auto Import Policy —— ClusterImportPolicy</h3>
-<p>After 0.4.0, Clusterpedia provides a more friendly way to interface to multi-cloud platforms.</p>
-<p>Users can create <code>ClusterImportPolicy</code> to automatically discover managed clusters in the multi-cloud platform and automatically synchronize them as <code>PediaCluster</code>,
-so you don&rsquo;t need to maintain <code>PediaCluster</code> manually based on the managed clusters.</p>
-<p>We maintain <code>PediaCluster</code> for each multi-cloud platform in the <a href=https://github.com/clusterpedia-io/clusterpedia/tree/main/deploy/clusterimportpolicy>Clusterpedia repository</a>. ClusterImportPolicy` for each multi-cloud platform.
-<strong>People also submit ClusterImportPolicy to Clusterpedia for interfacing to other multi-cloud platforms.</strong></p>
-<p>After installing Clusterpedia, you can create the appropriate <code>ClusterImportPolicy</code>,
-or <a href=../../usage/interfacing-to-multi-cloud-platforms#new-clusterimportpolicy>create a new <code>ClusterImportPolicy</code></a> according to your needs (multi-cloud platform).</p>
-<p>For details, please refer to <a href=../../usage/interfacing-to-multi-cloud-platforms#new-clusterimportpolicy>Interfacing to Multi-Cloud Platforms</a></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get clusterimportpolicy
-</code></pre></div><h2 id=uninstall>Uninstall</h2>
-<h3 id=clean-up-clusterimportpolicy>Clean up ClusterImportPolicy</h3>
-<p>If you have deployed <code>ClusterImportPolicy</code> then you need to clean up the <code>ClusterImportPolicy</code> resources first.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get clusterimportpolicy
-</code></pre></div><h3 id=clean-up-pediacluster>Clean up PediaCluster</h3>
-<p>Before uninstalling Clusterpedia, you need to check if PediaCluster resources still exist in your environment, and clean up those resources.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pediacluster
-</code></pre></div><h3 id=uninstall-clusterpedia>Uninstall Clusterpedia</h3>
-<p>After the PediaCluster resource cleanup is complete, uninstall the Clusterpedia components.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/clusterpedia_apiserver_apiservice.yaml
-kubectl delete -f ./deploy/clusterpedia_apiserver_deployment.yaml
-kubectl delete -f ./deploy/clusterpedia_clustersynchro_manager_deployment.yaml
-kubectl delete -f ./deploy/clusterpedia_apiserver_rbac.yaml
-kubectl delete -f ./deploy/cluster.clusterpedia.io_pediaclusers.yaml
-</code></pre></div><h3 id=uninstall-storage-component>Uninstall Storage Component</h3>
-<p>Remove related resources depending on the type of storage component selected.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete -f ./deploy/internalstorage/&lt;storage type&gt;
-</code></pre></div><h4 id=remove-local-pv-and-clean-up-data>remove Local PV and clean up data</h4>
-<p>After the storage component is uninstalled, the Local PV and corresponding data will still be left in the node and we need to clean it manually.</p>
-<p>View the mounted nodes via Local PV resource details.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pv clusterpedia-internalstorage-&lt;storage type&gt;
-</code></pre></div><p>Once you know the node where the data is stored, you can delete the Local PV.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete pv clusterpedia-internalstorage-&lt;storage type&gt;
-</code></pre></div><p>Log in to the node where the data is located and clean up the data.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># In the node where the legacy data is located</span>
-rm -rf /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
-</code></pre></div>
+<p>Also welcome to create <a href=https://github.com/clusterpedia-io/clusterpedia/issues/new/choose>a new issue</a></p>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
 <h2 class=feedback--title>Feedback</h2>

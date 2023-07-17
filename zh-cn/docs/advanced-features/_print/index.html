@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.93e428a549ea3aeeb1a28d2991aa544a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.f4bc8bd509526641bcacc4fa5b586410.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -84,13 +84,62 @@
 </div>
 <h1 class=title>高级功能</h1>
 <ul>
-<li>1: <a href=#pg-3f7581a2a6289f53ebfc75ee37b2d8d4>自定义存储层插件</a></li>
+<li>1: <a href=#pg-749921d4b7631dc83a7704cfc21dd956>多集群 kube-state-metrics</a></li>
+<li>2: <a href=#pg-3f7581a2a6289f53ebfc75ee37b2d8d4>自定义存储层插件</a></li>
 </ul>
 <div class=content>
 </div>
 </div>
 <div class=td-content>
-<h1 id=pg-3f7581a2a6289f53ebfc75ee37b2d8d4>1 - 自定义存储层插件</h1>
+<h1 id=pg-749921d4b7631dc83a7704cfc21dd956>1 - 多集群 kube-state-metrics</h1>
+<p>Clusterpedia 以极小的代价提供了多集群资源的 kube-state-metrics 功能，它提供的指标信息与 <a href=https://github.com/kubernetes/kube-state-metrics>kube-state-metrics</a> 一致，当然会额外增加了一个集群名称的 label.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>kube_deployment_created{cluster=&#34;test-14&#34;,namespace=&#34;clusterpedia-system&#34;,deployment=&#34;clusterpedia-apiserver&#34;} 1.676557618e+09
+</code></pre></div><p>由于该功能处于试验阶段，所以使用该功能需要先额外通过<a href=https://github.com/clusterpedia-io/clusterpedia-helm/tree/main/charts/clusterpedia#clusterpedia>标准方式安装 Clusterpedia</a>.</p>
+<p>Clusterpedia 安装完成后，我们需要更新 helm 来开启 <code>多集群 kube-state-metrics</code> 功能。</p>
+<blockquote>
+<p>当前 main 分支中已经合并 kube-state-metrics 功能，未来会包含在 <code>v0.8.0</code> 中。
+ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.0 镜像中包含该功能呢</p>
+</blockquote>
+<h2 id=开启多集群-kube-state-metrics>开启多集群 kube-state-metrics</h2>
+<h3 id=确保-clusterpedia-chart-版本--v180>确保 Clusterpedia Chart 版本 >= v1.8.0</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm repo update clusterpedia
+$ helm search clusterpedia
+ NAME                            CHART VERSION   APP VERSION     DESCRIPTION
+ clusterpedia/clusterpedia       1.8.0           v0.7.0          A Helm chart <span style=color:#204a87;font-weight:700>for</span> Kubernetes
+</code></pre></div><h3 id=获取当前-chart-values>获取当前 chart values</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm -n clusterpedia-system get values clusterpedia &gt; values.yaml
+</code></pre></div><h3 id=创建-patch-values>创建 patch values</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#000>echo &#34;clustersynchroManager:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>image</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>repository</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>iceber/clusterpedia/clustersynchro-manager</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>tag</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v0.8.0-ksm.0</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>kubeStateMetrics</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>enable</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000>&#34; &gt; patch.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><h3 id=更新-clusterpedia-开启多集群-kube-state-metrics>更新 Clusterpedia 开启多集群 kube-state-metrics</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ helm -n clusterpedia-system upgrade -f values.yaml -f patch.yaml clusterpedia clusterpedia/clusterpedia
+</code></pre></div><p>查看 clusterpedia kube-state-metrics services</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl -n clusterpedia-system get svc
+NAME                                          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span style=color:#ce5c00;font-weight:700>(</span>S<span style=color:#ce5c00;font-weight:700>)</span>    AGE
+clusterpedia-apiserver                        ClusterIP   10.97.129.238   &lt;none&gt;        443/TCP    150d
+clusterpedia-clustersynchro-manager-metrics   ClusterIP   10.108.129.32   &lt;none&gt;        8081/TCP   51m
+clusterpedia-kube-state-metrics               ClusterIP   10.108.130.62   &lt;none&gt;        8080/TCP   43m
+clusterpedia-mysql                            ClusterIP   10.102.38.225   &lt;none&gt;        3306/TCP   150d
+clusterpedia-mysql-headless                   ClusterIP   None            &lt;none&gt;        3306/TCP   150d
+</code></pre></div><p>For more information on importing clusters and using clusterpedia: <a href=../../usage/import-clusters>Import Clusters</a></p>
+<h2 id=未来>未来</h2>
+<p><code>多集群 kube-state-metrics</code> 是一个非常有趣的功能，它可以让你不再需要在每一个集群中安装单集群版本的 kube-state-metrics，并且它可以很好的处理资源版本不同的问题。</p>
+<p>这里有很多关于该功能的讨论，欢迎评论</p>
+<ul>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/544>The resource state metrics provide different metrics paths depending on the cluster</a></li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/545>Support remote write to send resource metrics data</a></li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/546>Support for filtering exposed resource state metrics based on namespace</a></li>
+<li><a href=https://github.com/clusterpedia-io/clusterpedia/issues/547>Support for filtering exposed resource state metrics by cluster labels/annotations</a></li>
+</ul>
+<p>也欢迎创建<a href=https://github.com/clusterpedia-io/clusterpedia/issues/new/choose>新的 issue</a></p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-3f7581a2a6289f53ebfc75ee37b2d8d4>2 - 自定义存储层插件</h1>
 <p>Clusterpedia 可以通过存储层来使用不同的存储组件，例如 MySQL/PostgreSQL, Memory, Elasticsearch</p>
 <p>当前，Clusterpedia 内置了两个存储层：</p>
 <ul>
