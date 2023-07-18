@@ -17,7 +17,7 @@ weight: 10
 
 创建用于对接 Cluster API 平台的 `ClusterImportPolicy`。
 ```bash
-$ kubectl applyf -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/cluster_api.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/cluster_api.yaml
 $ kubectl get clusterimportpolicy
 NAME          AGE
 cluster-api   4d19h

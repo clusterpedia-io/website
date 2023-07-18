@@ -34,7 +34,11 @@ One of the easiest ways to connect and authenticate to a cluster is to use the k
 
 First you need to base64 encode the kube config for the imported cluster.
 ```bash
-base64 ./kubeconfig
+# mac
+cat ./kubeconfig | base64
+
+# linux
+cat ./kubeconfig | base64 -w 0
 ```
 ```
 # Output:

@@ -19,7 +19,7 @@ Users can refer to [Cluster API Quick Start](https://cluster-api.sigs.k8s.io/use
 
 Create `ClusterImportPolicy` for interfacing to the ClusterAPI platform.
 ```bash
-$ kubectl applyf -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/cluster_api.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/clusterpedia-io/clusterpedia/main/deploy/clusterimportpolicy/cluster_api.yaml
 $ kubectl get clusterimportpolicy
 NAME          AGE
 cluster-api   4d19h
