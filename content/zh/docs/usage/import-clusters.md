@@ -34,7 +34,11 @@ spec:
 
 首先需要将接入集群的 kube config base64 编码。
 ```bash
-base64 ./kubeconfig
+# mac
+cat ./kubeconfig | base64
+
+# linux
+cat ./kubeconfig | base64 -w 0
 ```
 ```
 # 输出 base64 编码后的配置
