@@ -65,7 +65,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.78403f3e446f31afd214946fb52aeb24.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.fd381dd4021fed005372d75e92507550.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -2351,7 +2351,7 @@ Error from server <span style=color:#ce5c00;font-weight:700>(</span>BadRequest<s
 <p>Clusterpedia 安装完成后，我们需要更新 helm 来开启 <code>多集群 kube-state-metrics</code> 功能。</p>
 <blockquote>
 <p>当前 main 分支中已经合并 kube-state-metrics 功能，未来会包含在 <code>v0.8.0</code> 中。
-ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.0 镜像中包含该功能呢</p>
+ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.1 镜像中包含该功能呢</p>
 </blockquote>
 <h2 id=开启多集群-kube-state-metrics>开启多集群 kube-state-metrics</h2>
 <h3 id=确保-clusterpedia-chart-版本--v180>确保 Clusterpedia Chart 版本 >= v1.8.0</h3>
@@ -2365,7 +2365,7 @@ $ helm search clusterpedia
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#000>echo &#34;clustersynchroManager:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>image</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>repository</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>iceber/clusterpedia/clustersynchro-manager</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>tag</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v0.8.0-ksm.0</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>tag</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v0.8.0-ksm.1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>kubeStateMetrics</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>enable</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000>&#34; &gt; patch.yaml</span><span style=color:#f8f8f8;text-decoration:underline>

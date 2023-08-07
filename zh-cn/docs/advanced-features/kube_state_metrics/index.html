@@ -19,7 +19,7 @@
 <meta property="og:description" content="Clusterpedia 以极小的代价提供了多集群资源的 kube-state-metrics 功能，它提供的指标信息与 kube-state-metrics 一致，当然会额外增加了一个集群名称的 label.
 kube_deployment_created{cluster=&#34;test-14&#34;,namespace=&#34;clusterpedia-system&#34;,deployment=&#34;clusterpedia-apiserver&#34;} 1.676557618e+09 由于该功能处于试验阶段，所以使用该功能需要先额外通过标准方式安装 Clusterpedia.
 Clusterpedia 安装完成后，我们需要更新 helm 来开启 多集群 kube-state-metrics 功能。
- 当前 main 分支中已经合并 kube-state-metrics 功能，未来会包含在 v0.8.0 中。 ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.0 镜像中包含该功能呢
+ 当前 main 分支中已经合并 kube-state-metrics 功能，未来会包含在 v0.8.0 中。 ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.1 镜像中包含该功能呢
  开启多集群 kube-state-metrics 确保 Clusterpedia Chart 版本 >= v1.8.0 $ helm repo update clusterpedia $ helm search clusterpedia NAME CHART VERSION APP VERSION DESCRIPTION clusterpedia/clusterpedia 1.8.0 v0.7.0 A Helm chart for Kubernetes 获取当前 chart values $ helm -n clusterpedia-system get values clusterpedia > values.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/zh-cn/docs/advanced-features/kube_state_metrics/"><meta property="article:section" content="docs">
@@ -28,7 +28,7 @@ Clusterpedia 安装完成后，我们需要更新 helm 来开启 多集群 kube-
 <meta itemprop=description content="Clusterpedia 以极小的代价提供了多集群资源的 kube-state-metrics 功能，它提供的指标信息与 kube-state-metrics 一致，当然会额外增加了一个集群名称的 label.
 kube_deployment_created{cluster=&#34;test-14&#34;,namespace=&#34;clusterpedia-system&#34;,deployment=&#34;clusterpedia-apiserver&#34;} 1.676557618e+09 由于该功能处于试验阶段，所以使用该功能需要先额外通过标准方式安装 Clusterpedia.
 Clusterpedia 安装完成后，我们需要更新 helm 来开启 多集群 kube-state-metrics 功能。
- 当前 main 分支中已经合并 kube-state-metrics 功能，未来会包含在 v0.8.0 中。 ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.0 镜像中包含该功能呢
+ 当前 main 分支中已经合并 kube-state-metrics 功能，未来会包含在 v0.8.0 中。 ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.1 镜像中包含该功能呢
  开启多集群 kube-state-metrics 确保 Clusterpedia Chart 版本 >= v1.8.0 $ helm repo update clusterpedia $ helm search clusterpedia NAME CHART VERSION APP VERSION DESCRIPTION clusterpedia/clusterpedia 1.8.0 v0.7.0 A Helm chart for Kubernetes 获取当前 chart values $ helm -n clusterpedia-system get values clusterpedia > values.">
 <meta itemprop=wordCount content="196">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
@@ -36,7 +36,7 @@ Clusterpedia 安装完成后，我们需要更新 helm 来开启 多集群 kube-
 <meta name=twitter:description content="Clusterpedia 以极小的代价提供了多集群资源的 kube-state-metrics 功能，它提供的指标信息与 kube-state-metrics 一致，当然会额外增加了一个集群名称的 label.
 kube_deployment_created{cluster=&#34;test-14&#34;,namespace=&#34;clusterpedia-system&#34;,deployment=&#34;clusterpedia-apiserver&#34;} 1.676557618e+09 由于该功能处于试验阶段，所以使用该功能需要先额外通过标准方式安装 Clusterpedia.
 Clusterpedia 安装完成后，我们需要更新 helm 来开启 多集群 kube-state-metrics 功能。
- 当前 main 分支中已经合并 kube-state-metrics 功能，未来会包含在 v0.8.0 中。 ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.0 镜像中包含该功能呢
+ 当前 main 分支中已经合并 kube-state-metrics 功能，未来会包含在 v0.8.0 中。 ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.1 镜像中包含该功能呢
  开启多集群 kube-state-metrics 确保 Clusterpedia Chart 版本 >= v1.8.0 $ helm repo update clusterpedia $ helm search clusterpedia NAME CHART VERSION APP VERSION DESCRIPTION clusterpedia/clusterpedia 1.8.0 v0.7.0 A Helm chart for Kubernetes 获取当前 chart values $ helm -n clusterpedia-system get values clusterpedia > values.">
 <link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
 <link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
@@ -79,7 +79,7 @@ Clusterpedia 安装完成后，我们需要更新 helm 来开启 多集群 kube-
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.78403f3e446f31afd214946fb52aeb24.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.fd381dd4021fed005372d75e92507550.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -89,7 +89,7 @@ Clusterpedia 安装完成后，我们需要更新 helm 来开启 多集群 kube-
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.78403f3e446f31afd214946fb52aeb24.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.fd381dd4021fed005372d75e92507550.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -242,7 +242,7 @@ Clusterpedia 安装完成后，我们需要更新 helm 来开启 多集群 kube-
 <p>Clusterpedia 安装完成后，我们需要更新 helm 来开启 <code>多集群 kube-state-metrics</code> 功能。</p>
 <blockquote>
 <p>当前 main 分支中已经合并 kube-state-metrics 功能，未来会包含在 <code>v0.8.0</code> 中。
-ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.0 镜像中包含该功能呢</p>
+ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.1 镜像中包含该功能呢</p>
 </blockquote>
 <h2 id=开启多集群-kube-state-metrics>开启多集群 kube-state-metrics</h2>
 <h3 id=确保-clusterpedia-chart-版本--v180>确保 Clusterpedia Chart 版本 >= v1.8.0</h3>
@@ -256,7 +256,7 @@ $ helm search clusterpedia
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#000>echo &#34;clustersynchroManager:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>image</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>repository</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>iceber/clusterpedia/clustersynchro-manager</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>tag</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v0.8.0-ksm.0</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>tag</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v0.8.0-ksm.1</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>kubeStateMetrics</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>enable</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000>&#34; &gt; patch.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
