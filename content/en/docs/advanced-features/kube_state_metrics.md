@@ -12,7 +12,7 @@ Since this feature is experimental, you will install Clusterpedia [the standard 
 
 Once Clusterpedia is installed, we need to update the helm to enable the `multi-cluster kube-state-metrics` feature.
 > The kube-state-metrics feature has been merged into [the main branch](https://github.com/clusterpedia-io/clusterpedia) and will be included in `v0.8.0` in the future.
-> The feature is included in the ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.0
+> The feature is included in the ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.1
 
 ## Enable Multi-Cluster kube-state-metrics
 ### Ensure Clusterpedia Chart Version >= v1.8.0
@@ -33,7 +33,7 @@ $ helm -n clusterpedia-system get values clusterpedia > values.yaml
 $ echo "clustersynchroManager:
   image:
     repository: iceber/clusterpedia/clustersynchro-manager
-    tag: v0.8.0-ksm.0
+    tag: v0.8.0-ksm.1
   kubeStateMetrics:
     enable: true
 " > patch.yaml

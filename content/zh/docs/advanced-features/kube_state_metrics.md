@@ -12,7 +12,7 @@ kube_deployment_created{cluster="test-14",namespace="clusterpedia-system",deploy
 
 Clusterpedia 安装完成后，我们需要更新 helm 来开启 `多集群 kube-state-metrics` 功能。
 > 当前 main 分支中已经合并 kube-state-metrics 功能，未来会包含在 `v0.8.0` 中。
-> ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.0 镜像中包含该功能呢
+> ghcr.io/iceber/clusterpedia/clustersynchro-manager:v0.8.0-ksm.1 镜像中包含该功能呢
 
 ## 开启多集群 kube-state-metrics
 ### 确保 Clusterpedia Chart 版本 >= v1.8.0
@@ -33,7 +33,7 @@ $ helm -n clusterpedia-system get values clusterpedia > values.yaml
 echo "clustersynchroManager:
   image:
     repository: iceber/clusterpedia/clustersynchro-manager
-    tag: v0.8.0-ksm.0
+    tag: v0.8.0-ksm.1
   kubeStateMetrics:
     enable: true
 " > patch.yaml
