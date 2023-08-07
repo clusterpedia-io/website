@@ -35,7 +35,7 @@ $ echo "clustersynchroManager:
     repository: iceber/clusterpedia/clustersynchro-manager
     tag: v0.8.0-ksm.1
   kubeStateMetrics:
-    enable: true
+    enabled: true
 " > patch.yaml
 ```
 
