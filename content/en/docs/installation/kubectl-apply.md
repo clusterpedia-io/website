@@ -105,10 +105,16 @@ kubectl get clusterimportpolicy
 
 ### Clean up PediaCluster
 
-Before uninstalling Clusterpedia, you need to check if PediaCluster resources still exist in your environment, and clean up those resources.
+Before uninstalling Clusterpedia, you need to check if PediaCluster resources still exist in your environment, and clean up those resources(Dependent resources include serviceaccount (and secret after 1.24), clusterrole, clusterrolebinding).
 
 ```bash
 kubectl get pediacluster
+
+kubectl get sa,secret,clusterrole,clusterrolebinding  | grep clusterpedia
+serviceaccount/clusterpedia-synchro   0         81d
+secret/clusterpedia-xxx   kubernetes.io/service-account-token   3      81d
+clusterrole.rbac.authorization.k8s.io/clusterpedia-synchro                                                   2022-12-09T03:37:44Z
+clusterrolebinding.rbac.authorization.k8s.io/clusterpedia-synchro                                   ClusterRole/clusterpedia-synchro                                                   81d
 ```
 
 ### Uninstall Clusterpedia
