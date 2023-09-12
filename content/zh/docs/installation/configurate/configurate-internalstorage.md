@@ -92,7 +92,7 @@ database: "clusterpedia"
 默认存储层还提供了有关 MySQL 和 PostgreSQL 的更多配置，可以参考 [internalstorage/config.go](https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go)
 
 ## 配置存储组件密码 Secret
-Clusterpedia 的安装 yaml 会从 `internalstroage-password` 的 Secret 中获取密码。
+Clusterpedia 的安装 yaml 会从 `internalstorage-password` 的 Secret 中获取密码。
 
 将存储组件的密码配置到 Secret 中
 ```bash

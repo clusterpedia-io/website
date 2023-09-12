@@ -91,7 +91,7 @@ database: "clusterpedia"
 The default storage layer also provides more configurations about MySQL and PostgreSQL. Refer to [internalstorage/config.go](https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go).
 
 ## Configure Secret
-The yaml file that is used to install Clusterpedia may get the password from `internalstroage-password` Secret.
+The yaml file that is used to install Clusterpedia may get the password from `internalstorage-password` Secret.
 
 Configure the storage component password to Secret
 ```bash
