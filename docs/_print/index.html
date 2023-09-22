@@ -65,7 +65,7 @@ English
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.5b4be0039e2ca77ab493cf2448b53ebb.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.f552868f8be240a4ea8cec7150f7a297.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -405,7 +405,7 @@ rm -rf /var/local/clusterpedia/internalstorage/&lt;storage type&gt;
 </span></code></pre></div><h3 id=more-configuration>More configuration</h3>
 <p>The default storage layer also provides more configurations about MySQL and PostgreSQL. Refer to <a href=https://github.com/clusterpedia-io/clusterpedia/blob/main/pkg/storage/internalstorage/config.go>internalstorage/config.go</a>.</p>
 <h2 id=configure-secret>Configure Secret</h2>
-<p>The yaml file that is used to install Clusterpedia may get the password from <code>internalstroage-password</code> Secret.</p>
+<p>The yaml file that is used to install Clusterpedia may get the password from <code>internalstorage-password</code> Secret.</p>
 <p>Configure the storage component password to Secret</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n clusterpedia-system create secret generic <span style=color:#4e9a06>\
 </span><span style=color:#4e9a06></span>    internalstorage-password --from-literal<span style=color:#ce5c00;font-weight:700>=</span><span style=color:#000>password</span><span style=color:#ce5c00;font-weight:700>=</span>&lt;password to access storage components&gt;
