@@ -46,8 +46,8 @@ kubectl get collectionresources # 输出: NAME RESOURCES any * workloads deploym
 kuberesources 包含了所有 kube 的内置资源，我们可以通过 kuberesources 来对所有的内置资源进行统一的过滤和检索。
 以 yaml 形式查看支持的聚合资源
 kubectl get collectionresources -o yaml # 输出：apiVersion:v1items:- apiVersion:clusterpedia.io/v1beta1kind:CollectionResourcemetadata:creationTimestamp:nullname:anyresourceTypes:[]- apiVersion:clusterpedia.io/v1beta1kind:CollectionResourcemetadata:creationTimestamp:nullname:workloadsresourceTypes:- group:appsresource:deploymentsversion:v1- group:appsresource:daemonsetsversion:v1- group:appsresource:statefulsetsversion:v1- apiVersion:clusterpedia.io/v1beta1kind:CollectionResourcemetadata:creationTimestamp:nullname:kuberesourcesresourceTypes:- group:&#34;&#34;- group:admission.k8s.io- group:admissionregistration.k8s.io- group:apiextensions.k8s.io- group:apps- group:authentication.k8s.io- group:authorization.k8s.io- group:autoscaling- group:batch- group:certificates.k8s.io- group:coordination.k8s.io- group:discovery.k8s.io- group:events.k8s.io- group:extensions- group:flowcontrol.">
-<link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
-<link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
+<link rel=preload href=/scss/main.min.73045c8236ac0eff5872b331509c9baa375a47c43567fa214b7e8cd464d45073.css as=style>
+<link href=/scss/main.min.73045c8236ac0eff5872b331509c9baa375a47c43567fa214b7e8cd464d45073.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script src=https://unpkg.com/lunr@2.3.9/lunr.min.js integrity=sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli crossorigin=anonymous></script>
 <link href=https://cdn.bootcdn.net/ajax/libs/asciinema-player/2.6.1/asciinema-player.min.css rel=stylesheet>

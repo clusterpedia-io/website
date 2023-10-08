@@ -29,8 +29,8 @@ This results in the cluster health check interface using the same TCP connection
 <meta name=twitter:title content="Standalone TCP for Health Checker">
 <meta name=twitter:description content="When client-go creates any number of Clients with the same configuration, such as certificates, it reuses the same TCP connection. https://github.com/kubernetes/kubernetes/blob/3f823c0daa002158b12bfb2d53bcfe433516659d/staging/src/k8s.io/client-go/transport/transport.go#L54
 This results in the cluster health check interface using the same TCP connection as the resource synchronized informer, which may cause TCP blocking and increased health check latency if a large number of informers are started for the first time. We add a feature gate - HealthCheckerWithStandaloneTCP to allow users to use a standalone tcp for health checks">
-<link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
-<link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
+<link rel=preload href=/scss/main.min.73045c8236ac0eff5872b331509c9baa375a47c43567fa214b7e8cd464d45073.css as=style>
+<link href=/scss/main.min.73045c8236ac0eff5872b331509c9baa375a47c43567fa214b7e8cd464d45073.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script src=https://unpkg.com/lunr@2.3.9/lunr.min.js integrity=sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli crossorigin=anonymous></script>
 <link href=https://cdn.bootcdn.net/ajax/libs/asciinema-player/2.6.1/asciinema-player.min.css rel=stylesheet>

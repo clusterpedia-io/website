@@ -44,8 +44,8 @@ $ kubectl get pediacluster NAME APISERVER VERSION STATUS cluster-1 https://10.6.
  对 Not Ready 的集群进行资源检索时，增加了 Warning 提醒 增强了原生 Field Selector 的能力 根据父辈或者祖辈的 Owner 来进行查询 响应数据携带 remaining item count  v0.1.0 Release Notes
 资源检索时的 Warning 提醒 集群由于某些原因处于非 Ready 的状态时，资源通常也无法正常同步，在获取到该集群内的资源时，会通过 Warnning 提醒来告知用户集群异常，并且获取到的资源可能并不是实时准确的。
 $ kubectl get pediacluster NAME APISERVER VERSION STATUS cluster-1 https://10.6.100.10:6443 v1.22.2 ClusterSynchroStop $ kubectl --cluster cluster-1 get pods Warning: cluster-1 is not ready and the resources obtained may be inaccurate, reason: ClusterSynchroStop CLUSTER NAME READY STATUS RESTARTS AGE cluster-1 fake-pod-698dfbbd5b-64fsx 1/1 Running 0 68d cluster-1 fake-pod-698dfbbd5b-9ftzh 1/1 Running 0 39d cluster-1 fake-pod-698dfbbd5b-rk74p 1/1 Running 0 39d cluster-1 quickstart-ingress-nginx-admission-create--1-kxlnn 0/1 Completed 0 126d 强化 Field Selector 原生 kubernetes 对于 Field Selector 的支持非常有限，默认只支持 metadata.">
-<link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
-<link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
+<link rel=preload href=/scss/main.min.73045c8236ac0eff5872b331509c9baa375a47c43567fa214b7e8cd464d45073.css as=style>
+<link href=/scss/main.min.73045c8236ac0eff5872b331509c9baa375a47c43567fa214b7e8cd464d45073.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script src=https://unpkg.com/lunr@2.3.9/lunr.min.js integrity=sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli crossorigin=anonymous></script>
 <link href=https://cdn.bootcdn.net/ajax/libs/asciinema-player/2.6.1/asciinema-player.min.css rel=stylesheet>

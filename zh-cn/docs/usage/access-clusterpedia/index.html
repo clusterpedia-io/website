@@ -38,8 +38,8 @@ kubectl api-resources | grep clusterpedia.io # 输出： NAME SHORTNAMES APIVERS
  ClusterSynchroManager 管理 主集群 内的 PediaCluster 资源，通过 PediaCluster 配置认证信息连接到指定集群，并且实时同步相应的资源。 APIServer 同样会监听 主集群 内的 PediaCluster 资源，并根据集群同步的资源以兼容 Kubernetes OpenAPI的方式来提供对资源的复杂检索。 ControllerManager  并且 Clusterpedia APIServer 会以聚合式 API 的方式注册到 主集群 的 APIServer 中， 这样我们通过和主集群相同的入口便可访问 Clusterpedia
 Resources 和聚合资源 Clusterpedia APIServer 会在 Group —— clusterpedia.io 下提供两种检索资源：
 kubectl api-resources | grep clusterpedia.io # 输出： NAME SHORTNAMES APIVERSION NAMESPACED KIND collectionresources clusterpedia.io/v1beta1 false CollectionResource resources clusterpedia.io/v1beta1 false Resources  Resources 用于指定资源类型的方式来检索，在使用上兼容 Kubernetes OpenAPI CollectionResource 用于检索由多个资源类型聚合而成的新的资源类型，以达到同时检索多种资源的目的   对于 Collection Resource 的概念和使用可以查看 什么是聚合资源（Collection Resource），聚合资源（Collection Resource）检索">
-<link rel=preload href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css as=style>
-<link href=/scss/main.min.9961c751547efda0481dd5723ad2db290629eb1181b4dd88454b106a6737233e.css rel=stylesheet integrity>
+<link rel=preload href=/scss/main.min.73045c8236ac0eff5872b331509c9baa375a47c43567fa214b7e8cd464d45073.css as=style>
+<link href=/scss/main.min.73045c8236ac0eff5872b331509c9baa375a47c43567fa214b7e8cd464d45073.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script src=https://unpkg.com/lunr@2.3.9/lunr.min.js integrity=sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli crossorigin=anonymous></script>
 <link href=https://cdn.bootcdn.net/ajax/libs/asciinema-player/2.6.1/asciinema-player.min.css rel=stylesheet>
