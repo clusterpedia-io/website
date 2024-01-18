@@ -76,7 +76,7 @@ Once enabled, three additional query parameters will be introduced:
 | field | type | description |
 | :--- | :--- | :--- |
 | `whereSQLStatement` | `string` | The `WHERE` clause body of the SQL statement. A drop-in replacement of the existing `whereSQL` field. Callers are allowed to send raw queries more safely by using `?` as the placeholder of parameters (which is compatible for GORM). |
-| `whereSQLParam` | `string` | The actual parameter of the SQL statement that will be used in the `WHERE` clause of the SQL statement. This field is only valid when `whereSQLStatement` is set and will be ignored otherwise. |
+| `whereSQLParam` | `string`，`string[]` | The actual parameter of the SQL statement that will be used in the `WHERE` clause of the SQL statement. This field is only valid when `whereSQLStatement` is set and will be ignored otherwise. |
 | `whereSQLJSONParams` | `string` | Works the same as `whereSQLParam` but enables callers to send arrays and more complex parameters when `IN` or `JSON` operators is used. Supports any marshaled valid JSON array string. Needs to be `base64` encoded since query strings cannot contain `[]` (square brackets). This field is only valid when `whereSQLStatement` is set and will be ignored otherwise. |
 
 Assumes we have the following resources:

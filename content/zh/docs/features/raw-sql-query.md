@@ -10,7 +10,7 @@ weight: 2
 | 作用 |  Feature Gate  | 默认值 |
 |-----|---------------|-------|
 | 允许使用原生 SQL 设置检索条件 | `AllowRawSQLQuery` | `false` |
-| 允许使用参数化原生 SQL 进行查询（更好方便于防御 SQL 注入） | `AllowParameterizedSQLQuery` | `false` |
+| 允许使用参数化原生 SQL 进行查询（更易于防御 SQL 注入） | `AllowParameterizedSQLQuery` | `false` |
 
 注意：**上述 Feature Gates 专属于 `clusterpedia apiserver`。**
 
@@ -24,7 +24,7 @@ weight: 2
 
 Clusterpedia 不能保证将来不会有 SQL 注入的潜在威胁，而且在涉及原始 SQL 时也不应该能够保证。
 
-如果已经知晓上述提及的安全问题，并且还是希望使用「原生 SQL 查询」的能力，建议使用 `AllowParameterizedSQLQuery`  Feature Gate 而不是 `AllowRawSQLQuery`  Feature Gate 。这是因为 `AllowParameterizedSQLQuery` 特性门口引入的参数允许调用方分别传递**语句**和**参数**，这可以更好地防御 SQL 注入。
+如果已经知晓上述提及的安全问题，并且还是希望使用「原生 SQL 查询」的能力，建议使用 `AllowParameterizedSQLQuery`  Feature Gate 而不是 `AllowRawSQLQuery`  Feature Gate 。这是因为 `AllowParameterizedSQLQuery` 特性门口引入的参数允许调用方分别传递**语句**和**参数**，这可以更易于防御 SQL 注入。
 
 {{% /alert %}}
 
@@ -76,7 +76,7 @@ WHERE
 | 字段 | 类型 | 说明 |
 | :--- | :--- | :--- |
 | `whereSQLStatement` | `string` | SQL 语句的 `WHERE` 子句正文。可直接替换现有的 `whereSQL` 字段。通过使用 `?` 作为参数占位符（与 GORM 兼容），允许调用方更安全地发送原生。 |
- 查询| `whereSQLParam` | `string | string[]` | 将在 SQL 语句的 `WHERE` 子句中使用的 SQL 语句的实际参数。此字段仅在设置了 `whereSQLStatement硬拼接为` 时有效，否则将被忽略。 的一部分。
+| `whereSQLParam` | `string`，`string[]` | 将在 SQL 语句的 `WHERE` 子句中使用的 SQL 语句的实际参数。此字段仅在设置了 `whereSQLStatement硬拼接为` 时有效，否则将被忽略。 的一部分。
 | `whereSQLJSONParams` | `any[]` | 工作原理与 `whereSQLParam`相同，但在使用 `IN` 或 `JSON` 操作符时，调用方可以通过这个参数发送数组和更复杂的参数。支持任意的 JSON 数组字符串，并且由于查询字符串不能包含 `[]`（方括号），因此需要进行 `base64` 编码。该字段仅在设置了 `whereSQLStatement` 时有效，否则将被忽略。 |
 
 假设我们拥有以下资源
