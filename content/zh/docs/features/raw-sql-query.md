@@ -24,7 +24,7 @@ weight: 2
 
 Clusterpedia 不能保证将来不会有 SQL 注入的潜在威胁，而且在涉及原始 SQL 时也不应该能够保证。
 
-如果已经知晓上述提及的安全问题，并且还是希望使用「原生 SQL 查询」的能力，建议使用 `AllowParameterizedSQLQuery`  Feature Gate 而不是 `AllowRawSQLQuery`  Feature Gate 。这是因为 `AllowParameterizedSQLQuery` 特性门口引入的参数允许调用方分别传递**语句**和**参数**，这可以更易于防御 SQL 注入。
+如果已经知晓上述提及的安全问题，并且还是希望使用「原生 SQL 查询」的能力，建议使用 `AllowParameterizedSQLQuery`  Feature Gate 而不是 `AllowRawSQLQuery`  Feature Gate 。这是因为 `AllowParameterizedSQLQuery` Feature Gate 引入的参数允许调用方分别传递**语句**和**参数**，这可以更易于防御 SQL 注入。
 
 {{% /alert %}}
 
@@ -47,7 +47,7 @@ kubectl get --raw="$URL?whereSQL=(cluster='global') OR (namespace IN ('kube-syst
 
 在这个示例中，我们传递了一个用于查询 SQL 语句的 *WHERE* 子句：
 
-```
+```sql
 (cluster='global') OR (namespace IN ('kube-system','default'))
 ```
 
@@ -75,9 +75,11 @@ WHERE
 
 | 字段 | 类型 | 说明 |
 | :--- | :--- | :--- |
-| `whereSQLStatement` | `string` | SQL 语句的 `WHERE` 子句正文。可直接替换现有的 `whereSQL` 字段。通过使用 `?` 作为参数占位符（与 GORM 兼容），允许调用方更安全地发送原生。 |
-| `whereSQLParam` | `string`，`string[]` | 将在 SQL 语句的 `WHERE` 子句中使用的 SQL 语句的实际参数。此字段仅在设置了 `whereSQLStatement硬拼接为` 时有效，否则将被忽略。 的一部分。
+| `whereSQLStatement` | `string` | SQL 语句的 `WHERE` 子句正文。可直接替换现有的 `whereSQL` 字段。通过使用 `?` 作为参数占位符（与 GORM 兼容），允许调用方更安全地发送原生 SQL 查询。 |
+| `whereSQLParam` | `string`，`string[]` | 将在 SQL 语句的 `WHERE` 子句中使用的 SQL 语句的实际参数。此字段仅在设置了 `whereSQLStatement` 时有效，否则将被忽略。 |
 | `whereSQLJSONParams` | `any[]` | 工作原理与 `whereSQLParam`相同，但在使用 `IN` 或 `JSON` 操作符时，调用方可以通过这个参数发送数组和更复杂的参数。支持任意的 JSON 数组字符串，并且由于查询字符串不能包含 `[]`（方括号），因此需要进行 `base64` 编码。该字段仅在设置了 `whereSQLStatement` 时有效，否则将被忽略。 |
+
+### 使用案例
 
 假设我们拥有以下资源
 
@@ -99,8 +101,6 @@ NAMESPACE              NAME                                                     
 clusterpedia-test-ns   replicaset.apps/hello-node-in-clusterpedia-test-ns-6fbb8854b5   1         1         1       26s
 default                replicaset.apps/hello-node-7579565d66                           1         1         1       4h9m
 ```
-
-### 使用案例
 
 #### `whereSQLStatement` 参数搭配单个 `whereSQLParam` 参数使用
 
@@ -304,11 +304,11 @@ WHERE
 | :--- | :--- |
 | `hello-node` | `default` |
 
-### 启用 `AllowParameterizedSQLQuery` 功能门时，如何防御 SQL 注入？
+### 启用 `AllowParameterizedSQLQuery` Feature Gate 时，如何防御 SQL 注入？
 
 最常见的 SQL 注入是使用 `OR` 操作符绕过原始 SQL 语句，返回数据库中的所有资源。
 
-假设启用了 `AllowRawSQLQuery` 功能门控，调用方将会像这样发送请求：
+假设启用了 `AllowRawSQLQuery` Feature Gate，调用方将会像这样发送请求：
 
 ```shell
 URL="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments"
@@ -365,17 +365,12 @@ WHERE
 
 这个语句会检索 `"" OR 1 = 1` 命名空间下的 `deployments` 类型的资源。
 
-最终将获得数据库返回的以下资源：
-
-| 资源名称 | namespace |
-| :--- | :--- |
-
-而不是所有资源。
+最终将获得数据库**返回 0 个资源，而不是所有资源**。
 
 这是因为在使用 `whereSQLParam` 参数或是 `whereSQLJSONParams` 参数时，传入的值将在数据库执行前被解析为字符串，因此 `"" OR 1 = 1` 将被视为字符串字面形式，而不是 SQL 语句的一部分，从而避免了 SQL 注入。
 
 ## 安全注意事项
 
-1. 虽然 `AllowParameterizedSQLQuery` 功能门提供了更好的 SQL 注入防御，但如果调用者的实现在使用 `whereSQLStatement` 时仍使用字符串连接来直接构建带参数的原始 SQL 查询，而不使用 `whereSQLParam` 或 `whereSQLJSONParams` 参数，那么 SQL 注入的隐患将**永远**无法解决。
+1. 虽然 `AllowParameterizedSQLQuery` Feature Gate 提供了更好的 SQL 注入防御，但如果调用者的实现在使用 `whereSQLStatement` 时仍使用字符串连接来直接构建带参数的原始 SQL 查询，而不使用 `whereSQLParam` 或 `whereSQLJSONParams` 参数，那么 SQL 注入的隐患将**永远**无法解决。
 2. 在涉及到模糊搜索、字符串拼接的使用场景的时候，建议更新所有现有的原生 SQL 查询，将原始 SQL 的参数传递到 `whereSQLParam` 或 `whereSQLJSONParams` 字段，而不是硬拼接为 `whereSQL` 字段的一部分。
 3. 有关 GORM 的 SQL 注入的更多信息，请在此处阅读更多信息：[https://gorm.io/docs/security.html](https://gorm.io/docs/security.html)。

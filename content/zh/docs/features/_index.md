@@ -18,7 +18,7 @@ Clusterpedia APIServer 和 Clusterpedia ClusterSynchro Manager 分别具有不�
 |---|--------|----|
 | [设置默认返回剩余的资源数量](./remaining-item-count) | `RemainingItemCount` | `false` |
 | [原生 SQL 查询](./raw-sql-query) | `AllowRawSQLQuery` | `false` |
-| [Raw Parameterized SQL Query](./raw-sql-query) | `AllowRawSQLQueryWithParameter` | `false` |
+| [原生参数化 SQL 查询](./raw-sql-query) | `AllowRawSQLQueryWithParameter` | `false` |
 
 ## ClusterSynchro Manager
 

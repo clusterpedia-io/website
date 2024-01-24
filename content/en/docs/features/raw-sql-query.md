@@ -5,18 +5,18 @@ weight: 2
 
 Different users may have different needs, and although Clusterpedia provides many easy search options, such as specifying a set of namespaces or clusters, or specifying an owner for a query, users may still need to use more complex queries to query the resources.
 
-In this case, you can use the `Raw SQL Query` provided by the `default storage layer` to pass more complex search conditions by enabling either of the following feature gates:
+In this case, you can use the `Raw SQL Query` provided by the `default storage layer` to pass more complex search conditions by enabling either of the following Feature Gates:
 
-| desc | feature gates | default |
+| desc | Feature Gates | default |
 |------|---------------|---------|
 | Allow search conditions to be set using raw SQL. | `AllowRawSQLQuery` | `false` |
 | Allow querying by the parameterized SQL (for better defense against SQL injection). | `AllowParameterizedSQLQuery` | `false` |
 
-Note: **This feature gate is exclusive to the `clusterpedia apiserver`.**
+Note: **This Feature Gate is exclusive to the `clusterpedia apiserver`.**
 
 {{% alert title="Disclaimer" color="warning" %}}
 
-Either of  `AllowRawSQLQuery` and `AllowParameterizedSQLQuery` feature gates will potentially introduce vulnerabilities to SQL injection when enabled since the final SQL statements is not possible to be wrapped, escaped, parameterized, or validated by Clusterpedia.
+Either of  `AllowRawSQLQuery` and `AllowParameterizedSQLQuery` Feature Gates will potentially introduce vulnerabilities to SQL injection when enabled since the final SQL statements is not possible to be wrapped, escaped, parameterized, or validated by Clusterpedia.
 
 Such vulnerabilities can be exploited by malicious users to access unauthorized data or even causing data leaks, data loss and corruption.
 
@@ -24,7 +24,7 @@ It is always the responsibility and obligation of callers and end users interact
 
 Clusterpedia cannot guarantee there will be no potential threats of SQL injections in the future and should never be when raw SQL involves.
 
-If you still need to use the "Raw SQL Query" functionalities while understood the potential security issues, it is recommended to use the `AllowParameterizedSQLQuery` feature gate rather than the `AllowRawSQLQuery` feature gate. The introduced parameters of `AllowParameterizedSQLQuery` feature gate allow callers to pass statements and parameters separately, which can be better protected against SQL injection.
+If you still need to use the "Raw SQL Query" functionalities while understood the potential security issues, it is recommended to use the `AllowParameterizedSQLQuery` Feature Gate rather than the `AllowRawSQLQuery` Feature Gate. The introduced parameters of `AllowParameterizedSQLQuery` Feature Gate allow callers to pass statements and parameters separately, which can be better protected against SQL injection.
 
 {{% /alert %}}
 
@@ -34,7 +34,7 @@ If you still need to use the "Raw SQL Query" functionalities while understood th
 
 Raw SQL queries are currently in alpha and are not well protected against SQL injection, so you need to enable this feature via Feature Gate.
 
-And due to the introduction of the `AllowParameterizedSQLQuery` feature gate later, this feature gate has serious flaws in defending against SQL injection, and will be deprecated in future versions, and it is not recommended to use this feature gate.
+And due to the introduction of the `AllowParameterizedSQLQuery` Feature Gate later, this Feature Gate has serious flaws in defending against SQL injection, and will be deprecated in future versions, and it is not recommended to use this Feature Gate.
 
 {{% /alert %}}
 
@@ -81,6 +81,8 @@ Once enabled, three additional query parameters will be introduced:
 
 Assumes we have the following resources:
 
+### Use cases
+
 ```shell
 $ kubectl get all -A
 NAMESPACE              NAME                                                      READY   STATUS    RESTARTS   AGE
@@ -99,8 +101,6 @@ NAMESPACE              NAME                                                     
 clusterpedia-test-ns   replicaset.apps/hello-node-in-clusterpedia-test-ns-6fbb8854b5   1         1         1       26s
 default                replicaset.apps/hello-node-7579565d66                           1         1         1       4h9m
 ```
-
-### Use cases
 
 #### Use of `whereSQLStatement` and single `whereSQLParam`
 
@@ -313,11 +313,11 @@ You will get the following resources that returned by database:
 | :--- | :--- |
 | `hello-node` | `default` |
 
-### How to defense against SQL injection when `AllowParameterizedSQLQuery` feature gate is enabled?
+### How to defense against SQL injection when `AllowParameterizedSQLQuery` Feature Gate is enabled?
 
 The most common SQL injection is to use the `OR` operator to bypass the original SQL statement and return all the resources in the database.
 
-Let's say when `AllowRawSQLQuery` feature gate is enabled, the caller sends the following request:
+Let's say when `AllowRawSQLQuery` Feature Gate is enabled, the caller sends the following request:
 
 ```shell
 URL="/apis/clusterpedia.io/v1beta1/resources/apis/apps/v1/deployments"
@@ -342,7 +342,7 @@ The problem is that **the `OR` operator with statement of `1 = 1` will always be
 
 And this is quite hard to wrap, escape, and validate the SQL statement since in some extreme cases, such as resource search by users, the caller may need to pass the SQL statement directly to the apiserver without any modification.
 
-However, such SQL injection can be easily avoided by using `whereSQLStatement` and `whereSQLParam` by enabling `AllowParameterizedSQLQuery` feature gate instead.
+However, such SQL injection can be easily avoided by using `whereSQLStatement` and `whereSQLParam` by enabling `AllowParameterizedSQLQuery` Feature Gate instead.
 
 For example, with the same constructed payload:
 
@@ -372,17 +372,12 @@ WHERE
     AND namespace = "\"\" OR 1 = 1"
 ```
 
-you will get the following resources that returned by database:
-
-| name | namespace |
-| :--- | :--- |
-
-instead of all the resources in the database.
+you will **get none (0) resources that returned** by database instead of all the resources in the database.
 
 This is because when using either the `whereSQLParam` or the `whereSQLJSONParams` parameter, the values passed in are parsed as strings before it got executed inside of the database, therefore `"" OR 1 = 1` will be treated as string literals rather than as part of the SQL statement, thus avoiding SQL injection.
 
 ## Security Considerations
 
-1. While `AllowParameterizedSQLQuery` feature gate offers better defense against SQL injection, the potentials of SQL injection will **NEVER** be resolved if implementations of caller still use string concatenation to build the raw SQL query with parameters directly without `whereSQLParam` or `whereSQLJSONParams` when using `whereSQLStatement`.
+1. While `AllowParameterizedSQLQuery` Feature Gate offers better defense against SQL injection, the potentials of SQL injection will **NEVER** be resolved if implementations of caller still use string concatenation to build the raw SQL query with parameters directly without `whereSQLParam` or `whereSQLJSONParams` when using `whereSQLStatement`.
 2. It is recommended to update all the existing SQLs of raw queries to pass the parameters of raw SQL in `whereSQLParam` or `whereSQLJSONParams` field instead of `whereSQL` field when string concatenation is used to construct SQL statements or fuzzy search is implemented.
 3. For more about the SQL injection of GORM, please read it more here: [https://gorm.io/docs/security.html](https://gorm.io/docs/security.html).
