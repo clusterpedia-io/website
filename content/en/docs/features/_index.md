@@ -14,16 +14,18 @@ For example, enable `SyncAllResources` of clustersynchro manager to allow the us
 Clusterpedia APIServer and Clusterpedia ClusterSynchro Manager have different feature gates.
 
 ## APIServer
-|desc|feature gate|default|
+
+| desc | feature gate | default |
 |---|--------|----|
-|[Set the default to return the number of resources remaining](./remaining-item-count)|`RemainingItemCount`|false|
-|[Raw SQl Query](./raw-sql-query)|`AllowRawSQLQuery`|false|
+| [Set the default to return the number of resources remaining](./remaining-item-count) | `RemainingItemCount` | `false` |
+| [Raw SQL Query](./raw-sql-query) | `AllowRawSQLQuery` | `false` |
+| [Raw Parameterized SQL Query](./raw-sql-query) | `AllowRawSQLQueryWithParameter` | `false` |
 
 ## ClusterSynchro Manager
-|desc|feature gate|default|
+| desc | feature gate | default |
 |---|--------|----|
-|Prune `metadata.managedFields` |`PruneManagedFields`|true|
-|Prune `metadata.annotations['lastAppliedConfiguration']` |`PruneLastAppliedConfiguration`|true|
-|Allows synchronization of all types of custom resources|`AllowSyncCustomResources`|false|
-|Allows synchronization of all types of resources|`AllowSyncAllResources`|false|
-|Use standalone tcp for health checker| `HealthCheckerWithStandaloneTCP` |false|
+| Prune `metadata.managedFields` | `PruneManagedFields` | `true` |
+| Prune `metadata.annotations['lastAppliedConfiguration']` | `PruneLastAppliedConfiguration` | `true` |
+| Allows synchronization of all types of custom resources | `AllowSyncCustomResources` | `false` |
+| Allows synchronization of all types of resources | `AllowSyncAllResources` | `false` |
+| Use standalone tcp for health checker | `HealthCheckerWithStandaloneTCP` | `false` |

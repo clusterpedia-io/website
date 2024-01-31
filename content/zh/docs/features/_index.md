@@ -13,16 +13,19 @@ weight: 50
 Clusterpedia APIServer 和 Clusterpedia ClusterSynchro Manager 分别具有不同的特性门控
 
 ## APIServer
-|作用|feature gate|默认值|
+
+| 作用 | feature gate | 默认值 |
 |---|--------|----|
-|[设置默认返回剩余的资源数量](./remaining-item-count)|`RemainingItemCount`|false|
-|[原生 SQL 查询](./raw-sql-query)|`AllowRawSQLQuery`|false|
+| [设置默认返回剩余的资源数量](./remaining-item-count) | `RemainingItemCount` | `false` |
+| [原生 SQL 查询](./raw-sql-query) | `AllowRawSQLQuery` | `false` |
+| [原生参数化 SQL 查询](./raw-parameterized-sql-query) | `AllowRawSQLQueryWithParameter` | `false` |
 
 ## ClusterSynchro Manager
-|作用|feature gate|默认值|
+
+| 作用 | feature gate | 默认值 |
 |---|--------|----|
-|裁剪 `metadata.managedFields` 字段|`PruneManagedFields`|true|
-|裁剪 `metadata.annotations['lastAppliedConfiguration']` 字段|`PruneLastAppliedConfiguration`|true|
-|允许同步所有类型的自定义资源|`AllowSyncCustomResources`|false|
-|允许同步所有类型的资源|`AllowSyncAllResources`|false|
-|集群健康检查使用独立 TCP 连接| `HealthCheckerWithStandaloneTCP` |false|
+| 裁剪 `metadata.managedFields` 字段 | `PruneManagedFields` | `true` |
+| 裁剪 `metadata.annotations['lastAppliedConfiguration']` 字段 | `PruneLastAppliedConfiguration` | `true` |
+| 允许同步所有类型的自定义资源 | `AllowSyncCustomResources` | `false` |
+| 允许同步所有类型的资源 | `AllowSyncAllResources` | `false` |
+| 集群健康检查使用独立 TCP 连接 | `HealthCheckerWithStandaloneTCP` | `false` |
